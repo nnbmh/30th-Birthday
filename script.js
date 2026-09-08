@@ -88,20 +88,102 @@ const modalMap = {
 const hotspots =
   document.querySelectorAll(".hotspot");
 
+const isTouchDevice =
+  window.matchMedia("(hover: none)").matches;
+
+
+function openHotspot(hotspot) {
+
+  const item =
+    hotspot.dataset.item;
+
+  const modal =
+    modalMap[item];
+
+  if (!modal) {
+    return;
+  }
+
+  modal.classList.add("open");
+
+  modal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+  markFound(item);
+}
+
 
 hotspots.forEach((hotspot) => {
 
-  hotspot.addEventListener("click", () => {
+  /*
+    MOUSE / TRACKPAD
+  */
 
-    const item =
-      hotspot.dataset.item;
+  hotspot.addEventListener(
+    "mouseenter",
+    () => {
 
-    const modal =
-      modalMap[item];
+      if (!isTouchDevice) {
+        hotspot.classList.add("active");
+      }
 
-    if (!modal) {
-      return;
     }
+  );
+
+
+  hotspot.addEventListener(
+    "mouseleave",
+    () => {
+
+      if (!isTouchDevice) {
+        hotspot.classList.remove("active");
+      }
+
+    }
+  );
+
+
+  /*
+    CLICK
+  */
+
+  hotspot.addEventListener(
+    "click",
+    (event) => {
+
+      /*
+        On touchscreen:
+        first tap = discover
+        second tap = open
+      */
+
+      if (isTouchDevice) {
+
+        if (
+          !hotspot.classList.contains("active")
+        ) {
+
+          event.preventDefault();
+
+          hotspots.forEach((other) => {
+            other.classList.remove("active");
+          });
+
+          hotspot.classList.add("active");
+
+          return;
+        }
+
+      }
+
+      openHotspot(hotspot);
+
+    }
+  );
+
+});
 
     modal.classList.add("open");
     modal.setAttribute("aria-hidden", "false");
