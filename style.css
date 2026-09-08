@@ -126,7 +126,8 @@ button {
 #openFinalButton {
   padding: 12px 24px;
 
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border:
+    1px solid rgba(255, 255, 255, 0.35);
 
   background: transparent;
   color: white;
@@ -237,7 +238,6 @@ button {
 
   display: flex;
   align-items: center;
-
   gap: 8px;
 
   padding: 9px 13px;
@@ -335,7 +335,7 @@ button {
 
 
 /* ============================= */
-/* INVISIBLE INTERACTION AREAS */
+/* HOTSPOTS */
 /* ============================= */
 
 .hotspot {
@@ -359,19 +359,6 @@ button {
 }
 
 
-/*
-  IMPORTANT:
-
-  These buttons are MUCH bigger than
-  the little glowing dot.
-
-  Faris only needs to touch/click the
-  actual object area.
-
-  The dot is simply visual feedback.
-*/
-
-
 /* MSI MONITOR */
 
 #monitorHotspot {
@@ -380,6 +367,8 @@ button {
 
   width: 27%;
   height: 27%;
+
+  z-index: 50;
 }
 
 
@@ -416,16 +405,16 @@ button {
 }
 
 
-/* STICKY NOTE ON MONITOR */
+/* YELLOW NOTE ON MONITOR */
 
 #noteHotspot {
-  left: 40%;
-  top: 46%;
+  left: 34%;
+  top: 37%;
 
-  width: 8%;
-  height: 11%;
+  width: 13%;
+  height: 17%;
 
-  z-index: 55;
+  z-index: 90;
 }
 
 
@@ -457,23 +446,11 @@ button {
   pointer-events: none;
 }
 
-
-/*
-  JavaScript adds .active while
-  touching an object.
-*/
-
 .hotspot.active .hotspot-dot {
   opacity: 1;
 
   transform: scale(1);
 }
-
-
-/*
-  Computers with a real mouse/trackpad
-  reveal the glow when hovering.
-*/
 
 @media (hover: hover) {
 
@@ -1016,7 +993,7 @@ button {
 
 
 /* ============================= */
-/* FINAL UNLOCK */
+/* FINAL */
 /* ============================= */
 
 .final-card {
