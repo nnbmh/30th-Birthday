@@ -47,6 +47,10 @@ if (window.matchMedia("(pointer: fine)").matches) {
 
   document.addEventListener("mousemove", (event) => {
 
+    if (room.classList.contains("final-reveal-active")) {
+      return;
+    }
+
     const x =
       (event.clientX / window.innerWidth - 0.5) * 4;
 
@@ -199,6 +203,20 @@ document
         "true"
       );
 
+
+      if (
+        foundItems.size === 5 &&
+        !finalShown
+      ) {
+
+        setTimeout(() => {
+
+          startFinalReveal();
+
+        }, 450);
+
+      }
+
     });
 
   });
@@ -320,26 +338,150 @@ function markFound(item) {
     }
   );
 
+}
 
-  if (
-    count === 5 &&
-    !finalShown
-  ) {
 
-    finalShown = true;
+/* ============================= */
+/* CINEMATIC FINAL REVEAL */
+/* ============================= */
 
-    setTimeout(() => {
+const finalCard =
+  finalModal.querySelector(".final-card");
 
-      finalModal.classList.add("open");
+const finalEyebrow =
+  finalCard.querySelector(".eyebrow");
 
-      finalModal.setAttribute(
+const finalHeading =
+  finalCard.querySelector("h2");
+
+const finalParagraph =
+  finalCard.querySelector("p:not(.eyebrow)");
+
+const openFinalButton =
+  document.getElementById(
+    "openFinalButton"
+  );
+
+const finalLaterButton =
+  document.getElementById(
+    "finalLaterButton"
+  );
+
+
+function changeFinalText(
+  heading,
+  paragraph = ""
+) {
+
+  finalCard.classList.add(
+    "changing"
+  );
+
+
+  setTimeout(() => {
+
+    finalHeading.textContent =
+      heading;
+
+    finalParagraph.textContent =
+      paragraph;
+
+    finalCard.classList.remove(
+      "changing"
+    );
+
+  }, 350);
+
+}
+
+
+function startFinalReveal() {
+
+  if (finalShown) {
+    return;
+  }
+
+  finalShown = true;
+
+
+  document
+    .querySelectorAll(".modal.open")
+    .forEach((modal) => {
+
+      modal.classList.remove("open");
+
+      modal.setAttribute(
         "aria-hidden",
-        "false"
+        "true"
       );
 
-    }, 700);
+    });
 
-  }
+
+  room.classList.add(
+    "final-reveal-active"
+  );
+
+
+  roomImage.style.transform =
+    "scale(1.035)";
+
+
+  finalModal.classList.add(
+    "open",
+    "cinematic"
+  );
+
+
+  finalModal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
+
+
+  finalEyebrow.textContent =
+    "5 / 5 FOUND";
+
+
+  finalHeading.textContent =
+    "you actually found everything...";
+
+
+  finalParagraph.textContent =
+    "";
+
+
+  openFinalButton.classList.remove(
+    "reveal-button-visible"
+  );
+
+
+  setTimeout(() => {
+
+    changeFinalText(
+      "of course you did.",
+      "nosy."
+    );
+
+  }, 1900);
+
+
+  setTimeout(() => {
+
+    changeFinalText(
+      "theres one more thing, sayang."
+    );
+
+  }, 3900);
+
+
+  setTimeout(() => {
+
+    openFinalButton.classList.add(
+      "reveal-button-visible"
+    );
+
+  }, 5400);
 
 }
 
@@ -525,18 +667,8 @@ closeApp.addEventListener(
 
 
 /* ============================= */
-/* FINAL */
+/* FINAL MESSAGE */
 /* ============================= */
-
-const openFinalButton =
-  document.getElementById(
-    "openFinalButton"
-  );
-
-const finalLaterButton =
-  document.getElementById(
-    "finalLaterButton"
-  );
 
 const birthdayMessage =
   document.getElementById(
@@ -553,12 +685,16 @@ openFinalButton.addEventListener(
   "click",
   () => {
 
-    finalModal.classList.remove("open");
+    finalModal.classList.remove(
+      "open",
+      "cinematic"
+    );
 
     finalModal.setAttribute(
       "aria-hidden",
       "true"
     );
+
 
     birthdayMessage.classList.remove(
       "hidden"
@@ -572,11 +708,18 @@ finalLaterButton.addEventListener(
   "click",
   () => {
 
-    finalModal.classList.remove("open");
+    finalModal.classList.remove(
+      "open",
+      "cinematic"
+    );
 
     finalModal.setAttribute(
       "aria-hidden",
       "true"
+    );
+
+    room.classList.remove(
+      "final-reveal-active"
     );
 
   }
@@ -589,6 +732,10 @@ closeBirthdayMessage.addEventListener(
 
     birthdayMessage.classList.add(
       "hidden"
+    );
+
+    room.classList.remove(
+      "final-reveal-active"
     );
 
   }
