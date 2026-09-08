@@ -126,7 +126,8 @@ button {
 #openFinalButton {
   padding: 12px 24px;
 
-  border: 1px solid rgba(255, 255, 255, 0.35);
+  border:
+    1px solid rgba(255, 255, 255, 0.35);
 
   background: transparent;
   color: white;
@@ -237,16 +238,17 @@ button {
 
   display: flex;
   align-items: center;
-
   gap: 8px;
 
   padding: 9px 13px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 999px;
 
-  background: rgba(0, 0, 0, 0.38);
+  background:
+    rgba(0, 0, 0, 0.38);
 
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
@@ -323,7 +325,8 @@ button {
 
   border-radius: 50%;
 
-  border: 1px solid rgba(255, 255, 255, 0.65);
+  border:
+    1px solid rgba(255, 255, 255, 0.65);
 }
 
 .progress-dots span.found {
@@ -356,20 +359,25 @@ button {
 }
 
 
-/* MSI MONITOR */
+/* ============================= */
+/* MSI MONITOR / DESKTOP */
+/* MOVED LEFT TO AVOID NOTE */
+/* ============================= */
 
 #monitorHotspot {
-  left: 23%;
+  left: 22%;
   top: 42%;
 
-  width: 27%;
+  width: 19%;
   height: 27%;
 
   z-index: 50;
 }
 
 
+/* ============================= */
 /* WALL TV */
+/* ============================= */
 
 #tvHotspot {
   left: 49%;
@@ -380,7 +388,9 @@ button {
 }
 
 
+/* ============================= */
 /* PANDA */
+/* ============================= */
 
 #pandaHotspot {
   left: 79%;
@@ -391,7 +401,9 @@ button {
 }
 
 
+/* ============================= */
 /* LAPTOP */
+/* ============================= */
 
 #laptopHotspot {
   left: 49%;
@@ -401,43 +413,28 @@ button {
   height: 27%;
 }
 
+
+/* ============================= */
 /* YELLOW STICKY NOTE */
+/* SEPARATE SMALL HOTSPOT */
+/* ============================= */
 
 #noteHotspot {
-  left: 37%;
-  top: 27%;
+  left: 41%;
+  top: 36%;
 
-  width: 12%;
-  height: 18%;
+  width: 7%;
+  height: 9%;
 
   z-index: 90;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 0;
 }
 
-/* put the glow directly on the note */
-#noteHotspot .hotspot-dot {
-  position: absolute;
-
-  left: 72%;
-  top: 38%;
-
-  transform:
-    translate(-50%, -50%)
-    scale(0.4);
-}
-
-#noteHotspot.active .hotspot-dot {
-  transform:
-    translate(-50%, -50%)
-    scale(1);
-}
-
-@media (hover: hover) {
-  #noteHotspot:hover .hotspot-dot {
-    transform:
-      translate(-50%, -50%)
-      scale(1);
-  }
-}
 
 /* ============================= */
 /* HOTSPOT GLOW */
@@ -451,7 +448,8 @@ button {
 
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.95);
+  background:
+    rgba(255, 255, 255, 0.95);
 
   box-shadow:
     0 0 0 6px rgba(255, 255, 255, 0.12),
@@ -518,7 +516,8 @@ button {
   position: absolute;
   inset: 0;
 
-  background: rgba(0, 0, 0, 0.7);
+  background:
+    rgba(0, 0, 0, 0.7);
 
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -533,11 +532,13 @@ button {
 
   padding: 40px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
 
   border-radius: 8px;
 
-  background: rgba(14, 14, 14, 0.96);
+  background:
+    rgba(14, 14, 14, 0.96);
 
   box-shadow:
     0 30px 100px rgba(0, 0, 0, 0.65);
@@ -598,7 +599,8 @@ button {
 
   overflow: hidden;
 
-  border: 1px solid rgba(255, 255, 255, 0.22);
+  border:
+    1px solid rgba(255, 255, 255, 0.22);
 
   border-radius: 8px;
 
@@ -644,7 +646,8 @@ button {
 .desktop {
   position: relative;
 
-  height: calc(100% - 35px);
+  height:
+    calc(100% - 35px);
 
   overflow: hidden;
 
@@ -793,7 +796,8 @@ button {
 
   padding: 0 15px;
 
-  background: rgba(5, 5, 5, 0.78);
+  background:
+    rgba(5, 5, 5, 0.78);
 
   backdrop-filter: blur(15px);
   -webkit-backdrop-filter: blur(15px);
