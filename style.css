@@ -16,8 +16,10 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+
   background: var(--black);
   color: var(--white);
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -35,13 +37,14 @@ button {
 
 
 /* ============================= */
-/* LOADING */
+/* LOADING SCREEN */
 /* ============================= */
 
 #loadingScreen,
 #introScreen {
   position: fixed;
   inset: 0;
+
   z-index: 1000;
 
   display: flex;
@@ -123,15 +126,16 @@ button {
 #openFinalButton {
   padding: 12px 24px;
 
-  border: 1px solid rgba(255,255,255,0.35);
+  border: 1px solid rgba(255, 255, 255, 0.35);
 
   background: transparent;
-
   color: white;
 
   cursor: pointer;
 
-  transition: 0.25s;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
 #enterButton:hover,
@@ -182,11 +186,13 @@ button {
   transform: scale(1.015);
 
   transition: transform 0.3s ease-out;
+
+  pointer-events: none;
 }
 
 
 /* ============================= */
-/* HUD */
+/* ROOM HUD */
 /* ============================= */
 
 #roomHeader {
@@ -199,7 +205,8 @@ button {
 
   pointer-events: none;
 
-  text-shadow: 0 2px 14px rgba(0,0,0,0.8);
+  text-shadow:
+    0 2px 14px rgba(0, 0, 0, 0.8);
 }
 
 #roomHeader h2 {
@@ -230,20 +237,27 @@ button {
 
   display: flex;
   align-items: center;
+
   gap: 8px;
 
   padding: 9px 13px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
+
   border-radius: 999px;
 
-  background: rgba(0,0,0,0.38);
+  background:
+    rgba(0, 0, 0, 0.38);
 
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 
   font-size: 11px;
 
   white-space: nowrap;
+
+  pointer-events: none;
 }
 
 .mouse-icon {
@@ -256,12 +270,11 @@ button {
   left: max(20px, env(safe-area-inset-left));
   bottom: max(20px, env(safe-area-inset-bottom));
 
-  z-index: 30;
+  z-index: 60;
 
   border: 0;
 
   background: transparent;
-
   color: white;
 
   font-size: 11px;
@@ -269,7 +282,15 @@ button {
   cursor: pointer;
 
   opacity: 0.72;
+
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
+
+
+/* ============================= */
+/* PROGRESS */
+/* ============================= */
 
 #progress {
   position: absolute;
@@ -284,11 +305,15 @@ button {
   font-family: monospace;
   font-size: 10px;
 
-  text-shadow: 0 2px 10px black;
+  text-shadow:
+    0 2px 10px black;
+
+  pointer-events: none;
 }
 
 .progress-dots {
   display: flex;
+
   gap: 5px;
 
   margin-top: 8px;
@@ -300,7 +325,8 @@ button {
 
   border-radius: 50%;
 
-  border: 1px solid rgba(255,255,255,0.65);
+  border:
+    1px solid rgba(255, 255, 255, 0.65);
 }
 
 .progress-dots span.found {
@@ -309,7 +335,102 @@ button {
 
 
 /* ============================= */
-/* HOTSPOTS */
+/* INVISIBLE INTERACTION AREAS */
+/* ============================= */
+
+.hotspot {
+  position: absolute;
+
+  z-index: 50;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 0;
+  padding: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+
+/*
+  IMPORTANT:
+
+  These buttons are MUCH bigger than
+  the little glowing dot.
+
+  Faris only needs to touch/click the
+  actual object area.
+
+  The dot is simply visual feedback.
+*/
+
+
+/* MSI MONITOR */
+
+#monitorHotspot {
+  left: 23%;
+  top: 42%;
+
+  width: 27%;
+  height: 27%;
+}
+
+
+/* WALL TV */
+
+#tvHotspot {
+  left: 49%;
+  top: 20%;
+
+  width: 20%;
+  height: 16%;
+}
+
+
+/* PANDA */
+
+#pandaHotspot {
+  left: 79%;
+  top: 57%;
+
+  width: 11%;
+  height: 20%;
+}
+
+
+/* LAPTOP */
+
+#laptopHotspot {
+  left: 49%;
+  top: 49%;
+
+  width: 25%;
+  height: 27%;
+}
+
+
+/* STICKY NOTE ON MONITOR */
+
+#noteHotspot {
+  left: 40%;
+  top: 46%;
+
+  width: 8%;
+  height: 11%;
+
+  z-index: 55;
+}
+
+
+/* ============================= */
+/* HOTSPOT GLOW */
 /* ============================= */
 
 .hotspot-dot {
@@ -318,13 +439,15 @@ button {
 
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.95);
+  background:
+    rgba(255, 255, 255, 0.95);
 
   box-shadow:
     0 0 0 6px rgba(255, 255, 255, 0.12),
     0 0 28px rgba(255, 255, 255, 0.85);
 
   opacity: 0;
+
   transform: scale(0.4);
 
   transition:
@@ -334,88 +457,34 @@ button {
   pointer-events: none;
 }
 
+
+/*
+  JavaScript adds .active while
+  touching an object.
+*/
+
 .hotspot.active .hotspot-dot {
   opacity: 1;
+
   transform: scale(1);
 }
 
-@media (hover: hover) {
-  .hotspot:hover .hotspot-dot {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-
-/* touchscreen feedback */
-
-.hotspot:active .hotspot-dot {
-  opacity: 1;
-  transform: scale(1.3);
-}
 
 /*
-These are starting positions based on
-the room layout we designed.
-
-We can fine-tune them after you upload
-the final room image.
+  Computers with a real mouse/trackpad
+  reveal the glow when hovering.
 */
 
-#monitorHotspot {
-  left: 27%;
-  top: 34%;
+@media (hover: hover) {
 
-  width: 22%;
-  height: 27%;
+  .hotspot:hover .hotspot-dot {
+    opacity: 1;
+
+    transform: scale(1);
+  }
+
 }
 
-#tvHotspot {
-  left: 42%;
-  top: 8%;
-
-  width: 22%;
-  height: 22%;
-}
-
-#pandaHotspot {
-  left: 72%;
-  top: 54%;
-
-  width: 10%;
-  height: 20%;
-}
-
-#laptopHotspot {
-  left: 58%;
-  top: 39%;
-
-  width: 17%;
-  height: 24%;
-}
-
-#noteHotspot {
-  left: 49%;
-  top: 54%;
-
-  width: 11%;
-  height: 13%;
-}
-
-.hotspot-dot {
-  width: 11px;
-  height: 11px;
-
-  border-radius: 50%;
-
-  background: rgba(255,255,255,0.9);
-
-  box-shadow:
-    0 0 0 5px rgba(255,255,255,0.12),
-    0 0 22px rgba(255,255,255,0.75);
-
-  animation: pulse 2s infinite;
-}
 
 /* ============================= */
 /* MODALS */
@@ -450,9 +519,11 @@ the final room image.
   position: absolute;
   inset: 0;
 
-  background: rgba(0,0,0,0.7);
+  background:
+    rgba(0, 0, 0, 0.7);
 
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .content-card {
@@ -464,12 +535,16 @@ the final room image.
 
   padding: 40px;
 
-  border: 1px solid var(--border);
+  border:
+    1px solid var(--border);
+
   border-radius: 8px;
 
-  background: rgba(14,14,14,0.96);
+  background:
+    rgba(14, 14, 14, 0.96);
 
-  box-shadow: 0 30px 100px rgba(0,0,0,0.65);
+  box-shadow:
+    0 30px 100px rgba(0, 0, 0, 0.65);
 }
 
 .content-card h2 {
@@ -497,15 +572,19 @@ the final room image.
   right: 14px;
   top: 10px;
 
+  z-index: 5;
+
   border: 0;
 
   background: transparent;
-
   color: inherit;
 
   font-size: 24px;
 
   cursor: pointer;
+
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 
@@ -524,14 +603,14 @@ the final room image.
   overflow: hidden;
 
   border:
-    1px solid rgba(255,255,255,0.22);
+    1px solid rgba(255, 255, 255, 0.22);
 
   border-radius: 8px;
 
   background: #111;
 
   box-shadow:
-    0 40px 130px rgba(0,0,0,0.75);
+    0 40px 130px rgba(0, 0, 0, 0.75);
 }
 
 .window-bar {
@@ -556,10 +635,11 @@ the final room image.
   border: 0;
 
   background: transparent;
-
   color: white;
 
   cursor: pointer;
+
+  touch-action: manipulation;
 }
 
 .window-bar button:hover {
@@ -569,7 +649,8 @@ the final room image.
 .desktop {
   position: relative;
 
-  height: calc(100% - 35px);
+  height:
+    calc(100% - 35px);
 
   overflow: hidden;
 
@@ -600,7 +681,9 @@ the final room image.
 .desktop-greeting h2 {
   margin: 0;
 
-  font-size: clamp(25px, 4vw, 48px);
+  font-size:
+    clamp(25px, 4vw, 48px);
+
   font-weight: 300;
 
   letter-spacing: -0.04em;
@@ -612,6 +695,11 @@ the final room image.
   opacity: 0.6;
 }
 
+
+/* ============================= */
+/* DESKTOP ICONS */
+/* ============================= */
+
 .desktop-icons {
   position: absolute;
 
@@ -619,7 +707,9 @@ the final room image.
   top: 36%;
 
   display: grid;
-  grid-template-columns: repeat(2, 90px);
+
+  grid-template-columns:
+    repeat(2, 90px);
 
   gap: 18px 10px;
 }
@@ -627,13 +717,17 @@ the final room image.
 .desktop-icon {
   width: 85px;
 
+  padding: 8px 4px;
+
   border: 0;
 
   background: transparent;
-
   color: white;
 
   cursor: pointer;
+
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .desktop-icon span {
@@ -649,8 +743,14 @@ the final room image.
 }
 
 .desktop-icon:hover {
-  background: rgba(255,255,255,0.08);
+  background:
+    rgba(255, 255, 255, 0.08);
 }
+
+
+/* ============================= */
+/* STICKY NOTE */
+/* ============================= */
 
 .sticky-note {
   position: absolute;
@@ -663,10 +763,12 @@ the final room image.
   padding: 22px;
 
   background: var(--yellow);
-
   color: #252010;
 
-  font-family: "Courier New", monospace;
+  font-family:
+    "Courier New",
+    monospace;
+
   font-size: 13px;
 
   line-height: 1.55;
@@ -674,8 +776,13 @@ the final room image.
   transform: rotate(2deg);
 
   box-shadow:
-    0 12px 30px rgba(0,0,0,0.25);
+    0 12px 30px rgba(0, 0, 0, 0.25);
 }
+
+
+/* ============================= */
+/* TASKBAR */
+/* ============================= */
 
 .taskbar {
   position: absolute;
@@ -692,12 +799,14 @@ the final room image.
 
   padding: 0 15px;
 
-  background: rgba(5,5,5,0.78);
+  background:
+    rgba(5, 5, 5, 0.78);
 
   backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
 
   border-top:
-    1px solid rgba(255,255,255,0.08);
+    1px solid rgba(255, 255, 255, 0.08);
 
   font-family: monospace;
   font-size: 10px;
@@ -705,8 +814,8 @@ the final room image.
 
 .start-button {
   border: 0;
-  background: transparent;
 
+  background: transparent;
   color: white;
 
   font-size: 18px;
@@ -716,7 +825,7 @@ the final room image.
 
 
 /* ============================= */
-/* OTHER OBJECTS */
+/* TV */
 /* ============================= */
 
 .coming-soon {
@@ -725,7 +834,7 @@ the final room image.
   padding: 35px 20px;
 
   border:
-    1px dashed rgba(255,255,255,0.2);
+    1px dashed rgba(255, 255, 255, 0.2);
 
   text-align: center;
 
@@ -734,6 +843,11 @@ the final room image.
 
   opacity: 0.6;
 }
+
+
+/* ============================= */
+/* PANDA */
+/* ============================= */
 
 .panda-card {
   text-align: center;
@@ -751,15 +865,21 @@ the final room image.
   opacity: 0.4;
 }
 
+
+/* ============================= */
+/* LAPTOP SEARCH */
+/* ============================= */
+
 .fake-search {
   margin: 10px 0;
 
   padding: 12px 15px;
 
   border:
-    1px solid rgba(255,255,255,0.1);
+    1px solid rgba(255, 255, 255, 0.1);
 
-  background: rgba(255,255,255,0.04);
+  background:
+    rgba(255, 255, 255, 0.04);
 
   font-family: monospace;
   font-size: 11px;
@@ -775,16 +895,16 @@ the final room image.
 
   z-index: 2;
 
-  width: min(86vw, 390px);
+  width:
+    min(86vw, 390px);
 
   padding: 45px 35px;
 
   background: #e9dcae;
-
   color: #292316;
 
   box-shadow:
-    0 30px 90px rgba(0,0,0,0.6);
+    0 30px 90px rgba(0, 0, 0, 0.6);
 
   transform: rotate(-2deg);
 
@@ -814,7 +934,9 @@ the final room image.
   left: 50%;
   top: 50%;
 
-  width: min(82vw, 620px);
+  width:
+    min(82vw, 620px);
+
   max-height: 72vh;
 
   overflow: auto;
@@ -827,16 +949,18 @@ the final room image.
   opacity: 0;
 
   border:
-    1px solid rgba(255,255,255,0.22);
+    1px solid rgba(255, 255, 255, 0.22);
 
   background: #151515;
-
   color: white;
 
   box-shadow:
-    0 35px 100px rgba(0,0,0,0.75);
+    0 35px 100px rgba(0, 0, 0, 0.75);
 
-  transition: 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s;
 }
 
 .app-window.open {
@@ -873,10 +997,11 @@ the final room image.
   border: 0;
 
   background: transparent;
-
   color: white;
 
   cursor: pointer;
+
+  touch-action: manipulation;
 }
 
 #appContent {
@@ -891,7 +1016,7 @@ the final room image.
 
 
 /* ============================= */
-/* FINAL */
+/* FINAL UNLOCK */
 /* ============================= */
 
 .final-card {
@@ -899,12 +1024,13 @@ the final room image.
 
   z-index: 2;
 
-  width: min(90vw, 500px);
+  width:
+    min(90vw, 500px);
 
   padding: 45px;
 
   border:
-    1px solid rgba(255,255,255,0.18);
+    1px solid rgba(255, 255, 255, 0.18);
 
   background: #0c0c0c;
 
@@ -923,7 +1049,6 @@ the final room image.
   border: 0;
 
   background: transparent;
-
   color: white;
 
   font-size: 11px;
@@ -931,6 +1056,8 @@ the final room image.
   opacity: 0.5;
 
   cursor: pointer;
+
+  touch-action: manipulation;
 }
 
 
@@ -952,7 +1079,6 @@ the final room image.
     max(70px, env(safe-area-inset-bottom));
 
   background: #eee9df;
-
   color: #201d18;
 }
 
@@ -962,19 +1088,23 @@ the final room image.
   right: 25px;
   top: 20px;
 
+  z-index: 10;
+
   border: 0;
 
   background: transparent;
-
   color: #201d18;
 
   font-size: 28px;
 
   cursor: pointer;
+
+  touch-action: manipulation;
 }
 
 .birthday-letter {
-  width: min(100%, 650px);
+  width:
+    min(100%, 650px);
 
   margin: 0 auto;
 }
@@ -982,9 +1112,13 @@ the final room image.
 .birthday-letter h1 {
   margin: 20px 0 45px;
 
-  font-family: Georgia, serif;
+  font-family:
+    Georgia,
+    serif;
 
-  font-size: clamp(40px, 8vw, 72px);
+  font-size:
+    clamp(40px, 8vw, 72px);
+
   font-weight: 400;
 
   line-height: 1;
@@ -993,7 +1127,9 @@ the final room image.
 }
 
 .birthday-letter p {
-  font-family: Georgia, serif;
+  font-family:
+    Georgia,
+    serif;
 
   font-size: 17px;
 
@@ -1006,7 +1142,21 @@ the final room image.
 
 
 /* ============================= */
-/* MOBILE */
+/* IPAD / TABLET */
+/* ============================= */
+
+@media (max-width: 1100px) {
+
+  .computer {
+    width: 95vw;
+    height: 82vh;
+  }
+
+}
+
+
+/* ============================= */
+/* PHONE */
 /* ============================= */
 
 @media (max-width: 700px) {
@@ -1039,6 +1189,26 @@ the final room image.
 
   .content-card {
     padding: 32px 25px;
+  }
+
+}
+
+
+/* ============================= */
+/* REDUCED MOTION */
+/* ============================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
   }
 
 }
