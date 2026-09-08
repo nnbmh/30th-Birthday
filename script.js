@@ -39,8 +39,8 @@ enterButton.addEventListener("click", () => {
 
 
 /* ============================= */
-/* VERY SUBTLE ROOM MOVEMENT */
-/* DESKTOP ONLY */
+/* SUBTLE ROOM MOVEMENT */
+/* DESKTOP / TRACKPAD ONLY */
 /* ============================= */
 
 if (window.matchMedia("(pointer: fine)").matches) {
@@ -88,9 +88,6 @@ const modalMap = {
 const hotspots =
   document.querySelectorAll(".hotspot");
 
-const isTouchDevice =
-  window.matchMedia("(hover: none)").matches;
-
 
 function openHotspot(hotspot) {
 
@@ -115,19 +112,19 @@ function openHotspot(hotspot) {
 }
 
 
+/* ============================= */
+/* HOTSPOT INTERACTIONS */
+/* ============================= */
+
 hotspots.forEach((hotspot) => {
 
-  /*
-    MOUSE / TRACKPAD
-  */
+  /* mouse / trackpad hover */
 
   hotspot.addEventListener(
     "mouseenter",
     () => {
 
-      if (!isTouchDevice) {
-        hotspot.classList.add("active");
-      }
+      hotspot.classList.add("active");
 
     }
   );
@@ -137,45 +134,62 @@ hotspots.forEach((hotspot) => {
     "mouseleave",
     () => {
 
-      if (!isTouchDevice) {
-        hotspot.classList.remove("active");
-      }
+      hotspot.classList.remove("active");
 
     }
   );
 
 
-  /*
-    CLICK
-  */
+  /* touchscreen */
+
+  hotspot.addEventListener(
+    "touchstart",
+    () => {
+
+      hotspot.classList.add("active");
+
+    },
+    { passive: true }
+  );
+
+
+  hotspot.addEventListener(
+    "touchend",
+    (event) => {
+
+      event.preventDefault();
+
+      hotspot.classList.remove("active");
+
+      openHotspot(hotspot);
+
+    }
+  );
+
+
+  hotspot.addEventListener(
+    "touchcancel",
+    () => {
+
+      hotspot.classList.remove("active");
+
+    }
+  );
+
+
+  /* normal click */
 
   hotspot.addEventListener(
     "click",
     (event) => {
 
       /*
-        On touchscreen:
-        first tap = discover
-        second tap = open
+        touchscreens usually fire a synthetic
+        click after touchend, so ignore that.
       */
 
-      if (isTouchDevice) {
-
-        if (
-          !hotspot.classList.contains("active")
-        ) {
-
-          event.preventDefault();
-
-          hotspots.forEach((other) => {
-            other.classList.remove("active");
-          });
-
-          hotspot.classList.add("active");
-
-          return;
-        }
-
+      if (event.detail === 0) {
+        return;
       }
 
       openHotspot(hotspot);
@@ -185,15 +199,10 @@ hotspots.forEach((hotspot) => {
 
 });
 
-    modal.classList.add("open");
-    modal.setAttribute("aria-hidden", "false");
 
-    markFound(item);
-
-  });
-
-});
-
+/* ============================= */
+/* CLOSE MODALS */
+/* ============================= */
 
 document
   .querySelectorAll("[data-close]")
@@ -204,16 +213,16 @@ document
       const modal =
         button.closest(".modal");
 
-      if (modal) {
-
-        modal.classList.remove("open");
-
-        modal.setAttribute(
-          "aria-hidden",
-          "true"
-        );
-
+      if (!modal) {
+        return;
       }
+
+      modal.classList.remove("open");
+
+      modal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
 
     });
 
@@ -234,6 +243,11 @@ const helpModal =
 helpButton.addEventListener("click", () => {
 
   helpModal.classList.add("open");
+
+  helpModal.setAttribute(
+    "aria-hidden",
+    "false"
+  );
 
 });
 
@@ -342,6 +356,11 @@ function markFound(item) {
     setTimeout(() => {
 
       finalModal.classList.add("open");
+
+      finalModal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
 
     }, 700);
 
@@ -561,6 +580,11 @@ openFinalButton.addEventListener(
 
     finalModal.classList.remove("open");
 
+    finalModal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
     birthdayMessage.classList.remove(
       "hidden"
     );
@@ -574,6 +598,11 @@ finalLaterButton.addEventListener(
   () => {
 
     finalModal.classList.remove("open");
+
+    finalModal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
 
   }
 );
