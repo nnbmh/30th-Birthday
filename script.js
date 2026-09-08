@@ -114,14 +114,13 @@ function openHotspot(hotspot) {
 
 /* ============================= */
 /* HOTSPOT INTERACTIONS */
+/* POINTER EVENTS */
 /* ============================= */
 
 hotspots.forEach((hotspot) => {
 
-  /* mouse / trackpad hover */
-
   hotspot.addEventListener(
-    "mouseenter",
+    "pointerenter",
     () => {
 
       hotspot.classList.add("active");
@@ -131,7 +130,7 @@ hotspots.forEach((hotspot) => {
 
 
   hotspot.addEventListener(
-    "mouseleave",
+    "pointerleave",
     () => {
 
       hotspot.classList.remove("active");
@@ -140,21 +139,18 @@ hotspots.forEach((hotspot) => {
   );
 
 
-  /* touchscreen */
-
   hotspot.addEventListener(
-    "touchstart",
+    "pointerdown",
     () => {
 
       hotspot.classList.add("active");
 
-    },
-    { passive: true }
+    }
   );
 
 
   hotspot.addEventListener(
-    "touchend",
+    "pointerup",
     (event) => {
 
       event.preventDefault();
@@ -168,31 +164,10 @@ hotspots.forEach((hotspot) => {
 
 
   hotspot.addEventListener(
-    "touchcancel",
+    "pointercancel",
     () => {
 
       hotspot.classList.remove("active");
-
-    }
-  );
-
-
-  /* normal click */
-
-  hotspot.addEventListener(
-    "click",
-    (event) => {
-
-      /*
-        touchscreens usually fire a synthetic
-        click after touchend, so ignore that.
-      */
-
-      if (event.detail === 0) {
-        return;
-      }
-
-      openHotspot(hotspot);
 
     }
   );
