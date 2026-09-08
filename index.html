@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#090909">
+
+  <title>Faris' Room</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!-- LOADING SCREEN -->
+  <div id="loadingScreen">
+    <div class="loading-content">
+      <p class="loading-small">loading...</p>
+      <h1>Faris' Room</h1>
+
+      <div class="loading-bar">
+        <div class="loading-progress"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- INTRO SCREEN -->
+  <div id="introScreen" class="hidden">
+    <div class="intro-content">
+
+      <p class="eyebrow">
+        18 SEPTEMBER 2026
+      </p>
+
+      <h1>
+        Happy 30th,<br>
+        Faris.
+      </h1>
+
+      <p class="intro-text">
+        i left a few things in here for you.
+      </p>
+
+      <button id="enterButton">
+        enter
+      </button>
+
+    </div>
+  </div>
+
+
+  <!-- ROOM -->
+  <main id="room">
+
+    <div id="roomCanvas">
+
+      <img
+        id="roomImage"
+        src="assets/room.png"
+        alt="Faris' room"
+        draggable="false"
+      >
+
+
+      <!-- MONITOR -->
+      <button
+        class="hotspot"
+        id="monitorHotspot"
+        data-item="computer"
+        aria-label="Computer"
+      >
+        <span class="hotspot-dot"></span>
+      </button>
+
+
+      <!-- TV -->
+      <button
+        class="hotspot"
+        id="tvHotspot"
+        data-item="tv"
+        aria-label="TV"
+      >
+        <span class="hotspot-dot"></span>
+      </button>
+
+
+      <!-- PANDA -->
+      <button
+        class="hotspot"
+        id="pandaHotspot"
+        data-item="panda"
+        aria-label="Panda"
+      >
+        <span class="hotspot-dot"></span>
+      </button>
+
+
+      <!-- LAPTOP -->
+      <button
+        class="hotspot"
+        id="laptopHotspot"
+        data-item="laptop"
+        aria-label="Laptop"
+      >
+        <span class="hotspot-dot"></span>
+      </button>
+
+
+      <!-- DESK / NOTE -->
+      <button
+        class="hotspot"
+        id="noteHotspot"
+        data-item="note"
+        aria-label="Note"
+      >
+        <span class="hotspot-dot"></span>
+      </button>
+
+    </div>
+
+
+    <!-- TOP LEFT -->
+    <header id="roomHeader">
+
+      <div>
+        <h2>Faris' Room</h2>
+
+        <p>
+          18 Sep 2026
+        </p>
+      </div>
+
+    </header>
+
+
+    <!-- BOTTOM INSTRUCTIONS -->
+    <div id="roomInstructions">
+      <span class="mouse-icon">✦</span>
+      <span>look around... i left you some things</span>
+    </div>
+
+
+    <!-- HELP -->
+    <button id="helpButton">
+      ? help
+    </button>
+
+
+    <!-- PROGRESS -->
+    <div id="progress">
+      <span id="progressText">
+        0 / 5 found
+      </span>
+
+      <div class="progress-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- ======================== -->
+  <!-- COMPUTER -->
+  <!-- ======================== -->
+
+  <section
+    class="modal"
+    id="computerModal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-background" data-close></div>
+
+    <div class="computer">
+
+      <div class="window-bar">
+
+        <span>
+          FARIS-PC
+        </span>
+
+        <button data-close>
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="desktop">
+
+        <div class="desktop-greeting">
+
+          <p id="computerTime">
+            00:00
+          </p>
+
+          <h2>
+            Good evening, Faris.
+          </h2>
+
+          <p>
+            Keep going. ★
+          </p>
+
+        </div>
+
+
+        <div class="desktop-icons">
+
+          <button
+            class="desktop-icon"
+            data-app="birthday"
+          >
+            <span>🎂</span>
+            <p>Birthday</p>
+          </button>
+
+
+          <button
+            class="desktop-icon"
+            data-app="photos"
+          >
+            <span>📁</span>
+            <p>Photos</p>
+          </button>
+
+
+          <button
+            class="desktop-icon"
+            data-app="message"
+          >
+            <span>💌</span>
+            <p>Message</p>
+          </button>
+
+
+          <button
+            class="desktop-icon"
+            data-app="classified"
+          >
+            <span>🔒</span>
+            <p>CLASSIFIED</p>
+          </button>
+
+        </div>
+
+
+        <div class="sticky-note">
+          30 already sia sayang...<br>
+          anyway, i left you something.
+        </div>
+
+
+        <div class="taskbar">
+
+          <button class="start-button">
+            ◈
+          </button>
+
+          <span id="taskbarTime">
+            00:00
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================== -->
+  <!-- TV -->
+  <!-- ======================== -->
+
+  <section
+    class="modal"
+    id="tvModal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-background" data-close></div>
+
+    <div class="content-card">
+
+      <button class="card-close" data-close>
+        ×
+      </button>
+
+      <p class="card-number">
+        02
+      </p>
+
+      <h2>
+        NOW SHOWING
+      </h2>
+
+      <p>
+        faris turns 30
+      </p>
+
+      <div class="coming-soon">
+        birthday video goes here.
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================== -->
+  <!-- PANDA -->
+  <!-- ======================== -->
+
+  <section
+    class="modal"
+    id="pandaModal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-background" data-close></div>
+
+    <div class="content-card panda-card">
+
+      <button class="card-close" data-close>
+        ×
+      </button>
+
+      <p class="card-number">
+        03
+      </p>
+
+      <h2>
+        IMPORTANT MESSAGE
+      </h2>
+
+      <div class="panda-face">
+        ʕ•ᴥ•ʔ
+      </div>
+
+      <p>
+        hello baboy.
+      </p>
+
+      <p>
+        apparently you're 30 now.
+      </p>
+
+      <p class="tiny">
+        ancient.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================== -->
+  <!-- LAPTOP -->
+  <!-- ======================== -->
+
+  <section
+    class="modal"
+    id="laptopModal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-background" data-close></div>
+
+    <div class="content-card chat-card">
+
+      <button class="card-close" data-close>
+        ×
+      </button>
+
+      <p class="card-number">
+        04
+      </p>
+
+      <h2>
+        SEARCH HISTORY
+      </h2>
+
+
+      <div class="fake-search">
+        how is faris already 30
+      </div>
+
+      <div class="fake-search">
+        is 30 considered elderly
+      </div>
+
+      <div class="fake-search">
+        birthday presents for annoying boyfriend
+      </div>
+
+      <div class="fake-search">
+        how to annoy faris from 10,000km away
+      </div>
+
+      <div class="fake-search">
+        can i return boyfriend after 30 days
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================== -->
+  <!-- NOTE -->
+  <!-- ======================== -->
+
+  <section
+    class="modal"
+    id="noteModal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-background" data-close></div>
+
+    <div class="paper-note">
+
+      <button class="paper-close" data-close>
+        ×
+      </button>
+
+      <p>
+        sayang,
+      </p>
+
+      <p>
+        if youre reading this then you actually listened
+        and clicked around instead of immediately asking
+        me where everything is.
+      </p>
+
+      <p>
+        impressive.
+      </p>
+
+      <p>
+        keep looking.
+      </p>
+
+      <p class="note-signature">
+        ♡
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- ======================== -->
+  <!-- DESKTOP APP WINDOW -->
+  <!-- ======================== -->
+
+  <section
+    class="app-window"
+    id="appWindow"
+  >
+
+    <div class="app-titlebar">
+
+      <span id="appTitle">
+        File
+      </span>
+
+      <button id="closeApp">
+        ×
+      </button>
+
+    </div>
+
+    <div id="appContent"></div>
+
+  </section>
+
+
+  <!-- ======================== -->
+  <!-- FINAL UNLOCK -->
+  <!-- ======================== -->
+
+  <section
+    class="modal"
+    id="finalModal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-background"></div>
+
+    <div class="final-card">
+
+      <p class="eyebrow">
+        ALL FILES FOUND
+      </p>
+
+      <h2>
+        okay... you found everything.
+      </h2>
+
+      <p>
+        theres one more thing.
+      </p>
+
+      <button id="openFinalButton">
+        open it
+      </button>
+
+      <button
+        id="finalLaterButton"
+        class="text-button"
+      >
+        not yet
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- FINAL MESSAGE -->
+  <section
+    id="birthdayMessage"
+    class="hidden"
+  >
+
+    <button id="closeBirthdayMessage">
+      ×
+    </button>
+
+    <div class="birthday-letter">
+
+      <p class="eyebrow">
+        FOR FARIS
+      </p>
+
+      <h1>
+        Happy 30th Birthday,<br>
+        sayang.
+      </h1>
+
+      <p>
+        i wanted to make you something that was yours.
+      </p>
+
+      <p>
+        not just a present you open once and put somewhere,
+        but somewhere you could look around... find stupid
+        little things... get annoyed at me... and hopefully
+        smile a little.
+      </p>
+
+      <p>
+        this part isnt finished yet because this is where
+        your actual birthday message is going to go.
+      </p>
+
+      <p>
+        but yes... youre officially 30 now bb.
+      </p>
+
+      <p class="letter-signature">
+        i love you.<br>
+        ♡
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- HELP WINDOW -->
+  <section
+    class="modal"
+    id="helpModal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-background" data-close></div>
+
+    <div class="content-card">
+
+      <button class="card-close" data-close>
+        ×
+      </button>
+
+      <h2>
+        HOW TO PLAY
+      </h2>
+
+      <p>
+        there are 5 things hidden around the room.
+      </p>
+
+      <p>
+        tap the little glowing points to explore.
+      </p>
+
+      <p>
+        find all 5 and something else will unlock.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <script src="script.js"></script>
+
+</body>
+</html>
