@@ -1,0 +1,1034 @@
+* {
+  box-sizing: border-box;
+}
+
+:root {
+  --white: #f5f3ed;
+  --black: #080808;
+  --glass: rgba(10, 10, 10, 0.72);
+  --border: rgba(255, 255, 255, 0.18);
+  --yellow: #f0d25f;
+}
+
+html,
+body {
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: var(--black);
+  color: var(--white);
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+.hidden {
+  display: none !important;
+}
+
+
+/* ============================= */
+/* LOADING */
+/* ============================= */
+
+#loadingScreen,
+#introScreen {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: #080808;
+}
+
+.loading-content,
+.intro-content {
+  width: min(86vw, 500px);
+}
+
+.loading-small,
+.eyebrow {
+  margin: 0 0 12px;
+
+  font-family: monospace;
+  font-size: 11px;
+
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+
+  opacity: 0.6;
+}
+
+.loading-content h1 {
+  margin: 0 0 24px;
+
+  font-size: clamp(30px, 7vw, 58px);
+  font-weight: 400;
+}
+
+.loading-bar {
+  width: 100%;
+  height: 2px;
+
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.loading-progress {
+  width: 0%;
+  height: 100%;
+
+  background: white;
+
+  animation: load 1.7s ease forwards;
+}
+
+@keyframes load {
+  to {
+    width: 100%;
+  }
+}
+
+
+/* ============================= */
+/* INTRO */
+/* ============================= */
+
+.intro-content h1 {
+  margin: 0;
+
+  font-size: clamp(48px, 11vw, 100px);
+  font-weight: 300;
+
+  line-height: 0.94;
+  letter-spacing: -0.06em;
+}
+
+.intro-text {
+  margin: 30px 0;
+
+  opacity: 0.68;
+}
+
+#enterButton,
+#openFinalButton {
+  padding: 12px 24px;
+
+  border: 1px solid rgba(255,255,255,0.35);
+
+  background: transparent;
+
+  color: white;
+
+  cursor: pointer;
+
+  transition: 0.25s;
+}
+
+#enterButton:hover,
+#openFinalButton:hover {
+  background: white;
+  color: black;
+}
+
+
+/* ============================= */
+/* ROOM */
+/* ============================= */
+
+#room {
+  position: fixed;
+  inset: 0;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  transition: opacity 1s ease;
+}
+
+#room.visible {
+  opacity: 1;
+}
+
+#roomCanvas {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+}
+
+#roomImage {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  user-select: none;
+  -webkit-user-drag: none;
+
+  transform: scale(1.015);
+
+  transition: transform 0.3s ease-out;
+}
+
+
+/* ============================= */
+/* HUD */
+/* ============================= */
+
+#roomHeader {
+  position: absolute;
+
+  left: max(22px, env(safe-area-inset-left));
+  top: max(20px, env(safe-area-inset-top));
+
+  z-index: 20;
+
+  pointer-events: none;
+
+  text-shadow: 0 2px 14px rgba(0,0,0,0.8);
+}
+
+#roomHeader h2 {
+  margin: 0;
+
+  font-size: 17px;
+  font-weight: 500;
+}
+
+#roomHeader p {
+  margin: 5px 0 0;
+
+  font-family: monospace;
+  font-size: 10px;
+
+  opacity: 0.65;
+}
+
+#roomInstructions {
+  position: absolute;
+
+  left: 50%;
+  bottom: 22px;
+
+  transform: translateX(-50%);
+
+  z-index: 20;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  padding: 9px 13px;
+
+  border: 1px solid var(--border);
+  border-radius: 999px;
+
+  background: rgba(0,0,0,0.38);
+
+  backdrop-filter: blur(10px);
+
+  font-size: 11px;
+
+  white-space: nowrap;
+}
+
+.mouse-icon {
+  opacity: 0.7;
+}
+
+#helpButton {
+  position: absolute;
+
+  left: max(20px, env(safe-area-inset-left));
+  bottom: max(20px, env(safe-area-inset-bottom));
+
+  z-index: 30;
+
+  border: 0;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 11px;
+
+  cursor: pointer;
+
+  opacity: 0.72;
+}
+
+#progress {
+  position: absolute;
+
+  right: max(20px, env(safe-area-inset-right));
+  top: max(20px, env(safe-area-inset-top));
+
+  z-index: 20;
+
+  text-align: right;
+
+  font-family: monospace;
+  font-size: 10px;
+
+  text-shadow: 0 2px 10px black;
+}
+
+.progress-dots {
+  display: flex;
+  gap: 5px;
+
+  margin-top: 8px;
+}
+
+.progress-dots span {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(255,255,255,0.65);
+}
+
+.progress-dots span.found {
+  background: white;
+}
+
+
+/* ============================= */
+/* HOTSPOTS */
+/* ============================= */
+
+.hotspot {
+  position: absolute;
+
+  z-index: 10;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+/*
+These are starting positions based on
+the room layout we designed.
+
+We can fine-tune them after you upload
+the final room image.
+*/
+
+#monitorHotspot {
+  left: 27%;
+  top: 34%;
+
+  width: 22%;
+  height: 27%;
+}
+
+#tvHotspot {
+  left: 42%;
+  top: 8%;
+
+  width: 22%;
+  height: 22%;
+}
+
+#pandaHotspot {
+  left: 72%;
+  top: 54%;
+
+  width: 10%;
+  height: 20%;
+}
+
+#laptopHotspot {
+  left: 58%;
+  top: 39%;
+
+  width: 17%;
+  height: 24%;
+}
+
+#noteHotspot {
+  left: 49%;
+  top: 54%;
+
+  width: 11%;
+  height: 13%;
+}
+
+.hotspot-dot {
+  width: 11px;
+  height: 11px;
+
+  border-radius: 50%;
+
+  background: rgba(255,255,255,0.9);
+
+  box-shadow:
+    0 0 0 5px rgba(255,255,255,0.12),
+    0 0 22px rgba(255,255,255,0.75);
+
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.75;
+  }
+
+  50% {
+    transform: scale(1.35);
+    opacity: 1;
+  }
+}
+
+
+/* ============================= */
+/* MODALS */
+/* ============================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition:
+    opacity 0.25s ease,
+    visibility 0.25s;
+}
+
+.modal.open {
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-background {
+  position: absolute;
+  inset: 0;
+
+  background: rgba(0,0,0,0.7);
+
+  backdrop-filter: blur(8px);
+}
+
+.content-card {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(90vw, 480px);
+
+  padding: 40px;
+
+  border: 1px solid var(--border);
+  border-radius: 8px;
+
+  background: rgba(14,14,14,0.96);
+
+  box-shadow: 0 30px 100px rgba(0,0,0,0.65);
+}
+
+.content-card h2 {
+  margin: 0 0 20px;
+
+  font-size: 26px;
+  font-weight: 400;
+}
+
+.content-card p {
+  line-height: 1.65;
+}
+
+.card-number {
+  font-family: monospace;
+  font-size: 10px;
+
+  opacity: 0.4;
+}
+
+.card-close,
+.paper-close {
+  position: absolute;
+
+  right: 14px;
+  top: 10px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: inherit;
+
+  font-size: 24px;
+
+  cursor: pointer;
+}
+
+
+/* ============================= */
+/* COMPUTER */
+/* ============================= */
+
+.computer {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(94vw, 1200px);
+  height: min(86vh, 760px);
+
+  overflow: hidden;
+
+  border:
+    1px solid rgba(255,255,255,0.22);
+
+  border-radius: 8px;
+
+  background: #111;
+
+  box-shadow:
+    0 40px 130px rgba(0,0,0,0.75);
+}
+
+.window-bar {
+  height: 35px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding-left: 12px;
+
+  background: #191919;
+
+  font-family: monospace;
+  font-size: 10px;
+}
+
+.window-bar button {
+  width: 42px;
+  height: 35px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+.window-bar button:hover {
+  background: #b52c2c;
+}
+
+.desktop {
+  position: relative;
+
+  height: calc(100% - 35px);
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 50% 30%,
+      #2c3d4b 0%,
+      #17212a 35%,
+      #080d12 100%
+    );
+}
+
+.desktop-greeting {
+  position: absolute;
+
+  left: 6%;
+  top: 9%;
+}
+
+.desktop-greeting #computerTime {
+  margin: 0 0 8px;
+
+  font-size: 11px;
+
+  opacity: 0.6;
+}
+
+.desktop-greeting h2 {
+  margin: 0;
+
+  font-size: clamp(25px, 4vw, 48px);
+  font-weight: 300;
+
+  letter-spacing: -0.04em;
+}
+
+.desktop-greeting > p:last-child {
+  margin-top: 9px;
+
+  opacity: 0.6;
+}
+
+.desktop-icons {
+  position: absolute;
+
+  left: 5%;
+  top: 36%;
+
+  display: grid;
+  grid-template-columns: repeat(2, 90px);
+
+  gap: 18px 10px;
+}
+
+.desktop-icon {
+  width: 85px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+.desktop-icon span {
+  display: block;
+
+  font-size: 32px;
+}
+
+.desktop-icon p {
+  margin: 6px 0 0;
+
+  font-size: 11px;
+}
+
+.desktop-icon:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.sticky-note {
+  position: absolute;
+
+  right: 8%;
+  top: 17%;
+
+  width: 190px;
+
+  padding: 22px;
+
+  background: var(--yellow);
+
+  color: #252010;
+
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+
+  line-height: 1.55;
+
+  transform: rotate(2deg);
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,0.25);
+}
+
+.taskbar {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 15px;
+
+  background: rgba(5,5,5,0.78);
+
+  backdrop-filter: blur(15px);
+
+  border-top:
+    1px solid rgba(255,255,255,0.08);
+
+  font-family: monospace;
+  font-size: 10px;
+}
+
+.start-button {
+  border: 0;
+  background: transparent;
+
+  color: white;
+
+  font-size: 18px;
+
+  cursor: pointer;
+}
+
+
+/* ============================= */
+/* OTHER OBJECTS */
+/* ============================= */
+
+.coming-soon {
+  margin-top: 25px;
+
+  padding: 35px 20px;
+
+  border:
+    1px dashed rgba(255,255,255,0.2);
+
+  text-align: center;
+
+  font-family: monospace;
+  font-size: 11px;
+
+  opacity: 0.6;
+}
+
+.panda-card {
+  text-align: center;
+}
+
+.panda-face {
+  margin: 30px 0;
+
+  font-size: 70px;
+}
+
+.tiny {
+  font-size: 10px;
+
+  opacity: 0.4;
+}
+
+.fake-search {
+  margin: 10px 0;
+
+  padding: 12px 15px;
+
+  border:
+    1px solid rgba(255,255,255,0.1);
+
+  background: rgba(255,255,255,0.04);
+
+  font-family: monospace;
+  font-size: 11px;
+}
+
+
+/* ============================= */
+/* PAPER NOTE */
+/* ============================= */
+
+.paper-note {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(86vw, 390px);
+
+  padding: 45px 35px;
+
+  background: #e9dcae;
+
+  color: #292316;
+
+  box-shadow:
+    0 30px 90px rgba(0,0,0,0.6);
+
+  transform: rotate(-2deg);
+
+  font-family:
+    "Courier New",
+    monospace;
+
+  line-height: 1.65;
+}
+
+.note-signature {
+  margin-top: 25px;
+
+  font-size: 25px;
+}
+
+
+/* ============================= */
+/* COMPUTER APP WINDOW */
+/* ============================= */
+
+.app-window {
+  position: fixed;
+
+  z-index: 300;
+
+  left: 50%;
+  top: 50%;
+
+  width: min(82vw, 620px);
+  max-height: 72vh;
+
+  overflow: auto;
+
+  transform:
+    translate(-50%, -46%)
+    scale(0.96);
+
+  visibility: hidden;
+  opacity: 0;
+
+  border:
+    1px solid rgba(255,255,255,0.22);
+
+  background: #151515;
+
+  color: white;
+
+  box-shadow:
+    0 35px 100px rgba(0,0,0,0.75);
+
+  transition: 0.2s ease;
+}
+
+.app-window.open {
+  visibility: visible;
+  opacity: 1;
+
+  transform:
+    translate(-50%, -50%)
+    scale(1);
+}
+
+.app-titlebar {
+  position: sticky;
+  top: 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  height: 38px;
+
+  padding-left: 13px;
+
+  background: #202020;
+
+  font-family: monospace;
+  font-size: 10px;
+}
+
+.app-titlebar button {
+  width: 40px;
+  height: 38px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: white;
+
+  cursor: pointer;
+}
+
+#appContent {
+  padding: 30px;
+
+  line-height: 1.7;
+}
+
+#appContent h2 {
+  font-weight: 400;
+}
+
+
+/* ============================= */
+/* FINAL */
+/* ============================= */
+
+.final-card {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(90vw, 500px);
+
+  padding: 45px;
+
+  border:
+    1px solid rgba(255,255,255,0.18);
+
+  background: #0c0c0c;
+
+  text-align: center;
+}
+
+.final-card h2 {
+  font-weight: 400;
+}
+
+.text-button {
+  display: block;
+
+  margin: 18px auto 0;
+
+  border: 0;
+
+  background: transparent;
+
+  color: white;
+
+  font-size: 11px;
+
+  opacity: 0.5;
+
+  cursor: pointer;
+}
+
+
+/* ============================= */
+/* BIRTHDAY MESSAGE */
+/* ============================= */
+
+#birthdayMessage {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1000;
+
+  overflow-y: auto;
+
+  padding:
+    max(70px, env(safe-area-inset-top))
+    25px
+    max(70px, env(safe-area-inset-bottom));
+
+  background: #eee9df;
+
+  color: #201d18;
+}
+
+#closeBirthdayMessage {
+  position: fixed;
+
+  right: 25px;
+  top: 20px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #201d18;
+
+  font-size: 28px;
+
+  cursor: pointer;
+}
+
+.birthday-letter {
+  width: min(100%, 650px);
+
+  margin: 0 auto;
+}
+
+.birthday-letter h1 {
+  margin: 20px 0 45px;
+
+  font-family: Georgia, serif;
+
+  font-size: clamp(40px, 8vw, 72px);
+  font-weight: 400;
+
+  line-height: 1;
+
+  letter-spacing: -0.04em;
+}
+
+.birthday-letter p {
+  font-family: Georgia, serif;
+
+  font-size: 17px;
+
+  line-height: 1.9;
+}
+
+.letter-signature {
+  margin-top: 45px;
+}
+
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 700px) {
+
+  #roomInstructions {
+    bottom: 60px;
+
+    font-size: 9px;
+  }
+
+  .computer {
+    width: 96vw;
+    height: 80vh;
+  }
+
+  .sticky-note {
+    right: 5%;
+    top: 12%;
+
+    width: 150px;
+
+    padding: 16px;
+
+    font-size: 10px;
+  }
+
+  .desktop-icons {
+    top: 42%;
+  }
+
+  .content-card {
+    padding: 32px 25px;
+  }
+
+}
