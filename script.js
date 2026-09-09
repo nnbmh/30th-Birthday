@@ -438,10 +438,19 @@ function playTypingBurst() {
 const openPandaDelivery = document.getElementById("openPandaDelivery");
 const pandaMessage = document.getElementById("pandaMessage");
 const pandaDelivery = document.querySelector(".panda-delivery");
+const pandaCharacter = document.querySelector(".panda-character");
+const oreoLabel = document.querySelector(".oreo-label");
+const deliveryDetails = document.querySelector(".delivery-details");
+const pandaEyebrow = document.querySelector(".panda-delivery .eyebrow");
 
 function resetPanda() {
   pandaMessage.classList.add("hidden");
   openPandaDelivery.classList.remove("hidden");
+
+  pandaCharacter.classList.remove("hidden");
+  oreoLabel.classList.remove("hidden");
+  deliveryDetails.classList.remove("hidden");
+  pandaEyebrow.classList.remove("hidden");
 
   if (pandaDelivery) {
     pandaDelivery.scrollTop = 0;
@@ -451,18 +460,20 @@ function resetPanda() {
 openPandaDelivery.addEventListener("click", () => {
   playClick();
 
+  pandaEyebrow.classList.add("hidden");
+  pandaCharacter.classList.add("hidden");
+  oreoLabel.classList.add("hidden");
+  deliveryDetails.classList.add("hidden");
   openPandaDelivery.classList.add("hidden");
+
   pandaMessage.classList.remove("hidden");
 
   playTone(520, 0.1, 0.015, "sine");
   playTone(690, 0.14, 0.013, "sine", 0.08);
 
-  setTimeout(() => {
-    pandaMessage.scrollIntoView({
-      behavior: "smooth",
-      block: "start"
-    });
-  }, 80);
+  if (pandaDelivery) {
+    pandaDelivery.scrollTop = 0;
+  }
 });
 
 /* ============================= */
