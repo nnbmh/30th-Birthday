@@ -304,14 +304,26 @@ const aiRevealMessages = document.querySelectorAll("#aiConversation .reveal-mess
 let aiTimers = [];
 
 const aiMessageDelays = [
-  700,
-  1700,
+  1000,
   2600,
-  3500,
-  4500,
-  5600,
-  6800,
-  8200
+  4200,
+  5500,
+  7000,
+  8800,
+  10400,
+  12100,
+  13700,
+  15300,
+  16900,
+  18500,
+  20400,
+  22100,
+  23900,
+  25800,
+  27500,
+  29200,
+  31000,
+  32800
 ];
 
 function runAIConversation() {
@@ -325,7 +337,7 @@ function runAIConversation() {
   aiConversation.scrollTop = 0;
 
   aiRevealMessages.forEach((message, index) => {
-    const delay = aiMessageDelays[index] ?? 700 + index * 1000;
+    const delay = aiMessageDelays[index] ?? 1000 + index * 1700;
 
     const timer = setTimeout(() => {
       message.classList.add("revealed");
@@ -337,7 +349,7 @@ function runAIConversation() {
             top: aiConversation.scrollHeight,
             behavior: "smooth"
           });
-        }, 180);
+        }, 260);
       }
     }, delay);
 
@@ -537,16 +549,20 @@ const appData = {
   message: {
     title: "message.txt",
     content: `
-      <p class="eyebrow">FROM NADHIRA</p>
-      <h2>hi sayang.</h2>
+      <p class="eyebrow">MESSAGE FROM SAYANG</p>
+      <h2>hi bb.</h2>
       <p>
-        i know youre probably clicking
-        absolutely everything because
-        youre nosy.
+        i know i bully you a lot.
+        unfortunately this is one of my love languages.
       </p>
-      <p>which is exactly what i expected.</p>
-      <p>keep going.</p>
-      <p>theres more.</p>
+      <p>
+        but underneath all the nonsense...
+        i hope you know how loved you are.
+      </p>
+      <p>
+        happy birthday sayang.
+      </p>
+      <p>♡</p>
     `
   },
 
@@ -555,21 +571,28 @@ const appData = {
     content: `
       <p class="eyebrow">RESTRICTED FILE</p>
       <h2>ACCESS DENIED</h2>
-      <p>nice try.</p>
-      <p>you havent unlocked this yet.</p>
-      <p>go back to the room, detective.</p>
+      <p>
+        clearance level insufficient.
+      </p>
+      <p>
+        nice try, Faris.
+      </p>
+      <p>
+        maybe theres something else
+        in the room you havent found yet.
+      </p>
     `
   }
 };
 
 document.querySelectorAll(".desktop-icon").forEach((icon) => {
   icon.addEventListener("click", () => {
-    playClick();
-
     const app = icon.dataset.app;
     const data = appData[app];
 
     if (!data) return;
+
+    playClick();
 
     appTitle.textContent = data.title;
     appContent.innerHTML = data.content;
@@ -591,25 +614,10 @@ const finalCounter = document.getElementById("finalCounter");
 const finalHeading = document.getElementById("finalHeading");
 const finalSubtext = document.getElementById("finalSubtext");
 const openFinalButton = document.getElementById("openFinalButton");
+const birthdayMessage = document.getElementById("birthdayMessage");
+const closeBirthdayMessage = document.getElementById("closeBirthdayMessage");
 
 let finalShown = false;
-
-function swapFinalText(heading, subtext = "") {
-  finalHeading.classList.add("fade");
-  finalSubtext.classList.remove("visible");
-
-  setTimeout(() => {
-    finalHeading.textContent = heading;
-    finalSubtext.textContent = subtext;
-
-    finalHeading.classList.remove("fade");
-    finalHeading.classList.add("visible");
-
-    if (subtext) {
-      finalSubtext.classList.add("visible");
-    }
-  }, 380);
-}
 
 function startFinalReveal() {
   if (finalShown) return;
@@ -618,55 +626,41 @@ function startFinalReveal() {
 
   document.querySelectorAll(".modal.open").forEach((modal) => {
     modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
   });
 
   appWindow.classList.remove("open");
   room.classList.add("final-reveal-active");
 
-  playTone(110, 1.2, 0.018, "sine");
+  finalModal.classList.add("open");
+  finalModal.setAttribute("aria-hidden", "false");
 
-  setTimeout(() => {
-    room.classList.add("final-lights");
-  }, 650);
+  finalCounter.textContent = "5 / 5 FOUND";
+  finalHeading.textContent = "";
+  finalSubtext.textContent = "";
+  openFinalButton.classList.remove("visible");
 
-  setTimeout(() => {
-    finalModal.classList.add("open");
-    finalModal.setAttribute("aria-hidden", "false");
-  }, 900);
-
-  setTimeout(() => {
-    finalCounter.classList.add("visible");
-  }, 1200);
+  playFinalChime();
 
   setTimeout(() => {
     finalHeading.textContent = "you actually found everything...";
-    finalHeading.classList.add("visible");
-    playFinalChime();
-  }, 1550);
+  }, 1000);
 
   setTimeout(() => {
-    swapFinalText("of course you did.", "nosy.");
-  }, 3500);
+    finalSubtext.textContent = "of course you did. nosy.";
+  }, 2400);
 
   setTimeout(() => {
-    swapFinalText("theres one more thing, sayang.");
-  }, 5450);
+    finalSubtext.textContent = "theres one more thing, sayang.";
+  }, 3900);
 
   setTimeout(() => {
     openFinalButton.classList.add("visible");
-  }, 6900);
+  }, 4700);
 }
 
-/* ============================= */
-/* FINAL LETTER */
-/* ============================= */
-
-const birthdayMessage = document.getElementById("birthdayMessage");
-const closeBirthdayMessage = document.getElementById("closeBirthdayMessage");
-
 openFinalButton.addEventListener("click", () => {
-  playTone(440, 0.45, 0.018, "sine");
-  playTone(660, 0.7, 0.015, "sine", 0.2);
+  playClick();
 
   finalModal.classList.remove("open");
   finalModal.setAttribute("aria-hidden", "true");
@@ -675,5 +669,8 @@ openFinalButton.addEventListener("click", () => {
 });
 
 closeBirthdayMessage.addEventListener("click", () => {
+  playClick();
+
   birthdayMessage.classList.add("hidden");
+  room.classList.remove("final-reveal-active");
 });
