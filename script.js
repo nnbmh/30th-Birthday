@@ -490,7 +490,6 @@ function clearRoomFocus() {
 
 /* ============================= */
 /* OPEN HOTSPOT */
-/* FAST TRANSITION */
 /* ============================= */
 
 function openHotspot(
@@ -552,14 +551,6 @@ function openHotspot(
   }
 
 
-  /*
-    BEFORE: 520ms
-    NOW: 220ms
-
-    Enough time to see the focus effect,
-    but the object opens almost immediately.
-  */
-
   setTimeout(
     () => {
 
@@ -603,7 +594,6 @@ function openHotspot(
 
 /* ============================= */
 /* HOTSPOT POINTER EVENTS */
-/* KEEP THIS LOGIC */
 /* ============================= */
 
 hotspots.forEach(
@@ -725,6 +715,7 @@ function runModalExperience(
 
 }
 
+
 /* ============================= */
 /* COMPUTER BOOT */
 /* ============================= */
@@ -758,7 +749,6 @@ function runComputerBoot() {
 
 /* ============================= */
 /* TV SEQUENCE */
-/* FASTER */
 /* ============================= */
 
 const tvPower =
@@ -789,10 +779,6 @@ function runTVSequence() {
     "tv-broadcast";
 
 
-  /*
-    brief black screen
-  */
-
   setTimeout(
     () => {
 
@@ -816,11 +802,6 @@ function runTVSequence() {
     180
   );
 
-
-  /*
-    BEFORE broadcast appeared after 1750ms.
-    Now it appears after 650ms.
-  */
 
   setTimeout(
     () => {
@@ -881,7 +862,7 @@ birthdayVideo.addEventListener(
 
 /* ============================= */
 /* AI CONVERSATION */
-/* FASTER PACING */
+/* SLOWER / READABLE */
 /* ============================= */
 
 const aiConversation =
@@ -891,7 +872,7 @@ const aiConversation =
 
 const aiRevealMessages =
   document.querySelectorAll(
-    ".reveal-message"
+    "#aiConversation .reveal-message"
   );
 
 
@@ -899,14 +880,25 @@ let aiTimers =
   [];
 
 
-const aiFastDelays = [
-  250,
-  650,
-  1050,
-  1500,
-  2000,
-  2550,
-  3150
+/*
+  First message waits until the laptop
+  window has properly opened.
+
+  Each following message gets enough
+  breathing room to actually read.
+*/
+
+const aiMessageDelays = [
+
+  700,
+  1700,
+  2600,
+  3500,
+  4500,
+  5600,
+  6800,
+  8200
+
 ];
 
 
@@ -945,10 +937,10 @@ function runAIConversation() {
     (message, index) => {
 
       const delay =
-        aiFastDelays[index] ??
+        aiMessageDelays[index] ??
         (
-          250 +
-          index * 450
+          700 +
+          index * 1000
         );
 
 
@@ -964,22 +956,36 @@ function runAIConversation() {
             playTypingBurst();
 
 
-            setTimeout(
-              () => {
+            /*
+              Do NOT start scrolling immediately.
 
-                aiConversation.scrollTo(
-                  {
-                    top:
-                      aiConversation.scrollHeight,
+              The first four messages stay naturally
+              visible so the beginning of the
+              conversation cannot disappear.
+            */
 
-                    behavior:
-                      "smooth"
-                  }
-                );
+            if (
+              index >= 4
+            ) {
 
-              },
-              50
-            );
+              setTimeout(
+                () => {
+
+                  aiConversation.scrollTo(
+                    {
+                      top:
+                        aiConversation.scrollHeight,
+
+                      behavior:
+                        "smooth"
+                    }
+                  );
+
+                },
+                180
+              );
+
+            }
 
           },
           delay
@@ -1201,11 +1207,6 @@ document
 
           clearRoomFocus();
 
-
-          /*
-            Slightly faster transition into
-            final 5/5 reveal too.
-          */
 
           if (
             foundItems.size === 5 &&
