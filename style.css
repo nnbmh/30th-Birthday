@@ -331,13 +331,15 @@ button,
 
 #room {
   position: fixed;
+
   inset: 0;
 
   overflow: hidden;
 
   opacity: 0;
 
-  background: black;
+  background:
+    black;
 
   transition:
     opacity
@@ -351,11 +353,11 @@ button,
 
 #roomCanvas {
   position: absolute;
+
   inset: 0;
 
   overflow: hidden;
 }
-
 
 /* ============================= */
 /* ROOM IMAGE */
@@ -370,7 +372,7 @@ button,
   height: 100%;
 
   object-fit: cover;
-  object-position: center center;
+  object-position: center;
 
   user-select: none;
 
@@ -379,7 +381,7 @@ button,
   pointer-events: none;
 
   transform:
-    scale(1);
+    scale(1.065);
 
   filter:
     brightness(0.78)
@@ -416,7 +418,7 @@ button,
 
   0% {
     transform:
-      scale(1);
+      scale(1.07);
 
     filter:
       brightness(0.66)
@@ -425,7 +427,7 @@ button,
 
   100% {
     transform:
-      scale(1);
+      scale(1.015);
 
     filter:
       brightness(1)
@@ -433,6 +435,7 @@ button,
   }
 
 }
+
 /* ============================= */
 /* CINEMATIC VIGNETTE */
 /* ============================= */
