@@ -371,6 +371,25 @@ function closeLaptopAutomatically() {
   }
 }
 
+function scrollAIToMessage(message) {
+  const conversationRect = aiConversation.getBoundingClientRect();
+  const messageRect = message.getBoundingClientRect();
+
+  const currentTop = aiConversation.scrollTop;
+  const targetTop =
+    currentTop +
+    messageRect.bottom -
+    conversationRect.bottom +
+    28;
+
+  if (messageRect.bottom > conversationRect.bottom - 20) {
+    aiConversation.scrollTo({
+      top: Math.max(0, targetTop),
+      behavior: "smooth"
+    });
+  }
+}
+
 function runAIConversation() {
   clearAITimers();
 
@@ -387,14 +406,9 @@ function runAIConversation() {
       message.classList.add("revealed");
       playTypingBurst();
 
-      if (index >= 4) {
-        setTimeout(() => {
-          aiConversation.scrollTo({
-            top: aiConversation.scrollHeight,
-            behavior: "smooth"
-          });
-        }, 260);
-      }
+      setTimeout(() => {
+        scrollAIToMessage(message);
+      }, 120);
 
       if (index === aiRevealMessages.length - 1) {
         aiCloseTimer = setTimeout(() => {
@@ -625,12 +639,8 @@ const appData = {
     content: `
       <p class="eyebrow">RESTRICTED FILE</p>
       <h2>ACCESS DENIED</h2>
-      <p>
-        clearance level insufficient.
-      </p>
-      <p>
-        nice try, Faris.
-      </p>
+      <p>clearance level insufficient.</p>
+      <p>nice try, Faris.</p>
       <p>
         maybe theres something else
         in the room you havent found yet.
