@@ -639,6 +639,10 @@ button,
 /* FOCUS TRANSITION */
 /* ============================= */
 
+/* ============================= */
+/* FOCUS TRANSITION */
+/* ============================= */
+
 #focusTransition {
   position: fixed;
   inset: 0;
@@ -661,33 +665,7 @@ button,
 }
 
 .focus-reticle {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: white;
-  opacity: 0;
-  box-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
-}
-
-#focusTransition.active .focus-reticle {
-  animation: focusFlash 0.5s ease;
-}
-
-@keyframes focusFlash {
-  0% {
-    opacity: 0;
-  }
-
-  60% {
-    opacity: 0.8;
-  }
-
-  100% {
-    opacity: 0;
-  }
+  display: none;
 }
 
 /* ============================= */
