@@ -1,1009 +1,353 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#080808">
-
   <title>Faris' Room</title>
-
-<script>
-  const cacheVersion = Date.now();
-
-  const stylesheet = document.createElement("link");
-  stylesheet.rel = "stylesheet";
-  stylesheet.href = "style.css?v=" + cacheVersion;
-
-  document.head.appendChild(stylesheet);
-</script>
-  
+  <script>
+    const cacheVersion = Date.now();
+    const stylesheet = document.createElement("link");
+    stylesheet.rel = "stylesheet";
+    stylesheet.href = "style.css?v=" + cacheVersion;
+    document.head.appendChild(stylesheet);
+  </script>
 </head>
 
 <body>
-
   <!-- LOADING -->
-
   <div id="loadingScreen">
-
     <div class="loading-content">
-
-      <p class="loading-small">
-        INITIALISING ROOM
-      </p>
-
-      <h1>
-        Faris' Room
-      </h1>
-
-      <div class="loading-bar">
-        <div class="loading-progress"></div>
-      </div>
-
-      <p class="loading-status">
-        preparing birthday nonsense...
-      </p>
-
+      <p class="loading-small">INITIALISING ROOM</p>
+      <h1>Faris' Room</h1>
+      <div class="loading-bar"><div class="loading-progress"></div></div>
+      <p class="loading-status">preparing birthday nonsense...</p>
     </div>
-
   </div>
-
-
 
   <!-- INTRO -->
-
-  <div
-    id="introScreen"
-    class="hidden"
-  >
-
+  <div id="introScreen" class="hidden">
     <div class="intro-content">
-
-      <p class="eyebrow">
-        18 SEPTEMBER 2026
-      </p>
-
-      <h1>
-        Happy 30th,<br>
-        Faris.
-      </h1>
-
-      <p class="intro-text">
-        i left a few things in here for you.
-      </p>
-
-      <p class="intro-small">
-        headphones recommended.
-      </p>
-
-      <button id="enterButton">
-        enter room
-      </button>
-
+      <p class="eyebrow">18 SEPTEMBER 2026</p>
+      <h1>Happy 30th,<br>Faris.</h1>
+      <p class="intro-text">i left a few things in here for you.</p>
+      <p class="intro-small">headphones recommended.</p>
+      <button id="enterButton">enter room</button>
     </div>
-
   </div>
 
-
-
   <!-- ROOM -->
-
   <main id="room">
-
     <div id="roomCanvas">
+      <img id="roomImage" src="assets/E4B14229-8B68-4FAD-9080-8EB165B53B61.png" alt="Faris' room" draggable="false">
 
-    <img
-  id="roomImage"
-  src="assets/E4B14229-8B68-4FAD-9080-8EB165B53B61.png"
-  alt="Faris' room"
-  draggable="false"
-      >
+      <div class="ambient-glow monitor-ambient" aria-hidden="true"></div>
+      <div class="ambient-glow tv-ambient" aria-hidden="true"></div>
+      <div class="ambient-glow laptop-ambient" aria-hidden="true"></div>
 
-      <div
-        class="ambient-glow monitor-ambient"
-        aria-hidden="true"
-      ></div>
+      <div class="final-device-light final-monitor-light" aria-hidden="true"></div>
+      <div class="final-device-light final-tv-light" aria-hidden="true"></div>
 
-      <div
-        class="ambient-glow tv-ambient"
-        aria-hidden="true"
-      ></div>
-
-      <div
-        class="ambient-glow laptop-ambient"
-        aria-hidden="true"
-      ></div>
-
-
-      <div
-        class="final-device-light final-monitor-light"
-        aria-hidden="true"
-      ></div>
-
-      <div
-        class="final-device-light final-tv-light"
-        aria-hidden="true"
-      ></div>
-
-
-      <button
-        class="hotspot"
-        id="monitorHotspot"
-        data-item="computer"
-        aria-label="Computer"
-      >
+      <button class="hotspot" id="monitorHotspot" data-item="computer" aria-label="Computer">
         <span class="hotspot-dot"></span>
       </button>
 
-
-      <button
-        class="hotspot"
-        id="tvHotspot"
-        data-item="tv"
-        aria-label="TV"
-      >
+      <button class="hotspot" id="tvHotspot" data-item="tv" aria-label="TV">
         <span class="hotspot-dot"></span>
       </button>
 
-
-      <button
-        class="hotspot"
-        id="pandaHotspot"
-        data-item="panda"
-        aria-label="Panda"
-      >
+      <button class="hotspot" id="pandaHotspot" data-item="panda" aria-label="Panda">
         <span class="hotspot-dot"></span>
       </button>
 
-
-      <button
-        class="hotspot"
-        id="laptopHotspot"
-        data-item="laptop"
-        aria-label="Laptop"
-      >
+      <button class="hotspot" id="laptopHotspot" data-item="laptop" aria-label="Laptop">
         <span class="hotspot-dot"></span>
       </button>
 
-
-      <button
-        class="hotspot"
-        id="noteHotspot"
-        data-item="note"
-        aria-label="Sticky note"
-      >
+      <button class="hotspot" id="noteHotspot" data-item="note" aria-label="Sticky note">
         <span class="hotspot-dot"></span>
       </button>
-
     </div>
-
 
     <header id="roomHeader">
-
-      <h2>
-        Faris' Room
-      </h2>
-
-      <p>
-        18 SEP 2026
-      </p>
-
+      <h2>Faris' Room</h2>
+      <p>18 SEP 2026</p>
     </header>
 
-
     <div id="progress">
-
-      <span id="progressText">
-        0 / 5 found
-      </span>
-
+      <span id="progressText">0 / 5 found</span>
       <div class="progress-dots">
-
         <span></span>
         <span></span>
         <span></span>
         <span></span>
         <span></span>
-
       </div>
-
     </div>
 
-
-    <button id="helpButton">
-      ? help
-    </button>
-
-
-    <button
-      id="soundButton"
-      aria-label="Toggle sound"
-    >
-      ◉ sound on
-    </button>
-
+    <button id="helpButton">? help</button>
+    <button id="soundButton" aria-label="Toggle sound">◉ sound on</button>
 
     <div id="roomInstructions">
-
-      <span class="instruction-star">
-        ✦
-      </span>
-
-      <span>
-        look around... i left you some things
-      </span>
-
+      <span class="instruction-star">✦</span>
+      <span>look around... i left you some things</span>
     </div>
-
   </main>
 
-
-
   <!-- FOCUS TRANSITION -->
-
-  <div
-    id="focusTransition"
-    aria-hidden="true"
-  >
+  <div id="focusTransition" aria-hidden="true">
     <div class="focus-reticle"></div>
   </div>
 
-
-
   <!-- COMPUTER -->
-
-  <section
-    class="modal"
-    id="computerModal"
-    aria-hidden="true"
-  >
-
-    <div
-      class="modal-background"
-      data-close
-    ></div>
-
+  <section class="modal" id="computerModal" aria-hidden="true">
+    <div class="modal-background" data-close></div>
 
     <div class="computer">
-
-      <div
-        id="computerBoot"
-        class="computer-boot"
-      >
-
-        <div class="boot-logo">
-          ◈
-        </div>
-
-        <p>
-          FARIS-PC
-        </p>
-
-        <div class="boot-line">
-          <span></span>
-        </div>
-
-        <small>
-          loading 30 years of questionable decisions...
-        </small>
-
+      <div id="computerBoot" class="computer-boot">
+        <div class="boot-logo">◈</div>
+        <p>FARIS-PC</p>
+        <div class="boot-line"><span></span></div>
+        <small>loading 30 years of questionable decisions...</small>
       </div>
 
-
-      <div
-        id="computerDesktop"
-        class="computer-interface"
-      >
-
+      <div id="computerDesktop" class="computer-interface">
         <div class="window-bar">
-
-          <span>
-            FARIS-PC
-          </span>
-
-          <button data-close>
-            ×
-          </button>
-
+          <span>FARIS-PC</span>
+          <button data-close>×</button>
         </div>
-
 
         <div class="desktop">
-
           <div class="desktop-greeting">
-
-            <p id="computerTime">
-              00:00
-            </p>
-
-            <h2>
-              Good evening, Faris.
-            </h2>
-
-            <p>
-              Keep going. ★
-            </p>
-
+            <p id="computerTime">00:00</p>
+            <h2>Good evening, Faris.</h2>
+            <p>Keep going. ★</p>
           </div>
-
 
           <div class="desktop-icons">
-
-            <button
-              class="desktop-icon"
-              data-app="birthday"
-            >
-              <span class="desktop-symbol">
-                30
-              </span>
-
-              <p>
-                birthday.txt
-              </p>
+            <button class="desktop-icon" data-app="birthday">
+              <span class="desktop-symbol">30</span>
+              <p>birthday.txt</p>
             </button>
 
-
-            <button
-              class="desktop-icon"
-              data-app="photos"
-            >
-              <span class="desktop-symbol">
-                ▣
-              </span>
-
-              <p>
-                photos
-              </p>
+            <button class="desktop-icon" data-app="photos">
+              <span class="desktop-symbol">▣</span>
+              <p>photos</p>
             </button>
 
-
-            <button
-              class="desktop-icon"
-              data-app="message"
-            >
-              <span class="desktop-symbol">
-                ♡
-              </span>
-
-              <p>
-                message.txt
-              </p>
+            <button class="desktop-icon" data-app="message">
+              <span class="desktop-symbol">♡</span>
+              <p>message.txt</p>
             </button>
 
-
-            <button
-              class="desktop-icon"
-              data-app="classified"
-            >
-              <span class="desktop-symbol">
-                🔒
-              </span>
-
-              <p>
-                CLASSIFIED
-              </p>
+            <button class="desktop-icon" data-app="classified">
+              <span class="desktop-symbol">🔒</span>
+              <p>CLASSIFIED</p>
             </button>
-
           </div>
-
 
           <div class="sticky-note">
-
-            30 already sia sayang...
-
-            <br><br>
-
-            anyway,
-            i left you something.
-
-            <span>
-              :)
-            </span>
-
+            30 already sia sayang...<br><br>
+            anyway, i left you something.
+            <span>:)</span>
           </div>
-
 
           <div class="taskbar">
-
-            <span>
-              ◈
-            </span>
-
-            <span id="taskbarTime">
-              00:00
-            </span>
-
+            <span>◈</span>
+            <span id="taskbarTime">00:00</span>
           </div>
-
         </div>
-
       </div>
-
     </div>
-
   </section>
-
-
 
   <!-- COMPUTER APP -->
-
-  <section
-    id="appWindow"
-    class="app-window"
-  >
-
+  <section id="appWindow" class="app-window">
     <div class="app-titlebar">
-
-      <span id="appTitle">
-        File
-      </span>
-
-      <button id="closeApp">
-        ×
-      </button>
-
+      <span id="appTitle">File</span>
+      <button id="closeApp">×</button>
     </div>
-
     <div id="appContent"></div>
-
   </section>
-
-
 
   <!-- TV -->
-
-  <section
-    class="modal"
-    id="tvModal"
-    aria-hidden="true"
-  >
-
-    <div
-      class="modal-background"
-      data-close
-    ></div>
-
+  <section class="modal" id="tvModal" aria-hidden="true">
+    <div class="modal-background" data-close></div>
 
     <div class="tv-shell">
+      <button class="tv-close" data-close>×</button>
 
-      <button
-        class="tv-close"
-        data-close
-      >
-        ×
-      </button>
-
-
-      <div
-        id="tvPower"
-        class="tv-power"
-      >
-
+      <div id="tvPower" class="tv-power">
         <div class="tv-power-dot"></div>
-
-        <p>
-          powering on...
-        </p>
-
+        <p>powering on...</p>
       </div>
 
-
-      <div
-        id="tvStatic"
-        class="tv-static"
-      >
-
+      <div id="tvStatic" class="tv-static">
         <div class="static-noise"></div>
-
-        <p>
-          SEARCHING FOR SIGNAL
-        </p>
-
+        <p>SEARCHING FOR SIGNAL</p>
       </div>
 
+      <div id="tvBroadcast" class="tv-broadcast">
+        <p class="tv-channel">BIRTHDAY BROADCAST / CH 30</p>
+        <h2>FARIS TURNS 30</h2>
+        <p>extremely rare footage recovered.</p>
 
-      <div
-        id="tvBroadcast"
-        class="tv-broadcast"
-      >
-
-        <p class="tv-channel">
-          BIRTHDAY BROADCAST / CH 30
-        </p>
-
-        <h2>
-          FARIS TURNS 30
-        </h2>
-
-        <p>
-          extremely rare footage recovered.
-        </p>
-
-
-        <div
-          id="videoFallback"
-          class="video-fallback"
-        >
-
-          <span>
-            ▶
-          </span>
-
-          <p>
-            birthday video will play here
-          </p>
-
-          <small>
-            upload it later as
-            assets/birthday-video.mp4
-          </small>
-
+        <div id="videoFallback" class="video-fallback">
+          <span>▶</span>
+          <p>birthday video will play here</p>
+          <small>upload it later as assets/birthday-video.mp4</small>
         </div>
 
-
-        <video
-          id="birthdayVideo"
-          controls
-          playsinline
-          preload="metadata"
-        >
-
-          <source
-            src="assets/birthday-video.mp4"
-            type="video/mp4"
-          >
-
+        <video id="birthdayVideo" controls playsinline preload="metadata">
+          <source src="assets/birthday-video.mp4" type="video/mp4">
         </video>
-
       </div>
-
     </div>
-
   </section>
-
-
 
   <!-- LAPTOP -->
-
-  <section
-    class="modal"
-    id="laptopModal"
-    aria-hidden="true"
-  >
-
-    <div
-      class="modal-background"
-      data-close
-    ></div>
-
+  <section class="modal" id="laptopModal" aria-hidden="true">
+    <div class="modal-background" data-close></div>
 
     <div class="ai-window">
-
       <div class="ai-topbar">
-
         <div>
-
           <span class="ai-dot"></span>
-
-          <span>
-            definitely-not-chatgpt
-          </span>
-
+          <span>definitely-not-chatgpt</span>
         </div>
-
-        <button data-close>
-          ×
-        </button>
-
+        <button data-close>×</button>
       </div>
 
-
-      <div
-        id="aiConversation"
-        class="ai-conversation"
-      >
-
-
-        <div
-          class="ai-message user-message reveal-message"
-        >
-          how old is faris today?
-        </div>
-
-
-        <div
-          class="ai-message assistant-message reveal-message"
-        >
-          30.
-        </div>
-
-
-        <div
-          class="ai-message user-message reveal-message"
-        >
-          are you sure?
-        </div>
-
-
-        <div
-          class="ai-message assistant-message reveal-message"
-        >
-          unfortunately, yes.
-        </div>
-
-
-        <div
-          class="ai-message user-message reveal-message"
-        >
-          is that considered elderly?
-        </div>
-
-
-        <div
-          class="ai-message assistant-message reveal-message"
-        >
-          medically? no.
-
-          <br><br>
-
-          according to his girlfriend?
-
+      <div id="aiConversation" class="ai-conversation">
+        <div class="ai-message user-message reveal-message">how old is faris today?</div>
+        <div class="ai-message assistant-message reveal-message">30.</div>
+        <div class="ai-message user-message reveal-message">are you sure?</div>
+        <div class="ai-message assistant-message reveal-message">unfortunately, yes.</div>
+        <div class="ai-message user-message reveal-message">is that considered elderly?</div>
+        <div class="ai-message assistant-message reveal-message">
+          medically? no.<br><br>
+          according to his girlfriend?<br><br>
           ancient.
         </div>
-
-
-        <div
-          class="ai-message user-message reveal-message"
-        >
-          what should i do about it
-        </div>
-
-
-        <div
-          class="ai-message assistant-message reveal-message special-ai"
-        >
-          keep him.
-
-          <br><br>
-
+        <div class="ai-message user-message reveal-message">what should i do about it</div>
+        <div class="ai-message assistant-message reveal-message special-ai">
+          keep him.<br><br>
           apparently youre quite fond of this one.
         </div>
-
       </div>
-
 
       <div class="ai-input">
-
-        <span>
-          Ask anything
-        </span>
-
-        <span class="typing-cursor">
-          |
-        </span>
-
+        <span>Ask anything</span>
+        <span class="typing-cursor">|</span>
       </div>
-
     </div>
-
   </section>
 
-
-
   <!-- PANDA -->
-
-  <section
-    class="modal"
-    id="pandaModal"
-    aria-hidden="true"
-  >
-
-    <div
-      class="modal-background"
-      data-close
-    ></div>
-
+  <section class="modal" id="pandaModal" aria-hidden="true">
+    <div class="modal-background" data-close></div>
 
     <div class="panda-delivery">
-
-      <button
-        class="card-close"
-        data-close
-      >
-        ×
-      </button>
-
-
-      <p class="eyebrow">
-        SPECIAL DELIVERY
-      </p>
-
+      <button class="card-close" data-close>×</button>
+      <p class="eyebrow">SPECIAL DELIVERY</p>
 
       <div class="panda-character">
-
         <div class="panda-ears">
           <span></span>
           <span></span>
         </div>
 
-
         <div class="panda-head">
-
           <div class="panda-eye left"></div>
-
           <div class="panda-eye right"></div>
-
           <div class="panda-nose"></div>
-
         </div>
 
-
-        <div class="panda-body">
-          ♡
-        </div>
-
+        <div class="panda-body">♡</div>
       </div>
 
+      <p class="panda-intro">excuse me sayang.</p>
+      <p>somebody left this for you.</p>
+      <button id="openPandaDelivery">open delivery</button>
 
-      <p class="panda-intro">
-        excuse me sayang.
-      </p>
-
-      <p>
-        somebody left this for you.
-      </p>
-
-
-      <button id="openPandaDelivery">
-        open delivery
-      </button>
-
-
-      <div
-        id="pandaMessage"
-        class="panda-message hidden"
-      >
-
-        <p>
-          happy birthday from your tiny emotional support panda.
-        </p>
-
-        <p>
-          apparently youre 30 now.
-        </p>
-
-        <p class="panda-small">
-          devastating news.
-        </p>
-
+      <div id="pandaMessage" class="panda-message hidden">
+        <p>happy birthday from your tiny emotional support panda.</p>
+        <p>apparently youre 30 now.</p>
+        <p class="panda-small">devastating news.</p>
 
         <div class="audio-package">
+          <p>♫ message from sayang</p>
+          <button id="playPandaAudio">play message</button>
 
-          <p>
-            ♫ message from sayang
-          </p>
-
-          <button id="playPandaAudio">
-            play message
-          </button>
-
-          <audio
-            id="pandaAudio"
-            preload="metadata"
-          >
-
-            <source
-              src="assets/panda-message.m4a"
-              type="audio/mp4"
-            >
-
+          <audio id="pandaAudio" preload="metadata">
+            <source src="assets/panda-message.m4a" type="audio/mp4">
           </audio>
 
           <small id="pandaAudioStatus">
-            you can add your recording later as
-            assets/panda-message.m4a
+            you can add your recording later as assets/panda-message.m4a
           </small>
-
         </div>
-
       </div>
-
     </div>
-
   </section>
-
-
 
   <!-- NOTE -->
-
-  <section
-    class="modal note-modal"
-    id="noteModal"
-    aria-hidden="true"
-  >
-
-    <div
-      class="modal-background"
-      data-close
-    ></div>
-
+  <section class="modal note-modal" id="noteModal" aria-hidden="true">
+    <div class="modal-background" data-close></div>
 
     <div class="paper-note">
-
-      <button
-        class="paper-close"
-        data-close
-      >
-        ×
-      </button>
-
-
+      <button class="paper-close" data-close>×</button>
       <span class="tape"></span>
 
-
-      <p class="note-opening">
-        sayang,
-      </p>
-
-      <p>
-        youre nosy huh...
-      </p>
-
-      <p>
-        good.
-      </p>
-
-      <p>
-        keep going.
-      </p>
-
-      <p>
-        dont make me tell you where everything is.
-      </p>
-
-      <p class="note-signature">
-        ♡
-      </p>
-
+      <p class="note-opening">sayang,</p>
+      <p>youre nosy huh...</p>
+      <p>good.</p>
+      <p>keep going.</p>
+      <p>dont make me tell you where everything is.</p>
+      <p class="note-signature">♡</p>
     </div>
-
   </section>
-
-
 
   <!-- HELP -->
-
-  <section
-    class="modal"
-    id="helpModal"
-    aria-hidden="true"
-  >
-
-    <div
-      class="modal-background"
-      data-close
-    ></div>
-
+  <section class="modal" id="helpModal" aria-hidden="true">
+    <div class="modal-background" data-close></div>
 
     <div class="content-card">
-
-      <button
-        class="card-close"
-        data-close
-      >
-        ×
-      </button>
-
-      <p class="eyebrow">
-        HOW TO PLAY
-      </p>
-
-      <h2>
-        look around.
-      </h2>
-
-      <p>
-        there are five things hidden around the room.
-      </p>
-
-      <p>
-        hover or tap around objects that look suspicious.
-      </p>
-
-      <p>
-        find all five.
-      </p>
-
-      <p class="help-small">
-        yes, youre supposed to be nosy.
-      </p>
-
+      <button class="card-close" data-close>×</button>
+      <p class="eyebrow">HOW TO PLAY</p>
+      <h2>look around.</h2>
+      <p>there are five things hidden around the room.</p>
+      <p>hover or tap around objects that look suspicious.</p>
+      <p>find all five.</p>
+      <p class="help-small">yes, youre supposed to be nosy.</p>
     </div>
-
   </section>
-
-
 
   <!-- FINAL -->
-
-  <section
-    class="modal final-modal"
-    id="finalModal"
-    aria-hidden="true"
-  >
-
+  <section class="modal final-modal" id="finalModal" aria-hidden="true">
     <div class="final-darkness"></div>
 
-
     <div class="final-sequence">
-
-      <p
-        id="finalCounter"
-        class="final-counter"
-      >
-        5 / 5 FOUND
-      </p>
-
-
-      <h2 id="finalHeading">
-        you actually found everything...
-      </h2>
-
-
+      <p id="finalCounter" class="final-counter">5 / 5 FOUND</p>
+      <h2 id="finalHeading">you actually found everything...</h2>
       <p id="finalSubtext"></p>
-
-
-      <button id="openFinalButton">
-        open it
-      </button>
-
+      <button id="openFinalButton">open it</button>
     </div>
-
   </section>
 
-
-
   <!-- FINAL MESSAGE -->
-
-  <section
-    id="birthdayMessage"
-    class="hidden"
-  >
-
-    <button id="closeBirthdayMessage">
-      ×
-    </button>
-
+  <section id="birthdayMessage" class="hidden">
+    <button id="closeBirthdayMessage">×</button>
 
     <div class="birthday-letter">
+      <p class="eyebrow">FOR FARIS</p>
+      <p class="letter-date">18 September 2026</p>
 
-      <p class="eyebrow">
-        FOR FARIS
-      </p>
+      <h1>Happy 30th Birthday,<br>sayang.</h1>
 
-      <p class="letter-date">
-        18 September 2026
-      </p>
+      <div class="letter-divider">♡</div>
 
-
-      <h1>
-        Happy 30th Birthday,<br>
-        sayang.
-      </h1>
-
-
-      <div class="letter-divider">
-        ♡
-      </div>
-
-      <p>
-        i wanted to make you something that was yours.
-      </p>
+      <p>i wanted to make you something that was yours.</p>
 
       <p>
         not just a present you open once and put somewhere,
@@ -1017,32 +361,20 @@
         will go when we finish writing it.
       </p>
 
-      <p>
-        but yes...
-      </p>
-
-      <p class="letter-big-line">
-        youre officially 30 now bb.
-      </p>
+      <p>but yes...</p>
+      <p class="letter-big-line">youre officially 30 now bb.</p>
 
       <p class="letter-signature">
         i love you.<br>
         ♡
       </p>
-
     </div>
-
   </section>
 
-<script>
-  const mainScript = document.createElement("script");
-
-  mainScript.src =
-    "script.js?v=" + cacheVersion;
-
-  document.body.appendChild(mainScript);
-</script>
-
+  <script>
+    const mainScript = document.createElement("script");
+    mainScript.src = "script.js?v=" + cacheVersion;
+    document.body.appendChild(mainScript);
+  </script>
 </body>
-
 </html>
