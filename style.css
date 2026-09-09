@@ -4286,3 +4286,89 @@ button,
       )
     ) !important;
 }
+
+/* ================================= */
+/* IPAD SAFARI VIEWPORT FIX */
+/* ================================= */
+
+html,
+body {
+  width: 100%;
+  height: 100dvh;
+  min-height: 100dvh;
+}
+
+#room {
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100dvh;
+
+  right: auto;
+  bottom: auto;
+}
+
+#roomCanvas {
+  width: 100%;
+  height: 100%;
+}
+
+#roomImage {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover !important;
+  object-position: center bottom !important;
+
+  transform-origin: center bottom !important;
+}
+
+
+/* keep the room at true size once loaded */
+
+@keyframes roomWake {
+
+  0% {
+    transform: scale(1.015);
+
+    filter:
+      brightness(0.66)
+      saturate(0.85);
+  }
+
+  100% {
+    transform: scale(1);
+
+    filter:
+      brightness(1)
+      saturate(1);
+  }
+
+}
+
+
+/* keep our own controls inside the visible Safari area */
+
+#roomInstructions {
+  bottom:
+    max(
+      38px,
+      calc(
+        env(safe-area-inset-bottom)
+        + 22px
+      )
+    ) !important;
+}
+
+#helpButton,
+#soundButton {
+  bottom:
+    max(
+      30px,
+      calc(
+        env(safe-area-inset-bottom)
+        + 16px
+      )
+    ) !important;
+}
