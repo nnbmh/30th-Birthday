@@ -150,7 +150,7 @@ function playClick() {
 
   playTone(
     620,
-    0.06,
+    0.05,
     0.018,
     "sine"
   );
@@ -162,25 +162,25 @@ function playComputerSound() {
 
   playTone(
     220,
-    0.16,
-    0.025,
+    0.1,
+    0.02,
     "sine"
   );
 
   playTone(
-    330,
-    0.18,
-    0.022,
+    370,
+    0.12,
+    0.018,
     "sine",
-    0.13
+    0.07
   );
 
   playTone(
-    520,
-    0.28,
-    0.018,
+    530,
+    0.18,
+    0.015,
     "sine",
-    0.28
+    0.15
   );
 
 }
@@ -190,8 +190,8 @@ function playTVSound() {
 
   playTone(
     90,
-    0.11,
-    0.035,
+    0.07,
+    0.03,
     "square"
   );
 
@@ -221,7 +221,7 @@ function playFoundSound(
 
   playTone(
     frequency,
-    0.12,
+    0.1,
     0.018,
     "sine"
   );
@@ -313,7 +313,7 @@ window.addEventListener(
         );
 
       },
-      1900
+      1500
     );
 
   }
@@ -328,17 +328,17 @@ enterButton.addEventListener(
 
     playTone(
       250,
-      0.18,
+      0.12,
       0.02,
       "sine"
     );
 
     playTone(
       410,
-      0.45,
+      0.28,
       0.012,
       "sine",
-      0.12
+      0.08
     );
 
 
@@ -490,6 +490,7 @@ function clearRoomFocus() {
 
 /* ============================= */
 /* OPEN HOTSPOT */
+/* FAST TRANSITION */
 /* ============================= */
 
 function openHotspot(
@@ -551,6 +552,14 @@ function openHotspot(
   }
 
 
+  /*
+    BEFORE: 520ms
+    NOW: 220ms
+
+    Enough time to see the focus effect,
+    but the object opens almost immediately.
+  */
+
   setTimeout(
     () => {
 
@@ -586,7 +595,7 @@ function openHotspot(
         false;
 
     },
-    520
+    220
   );
 
 }
@@ -719,6 +728,7 @@ function runModalExperience(
 
 /* ============================= */
 /* COMPUTER BOOT */
+/* FASTER */
 /* ============================= */
 
 const computerBoot =
@@ -734,6 +744,11 @@ function runComputerBoot() {
   );
 
 
+  /*
+    BEFORE: 1750ms
+    NOW: 700ms
+  */
+
   setTimeout(
     () => {
 
@@ -742,7 +757,7 @@ function runComputerBoot() {
       );
 
     },
-    1750
+    700
   );
 
 }
@@ -750,6 +765,7 @@ function runComputerBoot() {
 
 /* ============================= */
 /* TV SEQUENCE */
+/* FASTER */
 /* ============================= */
 
 const tvPower =
@@ -780,6 +796,10 @@ function runTVSequence() {
     "tv-broadcast";
 
 
+  /*
+    brief black screen
+  */
+
   setTimeout(
     () => {
 
@@ -794,15 +814,20 @@ function runTVSequence() {
 
       playTone(
         85,
-        0.08,
+        0.06,
         0.015,
         "square"
       );
 
     },
-    650
+    180
   );
 
+
+  /*
+    BEFORE broadcast appeared after 1750ms.
+    Now it appears after 650ms.
+  */
 
   setTimeout(
     () => {
@@ -818,13 +843,13 @@ function runTVSequence() {
 
       playTone(
         410,
-        0.2,
+        0.16,
         0.016,
         "sine"
       );
 
     },
-    1750
+    650
   );
 
 }
@@ -863,6 +888,7 @@ birthdayVideo.addEventListener(
 
 /* ============================= */
 /* AI CONVERSATION */
+/* FASTER PACING */
 /* ============================= */
 
 const aiConversation =
@@ -878,6 +904,17 @@ const aiRevealMessages =
 
 let aiTimers =
   [];
+
+
+const aiFastDelays = [
+  250,
+  650,
+  1050,
+  1500,
+  2000,
+  2550,
+  3150
+];
 
 
 function runAIConversation() {
@@ -912,11 +949,13 @@ function runAIConversation() {
 
 
   aiRevealMessages.forEach(
-    (message) => {
+    (message, index) => {
 
       const delay =
-        Number(
-          message.dataset.delay
+        aiFastDelays[index] ??
+        (
+          250 +
+          index * 450
         );
 
 
@@ -946,7 +985,7 @@ function runAIConversation() {
                 );
 
               },
-              80
+              50
             );
 
           },
@@ -973,7 +1012,7 @@ function playTypingBurst() {
 
   for (
     let i = 0;
-    i < 4;
+    i < 3;
     i++
   ) {
 
@@ -983,7 +1022,7 @@ function playTypingBurst() {
         playTypingSound();
 
       },
-      i * 45
+      i * 35
     );
 
   }
@@ -1052,17 +1091,17 @@ openPandaDelivery.addEventListener(
 
     playTone(
       520,
-      0.12,
+      0.1,
       0.015,
       "sine"
     );
 
     playTone(
       690,
-      0.18,
+      0.14,
       0.013,
       "sine",
-      0.11
+      0.08
     );
 
   }
@@ -1170,6 +1209,11 @@ document
           clearRoomFocus();
 
 
+          /*
+            Slightly faster transition into
+            final 5/5 reveal too.
+          */
+
           if (
             foundItems.size === 5 &&
             !finalShown
@@ -1181,7 +1225,7 @@ document
                 startFinalReveal();
 
               },
-              650
+              350
             );
 
           }
@@ -1666,7 +1710,7 @@ function swapFinalText(
       }
 
     },
-    520
+    380
   );
 
 }
@@ -1710,7 +1754,7 @@ function startFinalReveal() {
 
   playTone(
     110,
-    1.4,
+    1.2,
     0.018,
     "sine"
   );
@@ -1724,7 +1768,7 @@ function startFinalReveal() {
       );
 
     },
-    1100
+    650
   );
 
 
@@ -1741,7 +1785,7 @@ function startFinalReveal() {
       );
 
     },
-    1600
+    900
   );
 
 
@@ -1753,7 +1797,7 @@ function startFinalReveal() {
       );
 
     },
-    2050
+    1200
   );
 
 
@@ -1771,7 +1815,7 @@ function startFinalReveal() {
       playFinalChime();
 
     },
-    2600
+    1550
   );
 
 
@@ -1784,7 +1828,7 @@ function startFinalReveal() {
       );
 
     },
-    5000
+    3500
   );
 
 
@@ -1796,7 +1840,7 @@ function startFinalReveal() {
       );
 
     },
-    7600
+    5450
   );
 
 
@@ -1808,7 +1852,7 @@ function startFinalReveal() {
       );
 
     },
-    9400
+    6900
   );
 
 }
