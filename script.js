@@ -725,16 +725,15 @@ function runModalExperience(
 
 }
 
-
 /* ============================= */
 /* COMPUTER BOOT */
-/* FASTER */
 /* ============================= */
 
 const computerBoot =
   document.getElementById(
     "computerBoot"
   );
+
 
 function runComputerBoot() {
 
@@ -751,20 +750,7 @@ function runComputerBoot() {
       );
 
     },
-    250
-  );
-
-}
-
-  setTimeout(
-    () => {
-
-      computerBoot.classList.add(
-        "finished"
-      );
-
-    },
-    700
+    1400
   );
 
 }
