@@ -136,7 +136,9 @@ button {
 
   transition:
     background 0.25s ease,
-    color 0.25s ease;
+    color 0.25s ease,
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 
 #enterButton:hover,
@@ -186,9 +188,53 @@ button {
 
   transform: scale(1.015);
 
-  transition: transform 0.3s ease-out;
+  filter:
+    brightness(1)
+    saturate(1);
+
+  transition:
+    transform 1.8s ease,
+    filter 1.8s ease;
 
   pointer-events: none;
+}
+
+
+/* CINEMATIC DARKENING */
+
+#room::after {
+  content: "";
+
+  position: absolute;
+  inset: 0;
+
+  z-index: 15;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(0, 0, 0, 0.05),
+      rgba(0, 0, 0, 0.92)
+    );
+
+  opacity: 0;
+
+  transition:
+    opacity 1.8s ease;
+}
+
+#room.final-reveal-active::after {
+  opacity: 1;
+}
+
+#room.final-reveal-active #roomImage {
+  filter:
+    brightness(0.34)
+    saturate(0.7);
+
+  transform: scale(1.035);
 }
 
 
@@ -208,6 +254,10 @@ button {
 
   text-shadow:
     0 2px 14px rgba(0, 0, 0, 0.8);
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
 #roomHeader h2 {
@@ -258,6 +308,10 @@ button {
   white-space: nowrap;
 
   pointer-events: none;
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
 .mouse-icon {
@@ -285,6 +339,9 @@ button {
 
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
+
+  transition:
+    opacity 0.8s ease;
 }
 
 
@@ -309,6 +366,10 @@ button {
     0 2px 10px black;
 
   pointer-events: none;
+
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
 .progress-dots {
@@ -327,10 +388,46 @@ button {
 
   border:
     1px solid rgba(255, 255, 255, 0.65);
+
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .progress-dots span.found {
   background: white;
+
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.55);
+}
+
+
+/* HIDE HUD DURING FINAL REVEAL */
+
+#room.final-reveal-active #roomHeader {
+  opacity: 0;
+
+  transform: translateY(-10px);
+}
+
+#room.final-reveal-active #progress {
+  opacity: 0;
+
+  transform: translateY(-10px);
+}
+
+#room.final-reveal-active #roomInstructions {
+  opacity: 0;
+
+  transform:
+    translateX(-50%)
+    translateY(12px);
+}
+
+#room.final-reveal-active #helpButton {
+  opacity: 0;
+
+  pointer-events: none;
 }
 
 
@@ -358,10 +455,13 @@ button {
   -webkit-tap-highlight-color: transparent;
 }
 
+#room.final-reveal-active .hotspot {
+  pointer-events: none;
+}
+
 
 /* ============================= */
 /* MSI MONITOR / DESKTOP */
-/* MOVED LEFT TO AVOID NOTE */
 /* ============================= */
 
 #monitorHotspot {
@@ -416,7 +516,6 @@ button {
 
 /* ============================= */
 /* YELLOW STICKY NOTE */
-/* SEPARATE SMALL HOTSPOT */
 /* ============================= */
 
 #noteHotspot {
@@ -1013,7 +1112,7 @@ button {
 
 
 /* ============================= */
-/* FINAL */
+/* NORMAL FINAL */
 /* ============================= */
 
 .final-card {
@@ -1055,6 +1154,117 @@ button {
   cursor: pointer;
 
   touch-action: manipulation;
+}
+
+
+/* ============================= */
+/* CINEMATIC FINAL */
+/* ============================= */
+
+#finalModal.cinematic {
+  z-index: 500;
+
+  background:
+    rgba(0, 0, 0, 0.08);
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+#finalModal.cinematic .modal-background {
+  background:
+    rgba(0, 0, 0, 0.12);
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+#finalModal.cinematic .final-card {
+  width:
+    min(86vw, 720px);
+
+  padding: 30px;
+
+  border: 0;
+
+  background: transparent;
+
+  box-shadow: none;
+
+  text-shadow:
+    0 3px 25px rgba(0, 0, 0, 0.95);
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+}
+
+#finalModal.cinematic .final-card.changing {
+  opacity: 0;
+
+  transform:
+    translateY(8px);
+}
+
+#finalModal.cinematic .eyebrow {
+  margin-bottom: 20px;
+
+  font-size: 10px;
+
+  letter-spacing: 0.3em;
+
+  opacity: 0.55;
+}
+
+#finalModal.cinematic .final-card h2 {
+  margin:
+    0 auto 18px;
+
+  max-width: 700px;
+
+  font-size:
+    clamp(30px, 5vw, 58px);
+
+  font-weight: 300;
+
+  line-height: 1.12;
+
+  letter-spacing: -0.04em;
+}
+
+#finalModal.cinematic .final-card > p:not(.eyebrow) {
+  min-height: 30px;
+
+  margin: 0;
+
+  font-size:
+    clamp(14px, 2vw, 18px);
+
+  opacity: 0.65;
+}
+
+#finalModal.cinematic #openFinalButton {
+  margin-top: 35px;
+
+  opacity: 0;
+
+  transform:
+    translateY(12px);
+
+  pointer-events: none;
+}
+
+#finalModal.cinematic #openFinalButton.reveal-button-visible {
+  opacity: 1;
+
+  transform:
+    translateY(0);
+
+  pointer-events: auto;
+}
+
+#finalModal.cinematic #finalLaterButton {
+  display: none;
 }
 
 
