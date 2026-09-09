@@ -13,15 +13,19 @@
 
   <title>Faris' Room</title>
 
-  <link
-  rel="stylesheet"
-  href="style.css?v=45"
->
+<script>
+  const cacheVersion = Date.now();
+
+  const stylesheet = document.createElement("link");
+  stylesheet.rel = "stylesheet";
+  stylesheet.href = "style.css?v=" + cacheVersion;
+
+  document.head.appendChild(stylesheet);
+</script>
+  
 </head>
 
-
 <body>
-
 
   <!-- LOADING -->
 
@@ -998,11 +1002,9 @@
         ♡
       </div>
 
-
       <p>
         i wanted to make you something that was yours.
       </p>
-
 
       <p>
         not just a present you open once and put somewhere,
@@ -1011,22 +1013,18 @@
         smile a little.
       </p>
 
-
       <p>
         this part is where your actual birthday message
         will go when we finish writing it.
       </p>
 
-
       <p>
         but yes...
       </p>
 
-
       <p class="letter-big-line">
         youre officially 30 now bb.
       </p>
-
 
       <p class="letter-signature">
         i love you.<br>
@@ -1037,8 +1035,14 @@
 
   </section>
 
+<script>
+  const mainScript = document.createElement("script");
 
-  <script src="script.js?v=43"></script>
+  mainScript.src =
+    "script.js?v=" + cacheVersion;
+
+  document.body.appendChild(mainScript);
+</script>
 
 </body>
 
