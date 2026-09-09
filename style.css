@@ -1637,6 +1637,60 @@ button,
 }
 
 /* ============================= */
+/* OREO VISIBILITY + LABEL */
+/* ============================= */
+
+.panda-character {
+  position: relative;
+  z-index: 1;
+}
+
+.panda-character::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 48%;
+  width: 155px;
+  height: 155px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 0.11) 0%,
+    rgba(255, 255, 255, 0.055) 42%,
+    transparent 72%
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.panda-ears span {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.13),
+    0 0 12px rgba(255, 255, 255, 0.04);
+}
+
+.panda-character::after {
+  content: "OREO\A your temporarily forgotten courier";
+  white-space: pre;
+  position: absolute;
+  left: 50%;
+  top: calc(100% + 15px);
+  width: 250px;
+  transform: translateX(-50%);
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 9px;
+  line-height: 1.8;
+  letter-spacing: 0.12em;
+  pointer-events: none;
+}
+
+.panda-delivery > p:nth-of-type(2) {
+  margin-top: 58px;
+}
+
+/* ============================= */
 /* PAPER NOTE */
 /* ============================= */
 
