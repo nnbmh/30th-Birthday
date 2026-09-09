@@ -1,66 +1,424 @@
 const loadingScreen =
-  document.getElementById("loadingScreen");
+  document.getElementById(
+    "loadingScreen"
+  );
 
 const introScreen =
-  document.getElementById("introScreen");
+  document.getElementById(
+    "introScreen"
+  );
 
 const enterButton =
-  document.getElementById("enterButton");
+  document.getElementById(
+    "enterButton"
+  );
 
 const room =
-  document.getElementById("room");
+  document.getElementById(
+    "room"
+  );
 
 const roomImage =
-  document.getElementById("roomImage");
+  document.getElementById(
+    "roomImage"
+  );
+
+const focusTransition =
+  document.getElementById(
+    "focusTransition"
+  );
+
+
+/* ============================= */
+/* SOUND */
+/* ============================= */
+
+let audioContext = null;
+
+let soundEnabled = true;
+
+
+const soundButton =
+  document.getElementById(
+    "soundButton"
+  );
+
+
+function initAudio() {
+
+  if (!audioContext) {
+
+    const AudioContext =
+      window.AudioContext ||
+      window.webkitAudioContext;
+
+    if (AudioContext) {
+
+      audioContext =
+        new AudioContext();
+
+    }
+
+  }
+
+
+  if (
+    audioContext &&
+    audioContext.state ===
+      "suspended"
+  ) {
+
+    audioContext.resume();
+
+  }
+
+}
+
+
+function playTone(
+  frequency = 440,
+  duration = 0.08,
+  volume = 0.025,
+  type = "sine",
+  delay = 0
+) {
+
+  if (
+    !soundEnabled ||
+    !audioContext
+  ) {
+    return;
+  }
+
+
+  const oscillator =
+    audioContext.createOscillator();
+
+  const gain =
+    audioContext.createGain();
+
+
+  oscillator.type =
+    type;
+
+  oscillator.frequency.value =
+    frequency;
+
+
+  const start =
+    audioContext.currentTime +
+    delay;
+
+
+  gain.gain.setValueAtTime(
+    0,
+    start
+  );
+
+  gain.gain.linearRampToValueAtTime(
+    volume,
+    start + 0.015
+  );
+
+  gain.gain.exponentialRampToValueAtTime(
+    0.0001,
+    start + duration
+  );
+
+
+  oscillator.connect(
+    gain
+  );
+
+  gain.connect(
+    audioContext.destination
+  );
+
+
+  oscillator.start(
+    start
+  );
+
+  oscillator.stop(
+    start + duration + 0.02
+  );
+
+}
+
+
+function playClick() {
+
+  playTone(
+    620,
+    0.06,
+    0.018,
+    "sine"
+  );
+
+}
+
+
+function playComputerSound() {
+
+  playTone(
+    220,
+    0.16,
+    0.025,
+    "sine"
+  );
+
+  playTone(
+    330,
+    0.18,
+    0.022,
+    "sine",
+    0.13
+  );
+
+  playTone(
+    520,
+    0.28,
+    0.018,
+    "sine",
+    0.28
+  );
+
+}
+
+
+function playTVSound() {
+
+  playTone(
+    90,
+    0.11,
+    0.035,
+    "square"
+  );
+
+}
+
+
+function playTypingSound() {
+
+  playTone(
+    760 +
+      Math.random() * 130,
+    0.025,
+    0.006,
+    "square"
+  );
+
+}
+
+
+function playFoundSound(
+  count
+) {
+
+  const frequency =
+    360 +
+    count * 75;
+
+  playTone(
+    frequency,
+    0.12,
+    0.018,
+    "sine"
+  );
+
+}
+
+
+function playFinalChime() {
+
+  playTone(
+    330,
+    0.8,
+    0.022,
+    "sine"
+  );
+
+  playTone(
+    440,
+    0.9,
+    0.02,
+    "sine",
+    0.22
+  );
+
+  playTone(
+    660,
+    1.1,
+    0.018,
+    "sine",
+    0.5
+  );
+
+}
+
+
+soundButton.addEventListener(
+  "click",
+  () => {
+
+    initAudio();
+
+    soundEnabled =
+      !soundEnabled;
+
+
+    if (soundEnabled) {
+
+      soundButton.textContent =
+        "◉ sound on";
+
+      soundButton.classList.remove(
+        "muted"
+      );
+
+      playClick();
+
+    } else {
+
+      soundButton.textContent =
+        "○ sound off";
+
+      soundButton.classList.add(
+        "muted"
+      );
+
+    }
+
+  }
+);
 
 
 /* ============================= */
 /* STARTUP */
 /* ============================= */
 
-window.addEventListener("load", () => {
+window.addEventListener(
+  "load",
+  () => {
 
-  setTimeout(() => {
+    setTimeout(
+      () => {
 
-    loadingScreen.classList.add("hidden");
-    introScreen.classList.remove("hidden");
+        loadingScreen.classList.add(
+          "hidden"
+        );
 
-  }, 1900);
+        introScreen.classList.remove(
+          "hidden"
+        );
 
-});
+      },
+      1900
+    );
+
+  }
+);
 
 
-enterButton.addEventListener("click", () => {
+enterButton.addEventListener(
+  "click",
+  () => {
 
-  introScreen.classList.add("hidden");
-  room.classList.add("visible");
+    initAudio();
 
-});
+    playTone(
+      250,
+      0.18,
+      0.02,
+      "sine"
+    );
+
+    playTone(
+      410,
+      0.45,
+      0.012,
+      "sine",
+      0.12
+    );
+
+
+    introScreen.classList.add(
+      "hidden"
+    );
+
+    room.classList.add(
+      "visible"
+    );
+
+  }
+);
 
 
 /* ============================= */
-/* SUBTLE ROOM MOVEMENT */
-/* DESKTOP / TRACKPAD ONLY */
+/* DESKTOP ROOM MOVEMENT */
 /* ============================= */
 
-if (window.matchMedia("(pointer: fine)").matches) {
+if (
+  window.matchMedia(
+    "(pointer: fine)"
+  ).matches
+) {
 
-  document.addEventListener("mousemove", (event) => {
+  document.addEventListener(
+    "mousemove",
+    (event) => {
 
-    if (room.classList.contains("final-reveal-active")) {
-      return;
+      if (
+        room.classList.contains(
+          "final-reveal-active"
+        )
+      ) {
+        return;
+      }
+
+
+      if (
+        room.classList.contains(
+          "focus-computer"
+        ) ||
+        room.classList.contains(
+          "focus-tv"
+        ) ||
+        room.classList.contains(
+          "focus-laptop"
+        ) ||
+        room.classList.contains(
+          "focus-panda"
+        ) ||
+        room.classList.contains(
+          "focus-note"
+        )
+      ) {
+        return;
+      }
+
+
+      const x =
+        (
+          event.clientX /
+          window.innerWidth -
+          0.5
+        ) * 4;
+
+
+      const y =
+        (
+          event.clientY /
+          window.innerHeight -
+          0.5
+        ) * 3;
+
+
+      roomImage.style.transform =
+        `scale(1.025) translate(${-x}px, ${-y}px)`;
+
     }
-
-    const x =
-      (event.clientX / window.innerWidth - 0.5) * 4;
-
-    const y =
-      (event.clientY / window.innerHeight - 0.5) * 3;
-
-    roomImage.style.transform =
-      `scale(1.025) translate(${-x}px, ${-y}px)`;
-
-  });
+  );
 
 }
 
@@ -72,111 +430,681 @@ if (window.matchMedia("(pointer: fine)").matches) {
 const modalMap = {
 
   computer:
-    document.getElementById("computerModal"),
+    document.getElementById(
+      "computerModal"
+    ),
 
   tv:
-    document.getElementById("tvModal"),
+    document.getElementById(
+      "tvModal"
+    ),
 
   panda:
-    document.getElementById("pandaModal"),
+    document.getElementById(
+      "pandaModal"
+    ),
 
   laptop:
-    document.getElementById("laptopModal"),
+    document.getElementById(
+      "laptopModal"
+    ),
 
   note:
-    document.getElementById("noteModal")
+    document.getElementById(
+      "noteModal"
+    )
 
 };
 
 
 const hotspots =
-  document.querySelectorAll(".hotspot");
+  document.querySelectorAll(
+    ".hotspot"
+  );
 
 
-function openHotspot(hotspot) {
+let openingHotspot =
+  false;
+
+
+/* ============================= */
+/* RESET ROOM FOCUS */
+/* ============================= */
+
+function clearRoomFocus() {
+
+  room.classList.remove(
+    "focus-computer",
+    "focus-tv",
+    "focus-laptop",
+    "focus-panda",
+    "focus-note"
+  );
+
+
+  roomImage.style.transform =
+    "";
+
+}
+
+
+/* ============================= */
+/* OPEN HOTSPOT */
+/* ============================= */
+
+function openHotspot(
+  hotspot
+) {
+
+  if (openingHotspot) {
+    return;
+  }
+
 
   const item =
     hotspot.dataset.item;
 
+
   const modal =
     modalMap[item];
+
 
   if (!modal) {
     return;
   }
 
-  modal.classList.add("open");
 
-  modal.setAttribute(
-    "aria-hidden",
-    "false"
+  openingHotspot =
+    true;
+
+
+  initAudio();
+
+  playClick();
+
+
+  room.classList.add(
+    `focus-${item}`
   );
 
-  markFound(item);
+
+  focusTransition.classList.add(
+    "active"
+  );
+
+
+  if (
+    item === "computer"
+  ) {
+
+    playComputerSound();
+
+  }
+
+
+  if (
+    item === "tv"
+  ) {
+
+    playTVSound();
+
+  }
+
+
+  setTimeout(
+    () => {
+
+      modal.classList.add(
+        "open"
+      );
+
+      modal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      markFound(
+        item
+      );
+
+
+      runModalExperience(
+        item
+      );
+
+
+      clearRoomFocus();
+
+
+      focusTransition.classList.remove(
+        "active"
+      );
+
+
+      openingHotspot =
+        false;
+
+    },
+    520
+  );
+
 }
 
 
 /* ============================= */
-/* HOTSPOT INTERACTIONS */
-/* POINTER EVENTS */
+/* HOTSPOT POINTER EVENTS */
+/* KEEP THIS LOGIC */
 /* ============================= */
 
-hotspots.forEach((hotspot) => {
+hotspots.forEach(
+  (hotspot) => {
 
-  hotspot.addEventListener(
-    "pointerenter",
+    hotspot.addEventListener(
+      "pointerenter",
+      () => {
+
+        hotspot.classList.add(
+          "active"
+        );
+
+      }
+    );
+
+
+    hotspot.addEventListener(
+      "pointerleave",
+      () => {
+
+        hotspot.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+
+    hotspot.addEventListener(
+      "pointerdown",
+      () => {
+
+        hotspot.classList.add(
+          "active"
+        );
+
+      }
+    );
+
+
+    hotspot.addEventListener(
+      "pointerup",
+      (event) => {
+
+        event.preventDefault();
+
+
+        hotspot.classList.remove(
+          "active"
+        );
+
+
+        openHotspot(
+          hotspot
+        );
+
+      }
+    );
+
+
+    hotspot.addEventListener(
+      "pointercancel",
+      () => {
+
+        hotspot.classList.remove(
+          "active"
+        );
+
+      }
+    );
+
+  }
+);
+
+
+/* ============================= */
+/* INDIVIDUAL EXPERIENCES */
+/* ============================= */
+
+function runModalExperience(
+  item
+) {
+
+  if (
+    item === "computer"
+  ) {
+
+    runComputerBoot();
+
+  }
+
+
+  if (
+    item === "tv"
+  ) {
+
+    runTVSequence();
+
+  }
+
+
+  if (
+    item === "laptop"
+  ) {
+
+    runAIConversation();
+
+  }
+
+
+  if (
+    item === "panda"
+  ) {
+
+    resetPanda();
+
+  }
+
+}
+
+
+/* ============================= */
+/* COMPUTER BOOT */
+/* ============================= */
+
+const computerBoot =
+  document.getElementById(
+    "computerBoot"
+  );
+
+
+function runComputerBoot() {
+
+  computerBoot.classList.remove(
+    "finished"
+  );
+
+
+  setTimeout(
     () => {
 
-      hotspot.classList.add("active");
+      computerBoot.classList.add(
+        "finished"
+      );
 
-    }
+    },
+    1750
+  );
+
+}
+
+
+/* ============================= */
+/* TV SEQUENCE */
+/* ============================= */
+
+const tvPower =
+  document.getElementById(
+    "tvPower"
+  );
+
+const tvStatic =
+  document.getElementById(
+    "tvStatic"
+  );
+
+const tvBroadcast =
+  document.getElementById(
+    "tvBroadcast"
   );
 
 
-  hotspot.addEventListener(
-    "pointerleave",
+function runTVSequence() {
+
+  tvPower.className =
+    "tv-power";
+
+  tvStatic.className =
+    "tv-static";
+
+  tvBroadcast.className =
+    "tv-broadcast";
+
+
+  setTimeout(
     () => {
 
-      hotspot.classList.remove("active");
+      tvPower.classList.add(
+        "hidden-phase"
+      );
 
-    }
+      tvStatic.classList.add(
+        "active"
+      );
+
+
+      playTone(
+        85,
+        0.08,
+        0.015,
+        "square"
+      );
+
+    },
+    650
   );
 
 
-  hotspot.addEventListener(
-    "pointerdown",
+  setTimeout(
     () => {
 
-      hotspot.classList.add("active");
+      tvStatic.classList.add(
+        "hidden-phase"
+      );
+
+      tvBroadcast.classList.add(
+        "active"
+      );
+
+
+      playTone(
+        410,
+        0.2,
+        0.016,
+        "sine"
+      );
+
+    },
+    1750
+  );
+
+}
+
+
+/* ============================= */
+/* VIDEO DETECTION */
+/* ============================= */
+
+const birthdayVideo =
+  document.getElementById(
+    "birthdayVideo"
+  );
+
+const videoFallback =
+  document.getElementById(
+    "videoFallback"
+  );
+
+
+birthdayVideo.addEventListener(
+  "loadedmetadata",
+  () => {
+
+    birthdayVideo.classList.add(
+      "ready"
+    );
+
+    videoFallback.classList.add(
+      "video-ready"
+    );
+
+  }
+);
+
+
+/* ============================= */
+/* AI CONVERSATION */
+/* ============================= */
+
+const aiConversation =
+  document.getElementById(
+    "aiConversation"
+  );
+
+const aiRevealMessages =
+  document.querySelectorAll(
+    ".reveal-message"
+  );
+
+
+let aiTimers =
+  [];
+
+
+function runAIConversation() {
+
+  aiTimers.forEach(
+    (timer) => {
+
+      clearTimeout(
+        timer
+      );
 
     }
   );
 
 
-  hotspot.addEventListener(
-    "pointerup",
-    (event) => {
-
-      event.preventDefault();
-
-      hotspot.classList.remove("active");
-
-      openHotspot(hotspot);
-
-    }
-  );
+  aiTimers = [];
 
 
-  hotspot.addEventListener(
-    "pointercancel",
-    () => {
+  aiRevealMessages.forEach(
+    (message) => {
 
-      hotspot.classList.remove("active");
+      message.classList.remove(
+        "revealed"
+      );
 
     }
   );
 
-});
+
+  aiConversation.scrollTop =
+    0;
+
+
+  aiRevealMessages.forEach(
+    (message) => {
+
+      const delay =
+        Number(
+          message.dataset.delay
+        );
+
+
+      const timer =
+        setTimeout(
+          () => {
+
+            message.classList.add(
+              "revealed"
+            );
+
+
+            playTypingBurst();
+
+
+            setTimeout(
+              () => {
+
+                aiConversation.scrollTo(
+                  {
+                    top:
+                      aiConversation.scrollHeight,
+
+                    behavior:
+                      "smooth"
+                  }
+                );
+
+              },
+              80
+            );
+
+          },
+          delay
+        );
+
+
+      aiTimers.push(
+        timer
+      );
+
+    }
+  );
+
+}
+
+
+function playTypingBurst() {
+
+  if (!soundEnabled) {
+    return;
+  }
+
+
+  for (
+    let i = 0;
+    i < 4;
+    i++
+  ) {
+
+    setTimeout(
+      () => {
+
+        playTypingSound();
+
+      },
+      i * 45
+    );
+
+  }
+
+}
+
+
+/* ============================= */
+/* PANDA DELIVERY */
+/* ============================= */
+
+const openPandaDelivery =
+  document.getElementById(
+    "openPandaDelivery"
+  );
+
+const pandaMessage =
+  document.getElementById(
+    "pandaMessage"
+  );
+
+const playPandaAudio =
+  document.getElementById(
+    "playPandaAudio"
+  );
+
+const pandaAudio =
+  document.getElementById(
+    "pandaAudio"
+  );
+
+const pandaAudioStatus =
+  document.getElementById(
+    "pandaAudioStatus"
+  );
+
+
+function resetPanda() {
+
+  pandaMessage.classList.add(
+    "hidden"
+  );
+
+  openPandaDelivery.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+openPandaDelivery.addEventListener(
+  "click",
+  () => {
+
+    playClick();
+
+
+    openPandaDelivery.classList.add(
+      "hidden"
+    );
+
+    pandaMessage.classList.remove(
+      "hidden"
+    );
+
+
+    playTone(
+      520,
+      0.12,
+      0.015,
+      "sine"
+    );
+
+    playTone(
+      690,
+      0.18,
+      0.013,
+      "sine",
+      0.11
+    );
+
+  }
+);
+
+
+playPandaAudio.addEventListener(
+  "click",
+  async () => {
+
+    try {
+
+      await pandaAudio.play();
+
+
+      pandaAudioStatus.textContent =
+        "playing message from sayang ♡";
+
+
+      playPandaAudio.textContent =
+        "playing...";
+
+    } catch {
+
+      pandaAudioStatus.textContent =
+        "no recording uploaded yet... add assets/panda-message.m4a later";
+
+    }
+
+  }
+);
+
+
+pandaAudio.addEventListener(
+  "ended",
+  () => {
+
+    playPandaAudio.textContent =
+      "play again";
+
+  }
+);
 
 
 /* ============================= */
@@ -184,42 +1112,85 @@ hotspots.forEach((hotspot) => {
 /* ============================= */
 
 document
-  .querySelectorAll("[data-close]")
-  .forEach((button) => {
+  .querySelectorAll(
+    "[data-close]"
+  )
+  .forEach(
+    (button) => {
 
-    button.addEventListener("click", () => {
+      button.addEventListener(
+        "click",
+        () => {
 
-      const modal =
-        button.closest(".modal");
+          const modal =
+            button.closest(
+              ".modal"
+            );
 
-      if (!modal) {
-        return;
-      }
 
-      modal.classList.remove("open");
+          if (!modal) {
+            return;
+          }
 
-      modal.setAttribute(
-        "aria-hidden",
-        "true"
+
+          playClick();
+
+
+          modal.classList.remove(
+            "open"
+          );
+
+
+          modal.setAttribute(
+            "aria-hidden",
+            "true"
+          );
+
+
+          if (
+            birthdayVideo &&
+            !birthdayVideo.paused
+          ) {
+
+            birthdayVideo.pause();
+
+          }
+
+
+          if (
+            pandaAudio &&
+            !pandaAudio.paused
+          ) {
+
+            pandaAudio.pause();
+
+          }
+
+
+          clearRoomFocus();
+
+
+          if (
+            foundItems.size === 5 &&
+            !finalShown
+          ) {
+
+            setTimeout(
+              () => {
+
+                startFinalReveal();
+
+              },
+              650
+            );
+
+          }
+
+        }
       );
 
-
-      if (
-        foundItems.size === 5 &&
-        !finalShown
-      ) {
-
-        setTimeout(() => {
-
-          startFinalReveal();
-
-        }, 450);
-
-      }
-
-    });
-
-  });
+    }
+  );
 
 
 /* ============================= */
@@ -227,22 +1198,34 @@ document
 /* ============================= */
 
 const helpButton =
-  document.getElementById("helpButton");
-
-const helpModal =
-  document.getElementById("helpModal");
-
-
-helpButton.addEventListener("click", () => {
-
-  helpModal.classList.add("open");
-
-  helpModal.setAttribute(
-    "aria-hidden",
-    "false"
+  document.getElementById(
+    "helpButton"
   );
 
-});
+const helpModal =
+  document.getElementById(
+    "helpModal"
+  );
+
+
+helpButton.addEventListener(
+  "click",
+  () => {
+
+    playClick();
+
+
+    helpModal.classList.add(
+      "open"
+    );
+
+    helpModal.setAttribute(
+      "aria-hidden",
+      "false"
+    );
+
+  }
+);
 
 
 /* ============================= */
@@ -250,10 +1233,14 @@ helpButton.addEventListener("click", () => {
 /* ============================= */
 
 const computerTime =
-  document.getElementById("computerTime");
+  document.getElementById(
+    "computerTime"
+  );
 
 const taskbarTime =
-  document.getElementById("taskbarTime");
+  document.getElementById(
+    "taskbarTime"
+  );
 
 
 function updateClock() {
@@ -261,14 +1248,19 @@ function updateClock() {
   const now =
     new Date();
 
+
   const time =
     now.toLocaleTimeString(
       [],
       {
-        hour: "2-digit",
-        minute: "2-digit"
+        hour:
+          "2-digit",
+
+        minute:
+          "2-digit"
       }
     );
+
 
   computerTime.textContent =
     time;
@@ -281,6 +1273,7 @@ function updateClock() {
 
 updateClock();
 
+
 setInterval(
   updateClock,
   30000
@@ -288,35 +1281,42 @@ setInterval(
 
 
 /* ============================= */
-/* FOUND ITEMS */
+/* DISCOVERIES */
 /* ============================= */
 
 const foundItems =
   new Set();
 
+
 const progressText =
-  document.getElementById("progressText");
+  document.getElementById(
+    "progressText"
+  );
+
 
 const progressDots =
   document.querySelectorAll(
     ".progress-dots span"
   );
 
-const finalModal =
-  document.getElementById("finalModal");
 
+function markFound(
+  item
+) {
 
-let finalShown =
-  false;
-
-
-function markFound(item) {
-
-  if (foundItems.has(item)) {
+  if (
+    foundItems.has(
+      item
+    )
+  ) {
     return;
   }
 
-  foundItems.add(item);
+
+  foundItems.add(
+    item
+  );
+
 
   const count =
     foundItems.size;
@@ -327,161 +1327,28 @@ function markFound(item) {
 
 
   progressDots.forEach(
-    (dot, index) => {
+    (
+      dot,
+      index
+    ) => {
 
-      if (index < count) {
+      if (
+        index < count
+      ) {
 
-        dot.classList.add("found");
+        dot.classList.add(
+          "found"
+        );
 
       }
 
     }
   );
 
-}
 
-
-/* ============================= */
-/* CINEMATIC FINAL REVEAL */
-/* ============================= */
-
-const finalCard =
-  finalModal.querySelector(".final-card");
-
-const finalEyebrow =
-  finalCard.querySelector(".eyebrow");
-
-const finalHeading =
-  finalCard.querySelector("h2");
-
-const finalParagraph =
-  finalCard.querySelector("p:not(.eyebrow)");
-
-const openFinalButton =
-  document.getElementById(
-    "openFinalButton"
+  playFoundSound(
+    count
   );
-
-const finalLaterButton =
-  document.getElementById(
-    "finalLaterButton"
-  );
-
-
-function changeFinalText(
-  heading,
-  paragraph = ""
-) {
-
-  finalCard.classList.add(
-    "changing"
-  );
-
-
-  setTimeout(() => {
-
-    finalHeading.textContent =
-      heading;
-
-    finalParagraph.textContent =
-      paragraph;
-
-    finalCard.classList.remove(
-      "changing"
-    );
-
-  }, 350);
-
-}
-
-
-function startFinalReveal() {
-
-  if (finalShown) {
-    return;
-  }
-
-  finalShown = true;
-
-
-  document
-    .querySelectorAll(".modal.open")
-    .forEach((modal) => {
-
-      modal.classList.remove("open");
-
-      modal.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-    });
-
-
-  room.classList.add(
-    "final-reveal-active"
-  );
-
-
-  roomImage.style.transform =
-    "scale(1.035)";
-
-
-  finalModal.classList.add(
-    "open",
-    "cinematic"
-  );
-
-
-  finalModal.setAttribute(
-    "aria-hidden",
-    "false"
-  );
-
-
-  finalEyebrow.textContent =
-    "5 / 5 FOUND";
-
-
-  finalHeading.textContent =
-    "you actually found everything...";
-
-
-  finalParagraph.textContent =
-    "";
-
-
-  openFinalButton.classList.remove(
-    "reveal-button-visible"
-  );
-
-
-  setTimeout(() => {
-
-    changeFinalText(
-      "of course you did.",
-      "nosy."
-    );
-
-  }, 1900);
-
-
-  setTimeout(() => {
-
-    changeFinalText(
-      "theres one more thing, sayang."
-    );
-
-  }, 3900);
-
-
-  setTimeout(() => {
-
-    openFinalButton.classList.add(
-      "reveal-button-visible"
-    );
-
-  }, 5400);
 
 }
 
@@ -491,16 +1358,27 @@ function startFinalReveal() {
 /* ============================= */
 
 const appWindow =
-  document.getElementById("appWindow");
+  document.getElementById(
+    "appWindow"
+  );
+
 
 const appTitle =
-  document.getElementById("appTitle");
+  document.getElementById(
+    "appTitle"
+  );
+
 
 const appContent =
-  document.getElementById("appContent");
+  document.getElementById(
+    "appContent"
+  );
+
 
 const closeApp =
-  document.getElementById("closeApp");
+  document.getElementById(
+    "closeApp"
+  );
 
 
 const appData = {
@@ -511,27 +1389,38 @@ const appData = {
       "birthday.txt",
 
     content: `
-      <p class="eyebrow">18 SEPTEMBER 2026</p>
+      <p class="eyebrow">
+        SYSTEM RECORD
+      </p>
 
       <h2>
-        congratulations.
+        30 years detected.
       </h2>
 
       <p>
+        congratulations.
         you have successfully completed
-        30 years of being Faris.
+        thirty years of being Faris.
       </p>
 
       <p>
-        current status:
-        <strong>old but still cute.</strong>
+        current condition:
+        <strong>
+          old but still cute.
+        </strong>
       </p>
 
       <p>
-        please proceed with caution.
-        joints may begin making noises.
+        estimated warranty:
+        questionable.
+      </p>
+
+      <p>
+        girlfriend recommendation:
+        keep.
       </p>
     `
+
   },
 
 
@@ -542,7 +1431,7 @@ const appData = {
 
     content: `
       <p class="eyebrow">
-        PHOTOS
+        PHOTO ARCHIVE
       </p>
 
       <h2>
@@ -550,15 +1439,20 @@ const appData = {
       </h2>
 
       <p>
-        this is where we'll put some of
-        your favourite photos later.
+        photos are going here later.
       </p>
 
       <p>
-        not an anniversary scrapbook.
-        promise.
+        before you say anything...
+        no, this is not secretly
+        an anniversary scrapbook.
+      </p>
+
+      <p>
+        this one is about you.
       </p>
     `
+
   },
 
 
@@ -569,7 +1463,7 @@ const appData = {
 
     content: `
       <p class="eyebrow">
-        FROM: NADHIRA
+        FROM NADHIRA
       </p>
 
       <h2>
@@ -578,11 +1472,12 @@ const appData = {
 
       <p>
         i know youre probably clicking
-        everything because youre nosy.
+        absolutely everything because
+        youre nosy.
       </p>
 
       <p>
-        good.
+        which is exactly what i expected.
       </p>
 
       <p>
@@ -593,6 +1488,7 @@ const appData = {
         theres more.
       </p>
     `
+
   },
 
 
@@ -615,65 +1511,318 @@ const appData = {
       </p>
 
       <p>
-        you havent earned this yet.
+        you havent unlocked this yet.
       </p>
 
       <p>
-        go explore the room.
+        go back to the room,
+        detective.
       </p>
     `
+
   }
 
 };
 
 
 document
-  .querySelectorAll(".desktop-icon")
-  .forEach((icon) => {
+  .querySelectorAll(
+    ".desktop-icon"
+  )
+  .forEach(
+    (icon) => {
 
-    icon.addEventListener("click", () => {
+      icon.addEventListener(
+        "click",
+        () => {
 
-      const app =
-        icon.dataset.app;
+          playClick();
 
-      const data =
-        appData[app];
 
-      if (!data) {
-        return;
-      }
+          const app =
+            icon.dataset.app;
 
-      appTitle.textContent =
-        data.title;
 
-      appContent.innerHTML =
-        data.content;
+          const data =
+            appData[app];
 
-      appWindow.classList.add("open");
 
-    });
+          if (!data) {
+            return;
+          }
 
-  });
+
+          appTitle.textContent =
+            data.title;
+
+
+          appContent.innerHTML =
+            data.content;
+
+
+          appWindow.classList.add(
+            "open"
+          );
+
+        }
+      );
+
+    }
+  );
 
 
 closeApp.addEventListener(
   "click",
   () => {
 
-    appWindow.classList.remove("open");
+    playClick();
+
+
+    appWindow.classList.remove(
+      "open"
+    );
 
   }
 );
 
 
 /* ============================= */
-/* FINAL MESSAGE */
+/* FINAL REVEAL */
+/* ============================= */
+
+const finalModal =
+  document.getElementById(
+    "finalModal"
+  );
+
+
+const finalCounter =
+  document.getElementById(
+    "finalCounter"
+  );
+
+
+const finalHeading =
+  document.getElementById(
+    "finalHeading"
+  );
+
+
+const finalSubtext =
+  document.getElementById(
+    "finalSubtext"
+  );
+
+
+const openFinalButton =
+  document.getElementById(
+    "openFinalButton"
+  );
+
+
+let finalShown =
+  false;
+
+
+function swapFinalText(
+  heading,
+  subtext = ""
+) {
+
+  finalHeading.classList.add(
+    "fade"
+  );
+
+  finalSubtext.classList.remove(
+    "visible"
+  );
+
+
+  setTimeout(
+    () => {
+
+      finalHeading.textContent =
+        heading;
+
+      finalSubtext.textContent =
+        subtext;
+
+
+      finalHeading.classList.remove(
+        "fade"
+      );
+
+      finalHeading.classList.add(
+        "visible"
+      );
+
+
+      if (subtext) {
+
+        finalSubtext.classList.add(
+          "visible"
+        );
+
+      }
+
+    },
+    520
+  );
+
+}
+
+
+function startFinalReveal() {
+
+  if (finalShown) {
+    return;
+  }
+
+
+  finalShown =
+    true;
+
+
+  document
+    .querySelectorAll(
+      ".modal.open"
+    )
+    .forEach(
+      (modal) => {
+
+        modal.classList.remove(
+          "open"
+        );
+
+      }
+    );
+
+
+  appWindow.classList.remove(
+    "open"
+  );
+
+
+  room.classList.add(
+    "final-reveal-active"
+  );
+
+
+  playTone(
+    110,
+    1.4,
+    0.018,
+    "sine"
+  );
+
+
+  setTimeout(
+    () => {
+
+      room.classList.add(
+        "final-lights"
+      );
+
+    },
+    1100
+  );
+
+
+  setTimeout(
+    () => {
+
+      finalModal.classList.add(
+        "open"
+      );
+
+      finalModal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+    },
+    1600
+  );
+
+
+  setTimeout(
+    () => {
+
+      finalCounter.classList.add(
+        "visible"
+      );
+
+    },
+    2050
+  );
+
+
+  setTimeout(
+    () => {
+
+      finalHeading.textContent =
+        "you actually found everything...";
+
+      finalHeading.classList.add(
+        "visible"
+      );
+
+
+      playFinalChime();
+
+    },
+    2600
+  );
+
+
+  setTimeout(
+    () => {
+
+      swapFinalText(
+        "of course you did.",
+        "nosy."
+      );
+
+    },
+    5000
+  );
+
+
+  setTimeout(
+    () => {
+
+      swapFinalText(
+        "theres one more thing, sayang."
+      );
+
+    },
+    7600
+  );
+
+
+  setTimeout(
+    () => {
+
+      openFinalButton.classList.add(
+        "visible"
+      );
+
+    },
+    9400
+  );
+
+}
+
+
+/* ============================= */
+/* FINAL LETTER */
 /* ============================= */
 
 const birthdayMessage =
   document.getElementById(
     "birthdayMessage"
   );
+
 
 const closeBirthdayMessage =
   document.getElementById(
@@ -685,10 +1834,26 @@ openFinalButton.addEventListener(
   "click",
   () => {
 
-    finalModal.classList.remove(
-      "open",
-      "cinematic"
+    playTone(
+      440,
+      0.45,
+      0.018,
+      "sine"
     );
+
+    playTone(
+      660,
+      0.7,
+      0.015,
+      "sine",
+      0.2
+    );
+
+
+    finalModal.classList.remove(
+      "open"
+    );
+
 
     finalModal.setAttribute(
       "aria-hidden",
@@ -704,38 +1869,12 @@ openFinalButton.addEventListener(
 );
 
 
-finalLaterButton.addEventListener(
-  "click",
-  () => {
-
-    finalModal.classList.remove(
-      "open",
-      "cinematic"
-    );
-
-    finalModal.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-    room.classList.remove(
-      "final-reveal-active"
-    );
-
-  }
-);
-
-
 closeBirthdayMessage.addEventListener(
   "click",
   () => {
 
     birthdayMessage.classList.add(
       "hidden"
-    );
-
-    room.classList.remove(
-      "final-reveal-active"
     );
 
   }
