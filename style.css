@@ -639,10 +639,6 @@ button,
 /* FOCUS TRANSITION */
 /* ============================= */
 
-/* ============================= */
-/* FOCUS TRANSITION */
-/* ============================= */
-
 #focusTransition {
   position: fixed;
   inset: 0;
@@ -1592,23 +1588,23 @@ button,
 
 .panda-arm {
   position: absolute;
-  top: 113px;
-  width: 34px;
-  height: 58px;
+  top: 108px;
+  width: 44px;
+  height: 67px;
   background: #090909;
   border: 1px solid rgba(255, 255, 255, 0.11);
-  border-radius: 55% 55% 50% 50%;
+  border-radius: 58% 58% 52% 52%;
   z-index: 1;
 }
 
 .panda-arm-left {
-  left: 17px;
-  transform: rotate(18deg);
+  left: 10px;
+  transform: rotate(15deg);
 }
 
 .panda-arm-right {
-  right: 17px;
-  transform: rotate(-18deg);
+  right: 10px;
+  transform: rotate(-15deg);
 }
 
 /* FEET */
