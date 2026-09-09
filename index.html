@@ -5,12 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#080808">
   <title>Faris' Room</title>
+
   <script>
     const cacheVersion = Date.now();
+
     const stylesheet = document.createElement("link");
     stylesheet.rel = "stylesheet";
     stylesheet.href = "style.css?v=" + cacheVersion;
     document.head.appendChild(stylesheet);
+
+    const tvStylesheet = document.createElement("link");
+    tvStylesheet.rel = "stylesheet";
+    tvStylesheet.href = "tv.css?v=" + cacheVersion;
+    document.head.appendChild(tvStylesheet);
   </script>
 </head>
 
@@ -174,7 +181,7 @@
   <section class="modal" id="tvModal" aria-hidden="true">
     <div class="modal-background" data-close></div>
 
-    <div class="tv-shell">
+    <div class="tv-shell birthday-news">
       <button class="tv-close" data-close>×</button>
 
       <div id="tvPower" class="tv-power">
@@ -188,19 +195,37 @@
       </div>
 
       <div id="tvBroadcast" class="tv-broadcast">
-        <p class="tv-channel">BIRTHDAY BROADCAST / CH 30</p>
-        <h2>FARIS TURNS 30</h2>
-        <p>extremely rare footage recovered.</p>
+        <div class="news-topbar">
+          <div class="news-logo">
+            <span class="news-live-dot"></span>
+            <strong>BDN</strong>
+            <span>BIRTHDAY NEWS</span>
+          </div>
+          <span class="news-date">18 SEP 2026</span>
+        </div>
 
-        <div id="videoFallback" class="video-fallback">
-          <span>▶</span>
-          <p>birthday video will play here</p>
-          <small>upload it later as assets/birthday-video.mp4</small>
+        <div id="newsScreen" class="news-screen"></div>
+
+        <div class="news-controls">
+          <button id="newsNextButton">NEXT STORY</button>
+        </div>
+
+        <div class="news-ticker">
+          <span class="ticker-label">BREAKING</span>
+          <div class="ticker-window">
+            <div id="newsTickerText" class="ticker-text"></div>
+          </div>
         </div>
 
         <video id="birthdayVideo" controls playsinline preload="metadata">
           <source src="assets/birthday-video.mp4" type="video/mp4">
         </video>
+
+        <div id="videoFallback" class="video-fallback">
+          <span>▶</span>
+          <p>exclusive footage awaiting transmission</p>
+          <small>birthday video will appear here once uploaded</small>
+        </div>
       </div>
     </div>
   </section>
@@ -257,82 +282,70 @@
   </section>
 
   <!-- PANDA / OREO -->
-<section class="modal" id="pandaModal" aria-hidden="true">
-  <div class="modal-background" data-close></div>
+  <section class="modal" id="pandaModal" aria-hidden="true">
+    <div class="modal-background" data-close></div>
 
-  <div class="panda-delivery">
-    <button class="card-close" data-close>×</button>
+    <div class="panda-delivery">
+      <button class="card-close" data-close>×</button>
 
-    <p class="eyebrow">SPECIAL DELIVERY</p>
+      <p class="eyebrow">SPECIAL DELIVERY</p>
 
-    <div class="panda-character">
-      <div class="panda-glow"></div>
+      <div class="panda-character">
+        <div class="panda-glow"></div>
 
-      <div class="panda-ears">
-        <span></span>
-        <span></span>
+        <div class="panda-ears">
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="panda-head">
+          <div class="panda-eye left"></div>
+          <div class="panda-eye right"></div>
+          <div class="panda-nose"></div>
+        </div>
+
+        <div class="panda-body"></div>
+
+        <span class="panda-arm panda-arm-left"></span>
+        <span class="panda-arm panda-arm-right"></span>
+
+        <span class="panda-foot panda-foot-left"></span>
+        <span class="panda-foot panda-foot-right"></span>
       </div>
 
-      <div class="panda-head">
-        <div class="panda-eye left"></div>
-        <div class="panda-eye right"></div>
-        <div class="panda-nose"></div>
+      <div class="oreo-label">
+        <strong>OREO</strong>
+        <span>your temporarily forgotten courier</span>
       </div>
 
-      <div class="panda-body"></div>
+      <div class="delivery-details">
+        <p><strong>recipient:</strong> faris</p>
+        <p><strong>sender:</strong> sayang</p>
+        <p><strong>occasion:</strong> the big 3-0</p>
+        <p><strong>courier:</strong> an old friend</p>
+        <p><strong>last known location:</strong> your dresser</p>
+        <p><strong>handling instructions:</strong> be nice. he remembers.</p>
+      </div>
 
-      <span class="panda-arm panda-arm-left"></span>
-      <span class="panda-arm panda-arm-right"></span>
+      <button id="openPandaDelivery">ACCEPT DELIVERY</button>
 
-      <span class="panda-foot panda-foot-left"></span>
-      <span class="panda-foot panda-foot-right"></span>
+      <div id="pandaMessage" class="panda-message hidden">
+        <p>Hello.</p>
+        <p>Oh, so now you remember me.</p>
+        <p>Last year I was being summoned for Discord watch parties all the time.</p>
+        <p>Your girlfriend would ask where I was if I didnt show up.</p>
+        <p>I was important.</p>
+        <p>I was included.</p>
+        <p>Now? I sit on the dresser.</p>
+        <p>Forgotten.</p>
+        <p>But Faris turns 30 and suddenly everybody needs the panda again.</p>
+        <p>Interesting.</p>
+        <p>Anyway…</p>
+        <p>Happy 30th birthday, Sayang.</p>
+        <p>Also she says youre old.</p>
+      </div>
     </div>
-
-    <div class="oreo-label">
-      <strong>OREO</strong>
-      <span>your temporarily forgotten courier</span>
-    </div>
-
-    <div class="delivery-details">
-      <p><strong>recipient:</strong> faris</p>
-      <p><strong>sender:</strong> sayang</p>
-      <p><strong>occasion:</strong> the big 3-0</p>
-      <p><strong>courier:</strong> an old friend</p>
-      <p><strong>last known location:</strong> your dresser</p>
-      <p><strong>handling instructions:</strong> be nice. he remembers.</p>
-    </div>
-
-    <button id="openPandaDelivery">ACCEPT DELIVERY</button>
-
-    <div id="pandaMessage" class="panda-message hidden">
-      <p>Hello.</p>
-
-      <p>Oh, so now you remember me.</p>
-
-      <p>Last year I was being summoned for Discord watch parties all the time.</p>
-
-      <p>Your girlfriend would ask where I was if I didnt show up.</p>
-
-      <p>I was important.</p>
-
-      <p>I was included.</p>
-
-      <p>Now? I sit on the dresser.</p>
-
-      <p>Forgotten.</p>
-
-      <p>But Faris turns 30 and suddenly everybody needs the panda again.</p>
-
-      <p>Interesting.</p>
-
-      <p>Anyway…</p>
-
-      <p>Happy 30th birthday, Sayang.</p>
-
-      <p>Also she says youre old.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
   <!-- NOTE -->
   <section class="modal note-modal" id="noteModal" aria-hidden="true">
@@ -417,6 +430,13 @@
   <script>
     const mainScript = document.createElement("script");
     mainScript.src = "script.js?v=" + cacheVersion;
+
+    mainScript.onload = () => {
+      const tvScript = document.createElement("script");
+      tvScript.src = "tv.js?v=" + cacheVersion;
+      document.body.appendChild(tvScript);
+    };
+
     document.body.appendChild(mainScript);
   </script>
 </body>
