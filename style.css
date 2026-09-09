@@ -383,7 +383,7 @@ button,
   pointer-events: none;
 
   transform:
-    scale(1.065);
+    scale(1);
 
   filter:
     brightness(0.78)
@@ -403,6 +403,7 @@ button,
     ease;
 }
 
+
 #room.visible #roomImage {
   animation:
     roomWake
@@ -414,6 +415,29 @@ button,
       1
     )
     forwards;
+}
+
+
+@keyframes roomWake {
+
+  0% {
+    transform:
+      scale(1.025);
+
+    filter:
+      brightness(0.66)
+      saturate(0.85);
+  }
+
+  100% {
+    transform:
+      scale(1);
+
+    filter:
+      brightness(1)
+      saturate(1);
+  }
+
 }
 
 @keyframes roomWake {
