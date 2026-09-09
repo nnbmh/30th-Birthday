@@ -12,77 +12,122 @@
   let currentNewsSlide = 0;
   let tvTimers = [];
 
-  const defaultTicker =
-    "FARIS TURNS 30 • SAYANG MONITORING SITUATION FROM 10,827 KM AWAY • MORE TO FOLLOW";
-
-  const newsSlides = [
+  const slides = [
     {
       ticker: "FARIS TURNS 30 • SAYANG MONITORING SITUATION FROM 10,827 KM AWAY • MORE TO FOLLOW",
       html: `
         <div class="news-slide">
-          <span class="news-breaking-tag">BREAKING NEWS</span>
-          <h1 class="news-title">FARIS<br>TURNS 30</h1>
-          <p class="news-location">LIVE • UNITED KINGDOM</p>
+          <div class="broadcast-scene">
+            <div class="studio-background"></div>
+
+            <div class="anchor-zone">
+              <div class="anchor-silhouette">
+                <div class="anchor-head"></div>
+                <div class="anchor-body"></div>
+              </div>
+            </div>
+
+            <div class="studio-side-panel">
+              <p class="small-label">LIVE • UNITED KINGDOM</p>
+              <h2>FARIS TURNS 30</h2>
+              <p>Celebrations are underway as the birthday boy officially enters his thirties.</p>
+            </div>
+
+            <div class="lower-third">
+              <div class="lower-breaking">BREAKING NEWS</div>
+              <div class="lower-main">
+                <h1>FARIS TURNS 30</h1>
+              </div>
+              <div class="lower-sub">Celebrations underway in the United Kingdom</div>
+            </div>
+          </div>
         </div>
       `
     },
 
     {
-      ticker: defaultTicker,
+      ticker: "BREAKING • FARIS TURNS 30 • BIRTHDAY BOY REPORTED TO BE IN GOOD SPIRITS",
       html: `
         <div class="news-slide">
-          <p class="news-kicker">LIVE REPORT</p>
-          <p class="news-copy">Good evening.</p>
-          <p class="news-copy">We interrupt your regularly scheduled programming with breaking news from the United Kingdom.</p>
-          <p class="news-copy">Faris has officially turned 30.</p>
-          <p class="news-copy">Sources in Singapore have confirmed that celebrations are underway.</p>
-          <p class="news-copy">The birthday boy is reported to be in good spirits.</p>
+          <div class="broadcast-scene">
+            <div class="studio-background"></div>
+
+            <div class="anchor-zone">
+              <div class="anchor-silhouette">
+                <div class="anchor-head"></div>
+                <div class="anchor-body"></div>
+              </div>
+              <div class="anchor-label">BDN NEWSROOM • LIVE</div>
+            </div>
+
+            <div class="studio-side-panel">
+              <p class="small-label">BREAKING NEWS</p>
+              <h2>Birthday celebrations underway</h2>
+              <p>We interrupt your regularly scheduled programming with breaking news from the United Kingdom.</p>
+              <p>Faris has officially turned 30.</p>
+            </div>
+
+            <div class="lower-third">
+              <div class="lower-breaking">LIVE</div>
+              <div class="lower-main">
+                <h1>Faris officially turns 30</h1>
+              </div>
+              <div class="lower-sub">Sources in Singapore confirm celebrations are underway</div>
+            </div>
+          </div>
         </div>
       `
     },
 
     {
-      ticker: "SPECIAL REPORT • INVESTIGATION INTO SUBJECT FARIS NOW UNDERWAY",
+      ticker: "SPECIAL REPORT • THE FARIS FILES • INVESTIGATION NOW UNDERWAY",
       html: `
         <div class="news-slide">
-          <p class="news-kicker">SPECIAL REPORT</p>
-          <h1 class="news-title small">THE FARIS<br>FILES</h1>
-          <p class="news-copy" style="margin-top:28px;">Our investigation into the birthday boy has uncovered several behaviours that experts have described as... uniquely Faris.</p>
+          <div class="news-package">
+            <span class="package-kicker">SPECIAL REPORT</span>
+            <h1 class="package-title">THE FARIS FILES</h1>
+
+            <p class="package-copy">
+              Our investigation into the birthday boy has uncovered several behaviours that experts have described as... uniquely Faris.
+            </p>
+
+            <div class="lower-third">
+              <div class="lower-breaking">SPECIAL REPORT</div>
+              <div class="lower-main">
+                <h1>The Faris Files</h1>
+              </div>
+              <div class="lower-sub">Investigators examine unusual behaviour of birthday subject</div>
+            </div>
+          </div>
         </div>
       `
     },
 
     {
-      ticker: "DEVELOPING • SUBJECT PROFILE RELEASED • FINDINGS DESCRIBED AS UNIQUELY FARIS",
+      ticker: "DEVELOPING • SUBJECT PROFILE RELEASED • RELATIONSHIP STATUS CONFIRMED AS VERY TAKEN",
       html: `
         <div class="news-slide">
-          <div class="news-card">
-            <p class="news-card-title">SUBJECT: FARIS</p>
+          <div class="profile-package">
+            <div class="subject-visual">
+              <span class="subject-status">SUBJECT IDENTIFIED</span>
 
-            <div class="profile-grid">
-              <strong>age</strong>
-              <span>30</span>
+              <div class="subject-name">
+                <strong>FARIS</strong>
+                <span>United Kingdom • Age 30</span>
+              </div>
+            </div>
 
-              <strong>location</strong>
-              <span>United Kingdom</span>
+            <div class="profile-data">
+              <h2>SUBJECT PROFILE</h2>
 
-              <strong>hobbies</strong>
-              <span>rock climbing, occasional Dota</span>
-
-              <strong>known weaknesses</strong>
-              <span>steak, cheese</span>
-
-              <strong>musical knowledge</strong>
-              <span>suspiciously extensive</span>
-
-              <strong>time required to do anything</strong>
-              <span>longer than necessary</span>
-
-              <strong>tendency to chew random objects</strong>
-              <span>concerning</span>
-
-              <strong>relationship status</strong>
-              <span>very taken</span>
+              <div class="profile-row"><strong>age</strong><span>30</span></div>
+              <div class="profile-row"><strong>location</strong><span>United Kingdom</span></div>
+              <div class="profile-row"><strong>hobbies</strong><span>rock climbing, occasional Dota</span></div>
+              <div class="profile-row"><strong>known weaknesses</strong><span>steak, cheese</span></div>
+              <div class="profile-row"><strong>musical knowledge</strong><span>suspiciously extensive</span></div>
+              <div class="profile-row"><strong>time required to do anything</strong><span>longer than necessary</span></div>
+              <div class="profile-row"><strong>chewing random objects</strong><span>concerning</span></div>
+              <div class="profile-row"><strong>relationship status</strong><span>very taken</span></div>
             </div>
           </div>
         </div>
@@ -93,27 +138,56 @@
       ticker: "DEVELOPING • RANDOM OBJECTS ADVISED TO REMAIN VIGILANT",
       html: `
         <div class="news-slide">
-          <p class="news-kicker">INVESTIGATION CONTINUES</p>
+          <div class="news-package">
+            <span class="package-kicker">DEVELOPING STORY</span>
+            <h1 class="package-title">Random objects remain at risk</h1>
 
-          <p class="news-copy">Investigators remain unable to explain why the subject insists on chewing random objects.</p>
+            <p class="package-copy">
+              Investigators remain unable to explain why the subject insists on chewing random objects.
+            </p>
 
-          <p class="news-copy">They have, however, confirmed that he takes approximately three business days to complete a task that should take five minutes.</p>
+            <p class="package-copy">
+              They have, however, confirmed that he takes approximately three business days to complete a task that should take five minutes.
+            </p>
+
+            <div class="lower-third">
+              <div class="lower-breaking">DEVELOPING</div>
+              <div class="lower-main">
+                <h1>Investigation continues</h1>
+              </div>
+              <div class="lower-sub">Random objects advised to remain vigilant</div>
+            </div>
+          </div>
         </div>
       `
     },
 
     {
-      ticker: "WELFARE UPDATE • FOOD AND HYDRATION STATUS UNDER ACTIVE SUPERVISION",
+      ticker: "WELFARE REPORT • SAYANG FOOD AND HYDRATION STATUS UNDER ACTIVE SUPERVISION",
       html: `
         <div class="news-slide">
-          <p class="news-kicker">WELFARE REPORT</p>
+          <div class="news-package">
+            <span class="package-kicker">WELFARE REPORT</span>
 
-          <p class="news-copy">Despite these findings, reports from Singapore suggest Faris regularly conducts important welfare checks on his girlfriend.</p>
+            <p class="package-copy">
+              Despite these findings, reports from Singapore suggest Faris regularly conducts important welfare checks on his girlfriend.
+            </p>
 
-          <p class="news-copy">These generally consist of two questions:</p>
+            <p class="package-copy">
+              These generally consist of two questions:
+            </p>
 
-          <p class="news-emphasis">“you eat already or not?”</p>
-          <p class="news-emphasis">“drink more water.”</p>
+            <div class="big-quote">“you eat already or not?”</div>
+            <div class="big-quote">“drink more water.”</div>
+
+            <div class="lower-third">
+              <div class="lower-breaking">WELFARE</div>
+              <div class="lower-main">
+                <h1>Sayang welfare checks continue</h1>
+              </div>
+              <div class="lower-sub">Food intake and hydration remain under supervision</div>
+            </div>
+          </div>
         </div>
       `
     },
@@ -122,16 +196,20 @@
       ticker: "SAYANG WELFARE PROGRAMME • HYDRATION AGGRESSIVELY MONITORED",
       html: `
         <div class="news-slide">
-          <div class="news-card">
-            <p class="news-card-title">SAYANG WELFARE PROGRAMME</p>
+          <div class="info-board">
+            <h2>SAYANG WELFARE PROGRAMME</h2>
 
-            <div class="welfare-grid">
+            <div class="info-row">
               <span>food intake</span>
               <strong>monitored</strong>
+            </div>
 
+            <div class="info-row">
               <span>hydration</span>
               <strong>aggressively monitored</strong>
+            </div>
 
+            <div class="info-row">
               <span>responsible officer</span>
               <strong>Faris</strong>
             </div>
@@ -144,16 +222,28 @@
       ticker: "MUSIC INVESTIGATION • IDENTIFICATION RATE DESCRIBED AS ANNOYINGLY HIGH",
       html: `
         <div class="news-slide">
-          <p class="news-kicker">MUSIC INVESTIGATION</p>
+          <div class="music-card">
+            <span class="package-kicker">MUSIC INVESTIGATION</span>
+            <h2>Unusual ability identified</h2>
 
-          <p class="news-copy">Further investigation has revealed an unusual ability.</p>
+            <p>
+              Witnesses claim that almost any song can be played in Faris' presence and he will somehow know what it is.
+            </p>
 
-          <p class="news-copy">Witnesses claim that almost any song can be played in Faris' presence and he will somehow know what it is.</p>
+            <p>
+              Experts have yet to determine why his brain has chosen to store this information.
+            </p>
 
-          <p class="news-copy">Experts have yet to determine why his brain has chosen to store this information.</p>
+            <div class="music-rate">annoyingly high</div>
+          </div>
 
-          <p class="news-kicker" style="margin-top:30px;">MUSICAL IDENTIFICATION RATE</p>
-          <div class="music-rate">annoyingly high</div>
+          <div class="lower-third">
+            <div class="lower-breaking">ANALYSIS</div>
+            <div class="lower-main">
+              <h1>Musical identification rate</h1>
+            </div>
+            <div class="lower-sub">Experts describe ability as suspiciously extensive</div>
+          </div>
         </div>
       `
     },
@@ -162,16 +252,27 @@
       ticker: "ARCHIVED AUDIO RECOVERED • NO LEGAL ACTION HAS BEEN TAKEN",
       html: `
         <div class="news-slide">
-          <p class="news-kicker">ARCHIVED AUDIO TRANSCRIPT</p>
+          <div class="music-card">
+            <span class="package-kicker">ARCHIVED AUDIO TRANSCRIPT</span>
 
-          <div class="music-transcript">
-            ♪ Di mana dia, anak baboy saya? ♪<br>
-            ♪ Di mana dia, buah hati saya? ♪
+            <div class="music-transcript">
+              ♪ Di mana dia, anak baboy saya? ♪<br>
+              ♪ Di mana dia, buah hati saya? ♪
+            </div>
+
+            <p>
+              The performance is believed to be an unauthorised adaptation of <em>Chan Mali Chan</em>.
+            </p>
+
+            <p>No legal action has been taken.</p>
           </div>
 
-          <p class="news-copy" style="margin-top:28px;">The performance is believed to be an unauthorised adaptation of <em>Chan Mali Chan</em>.</p>
-
-          <p class="news-copy">No legal action has been taken.</p>
+          <div class="lower-third">
+            <div class="lower-breaking">ARCHIVE</div>
+            <div class="lower-main">
+              <h1>Previously unheard material recovered</h1>
+            </div>
+          </div>
         </div>
       `
     },
@@ -180,40 +281,19 @@
       ticker: "DATA DESK • FARIS BY THE NUMBERS • ANALYSIS CONTINUES",
       html: `
         <div class="news-slide">
-          <div class="news-card">
-            <p class="news-card-title">FARIS BY THE NUMBERS</p>
+          <div class="info-board">
+            <h2>FARIS BY THE NUMBERS</h2>
 
-            <div class="stats-grid">
-              <span>countries explored together</span>
-              <strong>4</strong>
-
-              <span>distance between Faris & Sayang</span>
-              <strong>10,827 km</strong>
-
-              <span>flights Sayang has taken over</span>
-              <strong>3</strong>
-
-              <span>Discord calls</span>
-              <strong>too many to count</strong>
-
-              <span>calls that somehow became 3–4am</span>
-              <strong>more than sensible</strong>
-
-              <span>songs Faris mysteriously knows</span>
-              <strong>apparently all of them</strong>
-
-              <span>how often Sayang misses him</span>
-              <strong>more than shed like to admit</strong>
-
-              <span>hugs currently owed to Sayang</span>
-              <strong>far too many</strong>
-
-              <span>times shes wished he was 10,827 km closer</span>
-              <strong>countless</strong>
-
-              <span>likelihood shed fly all that way for him again</span>
-              <strong>100%</strong>
-            </div>
+            <div class="info-row"><span>countries explored together</span><strong>4</strong></div>
+            <div class="info-row"><span>distance between Faris & Sayang</span><strong>10,827 km</strong></div>
+            <div class="info-row"><span>flights Sayang has taken over</span><strong>3</strong></div>
+            <div class="info-row"><span>Discord calls</span><strong>too many to count</strong></div>
+            <div class="info-row"><span>calls that became 3–4am</span><strong>more than sensible</strong></div>
+            <div class="info-row"><span>songs Faris mysteriously knows</span><strong>apparently all of them</strong></div>
+            <div class="info-row"><span>how often Sayang misses him</span><strong>more than shed like to admit</strong></div>
+            <div class="info-row"><span>hugs currently owed</span><strong>far too many</strong></div>
+            <div class="info-row"><span>wishes he was 10,827 km closer</span><strong>countless</strong></div>
+            <div class="info-row"><span>likelihood shed fly over again</span><strong>100%</strong></div>
           </div>
         </div>
       `
@@ -223,13 +303,30 @@
       ticker: "LATE NIGHT REPORT • NEITHER PARTY APPEARS INTERESTED IN LEARNING FROM THIS",
       html: `
         <div class="news-slide">
-          <p class="news-kicker">DISTANCE REPORT</p>
+          <div class="broadcast-scene">
+            <div class="studio-background"></div>
 
-          <p class="news-copy">Despite the considerable distance between Singapore and the United Kingdom, sources confirm that the pair continue to spend an unreasonable number of hours together on Discord.</p>
+            <div class="studio-side-panel">
+              <p class="small-label">DISTANCE REPORT</p>
+              <h2>10,827 km apart</h2>
 
-          <p class="news-copy">Some calls have reportedly continued until 3 or 4 in the morning.</p>
+              <p>
+                Sources confirm that the pair continue to spend an unreasonable number of hours together on Discord.
+              </p>
 
-          <p class="news-copy">Neither party appears interested in learning from this.</p>
+              <p>
+                Some calls have reportedly continued until 3 or 4 in the morning.
+              </p>
+            </div>
+
+            <div class="lower-third">
+              <div class="lower-breaking">LIVE</div>
+              <div class="lower-main">
+                <h1>Neither party learns from this</h1>
+              </div>
+              <div class="lower-sub">Late-night Discord calls continue despite considerable distance</div>
+            </div>
+          </div>
         </div>
       `
     },
@@ -238,9 +335,9 @@
       ticker: "BREAKING • SAYANG CAUGHT BEING NICE • INVESTIGATION UNDERWAY",
       html: `
         <div class="news-slide">
-          <p class="news-kicker">EXCLUSIVE STATEMENT FROM SINGAPORE</p>
+          <div class="statement-layout">
+            <span class="statement-tag">EXCLUSIVE STATEMENT FROM SINGAPORE</span>
 
-          <div class="quote-card">
             <blockquote>
               “hes annoying uh... but i really love seeing him happy. especially that face he makes when hes genuinely excited abt something and his stupid big smile.<br><br>
               dont tell him i said that.”
@@ -249,22 +346,42 @@
             <cite>— Sayang</cite>
           </div>
 
-          <p class="news-copy" style="margin-top:26px;">Unfortunately for the source, the statement has now been broadcast internationally.</p>
+          <div class="lower-third">
+            <div class="lower-breaking">BREAKING</div>
+            <div class="lower-main">
+              <h1>Sayang caught being nice</h1>
+            </div>
+            <div class="lower-sub">Unfortunately, statement has now been broadcast internationally</div>
+          </div>
         </div>
       `
     },
 
     {
-      ticker: "VERIFIED • SUBJECT CONFIRMED TO BE VERY VERY LOVED",
+      ticker: "VERIFIED • FARIS CONFIRMED TO BE VERY VERY LOVED",
       html: `
         <div class="news-slide">
-          <p class="news-kicker">FINAL INVESTIGATIVE FINDING</p>
+          <div class="news-package">
+            <span class="package-kicker">FINAL INVESTIGATIVE FINDING</span>
 
-          <p class="news-copy">Investigators have concluded that while Faris remains difficult to classify, one fact has been independently verified.</p>
+            <p class="package-copy">
+              Investigators have concluded that while Faris remains difficult to classify, one fact has been independently verified.
+            </p>
 
-          <div class="news-emphasis">He is very, very loved.</div>
+            <div class="big-quote">He is very, very loved.</div>
 
-          <p class="news-copy" style="margin-top:24px;">Particularly by one woman approximately 10,827 kilometres away.</p>
+            <p class="package-copy">
+              Particularly by one woman approximately 10,827 kilometres away.
+            </p>
+
+            <div class="lower-third">
+              <div class="lower-breaking">CONFIRMED</div>
+              <div class="lower-main">
+                <h1>Faris is very, very loved</h1>
+              </div>
+              <div class="lower-sub">Finding independently verified by Singapore source</div>
+            </div>
+          </div>
         </div>
       `
     },
@@ -273,45 +390,65 @@
       ticker: "EXCLUSIVE FOOTAGE INCOMING • MATERIAL SUPPLIED BY SINGAPORE CORRESPONDENT",
       html: `
         <div class="news-slide">
-          <p class="news-kicker">DEVELOPING</p>
+          <div class="news-package">
+            <span class="package-kicker">EXCLUSIVE FOOTAGE</span>
 
-          <p class="news-copy">We are now receiving exclusive footage supplied by our Singapore correspondent.</p>
+            <h1 class="package-title">FARIS:<br>30 YEARS IN THE MAKING</h1>
 
-          <p class="news-copy">The following material concerns the birthday boy directly.</p>
+            <p class="package-copy">
+              We are now receiving exclusive footage supplied by our Singapore correspondent.
+            </p>
 
-          <div class="news-emphasis">EXCLUSIVE FOOTAGE</div>
-          <p class="news-location">FARIS: 30 YEARS IN THE MAKING</p>
-          <p class="news-location">footage supplied by Sayang</p>
+            <p class="package-copy">
+              The following material concerns the birthday boy directly.
+            </p>
+
+            <div class="lower-third">
+              <div class="lower-breaking">EXCLUSIVE</div>
+              <div class="lower-main">
+                <h1>Footage supplied by Sayang</h1>
+              </div>
+            </div>
+          </div>
         </div>
       `
     },
 
     {
-      ticker: "EXCLUSIVE FOOTAGE • FARIS: 30 YEARS IN THE MAKING",
       video: true,
+      ticker: "EXCLUSIVE FOOTAGE • FARIS: 30 YEARS IN THE MAKING",
       html: `
         <div class="news-slide">
-          <p class="news-kicker">EXCLUSIVE FOOTAGE</p>
-
           <div class="news-video-stage" id="newsVideoStage"></div>
+
+          <div class="lower-third">
+            <div class="lower-breaking">EXCLUSIVE FOOTAGE</div>
+            <div class="lower-main">
+              <h1>Faris: 30 Years in the Making</h1>
+            </div>
+          </div>
         </div>
       `
     },
 
     {
-      ticker: "HAPPY BIRTHDAY FARIS • 10,827 KM AWAY BUT NEVER REALLY THAT FAR • SAYANG LOVES YOU • END OF REPORT",
       final: true,
+      ticker: "HAPPY BIRTHDAY FARIS • 10,827 KM AWAY BUT NEVER REALLY THAT FAR • SAYANG LOVES YOU • END OF REPORT",
       html: `
-        <div class="news-slide news-final">
-          <p class="news-kicker">END OF SPECIAL REPORT</p>
+        <div class="news-slide">
+          <div class="final-broadcast">
+            <div>
+              <h1>HAPPY 30TH<br>BIRTHDAY, FARIS</h1>
 
-          <h1 class="news-title small">HAPPY 30TH<br>BIRTHDAY, FARIS</h1>
+              <p>
+                This concludes our special birthday coverage.
+              </p>
 
-          <p class="news-copy" style="margin:28px auto 0;">This concludes our special birthday coverage.</p>
-
-          <p class="news-copy" style="margin:10px auto 0;">Further celebrations are expected throughout the day.</p>
-
-          <div class="news-final-heart">♡</div>
+              <p>
+                Further celebrations are expected throughout the day.
+              </p>
+            </div>
+          </div>
         </div>
       `
     }
@@ -322,16 +459,18 @@
     tvTimers = [];
   }
 
-  function renderNewsSlide() {
-    const slide = newsSlides[currentNewsSlide];
-
-    newsScreen.scrollTop = 0;
-    newsScreen.innerHTML = slide.html;
-    newsTickerText.textContent = slide.ticker;
-
+  function restartTicker() {
     newsTickerText.style.animation = "none";
     void newsTickerText.offsetWidth;
     newsTickerText.style.animation = "";
+  }
+
+  function renderNewsSlide() {
+    const slide = slides[currentNewsSlide];
+
+    newsScreen.innerHTML = slide.html;
+    newsTickerText.textContent = slide.ticker;
+    restartTicker();
 
     if (slide.video) {
       const stage = document.getElementById("newsVideoStage");
@@ -341,15 +480,11 @@
         stage.appendChild(videoFallback);
       }
 
-      newsNextButton.textContent = "CONTINUE REPORT";
+      newsNextButton.textContent = "CONTINUE ›";
     } else if (slide.final) {
       newsNextButton.textContent = "RETURN TO ROOM";
     } else {
-      newsNextButton.textContent = "NEXT STORY";
-    }
-
-    if (typeof window.playTone === "function") {
-      window.playTone(360, 0.05, 0.008, "sine");
+      newsNextButton.textContent = "CONTINUE ›";
     }
   }
 
@@ -367,35 +502,42 @@
     const staticTimer = setTimeout(() => {
       tvPower.classList.add("hidden-phase");
       tvStatic.classList.add("active");
-    }, 700);
+    }, 650);
 
     const broadcastTimer = setTimeout(() => {
       tvStatic.classList.add("hidden-phase");
       tvBroadcast.classList.add("active");
 
-      setTimeout(() => {
+      const revealTimer = setTimeout(() => {
         renderNewsSlide();
-      }, 220);
-    }, 1550);
+      }, 180);
+
+      tvTimers.push(revealTimer);
+    }, 1400);
 
     tvTimers.push(staticTimer, broadcastTimer);
   }
 
+  function closeBirthdayNews() {
+    clearTVTimers();
+
+    if (birthdayVideo && !birthdayVideo.paused) {
+      birthdayVideo.pause();
+    }
+
+    tvModal.classList.remove("open");
+    tvModal.setAttribute("aria-hidden", "true");
+
+    if (typeof clearRoomFocus === "function") {
+      clearRoomFocus();
+    }
+  }
+
   newsNextButton.addEventListener("click", () => {
-    const slide = newsSlides[currentNewsSlide];
+    const slide = slides[currentNewsSlide];
 
     if (slide.final) {
-      tvModal.classList.remove("open");
-      tvModal.setAttribute("aria-hidden", "true");
-
-      if (!birthdayVideo.paused) {
-        birthdayVideo.pause();
-      }
-
-      if (typeof window.clearRoomFocus === "function") {
-        window.clearRoomFocus();
-      }
-
+      closeBirthdayNews();
       return;
     }
 
@@ -403,17 +545,13 @@
     renderNewsSlide();
   });
 
-  const originalRunTVSequence = window.runTVSequence;
-
-  window.runTVSequence = function () {
-    startBirthdayNews();
-  };
+  window.runTVSequence = startBirthdayNews;
 
   document.querySelectorAll("#tvModal [data-close]").forEach((button) => {
     button.addEventListener("click", () => {
       clearTVTimers();
 
-      if (!birthdayVideo.paused) {
+      if (birthdayVideo && !birthdayVideo.paused) {
         birthdayVideo.pause();
       }
     });
@@ -421,7 +559,7 @@
 
   if (birthdayVideo) {
     birthdayVideo.addEventListener("ended", () => {
-      newsNextButton.textContent = "CONTINUE REPORT";
+      newsNextButton.textContent = "CONTINUE ›";
     });
   }
 })();
