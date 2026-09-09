@@ -4202,3 +4202,87 @@ button,
   }
 
 }
+
+/* ================================= */
+/* FINAL ROOM FRAMING FIX */
+/* ================================= */
+
+/*
+  Keep the room full-screen,
+  but anchor the photograph to the bottom
+  so the bottom of the source image
+  cannot be cropped away.
+*/
+
+#roomImage {
+  object-fit: cover !important;
+  object-position: center bottom !important;
+
+  transform-origin:
+    center bottom !important;
+}
+
+
+/*
+  Replace the old excessive room zoom.
+
+  Starts with a very small cinematic push-in,
+  then settles at the true cover size.
+*/
+
+@keyframes roomWake {
+
+  0% {
+    transform:
+      scale(1.02);
+
+    filter:
+      brightness(0.66)
+      saturate(0.85);
+  }
+
+  100% {
+    transform:
+      scale(1);
+
+    filter:
+      brightness(1)
+      saturate(1);
+  }
+
+}
+
+
+/*
+  Give the website instruction slightly more
+  breathing room above Safari's bottom edge.
+*/
+
+#roomInstructions {
+  bottom:
+    max(
+      34px,
+      calc(
+        env(safe-area-inset-bottom)
+        + 18px
+      )
+    ) !important;
+}
+
+
+/*
+  Keep help + sound aligned with the
+  safe visible area too.
+*/
+
+#helpButton,
+#soundButton {
+  bottom:
+    max(
+      26px,
+      calc(
+        env(safe-area-inset-bottom)
+        + 12px
+      )
+    ) !important;
+}
