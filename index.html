@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
 
@@ -8,30 +9,59 @@
     content="width=device-width, initial-scale=1.0, viewport-fit=cover"
   >
 
-  <meta name="theme-color" content="#090909">
+  <meta name="theme-color" content="#080808">
 
   <title>Faris' Room</title>
 
-  <link rel="stylesheet" href="style.css?v=34">
+  <link
+    rel="stylesheet"
+    href="style.css?v=40"
+  >
 </head>
+
 
 <body>
 
-  <!-- LOADING SCREEN -->
+
+  <!-- ============================= -->
+  <!-- LOADING -->
+  <!-- ============================= -->
+
   <div id="loadingScreen">
+
     <div class="loading-content">
-      <p class="loading-small">loading...</p>
-      <h1>Faris' Room</h1>
+
+      <p class="loading-small">
+        INITIALISING ROOM
+      </p>
+
+      <h1>
+        Faris' Room
+      </h1>
 
       <div class="loading-bar">
         <div class="loading-progress"></div>
       </div>
+
+      <p class="loading-status">
+        preparing birthday nonsense...
+      </p>
+
     </div>
+
   </div>
 
 
-  <!-- INTRO SCREEN -->
-  <div id="introScreen" class="hidden">
+
+  <!-- ============================= -->
+  <!-- INTRO -->
+  <!-- ============================= -->
+
+  <div
+    id="introScreen"
+    class="hidden"
+  >
+
     <div class="intro-content">
 
       <p class="eyebrow">
@@ -47,15 +77,24 @@
         i left a few things in here for you.
       </p>
 
+      <p class="intro-small">
+        headphones recommended.
+      </p>
+
       <button id="enterButton">
-        enter
+        enter room
       </button>
 
     </div>
+
   </div>
 
 
+
+  <!-- ============================= -->
   <!-- ROOM -->
+  <!-- ============================= -->
+
   <main id="room">
 
     <div id="roomCanvas">
@@ -68,7 +107,39 @@
       >
 
 
+      <!-- ROOM ATMOSPHERE -->
+
+      <div
+        class="ambient-glow monitor-ambient"
+        aria-hidden="true"
+      ></div>
+
+      <div
+        class="ambient-glow tv-ambient"
+        aria-hidden="true"
+      ></div>
+
+      <div
+        class="ambient-glow laptop-ambient"
+        aria-hidden="true"
+      ></div>
+
+
+      <!-- FINAL REVEAL LIGHTS -->
+
+      <div
+        class="final-device-light final-monitor-light"
+        aria-hidden="true"
+      ></div>
+
+      <div
+        class="final-device-light final-tv-light"
+        aria-hidden="true"
+      ></div>
+
+
       <!-- MONITOR -->
+
       <button
         class="hotspot"
         id="monitorHotspot"
@@ -80,6 +151,7 @@
 
 
       <!-- TV -->
+
       <button
         class="hotspot"
         id="tvHotspot"
@@ -91,6 +163,7 @@
 
 
       <!-- PANDA -->
+
       <button
         class="hotspot"
         id="pandaHotspot"
@@ -102,6 +175,7 @@
 
 
       <!-- LAPTOP -->
+
       <button
         class="hotspot"
         id="laptopHotspot"
@@ -112,12 +186,13 @@
       </button>
 
 
-      <!-- NOTE -->
+      <!-- STICKY NOTE -->
+
       <button
         class="hotspot"
         id="noteHotspot"
         data-item="note"
-        aria-label="Note"
+        aria-label="Sticky note"
       >
         <span class="hotspot-dot"></span>
       </button>
@@ -125,28 +200,23 @@
     </div>
 
 
+
+    <!-- ============================= -->
+    <!-- ROOM UI -->
+    <!-- ============================= -->
+
     <header id="roomHeader">
 
-      <div>
-        <h2>Faris' Room</h2>
+      <h2>
+        Faris' Room
+      </h2>
 
-        <p>
-          18 Sep 2026
-        </p>
-      </div>
+      <p>
+        18 SEP 2026
+      </p>
 
     </header>
 
-
-    <div id="roomInstructions">
-      <span class="mouse-icon">✦</span>
-      <span>look around... i left you some things</span>
-    </div>
-
-
-    <button id="helpButton">
-      ? help
-    </button>
 
 
     <div id="progress">
@@ -156,19 +226,68 @@
       </span>
 
       <div class="progress-dots">
+
         <span></span>
         <span></span>
         <span></span>
         <span></span>
         <span></span>
+
       </div>
+
+    </div>
+
+
+
+    <button id="helpButton">
+      ? help
+    </button>
+
+
+
+    <button
+      id="soundButton"
+      aria-label="Toggle sound"
+    >
+      ◉ sound on
+    </button>
+
+
+
+    <div id="roomInstructions">
+
+      <span class="instruction-star">
+        ✦
+      </span>
+
+      <span>
+        look around... i left you some things
+      </span>
 
     </div>
 
   </main>
 
 
+
+  <!-- ============================= -->
+  <!-- FOCUS TRANSITION -->
+  <!-- ============================= -->
+
+  <div
+    id="focusTransition"
+    aria-hidden="true"
+  >
+
+    <div class="focus-reticle"></div>
+
+  </div>
+
+
+
+  <!-- ============================= -->
   <!-- COMPUTER -->
+  <!-- ============================= -->
 
   <section
     class="modal"
@@ -176,98 +295,168 @@
     aria-hidden="true"
   >
 
-    <div class="modal-background" data-close></div>
+    <div
+      class="modal-background"
+      data-close
+    ></div>
+
 
     <div class="computer">
 
-      <div class="window-bar">
+      <div
+        id="computerBoot"
+        class="computer-boot"
+      >
 
-        <span>
+        <div class="boot-logo">
+          ◈
+        </div>
+
+        <p>
           FARIS-PC
-        </span>
+        </p>
 
-        <button data-close>
-          ×
-        </button>
+        <div class="boot-line">
+          <span></span>
+        </div>
+
+        <small>
+          loading 30 years of questionable decisions...
+        </small>
 
       </div>
 
 
-      <div class="desktop">
 
-        <div class="desktop-greeting">
+      <div
+        id="computerDesktop"
+        class="computer-interface"
+      >
 
-          <p id="computerTime">
-            00:00
-          </p>
+        <div class="window-bar">
 
-          <h2>
-            Good evening, Faris.
-          </h2>
-
-          <p>
-            Keep going. ★
-          </p>
-
-        </div>
-
-
-        <div class="desktop-icons">
-
-          <button
-            class="desktop-icon"
-            data-app="birthday"
-          >
-            <span>🎂</span>
-            <p>Birthday</p>
-          </button>
-
-
-          <button
-            class="desktop-icon"
-            data-app="photos"
-          >
-            <span>📁</span>
-            <p>Photos</p>
-          </button>
-
-
-          <button
-            class="desktop-icon"
-            data-app="message"
-          >
-            <span>💌</span>
-            <p>Message</p>
-          </button>
-
-
-          <button
-            class="desktop-icon"
-            data-app="classified"
-          >
-            <span>🔒</span>
-            <p>CLASSIFIED</p>
-          </button>
-
-        </div>
-
-
-        <div class="sticky-note">
-          30 already sia sayang...<br>
-          anyway, i left you something.
-        </div>
-
-
-        <div class="taskbar">
-
-          <button class="start-button">
-            ◈
-          </button>
-
-          <span id="taskbarTime">
-            00:00
+          <span>
+            FARIS-PC
           </span>
 
+          <button data-close>
+            ×
+          </button>
+
+        </div>
+
+
+
+        <div class="desktop">
+
+          <div class="desktop-greeting">
+
+            <p id="computerTime">
+              00:00
+            </p>
+
+            <h2>
+              Good evening, Faris.
+            </h2>
+
+            <p>
+              Keep going. ★
+            </p>
+
+          </div>
+
+
+
+          <div class="desktop-icons">
+
+            <button
+              class="desktop-icon"
+              data-app="birthday"
+            >
+              <span class="desktop-symbol">
+                30
+              </span>
+
+              <p>
+                birthday.txt
+              </p>
+            </button>
+
+
+            <button
+              class="desktop-icon"
+              data-app="photos"
+            >
+              <span class="desktop-symbol">
+                ▣
+              </span>
+
+              <p>
+                photos
+              </p>
+            </button>
+
+
+            <button
+              class="desktop-icon"
+              data-app="message"
+            >
+              <span class="desktop-symbol">
+                ♡
+              </span>
+
+              <p>
+                message.txt
+              </p>
+            </button>
+
+
+            <button
+              class="desktop-icon"
+              data-app="classified"
+            >
+              <span class="desktop-symbol">
+                🔒
+              </span>
+
+              <p>
+                CLASSIFIED
+              </p>
+            </button>
+
+          </div>
+
+
+
+          <div class="sticky-note">
+
+            30 already sia sayang...
+
+            <br><br>
+
+            anyway,
+            i left you something.
+
+            <span>
+              :)
+            </span>
+
+          </div>
+
+
+
+          <div class="taskbar">
+
+            <span>
+              ◈
+            </span>
+
+            <span id="taskbarTime">
+              00:00
+            </span>
+
+          </div>
+
         </div>
 
       </div>
@@ -277,186 +466,14 @@
   </section>
 
 
-  <!-- TV -->
+
+  <!-- ============================= -->
+  <!-- COMPUTER APP -->
+  <!-- ============================= -->
 
   <section
-    class="modal"
-    id="tvModal"
-    aria-hidden="true"
-  >
-
-    <div class="modal-background" data-close></div>
-
-    <div class="content-card">
-
-      <button class="card-close" data-close>
-        ×
-      </button>
-
-      <p class="card-number">
-        02
-      </p>
-
-      <h2>
-        NOW SHOWING
-      </h2>
-
-      <p>
-        faris turns 30
-      </p>
-
-      <div class="coming-soon">
-        birthday video goes here.
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- PANDA -->
-
-  <section
-    class="modal"
-    id="pandaModal"
-    aria-hidden="true"
-  >
-
-    <div class="modal-background" data-close></div>
-
-    <div class="content-card panda-card">
-
-      <button class="card-close" data-close>
-        ×
-      </button>
-
-      <p class="card-number">
-        03
-      </p>
-
-      <h2>
-        IMPORTANT MESSAGE
-      </h2>
-
-      <div class="panda-face">
-        ʕ•ᴥ•ʔ
-      </div>
-
-      <p>
-        hello baboy.
-      </p>
-
-      <p>
-        apparently you're 30 now.
-      </p>
-
-      <p class="tiny">
-        ancient.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- LAPTOP -->
-
-  <section
-    class="modal"
-    id="laptopModal"
-    aria-hidden="true"
-  >
-
-    <div class="modal-background" data-close></div>
-
-    <div class="content-card chat-card">
-
-      <button class="card-close" data-close>
-        ×
-      </button>
-
-      <p class="card-number">
-        04
-      </p>
-
-      <h2>
-        SEARCH HISTORY
-      </h2>
-
-
-      <div class="fake-search">
-        how is faris already 30
-      </div>
-
-      <div class="fake-search">
-        is 30 considered elderly
-      </div>
-
-      <div class="fake-search">
-        birthday presents for annoying boyfriend
-      </div>
-
-      <div class="fake-search">
-        how to annoy faris from 10,000km away
-      </div>
-
-      <div class="fake-search">
-        can i return boyfriend after 30 days
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- NOTE -->
-
-  <section
-    class="modal"
-    id="noteModal"
-    aria-hidden="true"
-  >
-
-    <div class="modal-background" data-close></div>
-
-    <div class="paper-note">
-
-      <button class="paper-close" data-close>
-        ×
-      </button>
-
-      <p>
-        sayang,
-      </p>
-
-      <p>
-        if youre reading this then you actually listened
-        and clicked around instead of immediately asking
-        me where everything is.
-      </p>
-
-      <p>
-        impressive.
-      </p>
-
-      <p>
-        keep looking.
-      </p>
-
-      <p class="note-signature">
-        ♡
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- DESKTOP APP WINDOW -->
-
-  <section
-    class="app-window"
     id="appWindow"
+    class="app-window"
   >
 
     <div class="app-titlebar">
@@ -476,39 +493,516 @@
   </section>
 
 
-  <!-- FINAL UNLOCK -->
+
+  <!-- ============================= -->
+  <!-- TV -->
+  <!-- ============================= -->
 
   <section
     class="modal"
+    id="tvModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-background"
+      data-close
+    ></div>
+
+
+    <div class="tv-shell">
+
+      <button
+        class="tv-close"
+        data-close
+      >
+        ×
+      </button>
+
+
+      <div
+        id="tvPower"
+        class="tv-power"
+      >
+
+        <div class="tv-power-dot"></div>
+
+        <p>
+          powering on...
+        </p>
+
+      </div>
+
+
+
+      <div
+        id="tvStatic"
+        class="tv-static"
+      >
+
+        <div class="static-noise"></div>
+
+        <p>
+          SEARCHING FOR SIGNAL
+        </p>
+
+      </div>
+
+
+
+      <div
+        id="tvBroadcast"
+        class="tv-broadcast"
+      >
+
+        <p class="tv-channel">
+          BIRTHDAY BROADCAST / CH 30
+        </p>
+
+        <h2>
+          FARIS TURNS 30
+        </h2>
+
+        <p>
+          extremely rare footage recovered.
+        </p>
+
+
+        <div
+          id="videoFallback"
+          class="video-fallback"
+        >
+
+          <span>
+            ▶
+          </span>
+
+          <p>
+            birthday video will play here
+          </p>
+
+          <small>
+            upload it later as
+            assets/birthday-video.mp4
+          </small>
+
+        </div>
+
+
+        <video
+          id="birthdayVideo"
+          controls
+          playsinline
+          preload="metadata"
+        >
+          <source
+            src="assets/birthday-video.mp4"
+            type="video/mp4"
+          >
+        </video>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ============================= -->
+  <!-- LAPTOP / AI -->
+  <!-- ============================= -->
+
+  <section
+    class="modal"
+    id="laptopModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-background"
+      data-close
+    ></div>
+
+
+    <div class="ai-window">
+
+      <div class="ai-topbar">
+
+        <div>
+
+          <span class="ai-dot"></span>
+
+          <span>
+            definitely-not-chatgpt
+          </span>
+
+        </div>
+
+        <button data-close>
+          ×
+        </button>
+
+      </div>
+
+
+
+      <div
+        id="aiConversation"
+        class="ai-conversation"
+      >
+
+        <div class="ai-message user-message">
+          how old is faris today?
+        </div>
+
+        <div
+          class="ai-message assistant-message reveal-message"
+          data-delay="600"
+        >
+          30.
+        </div>
+
+        <div
+          class="ai-message user-message reveal-message"
+          data-delay="1200"
+        >
+          are you sure?
+        </div>
+
+        <div
+          class="ai-message assistant-message reveal-message"
+          data-delay="1850"
+        >
+          unfortunately, yes.
+        </div>
+
+        <div
+          class="ai-message user-message reveal-message"
+          data-delay="2500"
+        >
+          is that considered elderly
+        </div>
+
+        <div
+          class="ai-message assistant-message reveal-message"
+          data-delay="3200"
+        >
+          medically? no.
+          <br><br>
+          according to his girlfriend?
+          ancient.
+        </div>
+
+        <div
+          class="ai-message user-message reveal-message"
+          data-delay="4100"
+        >
+          what should i do about it
+        </div>
+
+        <div
+          class="ai-message assistant-message reveal-message special-ai"
+          data-delay="4850"
+        >
+          keep him.
+          <br><br>
+          apparently youre quite fond of this one.
+        </div>
+
+      </div>
+
+
+
+      <div class="ai-input">
+
+        <span>
+          Ask anything
+        </span>
+
+        <span class="typing-cursor">
+          |
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ============================= -->
+  <!-- PANDA -->
+  <!-- ============================= -->
+
+  <section
+    class="modal"
+    id="pandaModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-background"
+      data-close
+    ></div>
+
+
+    <div class="panda-delivery">
+
+      <button
+        class="card-close"
+        data-close
+      >
+        ×
+      </button>
+
+
+      <p class="eyebrow">
+        SPECIAL DELIVERY
+      </p>
+
+
+      <div class="panda-character">
+
+        <div class="panda-ears">
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="panda-head">
+
+          <div class="panda-eye left"></div>
+          <div class="panda-eye right"></div>
+
+          <div class="panda-nose"></div>
+
+        </div>
+
+        <div class="panda-body">
+          ♡
+        </div>
+
+      </div>
+
+
+
+      <p class="panda-intro">
+        excuse me baboy.
+      </p>
+
+      <p>
+        somebody left this for you.
+      </p>
+
+
+
+      <button id="openPandaDelivery">
+        open delivery
+      </button>
+
+
+
+      <div
+        id="pandaMessage"
+        class="panda-message hidden"
+      >
+
+        <p>
+          happy birthday from your tiny emotional support panda.
+        </p>
+
+        <p>
+          apparently youre 30 now.
+        </p>
+
+        <p class="panda-small">
+          devastating news.
+        </p>
+
+
+        <div class="audio-package">
+
+          <p>
+            ♫ message from sayang
+          </p>
+
+          <button id="playPandaAudio">
+            play message
+          </button>
+
+          <audio
+            id="pandaAudio"
+            preload="metadata"
+          >
+            <source
+              src="assets/panda-message.m4a"
+              type="audio/mp4"
+            >
+          </audio>
+
+          <small id="pandaAudioStatus">
+            you can add your recording later as
+            assets/panda-message.m4a
+          </small>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ============================= -->
+  <!-- NOTE -->
+  <!-- ============================= -->
+
+  <section
+    class="modal note-modal"
+    id="noteModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-background"
+      data-close
+    ></div>
+
+
+    <div class="paper-note">
+
+      <button
+        class="paper-close"
+        data-close
+      >
+        ×
+      </button>
+
+
+      <span class="tape"></span>
+
+
+      <p class="note-opening">
+        sayang,
+      </p>
+
+      <p>
+        youre nosy huh...
+      </p>
+
+      <p>
+        good.
+      </p>
+
+      <p>
+        keep going.
+      </p>
+
+      <p>
+        dont make me tell you where everything is.
+      </p>
+
+      <p class="note-signature">
+        ♡
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ============================= -->
+  <!-- HELP -->
+  <!-- ============================= -->
+
+  <section
+    class="modal"
+    id="helpModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-background"
+      data-close
+    ></div>
+
+
+    <div class="content-card">
+
+      <button
+        class="card-close"
+        data-close
+      >
+        ×
+      </button>
+
+      <p class="eyebrow">
+        HOW TO PLAY
+      </p>
+
+      <h2>
+        look around.
+      </h2>
+
+      <p>
+        there are five things hidden around the room.
+      </p>
+
+      <p>
+        hover or tap around objects that look suspicious.
+      </p>
+
+      <p>
+        find all five.
+      </p>
+
+      <p class="help-small">
+        yes, youre supposed to be nosy.
+      </p>
+
+    </div>
+
+  </section>
+
+
+
+  <!-- ============================= -->
+  <!-- FINAL 5/5 REVEAL -->
+  <!-- ============================= -->
+
+  <section
+    class="modal final-modal"
     id="finalModal"
     aria-hidden="true"
   >
 
-    <div class="modal-background"></div>
+    <div class="final-darkness"></div>
 
-    <div class="final-card">
 
-      <p class="eyebrow">
-        ALL FILES FOUND
+    <div class="final-sequence">
+
+      <p
+        id="finalCounter"
+        class="final-counter"
+      >
+        5 / 5 FOUND
       </p>
 
-      <h2>
-        okay... you found everything.
+
+      <h2 id="finalHeading">
+        you actually found everything...
       </h2>
 
-      <p>
-        theres one more thing.
-      </p>
+
+      <p id="finalSubtext"></p>
+
 
       <button id="openFinalButton">
         open it
-      </button>
-
-      <button
-        id="finalLaterButton"
-        class="text-button"
-      >
-        not yet
       </button>
 
     </div>
@@ -516,7 +1010,10 @@
   </section>
 
 
-  <!-- FINAL MESSAGE -->
+
+  <!-- ============================= -->
+  <!-- FINAL BIRTHDAY MESSAGE -->
+  <!-- ============================= -->
 
   <section
     id="birthdayMessage"
@@ -527,20 +1024,34 @@
       ×
     </button>
 
+
     <div class="birthday-letter">
 
       <p class="eyebrow">
         FOR FARIS
       </p>
 
+
+      <p class="letter-date">
+        18 September 2026
+      </p>
+
+
       <h1>
         Happy 30th Birthday,<br>
         sayang.
       </h1>
 
+
+      <div class="letter-divider">
+        ♡
+      </div>
+
+
       <p>
         i wanted to make you something that was yours.
       </p>
+
 
       <p>
         not just a present you open once and put somewhere,
@@ -549,14 +1060,22 @@
         smile a little.
       </p>
 
-      <p>
-        this part isnt finished yet because this is where
-        your actual birthday message is going to go.
-      </p>
 
       <p>
-        but yes... youre officially 30 now bb.
+        this part is where your actual birthday message
+        will go when we finish writing it.
       </p>
+
+
+      <p>
+        but yes...
+      </p>
+
+
+      <p class="letter-big-line">
+        youre officially 30 now bb.
+      </p>
+
 
       <p class="letter-signature">
         i love you.<br>
@@ -568,44 +1087,9 @@
   </section>
 
 
-  <!-- HELP WINDOW -->
 
-  <section
-    class="modal"
-    id="helpModal"
-    aria-hidden="true"
-  >
-
-    <div class="modal-background" data-close></div>
-
-    <div class="content-card">
-
-      <button class="card-close" data-close>
-        ×
-      </button>
-
-      <h2>
-        HOW TO PLAY
-      </h2>
-
-      <p>
-        there are 5 things hidden around the room.
-      </p>
-
-      <p>
-        tap the little glowing points to explore.
-      </p>
-
-      <p>
-        find all 5 and something else will unlock.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <script src="script.js?v=34"></script>
+  <script src="script.js?v=40"></script>
 
 </body>
+
 </html>
