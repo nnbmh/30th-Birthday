@@ -5,20 +5,11 @@
 :root {
   --black: #070707;
   --white: #f7f4ed;
-
-  --soft-white:
-    rgba(255, 255, 255, 0.72);
-
-  --border:
-    rgba(255, 255, 255, 0.16);
-
-  --glass:
-    rgba(10, 10, 10, 0.78);
-
-  --yellow:
-    #efd169;
+  --soft-white: rgba(255, 255, 255, 0.72);
+  --border: rgba(255, 255, 255, 0.16);
+  --glass: rgba(10, 10, 10, 0.78);
+  --yellow: #efd169;
 }
-
 
 /* ============================= */
 /* BASE */
@@ -27,20 +18,13 @@
 html,
 body {
   margin: 0;
-
   width: 100%;
-  height: 100%;
-
+  height: 100dvh;
+  min-height: 100dvh;
   overflow: hidden;
-
   background: var(--black);
   color: var(--white);
-
-  font-family:
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 
 button {
@@ -49,8 +33,7 @@ button {
 
 button,
 .hotspot {
-  -webkit-tap-highlight-color:
-    transparent;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .hidden {
@@ -59,20 +42,12 @@ button,
 
 .eyebrow {
   margin: 0 0 13px;
-
-  font-family:
-    "Courier New",
-    monospace;
-
+  font-family: "Courier New", monospace;
   font-size: 10px;
-
   letter-spacing: 0.24em;
-
   text-transform: uppercase;
-
   opacity: 0.55;
 }
-
 
 /* ============================= */
 /* LOADING */
@@ -80,114 +55,55 @@ button,
 
 #loadingScreen {
   position: fixed;
-
   inset: 0;
-
   z-index: 2000;
-
   display: flex;
-
-  justify-content: center;
   align-items: center;
-
-  background:
-    radial-gradient(
-      circle at center,
-      #121212,
-      #060606 70%
-    );
+  justify-content: center;
+  background: radial-gradient(circle at center, #121212, #060606 70%);
 }
 
 .loading-content {
-  width:
-    min(82vw, 500px);
+  width: min(82vw, 500px);
 }
 
 .loading-small {
-  margin:
-    0 0 10px;
-
-  font-family:
-    monospace;
-
+  margin: 0 0 10px;
+  font-family: monospace;
   font-size: 10px;
-
   letter-spacing: 0.2em;
-
   opacity: 0.45;
 }
 
 .loading-content h1 {
-  margin:
-    0 0 30px;
-
-  font-size:
-    clamp(
-      34px,
-      7vw,
-      64px
-    );
-
+  margin: 0 0 30px;
+  font-size: clamp(34px, 7vw, 64px);
   font-weight: 300;
-
-  letter-spacing:
-    -0.045em;
+  letter-spacing: -0.045em;
 }
 
 .loading-bar {
-  height: 2px;
-
   width: 100%;
-
+  height: 2px;
   overflow: hidden;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.12
-    );
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .loading-progress {
-  height: 100%;
-
   width: 0;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.92
-    );
-
-  animation:
-    loadingProgress
-    1.8s
-    cubic-bezier(
-      0.2,
-      0.7,
-      0.2,
-      1
-    )
-    forwards;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.92);
+  animation: loadingProgress 1.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
 }
 
 .loading-status {
   margin-top: 13px;
-
-  font-family:
-    monospace;
-
+  font-family: monospace;
   font-size: 9px;
-
   opacity: 0.3;
 }
 
 @keyframes loadingProgress {
-
   0% {
     width: 0;
   }
@@ -199,9 +115,7 @@ button,
   100% {
     width: 100%;
   }
-
 }
-
 
 /* ============================= */
 /* INTRO */
@@ -209,122 +123,62 @@ button,
 
 #introScreen {
   position: fixed;
-
   inset: 0;
-
   z-index: 1500;
-
   display: flex;
-
-  justify-content: center;
   align-items: center;
-
-  background:
-    radial-gradient(
-      circle at 50% 40%,
-      #151515,
-      #070707 65%
-    );
+  justify-content: center;
+  background: radial-gradient(circle at 50% 40%, #151515, #070707 65%);
 }
 
 .intro-content {
-  width:
-    min(86vw, 620px);
-
+  width: min(86vw, 620px);
   opacity: 0;
-
-  transform:
-    translateY(16px);
-
-  animation:
-    introReveal
-    0.9s
-    ease
-    forwards;
+  transform: translateY(16px);
+  animation: introReveal 0.9s ease forwards;
 }
 
 @keyframes introReveal {
-
   to {
     opacity: 1;
-
-    transform:
-      translateY(0);
+    transform: translateY(0);
   }
-
 }
 
 .intro-content h1 {
   margin: 0;
-
-  font-size:
-    clamp(
-      54px,
-      11vw,
-      110px
-    );
-
+  font-size: clamp(54px, 11vw, 110px);
   font-weight: 250;
-
   line-height: 0.9;
-
-  letter-spacing:
-    -0.065em;
+  letter-spacing: -0.065em;
 }
 
 .intro-text {
-  margin:
-    34px 0 6px;
-
+  margin: 34px 0 6px;
   font-size: 14px;
-
   opacity: 0.7;
 }
 
 .intro-small {
-  margin:
-    0 0 28px;
-
-  font-family:
-    monospace;
-
+  margin: 0 0 28px;
+  font-family: monospace;
   font-size: 9px;
-
   opacity: 0.34;
 }
 
 #enterButton {
-  padding:
-    13px 26px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.32
-    );
-
-  background:
-    transparent;
-
+  padding: 13px 26px;
+  border: 1px solid rgba(255, 255, 255, 0.32);
+  background: transparent;
   color: white;
-
   cursor: pointer;
-
-  transition:
-    0.3s ease;
+  transition: 0.3s ease;
 }
 
 #enterButton:hover {
-  background:
-    white;
-
-  color:
-    black;
+  background: white;
+  color: black;
 }
-
 
 /* ============================= */
 /* ROOM */
@@ -332,20 +186,14 @@ button,
 
 #room {
   position: fixed;
-
-  inset: 0;
-
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
   overflow: hidden;
-
   opacity: 0;
-
-  background:
-    black;
-
-  transition:
-    opacity
-    1.2s
-    ease;
+  background: black;
+  transition: opacity 1.2s ease;
 }
 
 #room.visible {
@@ -354,12 +202,11 @@ button,
 
 #roomCanvas {
   position: absolute;
-
   inset: 0;
-
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
-
 
 /* ============================= */
 /* ROOM IMAGE */
@@ -367,77 +214,43 @@ button,
 
 #roomImage {
   position: absolute;
-
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   object-fit: cover;
-  object-position: center;
-
+  object-position: center center;
   user-select: none;
-
   -webkit-user-drag: none;
-
   pointer-events: none;
-
-  transform:
-    scale(1.065);
-
-  filter:
-    brightness(0.78)
-    saturate(0.92);
-
-  transition:
-    transform
-    1.6s
-    cubic-bezier(
-      0.2,
-      0.8,
-      0.2,
-      1
-    ),
-    filter
-    1.5s
-    ease;
+  transform-origin: center center;
+  filter: brightness(0.78) saturate(0.92);
 }
 
 #room.visible #roomImage {
-  animation:
-    roomWake
-    3.2s
-    cubic-bezier(
-      0.16,
-      1,
-      0.3,
-      1
-    )
-    forwards;
+  animation: roomWake 3.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes roomWake {
-
   0% {
-    transform:
-      scale(1.07);
-
-    filter:
-      brightness(0.66)
-      saturate(0.85);
+    transform: scale(1.015);
+    filter: brightness(0.66) saturate(0.85);
   }
 
   100% {
-    transform:
-      scale(1.015);
-
-    filter:
-      brightness(1)
-      saturate(1);
+    transform: scale(1);
+    filter: brightness(1) saturate(1);
   }
-
 }
 
+/* ============================= */
+/* IPAD LANDSCAPE FRAMING */
+/* ============================= */
+
+@media (min-width: 900px) and (max-width: 1400px) and (orientation: landscape) {
+  #roomImage {
+    object-position: center 38%;
+  }
+}
 
 /* ============================= */
 /* CINEMATIC VIGNETTE */
@@ -445,139 +258,59 @@ button,
 
 #roomCanvas::after {
   content: "";
-
   position: absolute;
-
   inset: 0;
-
   z-index: 10;
-
   pointer-events: none;
-
-  background:
-    radial-gradient(
-      ellipse at center,
-      transparent 42%,
-      rgba(
-        0,
-        0,
-        0,
-        0.08
-      ) 65%,
-      rgba(
-        0,
-        0,
-        0,
-        0.42
-      ) 100%
-    );
+  background: radial-gradient(
+    ellipse at center,
+    transparent 42%,
+    rgba(0, 0, 0, 0.08) 65%,
+    rgba(0, 0, 0, 0.42) 100%
+  );
 }
 
-
 /* ============================= */
-/* AMBIENT ROOM LIGHTS */
+/* AMBIENT LIGHT */
 /* ============================= */
 
 .ambient-glow {
   position: absolute;
-
   z-index: 12;
-
   pointer-events: none;
-
   border-radius: 50%;
-
-  filter:
-    blur(20px);
-
-  mix-blend-mode:
-    screen;
+  filter: blur(20px);
+  mix-blend-mode: screen;
 }
 
 .monitor-ambient {
   left: 24%;
-
-  top: 43%;
-
-  width: 24%;
+  top: 39%;
+  width: 25%;
   height: 23%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(
-        105,
-        181,
-        255,
-        0.2
-      ),
-      transparent 70%
-    );
-
-  animation:
-    monitorBreathe
-    5.2s
-    ease-in-out
-    infinite;
+  background: radial-gradient(ellipse, rgba(105, 181, 255, 0.2), transparent 70%);
+  animation: monitorBreathe 5.2s ease-in-out infinite;
 }
 
 .laptop-ambient {
   left: 51%;
-
-  top: 50%;
-
-  width: 22%;
-  height: 19%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(
-        130,
-        186,
-        255,
-        0.13
-      ),
-      transparent 70%
-    );
-
-  animation:
-    monitorBreathe
-    6.2s
-    ease-in-out
-    infinite
-    reverse;
+  top: 43%;
+  width: 23%;
+  height: 22%;
+  background: radial-gradient(ellipse, rgba(130, 186, 255, 0.13), transparent 70%);
+  animation: monitorBreathe 6.2s ease-in-out infinite reverse;
 }
 
 .tv-ambient {
   left: 50%;
-
-  top: 19%;
-
+  top: 3%;
   width: 20%;
-  height: 17%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(
-        136,
-        188,
-        255,
-        0.11
-      ),
-      transparent 72%
-    );
-
-  animation:
-    tvRoomFlicker
-    7s
-    linear
-    infinite;
+  height: 18%;
+  background: radial-gradient(ellipse, rgba(136, 188, 255, 0.11), transparent 72%);
+  animation: tvRoomFlicker 7s linear infinite;
 }
 
 @keyframes monitorBreathe {
-
   0%,
   100% {
     opacity: 0.35;
@@ -586,11 +319,9 @@ button,
   50% {
     opacity: 0.85;
   }
-
 }
 
 @keyframes tvRoomFlicker {
-
   0%,
   31%,
   34%,
@@ -611,89 +342,41 @@ button,
   74% {
     opacity: 0.45;
   }
-
 }
 
-
 /* ============================= */
-/* ROOM HUD */
+/* ROOM HEADER */
 /* ============================= */
 
 #roomHeader {
   position: absolute;
-
-  left:
-    max(
-      22px,
-      env(
-        safe-area-inset-left
-      )
-    );
-
-  top:
-    max(
-      20px,
-      env(
-        safe-area-inset-top
-      )
-    );
-
+  left: max(22px, env(safe-area-inset-left));
+  top: max(20px, env(safe-area-inset-top));
   z-index: 30;
-
   pointer-events: none;
-
   opacity: 0;
-
-  transform:
-    translateY(-8px);
-
-  text-shadow:
-    0 2px 16px
-    rgba(
-      0,
-      0,
-      0,
-      0.9
-    );
-
-  transition:
-    opacity
-    1s
-    ease
-    1.25s,
-    transform
-    1s
-    ease
-    1.25s;
+  transform: translateY(-8px);
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9);
+  transition: opacity 1s ease 1.25s, transform 1s ease 1.25s;
 }
 
 #room.visible #roomHeader {
   opacity: 1;
-
-  transform:
-    none;
+  transform: none;
 }
 
 #roomHeader h2 {
   margin: 0;
-
   font-size: 16px;
-
   font-weight: 500;
 }
 
 #roomHeader p {
-  margin:
-    5px 0 0;
-
-  font-family:
-    monospace;
-
+  margin: 5px 0 0;
+  font-family: monospace;
   font-size: 9px;
-
   opacity: 0.55;
 }
-
 
 /* ============================= */
 /* PROGRESS */
@@ -701,104 +384,43 @@ button,
 
 #progress {
   position: absolute;
-
-  right:
-    max(
-      22px,
-      env(
-        safe-area-inset-right
-      )
-    );
-
-  top:
-    max(
-      20px,
-      env(
-        safe-area-inset-top
-      )
-    );
-
+  right: max(22px, env(safe-area-inset-right));
+  top: max(20px, env(safe-area-inset-top));
   z-index: 30;
-
   text-align: right;
-
-  font-family:
-    monospace;
-
+  font-family: monospace;
   font-size: 9px;
-
   pointer-events: none;
-
   opacity: 0;
-
-  transform:
-    translateY(-8px);
-
-  transition:
-    opacity
-    1s
-    ease
-    1.45s,
-    transform
-    1s
-    ease
-    1.45s;
+  transform: translateY(-8px);
+  transition: opacity 1s ease 1.45s, transform 1s ease 1.45s;
 }
 
 #room.visible #progress {
   opacity: 1;
-
-  transform:
-    none;
+  transform: none;
 }
 
 .progress-dots {
   display: flex;
-
-  justify-content:
-    flex-end;
-
+  justify-content: flex-end;
   gap: 6px;
-
   margin-top: 8px;
 }
 
 .progress-dots span {
   width: 6px;
   height: 6px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.62
-    );
-
+  border: 1px solid rgba(255, 255, 255, 0.62);
   border-radius: 50%;
-
-  transition:
-    0.4s ease;
+  transition: 0.4s ease;
 }
 
 .progress-dots span.found {
-  background:
-    white;
-
-  box-shadow:
-    0 0 13px
-    rgba(
-      255,
-      255,
-      255,
-      0.9
-    );
-
-  transform:
-    scale(1.15);
+  background: white;
+  box-shadow: 0 0 13px rgba(255, 255, 255, 0.9);
+  transform: scale(1.15);
 }
-
 
 /* ============================= */
 /* ROOM CONTROLS */
@@ -807,41 +429,17 @@ button,
 #helpButton,
 #soundButton {
   position: absolute;
-
   z-index: 70;
-
-  bottom:
-    max(
-      20px,
-      env(
-        safe-area-inset-bottom
-      )
-    );
-
+  bottom: max(30px, calc(env(safe-area-inset-bottom) + 16px));
   border: 0;
-
   padding: 0;
-
-  background:
-    transparent;
-
-  color:
-    white;
-
-  font-family:
-    monospace;
-
+  background: transparent;
+  color: white;
+  font-family: monospace;
   font-size: 9px;
-
   cursor: pointer;
-
   opacity: 0;
-
-  transition:
-    opacity
-    1s
-    ease
-    1.8s;
+  transition: opacity 1s ease 1.8s;
 }
 
 #room.visible #helpButton,
@@ -850,138 +448,64 @@ button,
 }
 
 #helpButton {
-  left:
-    max(
-      20px,
-      env(
-        safe-area-inset-left
-      )
-    );
+  left: max(20px, env(safe-area-inset-left));
 }
 
 #soundButton {
-  right:
-    max(
-      20px,
-      env(
-        safe-area-inset-right
-      )
-    );
+  right: max(20px, env(safe-area-inset-right));
 }
 
 #soundButton.muted {
   opacity: 0.34;
 }
 
-
 /* ============================= */
-/* INSTRUCTIONS */
+/* ROOM INSTRUCTIONS */
 /* ============================= */
 
 #roomInstructions {
   position: absolute;
-
   left: 50%;
-
-  bottom: 21px;
-
+  bottom: max(38px, calc(env(safe-area-inset-bottom) + 22px));
   z-index: 30;
-
   display: flex;
-
   align-items: center;
-
   gap: 8px;
-
-  padding:
-    9px 13px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.13
-    );
-
-  border-radius:
-    999px;
-
-  background:
-    rgba(
-      0,
-      0,
-      0,
-      0.38
-    );
-
-  backdrop-filter:
-    blur(12px);
-
-  -webkit-backdrop-filter:
-    blur(12px);
-
+  padding: 9px 13px;
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   font-size: 10px;
-
-  white-space:
-    nowrap;
-
-  pointer-events:
-    none;
-
+  white-space: nowrap;
+  pointer-events: none;
   opacity: 0;
-
-  transform:
-    translateX(-50%)
-    translateY(10px);
-
-  transition:
-    opacity
-    1s
-    ease
-    1.7s,
-    transform
-    1s
-    ease
-    1.7s;
+  transform: translateX(-50%) translateY(10px);
+  transition: opacity 1s ease 1.7s, transform 1s ease 1.7s;
 }
 
 #room.visible #roomInstructions {
   opacity: 0.82;
-
-  transform:
-    translateX(-50%)
-    translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 .instruction-star {
-  animation:
-    instructionPulse
-    2.6s
-    ease-in-out
-    infinite;
+  animation: instructionPulse 2.6s ease-in-out infinite;
 }
 
 @keyframes instructionPulse {
-
   0%,
   100% {
     opacity: 0.3;
-
-    transform:
-      scale(0.85);
+    transform: scale(0.85);
   }
 
   50% {
     opacity: 1;
-
-    transform:
-      scale(1.15);
+    transform: scale(1.15);
   }
-
 }
-
 
 /* ============================= */
 /* HOTSPOTS */
@@ -989,99 +513,63 @@ button,
 
 .hotspot {
   position: absolute;
-
   z-index: 50;
-
   display: flex;
-
-  justify-content:
-    center;
-
-  align-items:
-    center;
-
+  justify-content: center;
+  align-items: center;
   border: 0;
-
   padding: 0;
-
-  background:
-    transparent;
-
+  background: transparent;
   cursor: pointer;
-
-  touch-action:
-    manipulation;
+  touch-action: manipulation;
 }
 
-
-/* MONITOR */
+/* MSI MONITOR */
 
 #monitorHotspot {
-  left: 22%;
-
-  top: 42%;
-
-  width: 19%;
-
+  left: 24%;
+  top: 29%;
+  width: 24%;
   height: 27%;
-
   z-index: 50;
 }
-
 
 /* TV */
 
 #tvHotspot {
-  left: 49%;
-
-  top: 20%;
-
-  width: 20%;
-
+  left: 50.5%;
+  top: 2%;
+  width: 18%;
   height: 16%;
 }
-
-
-/* PANDA */
-
-#pandaHotspot {
-  left: 79%;
-
-  top: 57%;
-
-  width: 11%;
-
-  height: 20%;
-}
-
 
 /* LAPTOP */
 
 #laptopHotspot {
-  left: 49%;
-
-  top: 49%;
-
-  width: 25%;
-
-  height: 27%;
+  left: 50%;
+  top: 36%;
+  width: 23.5%;
+  height: 29%;
 }
 
+/* PANDA */
 
-/* NOTE */
+#pandaHotspot {
+  left: 80.5%;
+  top: 50.5%;
+  width: 8.5%;
+  height: 17%;
+}
+
+/* YELLOW STICKY NOTE */
 
 #noteHotspot {
-  left: 41%;
-
-  top: 36%;
-
-  width: 7%;
-
-  height: 9%;
-
+  left: 42.3%;
+  top: 29.5%;
+  width: 6%;
+  height: 8%;
   z-index: 90;
 }
-
 
 /* ============================= */
 /* HOTSPOT DOT */
@@ -1089,243 +577,106 @@ button,
 
 .hotspot-dot {
   position: relative;
-
   width: 11px;
-
   height: 11px;
-
   border-radius: 50%;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.98
-    );
-
+  background: rgba(255, 255, 255, 0.98);
   box-shadow:
-    0 0 0 5px
-    rgba(
-      255,
-      255,
-      255,
-      0.08
-    ),
-    0 0 24px
-    rgba(
-      255,
-      255,
-      255,
-      0.9
-    );
-
+    0 0 0 5px rgba(255, 255, 255, 0.08),
+    0 0 24px rgba(255, 255, 255, 0.9);
   opacity: 0;
-
-  transform:
-    scale(0.5);
-
-  transition:
-    opacity
-    0.18s
-    ease,
-    transform
-    0.18s
-    ease;
-
+  transform: scale(0.5);
+  transition: opacity 0.18s ease, transform 0.18s ease;
   pointer-events: none;
 }
 
 .hotspot-dot::after {
   content: "";
-
   position: absolute;
-
   left: 50%;
-
   top: 50%;
-
   width: 24px;
-
   height: 24px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.45
-    );
-
-  border-radius:
-    50%;
-
-  transform:
-    translate(
-      -50%,
-      -50%
-    );
-
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
   opacity: 0;
 }
 
-.hotspot.active
-.hotspot-dot {
+.hotspot.active .hotspot-dot {
   opacity: 1;
-
-  transform:
-    scale(1);
+  transform: scale(1);
 }
 
-.hotspot.active
-.hotspot-dot::after {
-  animation:
-    dotRing
-    1.15s
-    ease-out
-    infinite;
+.hotspot.active .hotspot-dot::after {
+  animation: dotRing 1.15s ease-out infinite;
 }
 
-@media (hover:hover) {
-
-  .hotspot:hover
-  .hotspot-dot {
+@media (hover: hover) {
+  .hotspot:hover .hotspot-dot {
     opacity: 1;
-
-    transform:
-      scale(1);
+    transform: scale(1);
   }
 
-  .hotspot:hover
-  .hotspot-dot::after {
-    animation:
-      dotRing
-      1.15s
-      ease-out
-      infinite;
+  .hotspot:hover .hotspot-dot::after {
+    animation: dotRing 1.15s ease-out infinite;
   }
-
 }
 
 @keyframes dotRing {
-
   0% {
     opacity: 0.7;
-
-    transform:
-      translate(
-        -50%,
-        -50%
-      )
-      scale(0.5);
+    transform: translate(-50%, -50%) scale(0.5);
   }
 
   100% {
     opacity: 0;
-
-    transform:
-      translate(
-        -50%,
-        -50%
-      )
-      scale(1.7);
+    transform: translate(-50%, -50%) scale(1.7);
   }
-
 }
 
-
 /* ============================= */
-/* FOCUS / ZOOM TRANSITION */
+/* FOCUS TRANSITION */
 /* ============================= */
 
 #focusTransition {
   position: fixed;
-
   inset: 0;
-
   z-index: 95;
-
-  visibility:
-    hidden;
-
+  visibility: hidden;
   opacity: 0;
-
-  pointer-events:
-    none;
-
-  background:
-    radial-gradient(
-      circle at center,
-      transparent 20%,
-      rgba(
-        0,
-        0,
-        0,
-        0.2
-      ) 50%,
-      rgba(
-        0,
-        0,
-        0,
-        0.8
-      ) 100%
-    );
-
-  transition:
-    opacity
-    0.45s
-    ease,
-    visibility
-    0.45s;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at center,
+    transparent 20%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  transition: opacity 0.45s ease, visibility 0.45s;
 }
 
 #focusTransition.active {
-  visibility:
-    visible;
-
+  visibility: visible;
   opacity: 1;
 }
 
 .focus-reticle {
   position: absolute;
-
   left: 50%;
-
   top: 50%;
-
   width: 8px;
-
   height: 8px;
-
-  border-radius:
-    50%;
-
-  background:
-    white;
-
+  border-radius: 50%;
+  background: white;
   opacity: 0;
-
-  box-shadow:
-    0 0 35px
-    rgba(
-      255,
-      255,
-      255,
-      0.9
-    );
+  box-shadow: 0 0 35px rgba(255, 255, 255, 0.9);
 }
 
-#focusTransition.active
-.focus-reticle {
-  animation:
-    focusFlash
-    0.5s
-    ease;
+#focusTransition.active .focus-reticle {
+  animation: focusFlash 0.5s ease;
 }
 
 @keyframes focusFlash {
-
   0% {
     opacity: 0;
   }
@@ -1337,85 +688,36 @@ button,
   100% {
     opacity: 0;
   }
-
 }
 
+/* ============================= */
+/* OBJECT FOCUS */
+/* ============================= */
 
-/* monitor focus */
-
-#room.focus-computer
-#roomImage {
-  transform:
-    scale(1.16)
-    translate(
-      10%,
-      2%
-    );
-
-  filter:
-    brightness(0.65);
+#room.focus-computer #roomImage {
+  transform: scale(1.12) translate(10%, 2%);
+  filter: brightness(0.65);
 }
 
-
-/* tv focus */
-
-#room.focus-tv
-#roomImage {
-  transform:
-    scale(1.14)
-    translate(
-      -5%,
-      10%
-    );
-
-  filter:
-    brightness(0.6);
+#room.focus-tv #roomImage {
+  transform: scale(1.12) translate(-4%, 8%);
+  filter: brightness(0.6);
 }
 
-
-/* laptop focus */
-
-#room.focus-laptop
-#roomImage {
-  transform:
-    scale(1.12)
-    translate(
-      -5%,
-      -3%
-    );
-
-  filter:
-    brightness(0.62);
+#room.focus-laptop #roomImage {
+  transform: scale(1.1) translate(-5%, -3%);
+  filter: brightness(0.62);
 }
 
-
-/* panda focus */
-
-#room.focus-panda
-#roomImage {
-  transform:
-    scale(1.11)
-    translate(
-      -8%,
-      -4%
-    );
-
-  filter:
-    brightness(0.65);
+#room.focus-panda #roomImage {
+  transform: scale(1.1) translate(-8%, -3%);
+  filter: brightness(0.65);
 }
 
-
-/* note focus */
-
-#room.focus-note
-#roomImage {
-  transform:
-    scale(1.1);
-
-  filter:
-    brightness(0.68);
+#room.focus-note #roomImage {
+  transform: scale(1.08);
+  filter: brightness(0.68);
 }
-
 
 /* ============================= */
 /* GENERIC MODAL */
@@ -1423,135 +725,56 @@ button,
 
 .modal {
   position: fixed;
-
   inset: 0;
-
   z-index: 120;
-
   display: flex;
-
   align-items: center;
-
-  justify-content:
-    center;
-
+  justify-content: center;
   padding: 20px;
-
-  visibility:
-    hidden;
-
+  visibility: hidden;
   opacity: 0;
-
-  transition:
-    opacity
-    0.35s
-    ease,
-    visibility
-    0.35s;
+  transition: opacity 0.35s ease, visibility 0.35s;
 }
 
 .modal.open {
-  visibility:
-    visible;
-
+  visibility: visible;
   opacity: 1;
 }
 
 .modal-background {
   position: absolute;
-
   inset: 0;
-
-  background:
-    rgba(
-      0,
-      0,
-      0,
-      0.72
-    );
-
-  backdrop-filter:
-    blur(10px);
-
-  -webkit-backdrop-filter:
-    blur(10px);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
 .content-card {
   position: relative;
-
   z-index: 2;
-
-  width:
-    min(
-      90vw,
-      470px
-    );
-
-  padding:
-    40px;
-
-  border:
-    1px solid
-    var(--border);
-
-  border-radius:
-    9px;
-
-  background:
-    rgba(
-      14,
-      14,
-      14,
-      0.96
-    );
-
-  box-shadow:
-    0 35px 110px
-    rgba(
-      0,
-      0,
-      0,
-      0.7
-    );
-
+  width: min(90vw, 470px);
+  padding: 40px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: rgba(14, 14, 14, 0.96);
+  box-shadow: 0 35px 110px rgba(0, 0, 0, 0.7);
   opacity: 0;
-
-  transform:
-    translateY(18px)
-    scale(0.97);
+  transform: translateY(18px) scale(0.97);
 }
 
-.modal.open
-.content-card {
-  animation:
-    genericCardOpen
-    0.55s
-    cubic-bezier(
-      0.16,
-      1,
-      0.3,
-      1
-    )
-    forwards;
+.modal.open .content-card {
+  animation: genericCardOpen 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes genericCardOpen {
-
   to {
     opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
+    transform: translateY(0) scale(1);
   }
-
 }
 
 .content-card h2 {
-  margin:
-    0 0 20px;
-
+  margin: 0 0 20px;
   font-weight: 350;
 }
 
@@ -1563,25 +786,15 @@ button,
 .paper-close,
 .tv-close {
   position: absolute;
-
   right: 14px;
-
   top: 10px;
-
   z-index: 20;
-
   border: 0;
-
-  background:
-    transparent;
-
+  background: transparent;
   color: inherit;
-
   font-size: 25px;
-
   cursor: pointer;
 }
-
 
 /* ============================= */
 /* COMPUTER */
@@ -1589,219 +802,103 @@ button,
 
 .computer {
   position: relative;
-
   z-index: 2;
-
-  width:
-    min(
-      94vw,
-      1180px
-    );
-
-  height:
-    min(
-      86vh,
-      750px
-    );
-
+  width: min(94vw, 1180px);
+  height: min(86vh, 750px);
   overflow: hidden;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.2
-    );
-
-  border-radius:
-    8px;
-
-  background:
-    #080a0d;
-
-  box-shadow:
-    0 45px 130px
-    rgba(
-      0,
-      0,
-      0,
-      0.82
-    );
-
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  background: #080a0d;
+  box-shadow: 0 45px 130px rgba(0, 0, 0, 0.82);
   opacity: 0;
-
-  transform:
-    scale(0.89);
+  transform: scale(0.89);
 }
 
-#computerModal.open
-.computer {
-  animation:
-    computerAppear
-    0.65s
-    cubic-bezier(
-      0.16,
-      1,
-      0.3,
-      1
-    )
-    forwards;
+#computerModal.open .computer {
+  animation: computerAppear 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes computerAppear {
-
   to {
     opacity: 1;
-
-    transform:
-      scale(1);
+    transform: scale(1);
   }
-
 }
 
-
 /* ============================= */
-/* BOOT SCREEN */
+/* COMPUTER BOOT */
 /* ============================= */
 
 .computer-boot {
   position: absolute;
-
   inset: 0;
-
   z-index: 20;
-
   display: flex;
-
-  flex-direction:
-    column;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  background:
-    #050608;
-
-  transition:
-    opacity
-    0.5s
-    ease,
-    visibility
-    0.5s;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #050608;
+  transition: opacity 0.5s ease, visibility 0.5s;
 }
 
 .computer-boot.finished {
   opacity: 0;
-
-  visibility:
-    hidden;
+  visibility: hidden;
 }
 
 .boot-logo {
-  font-size: 45px;
-
   margin-bottom: 20px;
-
-  animation:
-    bootLogo
-    1.7s
-    ease-in-out
-    infinite;
+  font-size: 45px;
+  animation: bootLogo 1.7s ease-in-out infinite;
 }
 
 @keyframes bootLogo {
-
   0%,
   100% {
     opacity: 0.35;
-
-    transform:
-      scale(0.9);
+    transform: scale(0.9);
   }
 
   50% {
     opacity: 1;
-
-    transform:
-      scale(1.05);
+    transform: scale(1.05);
   }
-
 }
 
 .computer-boot p {
-  margin:
-    0 0 20px;
-
-  font-family:
-    monospace;
-
+  margin: 0 0 20px;
+  font-family: monospace;
   font-size: 12px;
-
-  letter-spacing:
-    0.18em;
+  letter-spacing: 0.18em;
 }
 
 .computer-boot small {
   margin-top: 13px;
-
-  font-family:
-    monospace;
-
+  font-family: monospace;
   font-size: 8px;
-
   opacity: 0.32;
 }
 
 .boot-line {
-  width:
-    min(
-      60%,
-      300px
-    );
-
+  width: min(60%, 300px);
   height: 1px;
-
   overflow: hidden;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.12
-    );
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .boot-line span {
   display: block;
-
-  height: 100%;
-
   width: 0;
-
-  background:
-    white;
-
-  animation:
-    bootProgress
-    1.55s
-    ease
-    forwards;
+  height: 100%;
+  background: white;
+  animation: bootProgress 1.55s ease forwards;
 }
 
 @keyframes bootProgress {
-
   to {
     width: 100%;
   }
-
 }
-
 
 /* ============================= */
 /* COMPUTER DESKTOP */
@@ -1813,130 +910,66 @@ button,
 
 .window-bar {
   height: 36px;
-
   display: flex;
-
-  justify-content:
-    space-between;
-
-  align-items:
-    center;
-
+  align-items: center;
+  justify-content: space-between;
   padding-left: 14px;
-
-  background:
-    #181a1d;
-
-  font-family:
-    monospace;
-
+  background: #181a1d;
+  font-family: monospace;
   font-size: 9px;
 }
 
 .window-bar button {
   width: 42px;
-
   height: 36px;
-
   border: 0;
-
-  background:
-    transparent;
-
+  background: transparent;
   color: white;
-
   cursor: pointer;
 }
 
 .window-bar button:hover {
-  background:
-    #b72b34;
+  background: #b72b34;
 }
 
 .desktop {
   position: relative;
-
-  height:
-    calc(
-      100% - 36px
-    );
-
+  height: calc(100% - 36px);
   overflow: hidden;
-
-  background:
-    radial-gradient(
-      circle at
-      55% 25%,
-      #31495e,
-      #172532 38%,
-      #081017 100%
-    );
+  background: radial-gradient(circle at 55% 25%, #31495e, #172532 38%, #081017 100%);
 }
 
 .desktop::before {
   content: "";
-
   position: absolute;
-
   inset: 0;
-
-  background:
-    linear-gradient(
-      125deg,
-      rgba(
-        255,
-        255,
-        255,
-        0.04
-      ),
-      transparent 40%
-    );
-
+  background: linear-gradient(125deg, rgba(255, 255, 255, 0.04), transparent 40%);
   pointer-events: none;
 }
 
 .desktop-greeting {
   position: absolute;
-
   left: 6%;
-
   top: 8%;
 }
 
-.desktop-greeting
-#computerTime {
-  margin:
-    0 0 8px;
-
-  font-family:
-    monospace;
-
+.desktop-greeting #computerTime {
+  margin: 0 0 8px;
+  font-family: monospace;
   font-size: 10px;
-
   opacity: 0.55;
 }
 
 .desktop-greeting h2 {
   margin: 0;
-
-  font-size:
-    clamp(
-      28px,
-      4vw,
-      50px
-    );
-
+  font-size: clamp(28px, 4vw, 50px);
   font-weight: 250;
-
-  letter-spacing:
-    -0.045em;
+  letter-spacing: -0.045em;
 }
 
-.desktop-greeting
-> p:last-child {
+.desktop-greeting > p:last-child {
   opacity: 0.55;
 }
-
 
 /* ============================= */
 /* DESKTOP ICONS */
@@ -1944,151 +977,69 @@ button,
 
 .desktop-icons {
   position: absolute;
-
   left: 5%;
-
   top: 37%;
-
   display: grid;
-
-  grid-template-columns:
-    repeat(
-      2,
-      110px
-    );
-
-  gap:
-    18px 8px;
+  grid-template-columns: repeat(2, 110px);
+  gap: 18px 8px;
 }
 
 .desktop-icon {
   width: 105px;
-
-  padding:
-    10px 6px;
-
+  padding: 10px 6px;
   border: 0;
-
-  border-radius:
-    5px;
-
-  background:
-    transparent;
-
+  border-radius: 5px;
+  background: transparent;
   color: white;
-
   cursor: pointer;
-
-  transition:
-    background
-    0.2s
-    ease,
-    transform
-    0.2s
-    ease;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
 .desktop-icon:hover {
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.07
-    );
-
-  transform:
-    translateY(-2px);
+  background: rgba(255, 255, 255, 0.07);
+  transform: translateY(-2px);
 }
 
 .desktop-symbol {
   display: flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
+  align-items: center;
+  justify-content: center;
   width: 40px;
-
   height: 40px;
-
-  margin:
-    auto;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.18
-    );
-
-  border-radius:
-    8px;
-
+  margin: auto;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
   font-size: 15px;
 }
 
 .desktop-icon p {
-  margin:
-    7px 0 0;
-
+  margin: 7px 0 0;
   font-size: 10px;
 }
 
-
 /* ============================= */
-/* COMPUTER STICKY */
+/* COMPUTER STICKY NOTE */
 /* ============================= */
 
 .sticky-note {
   position: absolute;
-
   right: 8%;
-
   top: 17%;
-
   width: 190px;
-
-  padding:
-    22px;
-
-  background:
-    var(--yellow);
-
-  color:
-    #252010;
-
-  box-shadow:
-    0 14px 35px
-    rgba(
-      0,
-      0,
-      0,
-      0.25
-    );
-
-  font-family:
-    "Courier New",
-    monospace;
-
+  padding: 22px;
+  background: var(--yellow);
+  color: #252010;
+  box-shadow: 0 14px 35px rgba(0, 0, 0, 0.25);
+  font-family: "Courier New", monospace;
   font-size: 12px;
-
   line-height: 1.55;
-
-  transform:
-    rotate(2deg);
+  transform: rotate(2deg);
 }
 
 .sticky-note span {
   display: block;
-
   margin-top: 10px;
 }
-
 
 /* ============================= */
 /* TASKBAR */
@@ -2096,51 +1047,20 @@ button,
 
 .taskbar {
   position: absolute;
-
   left: 0;
-
   right: 0;
-
   bottom: 0;
-
   height: 42px;
-
   display: flex;
-
   align-items: center;
-
-  justify-content:
-    space-between;
-
-  padding:
-    0 15px;
-
-  background:
-    rgba(
-      4,
-      6,
-      8,
-      0.76
-    );
-
-  border-top:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.07
-    );
-
-  backdrop-filter:
-    blur(14px);
-
-  font-family:
-    monospace;
-
+  justify-content: space-between;
+  padding: 0 15px;
+  background: rgba(4, 6, 8, 0.76);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  backdrop-filter: blur(14px);
+  font-family: monospace;
   font-size: 9px;
 }
-
 
 /* ============================= */
 /* APP WINDOW */
@@ -2148,124 +1068,52 @@ button,
 
 .app-window {
   position: fixed;
-
   z-index: 400;
-
   left: 50%;
-
   top: 50%;
-
-  width:
-    min(
-      82vw,
-      620px
-    );
-
-  max-height:
-    72vh;
-
+  width: min(82vw, 620px);
+  max-height: 72vh;
   overflow-y: auto;
-
-  visibility:
-    hidden;
-
+  visibility: hidden;
   opacity: 0;
-
-  transform:
-    translate(
-      -50%,
-      -46%
-    )
-    scale(0.96);
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.2
-    );
-
-  background:
-    #121416;
-
-  color:
-    white;
-
-  box-shadow:
-    0 40px 120px
-    rgba(
-      0,
-      0,
-      0,
-      0.75
-    );
-
-  transition:
-    0.25s
-    ease;
+  transform: translate(-50%, -46%) scale(0.96);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: #121416;
+  color: white;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.75);
+  transition: 0.25s ease;
 }
 
 .app-window.open {
-  visibility:
-    visible;
-
+  visibility: visible;
   opacity: 1;
-
-  transform:
-    translate(
-      -50%,
-      -50%
-    )
-    scale(1);
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .app-titlebar {
   position: sticky;
-
   top: 0;
-
   z-index: 4;
-
   height: 38px;
-
   display: flex;
-
   align-items: center;
-
-  justify-content:
-    space-between;
-
+  justify-content: space-between;
   padding-left: 13px;
-
-  background:
-    #202326;
-
-  font-family:
-    monospace;
-
+  background: #202326;
+  font-family: monospace;
   font-size: 9px;
 }
 
 .app-titlebar button {
   width: 40px;
-
   height: 38px;
-
   border: 0;
-
-  background:
-    transparent;
-
-  color:
-    white;
+  background: transparent;
+  color: white;
 }
 
 #appContent {
-  padding:
-    32px;
-
+  padding: 32px;
   line-height: 1.7;
 }
 
@@ -2273,198 +1121,93 @@ button,
   font-weight: 350;
 }
 
-
 /* ============================= */
 /* TV */
 /* ============================= */
 
 .tv-shell {
   position: relative;
-
   z-index: 2;
-
-  width:
-    min(
-      90vw,
-      900px
-    );
-
-  aspect-ratio:
-    16 / 9;
-
+  width: min(90vw, 900px);
+  aspect-ratio: 16 / 9;
   overflow: hidden;
-
-  border:
-    8px solid
-    #121212;
-
-  border-radius:
-    9px;
-
-  background:
-    black;
-
+  border: 8px solid #121212;
+  border-radius: 9px;
+  background: black;
   box-shadow:
-    0 40px 130px
-    rgba(
-      0,
-      0,
-      0,
-      0.9
-    ),
-    0 0 80px
-    rgba(
-      106,
-      164,
-      255,
-      0.1
-    );
-
+    0 40px 130px rgba(0, 0, 0, 0.9),
+    0 0 80px rgba(106, 164, 255, 0.1);
   opacity: 0;
-
-  transform:
-    scale(0.92);
+  transform: scale(0.92);
 }
 
-#tvModal.open
-.tv-shell {
-  animation:
-    tvAppear
-    0.45s
-    ease
-    forwards;
+#tvModal.open .tv-shell {
+  animation: tvAppear 0.45s ease forwards;
 }
 
 @keyframes tvAppear {
-
   to {
     opacity: 1;
-
-    transform:
-      scale(1);
+    transform: scale(1);
   }
-
 }
 
 .tv-close {
   color: white;
 }
 
-
-/* ============================= */
-/* TV POWER */
-/* ============================= */
-
 .tv-power,
 .tv-static,
 .tv-broadcast {
   position: absolute;
-
   inset: 0;
 }
 
 .tv-power {
   z-index: 8;
-
   display: flex;
-
-  flex-direction:
-    column;
-
-  justify-content:
-    center;
-
-  align-items:
-    center;
-
-  background:
-    black;
-
-  font-family:
-    monospace;
-
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  font-family: monospace;
   font-size: 9px;
-
-  transition:
-    opacity
-    0.25s
-    ease;
+  transition: opacity 0.25s ease;
 }
 
 .tv-power.hidden-phase {
   opacity: 0;
-
-  pointer-events:
-    none;
+  pointer-events: none;
 }
 
 .tv-power-dot {
   width: 5px;
-
   height: 5px;
-
   margin-bottom: 13px;
-
-  border-radius:
-    50%;
-
-  background:
-    white;
-
-  box-shadow:
-    0 0 17px
-    white;
-
-  animation:
-    powerDot
-    0.8s
-    ease-in-out
-    infinite;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 17px white;
+  animation: powerDot 0.8s ease-in-out infinite;
 }
 
 @keyframes powerDot {
-
   50% {
     opacity: 0.25;
   }
-
 }
-
-
-/* ============================= */
-/* TV STATIC */
-/* ============================= */
 
 .tv-static {
   z-index: 6;
-
   display: flex;
-
-  justify-content:
-    center;
-
-  align-items:
-    center;
-
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-
-  background:
-    #161616;
-
-  font-family:
-    monospace;
-
+  background: #161616;
+  font-family: monospace;
   font-size: 9px;
-
-  letter-spacing:
-    0.2em;
-
+  letter-spacing: 0.2em;
   opacity: 0;
-
-  transition:
-    opacity
-    0.2s
-    ease;
+  transition: opacity 0.2s ease;
 }
 
 .tv-static.active {
@@ -2477,166 +1220,73 @@ button,
 
 .static-noise {
   position: absolute;
-
-  inset:
-    -50%;
-
+  inset: -50%;
   opacity: 0.45;
-
-  background-image:
-    repeating-radial-gradient(
-      circle at
-      20% 30%,
-      white 0,
-      black 1px,
-      white 2px
-    );
-
-  background-size:
-    5px 5px;
-
-  animation:
-    staticMove
-    0.11s
-    steps(2)
-    infinite;
+  background-image: repeating-radial-gradient(circle at 20% 30%, white 0, black 1px, white 2px);
+  background-size: 5px 5px;
+  animation: staticMove 0.11s steps(2) infinite;
 }
 
 .tv-static p {
   position: relative;
-
   z-index: 2;
-
-  padding:
-    8px 12px;
-
-  background:
-    black;
+  padding: 8px 12px;
+  background: black;
 }
 
 @keyframes staticMove {
-
   0% {
-    transform:
-      translate(
-        -3%,
-        1%
-      );
+    transform: translate(-3%, 1%);
   }
 
   25% {
-    transform:
-      translate(
-        4%,
-        -2%
-      );
+    transform: translate(4%, -2%);
   }
 
   50% {
-    transform:
-      translate(
-        -2%,
-        5%
-      );
+    transform: translate(-2%, 5%);
   }
 
   75% {
-    transform:
-      translate(
-        4%,
-        2%
-      );
+    transform: translate(4%, 2%);
   }
 
   100% {
-    transform:
-      translate(
-        0,
-        -3%
-      );
+    transform: translate(0, -3%);
   }
-
 }
-
-
-/* ============================= */
-/* TV BROADCAST */
-/* ============================= */
 
 .tv-broadcast {
   z-index: 3;
-
   display: flex;
-
-  flex-direction:
-    column;
-
-  align-items:
-    center;
-
-  justify-content:
-    center;
-
-  padding:
-    40px;
-
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
   text-align: center;
-
-  background:
-    radial-gradient(
-      circle at center,
-      #18212c,
-      #050608 70%
-    );
-
+  background: radial-gradient(circle at center, #18212c, #050608 70%);
   opacity: 0;
-
-  transform:
-    scale(1.02);
-
-  transition:
-    opacity
-    0.7s
-    ease,
-    transform
-    0.7s
-    ease;
+  transform: scale(1.02);
+  transition: opacity 0.7s ease, transform 0.7s ease;
 }
 
 .tv-broadcast.active {
   opacity: 1;
-
-  transform:
-    scale(1);
+  transform: scale(1);
 }
 
 .tv-channel {
-  font-family:
-    monospace;
-
+  font-family: monospace;
   font-size: 9px;
-
-  letter-spacing:
-    0.2em;
-
+  letter-spacing: 0.2em;
   opacity: 0.5;
 }
 
 .tv-broadcast h2 {
-  margin:
-    7px 0;
-
-  font-size:
-    clamp(
-      32px,
-      6vw,
-      68px
-    );
-
+  margin: 7px 0;
+  font-size: clamp(32px, 6vw, 68px);
   font-weight: 250;
-
-  letter-spacing:
-    -0.05em;
+  letter-spacing: -0.05em;
 }
 
 .tv-broadcast > p {
@@ -2645,75 +1295,35 @@ button,
 
 .video-fallback {
   margin-top: 28px;
-
-  width:
-    min(
-      80%,
-      500px
-    );
-
-  padding:
-    25px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.12
-    );
-
-  background:
-    rgba(
-      0,
-      0,
-      0,
-      0.22
-    );
+  width: min(80%, 500px);
+  padding: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(0, 0, 0, 0.22);
 }
 
 .video-fallback span {
   display: block;
-
-  font-size: 25px;
-
   margin-bottom: 10px;
+  font-size: 25px;
 }
 
 .video-fallback p {
-  margin:
-    0 0 7px;
-
+  margin: 0 0 7px;
   font-size: 11px;
 }
 
 .video-fallback small {
-  font-family:
-    monospace;
-
+  font-family: monospace;
   font-size: 8px;
-
   opacity: 0.4;
 }
 
 #birthdayVideo {
   display: none;
-
-  width:
-    min(
-      90%,
-      700px
-    );
-
-  max-height:
-    65%;
-
-  margin-top:
-    18px;
-
-  background:
-    black;
+  width: min(90%, 700px);
+  max-height: 65%;
+  margin-top: 18px;
+  background: black;
 }
 
 #birthdayVideo.ready {
@@ -2724,457 +1334,199 @@ button,
   display: none;
 }
 
-
 /* ============================= */
 /* AI WINDOW */
 /* ============================= */
 
 .ai-window {
   position: relative;
-
   z-index: 2;
-
-  width:
-    min(
-      90vw,
-      720px
-    );
-
-  height:
-    min(
-      80vh,
-      700px
-    );
-
+  width: min(90vw, 720px);
+  height: min(80vh, 700px);
   display: flex;
-
-  flex-direction:
-    column;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.14
-    );
-
-  border-radius:
-    12px;
-
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
   overflow: hidden;
-
-  background:
-    #151515;
-
-  box-shadow:
-    0 40px 120px
-    rgba(
-      0,
-      0,
-      0,
-      0.8
-    );
-
+  background: #151515;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8);
   opacity: 0;
-
-  transform:
-    translateY(15px)
-    scale(0.97);
+  transform: translateY(15px) scale(0.97);
 }
 
-#laptopModal.open
-.ai-window {
-  animation:
-    aiWindowOpen
-    0.55s
-    cubic-bezier(
-      0.16,
-      1,
-      0.3,
-      1
-    )
-    forwards;
+#laptopModal.open .ai-window {
+  animation: aiWindowOpen 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes aiWindowOpen {
-
   to {
     opacity: 1;
-
-    transform:
-      none;
+    transform: none;
   }
-
 }
 
 .ai-topbar {
   height: 45px;
-
   flex: 0 0 45px;
-
   display: flex;
-
   align-items: center;
-
-  justify-content:
-    space-between;
-
-  padding-left:
-    15px;
-
-  border-bottom:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.08
-    );
-
-  font-family:
-    monospace;
-
+  justify-content: space-between;
+  padding-left: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: monospace;
   font-size: 9px;
 }
 
 .ai-topbar > div {
   display: flex;
-
-  align-items:
-    center;
-
+  align-items: center;
   gap: 8px;
 }
 
 .ai-dot {
   width: 6px;
-
   height: 6px;
-
-  border-radius:
-    50%;
-
-  background:
-    white;
-
-  box-shadow:
-    0 0 12px
-    rgba(
-      255,
-      255,
-      255,
-      0.7
-    );
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.7);
 }
 
 .ai-topbar button {
   width: 45px;
-
   height: 45px;
-
   border: 0;
-
-  background:
-    transparent;
-
+  background: transparent;
   color: white;
 }
 
 .ai-conversation {
   flex: 1;
-
-  overflow-y:
-    auto;
-
-  padding:
-    28px 24px;
-
-  scroll-behavior:
-    smooth;
+  overflow-y: auto;
+  padding: 28px 24px;
+  scroll-behavior: smooth;
 }
 
 .ai-message {
   width: fit-content;
-
   max-width: 78%;
-
-  margin-bottom:
-    18px;
-
-  padding:
-    13px 16px;
-
-  border-radius:
-    15px;
-
-  line-height:
-    1.55;
-
+  margin-bottom: 18px;
+  padding: 13px 16px;
+  border-radius: 15px;
+  line-height: 1.55;
   font-size: 13px;
 }
 
 .user-message {
-  margin-left:
-    auto;
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.11
-    );
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.11);
 }
 
 .assistant-message {
-  margin-right:
-    auto;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.1
-    );
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.035
-    );
+  margin-right: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
 }
 
 .reveal-message {
   opacity: 0;
-
-  transform:
-    translateY(8px);
+  transform: translateY(8px);
 }
 
 .reveal-message.revealed {
-  animation:
-    messageReveal
-    0.45s
-    ease
-    forwards;
+  animation: messageReveal 0.45s ease forwards;
 }
 
 @keyframes messageReveal {
-
   to {
     opacity: 1;
-
-    transform:
-      translateY(0);
+    transform: translateY(0);
   }
-
 }
 
 .special-ai {
-  border-color:
-    rgba(
-      255,
-      255,
-      255,
-      0.25
-    );
+  border-color: rgba(255, 255, 255, 0.25);
 }
 
 .ai-input {
   flex: 0 0 55px;
-
   display: flex;
-
-  align-items:
-    center;
-
-  justify-content:
-    space-between;
-
-  margin:
-    0 20px 20px;
-
-  padding:
-    0 16px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.1
-    );
-
-  border-radius:
-    14px;
-
-  color:
-    rgba(
-      255,
-      255,
-      255,
-      0.35
-    );
-
-  font-size:
-    11px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 20px 20px;
+  padding: 0 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 14px;
+  color: rgba(255, 255, 255, 0.35);
+  font-size: 11px;
 }
 
 .typing-cursor {
-  animation:
-    cursorBlink
-    0.7s
-    step-end
-    infinite;
+  animation: cursorBlink 0.7s step-end infinite;
 }
 
 @keyframes cursorBlink {
-
   50% {
     opacity: 0;
   }
-
 }
 
-
 /* ============================= */
-/* PANDA DELIVERY */
+/* PANDA */
 /* ============================= */
 
 .panda-delivery {
   position: relative;
-
   z-index: 2;
-
-  width:
-    min(
-      88vw,
-      500px
-    );
-
-  max-height:
-    86vh;
-
-  overflow-y:
-    auto;
-
-  padding:
-    36px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.14
-    );
-
-  border-radius:
-    12px;
-
-  background:
-    #101010;
-
-  text-align:
-    center;
-
-  box-shadow:
-    0 40px 120px
-    rgba(
-      0,
-      0,
-      0,
-      0.8
-    );
-
+  width: min(88vw, 500px);
+  max-height: 86vh;
+  overflow-y: auto;
+  padding: 36px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  background: #101010;
+  text-align: center;
+  box-shadow: 0 40px 120px rgba(0, 0, 0, 0.8);
   opacity: 0;
-
-  transform:
-    translateY(25px)
-    scale(0.9);
+  transform: translateY(25px) scale(0.9);
 }
 
-#pandaModal.open
-.panda-delivery {
-  animation:
-    pandaDeliveryOpen
-    0.65s
-    cubic-bezier(
-      0.16,
-      1,
-      0.3,
-      1
-    )
-    forwards;
+#pandaModal.open .panda-delivery {
+  animation: pandaDeliveryOpen 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes pandaDeliveryOpen {
-
   to {
     opacity: 1;
-
-    transform:
-      none;
+    transform: none;
   }
-
 }
 
 .panda-character {
   position: relative;
-
   width: 150px;
-
   height: 190px;
-
-  margin:
-    25px auto;
-
-  animation:
-    pandaBounce
-    2.5s
-    ease-in-out
-    infinite;
+  margin: 25px auto;
+  animation: pandaBounce 2.5s ease-in-out infinite;
 }
 
 @keyframes pandaBounce {
-
   0%,
   100% {
-    transform:
-      translateY(0)
-      rotate(-1deg);
+    transform: translateY(0) rotate(-1deg);
   }
 
   50% {
-    transform:
-      translateY(-8px)
-      rotate(1deg);
+    transform: translateY(-8px) rotate(1deg);
   }
-
 }
 
 .panda-ears span {
   position: absolute;
-
   top: 2px;
-
   width: 50px;
-
   height: 50px;
-
-  border-radius:
-    50%;
-
-  background:
-    #090909;
+  border-radius: 50%;
+  background: #090909;
 }
 
 .panda-ears span:first-child {
@@ -3187,43 +1539,23 @@ button,
 
 .panda-head {
   position: absolute;
-
   top: 16px;
-
   left: 20px;
-
   width: 110px;
-
   height: 105px;
-
-  border-radius:
-    48%;
-
-  background:
-    #efefea;
-
-  border:
-    1px solid
-    #cfcfc8;
+  border-radius: 48%;
+  background: #efefea;
+  border: 1px solid #cfcfc8;
 }
 
 .panda-eye {
   position: absolute;
-
   top: 35px;
-
   width: 25px;
-
   height: 33px;
-
-  border-radius:
-    50%;
-
-  background:
-    #121212;
-
-  transform:
-    rotate(18deg);
+  border-radius: 50%;
+  background: #121212;
+  transform: rotate(18deg);
 }
 
 .panda-eye.left {
@@ -3232,339 +1564,156 @@ button,
 
 .panda-eye.right {
   right: 18px;
-
-  transform:
-    rotate(-18deg);
+  transform: rotate(-18deg);
 }
 
 .panda-eye::after {
   content: "";
-
   position: absolute;
-
   left: 9px;
-
   top: 10px;
-
   width: 6px;
-
   height: 6px;
-
-  border-radius:
-    50%;
-
-  background:
-    white;
+  border-radius: 50%;
+  background: white;
 }
 
 .panda-nose {
   position: absolute;
-
   left: 50%;
-
   bottom: 17px;
-
   width: 12px;
-
   height: 8px;
-
-  border-radius:
-    50%;
-
-  background:
-    #111;
-
-  transform:
-    translateX(-50%);
+  border-radius: 50%;
+  background: #111;
+  transform: translateX(-50%);
 }
 
 .panda-body {
   position: absolute;
-
   left: 26px;
-
   bottom: 0;
-
   width: 98px;
-
   height: 90px;
-
   display: flex;
-
   align-items: center;
-
-  justify-content:
-    center;
-
-  border-radius:
-    50% 50% 35% 35%;
-
-  background:
-    #eeeeea;
-
-  color:
-    #111;
-
-  font-size:
-    24px;
+  justify-content: center;
+  border-radius: 50% 50% 35% 35%;
+  background: #eeeeea;
+  color: #111;
+  font-size: 24px;
 }
 
 .panda-intro {
-  font-size:
-    18px;
+  font-size: 18px;
 }
 
-.panda-delivery
-#openPandaDelivery,
+.panda-delivery #openPandaDelivery,
 #playPandaAudio {
-  margin-top:
-    14px;
-
-  padding:
-    11px 18px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.28
-    );
-
-  background:
-    transparent;
-
-  color:
-    white;
-
-  cursor:
-    pointer;
+  margin-top: 14px;
+  padding: 11px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  background: transparent;
+  color: white;
+  cursor: pointer;
 }
 
 .panda-message {
-  margin-top:
-    25px;
-
-  padding-top:
-    22px;
-
-  border-top:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.1
-    );
-
-  animation:
-    pandaMessageOpen
-    0.55s
-    ease;
+  margin-top: 25px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  animation: pandaMessageOpen 0.55s ease;
 }
 
 @keyframes pandaMessageOpen {
-
   from {
     opacity: 0;
-
-    transform:
-      translateY(8px);
+    transform: translateY(8px);
   }
-
 }
 
 .panda-small {
-  font-family:
-    monospace;
-
+  font-family: monospace;
   font-size: 9px;
-
   opacity: 0.4;
 }
 
 .audio-package {
-  margin-top:
-    22px;
-
-  padding:
-    18px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.1
-    );
-
-  background:
-    rgba(
-      255,
-      255,
-      255,
-      0.03
-    );
+  margin-top: 22px;
+  padding: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
 }
 
 .audio-package p {
   margin-top: 0;
-
-  font-family:
-    monospace;
-
+  font-family: monospace;
   font-size: 10px;
 }
 
 .audio-package small {
   display: block;
-
-  margin-top:
-    10px;
-
+  margin-top: 10px;
   font-size: 8px;
-
   opacity: 0.35;
 }
-
 
 /* ============================= */
 /* PAPER NOTE */
 /* ============================= */
 
-.note-modal
-.modal-background {
-  background:
-    rgba(
-      0,
-      0,
-      0,
-      0.6
-    );
-
-  backdrop-filter:
-    blur(6px);
+.note-modal .modal-background {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(6px);
 }
 
 .paper-note {
   position: relative;
-
   z-index: 2;
-
-  width:
-    min(
-      82vw,
-      370px
-    );
-
-  padding:
-    50px 38px
-    40px;
-
-  background:
-    #eadca8;
-
-  color:
-    #292216;
-
-  box-shadow:
-    0 30px 90px
-    rgba(
-      0,
-      0,
-      0,
-      0.62
-    );
-
-  font-family:
-    "Courier New",
-    monospace;
-
-  line-height:
-    1.7;
-
+  width: min(82vw, 370px);
+  padding: 50px 38px 40px;
+  background: #eadca8;
+  color: #292216;
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.62);
+  font-family: "Courier New", monospace;
+  line-height: 1.7;
   opacity: 0;
-
-  transform:
-    translateY(60px)
-    rotate(-8deg)
-    scale(0.7);
+  transform: translateY(60px) rotate(-8deg) scale(0.7);
 }
 
-#noteModal.open
-.paper-note {
-  animation:
-    noteFlyForward
-    0.75s
-    cubic-bezier(
-      0.16,
-      1,
-      0.3,
-      1
-    )
-    forwards;
+#noteModal.open .paper-note {
+  animation: noteFlyForward 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 @keyframes noteFlyForward {
-
   0% {
     opacity: 0;
-
-    transform:
-      translateY(80px)
-      rotate(-10deg)
-      scale(0.6);
+    transform: translateY(80px) rotate(-10deg) scale(0.6);
   }
 
   70% {
     opacity: 1;
-
-    transform:
-      translateY(-5px)
-      rotate(-1deg)
-      scale(1.03);
+    transform: translateY(-5px) rotate(-1deg) scale(1.03);
   }
 
   100% {
     opacity: 1;
-
-    transform:
-      translateY(0)
-      rotate(-2deg)
-      scale(1);
+    transform: translateY(0) rotate(-2deg) scale(1);
   }
-
 }
 
 .paper-close {
-  color:
-    #292216;
+  color: #292216;
 }
 
 .tape {
   position: absolute;
-
   top: -12px;
-
   left: 50%;
-
   width: 85px;
-
   height: 28px;
-
-  background:
-    rgba(
-      241,
-      232,
-      194,
-      0.75
-    );
-
-  transform:
-    translateX(-50%)
-    rotate(1deg);
+  background: rgba(241, 232, 194, 0.75);
+  transform: translateX(-50%) rotate(1deg);
 }
 
 .note-opening {
@@ -3572,69 +1721,45 @@ button,
 }
 
 .note-signature {
-  margin-top:
-    30px;
-
-  font-size:
-    24px;
+  margin-top: 30px;
+  font-size: 24px;
 }
-
 
 /* ============================= */
 /* HELP */
 /* ============================= */
 
 .help-small {
-  font-family:
-    monospace;
-
+  font-family: monospace;
   font-size: 9px;
-
   opacity: 0.4;
 }
-
 
 /* ============================= */
 /* FINAL ROOM STATE */
 /* ============================= */
 
-#room.final-reveal-active
-#roomHeader,
-#room.final-reveal-active
-#progress,
-#room.final-reveal-active
-#roomInstructions,
-#room.final-reveal-active
-#helpButton,
-#room.final-reveal-active
-#soundButton {
+#room.final-reveal-active #roomHeader,
+#room.final-reveal-active #progress,
+#room.final-reveal-active #roomInstructions,
+#room.final-reveal-active #helpButton,
+#room.final-reveal-active #soundButton {
   opacity: 0;
-
-  pointer-events:
-    none;
+  pointer-events: none;
 }
 
-#room.final-reveal-active
-.hotspot {
-  pointer-events:
-    none;
+#room.final-reveal-active .hotspot {
+  pointer-events: none;
 }
 
-#room.final-reveal-active
-#roomImage {
-  transform:
-    scale(1.04);
-
-  filter:
-    brightness(0.18)
-    saturate(0.65);
+#room.final-reveal-active #roomImage {
+  transform: scale(1.04);
+  filter: brightness(0.18) saturate(0.65);
 }
 
-#room.final-reveal-active
-.ambient-glow {
+#room.final-reveal-active .ambient-glow {
   opacity: 0;
 }
-
 
 /* ============================= */
 /* FINAL DEVICE LIGHTS */
@@ -3642,104 +1767,55 @@ button,
 
 .final-device-light {
   position: absolute;
-
   z-index: 18;
-
   pointer-events: none;
-
   opacity: 0;
-
-  filter:
-    blur(16px);
-
-  transition:
-    opacity
-    1.2s
-    ease;
+  filter: blur(16px);
+  transition: opacity 1.2s ease;
 }
 
 .final-monitor-light {
-  left: 23%;
-
-  top: 40%;
-
-  width: 28%;
-
+  left: 24%;
+  top: 29%;
+  width: 25%;
   height: 27%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(
-        123,
-        195,
-        255,
-        0.72
-      ),
-      rgba(
-        77,
-        148,
-        255,
-        0.16
-      ) 45%,
-      transparent 72%
-    );
+  background: radial-gradient(
+    ellipse,
+    rgba(123, 195, 255, 0.72),
+    rgba(77, 148, 255, 0.16) 45%,
+    transparent 72%
+  );
 }
 
 .final-tv-light {
-  left: 47%;
-
-  top: 16%;
-
-  width: 25%;
-
-  height: 23%;
-
-  background:
-    radial-gradient(
-      ellipse,
-      rgba(
-        195,
-        216,
-        255,
-        0.48
-      ),
-      transparent 70%
-    );
+  left: 50%;
+  top: 2%;
+  width: 20%;
+  height: 18%;
+  background: radial-gradient(
+    ellipse,
+    rgba(195, 216, 255, 0.48),
+    transparent 70%
+  );
 }
 
-#room.final-lights
-.final-device-light {
+#room.final-lights .final-device-light {
   opacity: 1;
 }
 
-#room.final-lights
-.final-monitor-light {
-  animation:
-    finalScreenGlow
-    3s
-    ease-in-out
-    infinite;
+#room.final-lights .final-monitor-light {
+  animation: finalScreenGlow 3s ease-in-out infinite;
 }
 
-#room.final-lights
-.final-tv-light {
-  animation:
-    finalScreenGlow
-    3.6s
-    ease-in-out
-    infinite
-    reverse;
+#room.final-lights .final-tv-light {
+  animation: finalScreenGlow 3.6s ease-in-out infinite reverse;
 }
 
 @keyframes finalScreenGlow {
-
   50% {
     opacity: 0.55;
   }
-
 }
-
 
 /* ============================= */
 /* FINAL MODAL */
@@ -3751,131 +1827,61 @@ button,
 
 .final-darkness {
   position: absolute;
-
   inset: 0;
-
-  background:
-    rgba(
-      0,
-      0,
-      0,
-      0.48
-    );
+  background: rgba(0, 0, 0, 0.48);
 }
 
 .final-sequence {
   position: relative;
-
   z-index: 2;
-
-  width:
-    min(
-      88vw,
-      760px
-    );
-
-  text-align:
-    center;
-
-  text-shadow:
-    0 3px 35px
-    black;
+  width: min(88vw, 760px);
+  text-align: center;
+  text-shadow: 0 3px 35px black;
 }
 
 .final-counter {
-  margin:
-    0 0 24px;
-
-  font-family:
-    monospace;
-
+  margin: 0 0 24px;
+  font-family: monospace;
   font-size: 9px;
-
-  letter-spacing:
-    0.3em;
-
+  letter-spacing: 0.3em;
   opacity: 0;
-
-  transform:
-    translateY(8px);
-
-  transition:
-    0.65s ease;
+  transform: translateY(8px);
+  transition: 0.65s ease;
 }
 
 .final-counter.visible {
   opacity: 0.55;
-
-  transform:
-    none;
+  transform: none;
 }
 
 #finalHeading {
-  margin:
-    0 auto;
-
-  max-width:
-    760px;
-
-  font-size:
-    clamp(
-      34px,
-      6vw,
-      68px
-    );
-
+  margin: 0 auto;
+  max-width: 760px;
+  font-size: clamp(34px, 6vw, 68px);
   font-weight: 250;
-
-  line-height:
-    1.07;
-
-  letter-spacing:
-    -0.05em;
-
+  line-height: 1.07;
+  letter-spacing: -0.05em;
   opacity: 0;
-
-  transform:
-    translateY(13px);
-
-  transition:
-    opacity
-    0.65s
-    ease,
-    transform
-    0.65s
-    ease;
+  transform: translateY(13px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
 }
 
 #finalHeading.visible {
   opacity: 1;
-
-  transform:
-    none;
+  transform: none;
 }
 
 #finalHeading.fade {
   opacity: 0;
-
-  transform:
-    translateY(-7px);
+  transform: translateY(-7px);
 }
 
 #finalSubtext {
-  min-height:
-    25px;
-
-  margin:
-    20px 0 0;
-
-  font-size:
-    15px;
-
+  min-height: 25px;
+  margin: 20px 0 0;
+  font-size: 15px;
   opacity: 0;
-
-  transition:
-    opacity
-    0.6s
-    ease;
+  transition: opacity 0.6s ease;
 }
 
 #finalSubtext.visible {
@@ -3883,74 +1889,32 @@ button,
 }
 
 #openFinalButton {
-  margin-top:
-    35px;
-
-  padding:
-    12px 24px;
-
-  border:
-    1px solid
-    rgba(
-      255,
-      255,
-      255,
-      0.38
-    );
-
-  background:
-    rgba(
-      0,
-      0,
-      0,
-      0.2
-    );
-
+  margin-top: 35px;
+  padding: 12px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: rgba(0, 0, 0, 0.2);
   color: white;
-
   cursor: pointer;
-
   opacity: 0;
-
-  transform:
-    translateY(12px);
-
-  pointer-events:
-    none;
-
+  transform: translateY(12px);
+  pointer-events: none;
   transition:
-    background
-    0.25s
-    ease,
-    color
-    0.25s
-    ease,
-    opacity
-    0.8s
-    ease,
-    transform
-    0.8s
-    ease;
+    background 0.25s ease,
+    color 0.25s ease,
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 
 #openFinalButton.visible {
   opacity: 1;
-
-  transform:
-    none;
-
-  pointer-events:
-    auto;
+  transform: none;
+  pointer-events: auto;
 }
 
 #openFinalButton:hover {
-  background:
-    white;
-
-  color:
-    black;
+  background: white;
+  color: black;
 }
-
 
 /* ============================= */
 /* FINAL LETTER */
@@ -3958,195 +1922,104 @@ button,
 
 #birthdayMessage {
   position: fixed;
-
   inset: 0;
-
   z-index: 1200;
-
   overflow-y: auto;
-
   padding:
-    max(
-      72px,
-      env(
-        safe-area-inset-top
-      )
-    )
+    max(72px, env(safe-area-inset-top))
     26px
-    max(
-      80px,
-      env(
-        safe-area-inset-bottom
-      )
-    );
-
-  background:
-    #eee8dc;
-
-  color:
-    #211d17;
-
-  animation:
-    letterReveal
-    1.2s
-    ease;
+    max(80px, env(safe-area-inset-bottom));
+  background: #eee8dc;
+  color: #211d17;
+  animation: letterReveal 1.2s ease;
 }
 
 @keyframes letterReveal {
-
   from {
     opacity: 0;
   }
-
 }
 
 #closeBirthdayMessage {
   position: fixed;
-
   right: 25px;
-
   top: 19px;
-
   z-index: 8;
-
   border: 0;
-
-  background:
-    transparent;
-
-  color:
-    #211d17;
-
-  font-size:
-    28px;
-
+  background: transparent;
+  color: #211d17;
+  font-size: 28px;
   cursor: pointer;
 }
 
 .birthday-letter {
-  width:
-    min(
-      100%,
-      660px
-    );
-
-  margin:
-    auto;
+  width: min(100%, 660px);
+  margin: auto;
 }
 
 .letter-date {
-  margin:
-    0 0 18px;
-
-  font-family:
-    Georgia,
-    serif;
-
+  margin: 0 0 18px;
+  font-family: Georgia, serif;
   font-size: 13px;
-
   opacity: 0.45;
 }
 
 .birthday-letter h1 {
-  margin:
-    0 0 35px;
-
-  font-family:
-    Georgia,
-    serif;
-
-  font-size:
-    clamp(
-      44px,
-      8vw,
-      76px
-    );
-
+  margin: 0 0 35px;
+  font-family: Georgia, serif;
+  font-size: clamp(44px, 8vw, 76px);
   font-weight: 400;
-
-  line-height:
-    0.98;
-
-  letter-spacing:
-    -0.045em;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
 }
 
 .letter-divider {
-  margin-bottom:
-    38px;
-
+  margin-bottom: 38px;
   opacity: 0.4;
 }
 
 .birthday-letter > p {
-  font-family:
-    Georgia,
-    serif;
-
-  font-size:
-    17px;
-
-  line-height:
-    1.9;
+  font-family: Georgia, serif;
+  font-size: 17px;
+  line-height: 1.9;
 }
 
 .letter-big-line {
-  margin:
-    35px 0;
-
-  font-size:
-    25px !important;
+  margin: 35px 0;
+  font-size: 25px !important;
 }
 
 .letter-signature {
-  margin-top:
-    50px;
+  margin-top: 50px;
 }
-
 
 /* ============================= */
 /* TABLET */
 /* ============================= */
 
-@media (
-  max-width: 1100px
-) {
-
+@media (max-width: 1100px) {
   .computer {
     width: 95vw;
-
     height: 82vh;
   }
 
   .ambient-glow {
-    filter:
-      blur(14px);
+    filter: blur(14px);
   }
-
 }
-
 
 /* ============================= */
 /* PHONE */
 /* ============================= */
 
-@media (
-  max-width: 700px
-) {
-
+@media (max-width: 700px) {
   #roomInstructions {
     bottom: 55px;
-
     font-size: 8px;
   }
 
   .desktop-icons {
-    grid-template-columns:
-      repeat(
-        2,
-        85px
-      );
-
+    grid-template-columns: repeat(2, 85px);
     top: 43%;
   }
 
@@ -4156,11 +2029,8 @@ button,
 
   .sticky-note {
     right: 4%;
-
     width: 145px;
-
     padding: 15px;
-
     font-size: 9px;
   }
 
@@ -4175,238 +2045,18 @@ button,
   .video-fallback {
     margin-top: 15px;
   }
-
 }
-
 
 /* ============================= */
 /* REDUCED MOTION */
 /* ============================= */
 
-@media (
-  prefers-reduced-motion:
-  reduce
-) {
-
+@media (prefers-reduced-motion: reduce) {
   *,
   *::before,
   *::after {
-    animation-duration:
-      0.01ms !important;
-
-    animation-iteration-count:
-      1 !important;
-
-    transition-duration:
-      0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
-
-}
-
-/* ================================= */
-/* FINAL ROOM FRAMING FIX */
-/* ================================= */
-
-/*
-  Keep the room full-screen,
-  but anchor the photograph to the bottom
-  so the bottom of the source image
-  cannot be cropped away.
-*/
-
-#roomImage {
-  object-fit: cover !important;
-  object-position: center bottom !important;
-
-  transform-origin:
-    center bottom !important;
-}
-
-
-/*
-  Replace the old excessive room zoom.
-
-  Starts with a very small cinematic push-in,
-  then settles at the true cover size.
-*/
-
-@keyframes roomWake {
-
-  0% {
-    transform:
-      scale(1.02);
-
-    filter:
-      brightness(0.66)
-      saturate(0.85);
-  }
-
-  100% {
-    transform:
-      scale(1);
-
-    filter:
-      brightness(1)
-      saturate(1);
-  }
-
-}
-
-
-/*
-  Give the website instruction slightly more
-  breathing room above Safari's bottom edge.
-*/
-
-#roomInstructions {
-  bottom:
-    max(
-      34px,
-      calc(
-        env(safe-area-inset-bottom)
-        + 18px
-      )
-    ) !important;
-}
-
-
-/*
-  Keep help + sound aligned with the
-  safe visible area too.
-*/
-
-#helpButton,
-#soundButton {
-  bottom:
-    max(
-      26px,
-      calc(
-        env(safe-area-inset-bottom)
-        + 12px
-      )
-    ) !important;
-}
-
-/* ================================= */
-/* IPAD SAFARI VIEWPORT FIX */
-/* ================================= */
-
-html,
-body {
-  width: 100%;
-  height: 100dvh;
-  min-height: 100dvh;
-}
-
-#room {
-  top: 0;
-  left: 0;
-
-  width: 100vw;
-  height: 100dvh;
-
-  right: auto;
-  bottom: auto;
-}
-
-#roomCanvas {
-  width: 100%;
-  height: 100%;
-}
-
-#roomImage {
-  width: 100%;
-  height: 100%;
-
-  object-fit: cover !important;
-  object-position: center bottom !important;
-
-  transform-origin: center bottom !important;
-}
-
-
-/* keep the room at true size once loaded */
-
-@keyframes roomWake {
-
-  0% {
-    transform: scale(1.015);
-
-    filter:
-      brightness(0.66)
-      saturate(0.85);
-  }
-
-  100% {
-    transform: scale(1);
-
-    filter:
-      brightness(1)
-      saturate(1);
-  }
-
-}
-
-
-/* keep our own controls inside the visible Safari area */
-
-#roomInstructions {
-  bottom:
-    max(
-      38px,
-      calc(
-        env(safe-area-inset-bottom)
-        + 22px
-      )
-    ) !important;
-}
-
-#helpButton,
-#soundButton {
-  bottom:
-    max(
-      30px,
-      calc(
-        env(safe-area-inset-bottom)
-        + 16px
-      )
-    ) !important;
-}
-
-/* ================================= */
-/* IPAD LANDSCAPE ROOM FRAMING */
-/* ================================= */
-
-@media
-  (min-width: 900px)
-  and (max-width: 1400px)
-  and (orientation: landscape) {
-
-  #roomImage {
-    object-position:
-      center 38% !important;
-  }
-
-  @keyframes roomWake {
-
-    0% {
-      transform:
-        scale(1.01);
-
-      filter:
-        brightness(0.66)
-        saturate(0.85);
-    }
-
-    100% {
-      transform:
-        scale(1);
-
-      filter:
-        brightness(1)
-        saturate(1);
-    }
-
-  }
-
 }
