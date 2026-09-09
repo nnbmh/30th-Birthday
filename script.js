@@ -149,6 +149,8 @@ const modalMap = {
 };
 
 const hotspots = document.querySelectorAll(".hotspot");
+const canHover = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+
 let openingHotspot = false;
 
 /* ============================= */
@@ -181,6 +183,10 @@ function openHotspot(hotspot) {
 
   openingHotspot = true;
 
+  hotspots.forEach((itemHotspot) => {
+    itemHotspot.classList.remove("active");
+  });
+
   initAudio();
   playClick();
 
@@ -208,21 +214,33 @@ function openHotspot(hotspot) {
 /* ============================= */
 
 hotspots.forEach((hotspot) => {
-  hotspot.addEventListener("pointerenter", () => {
-    hotspot.classList.add("active");
-  });
+  if (canHover) {
+    hotspot.addEventListener("pointerenter", () => {
+      hotspots.forEach((itemHotspot) => {
+        itemHotspot.classList.remove("active");
+      });
 
-  hotspot.addEventListener("pointerleave", () => {
-    hotspot.classList.remove("active");
-  });
+      hotspot.classList.add("active");
+    });
+
+    hotspot.addEventListener("pointerleave", () => {
+      hotspot.classList.remove("active");
+    });
+  }
 
   hotspot.addEventListener("pointerdown", () => {
-    hotspot.classList.add("active");
+    hotspots.forEach((itemHotspot) => {
+      itemHotspot.classList.remove("active");
+    });
   });
 
   hotspot.addEventListener("pointerup", (event) => {
     event.preventDefault();
-    hotspot.classList.remove("active");
+
+    hotspots.forEach((itemHotspot) => {
+      itemHotspot.classList.remove("active");
+    });
+
     openHotspot(hotspot);
   });
 
@@ -298,10 +316,12 @@ birthdayVideo.addEventListener("loadedmetadata", () => {
 /* AI CONVERSATION */
 /* ============================= */
 
+const laptopModal = document.getElementById("laptopModal");
 const aiConversation = document.getElementById("aiConversation");
 const aiRevealMessages = document.querySelectorAll("#aiConversation .reveal-message");
 
 let aiTimers = [];
+let aiCloseTimer = null;
 
 const aiMessageDelays = [
   1000,
@@ -326,9 +346,33 @@ const aiMessageDelays = [
   32800
 ];
 
-function runAIConversation() {
+function clearAITimers() {
   aiTimers.forEach((timer) => clearTimeout(timer));
   aiTimers = [];
+
+  if (aiCloseTimer) {
+    clearTimeout(aiCloseTimer);
+    aiCloseTimer = null;
+  }
+}
+
+function closeLaptopAutomatically() {
+  if (!laptopModal.classList.contains("open")) return;
+
+  laptopModal.classList.remove("open");
+  laptopModal.setAttribute("aria-hidden", "true");
+
+  clearRoomFocus();
+
+  if (foundItems.size === 5 && !finalShown) {
+    setTimeout(() => {
+      startFinalReveal();
+    }, 350);
+  }
+}
+
+function runAIConversation() {
+  clearAITimers();
 
   aiRevealMessages.forEach((message) => {
     message.classList.remove("revealed");
@@ -350,6 +394,12 @@ function runAIConversation() {
             behavior: "smooth"
           });
         }, 260);
+      }
+
+      if (index === aiRevealMessages.length - 1) {
+        aiCloseTimer = setTimeout(() => {
+          closeLaptopAutomatically();
+        }, 3000);
       }
     }, delay);
 
@@ -421,6 +471,10 @@ document.querySelectorAll("[data-close]").forEach((button) => {
 
     modal.classList.remove("open");
     modal.setAttribute("aria-hidden", "true");
+
+    if (modal === laptopModal) {
+      clearAITimers();
+    }
 
     if (birthdayVideo && !birthdayVideo.paused) {
       birthdayVideo.pause();
