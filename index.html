@@ -23,9 +23,7 @@
 <body>
 
 
-  <!-- ============================= -->
   <!-- LOADING -->
-  <!-- ============================= -->
 
   <div id="loadingScreen">
 
@@ -53,9 +51,7 @@
 
 
 
-  <!-- ============================= -->
   <!-- INTRO -->
-  <!-- ============================= -->
 
   <div
     id="introScreen"
@@ -91,9 +87,7 @@
 
 
 
-  <!-- ============================= -->
   <!-- ROOM -->
-  <!-- ============================= -->
 
   <main id="room">
 
@@ -106,8 +100,6 @@
         draggable="false"
       >
 
-
-      <!-- ROOM ATMOSPHERE -->
 
       <div
         class="ambient-glow monitor-ambient"
@@ -125,8 +117,6 @@
       ></div>
 
 
-      <!-- FINAL REVEAL LIGHTS -->
-
       <div
         class="final-device-light final-monitor-light"
         aria-hidden="true"
@@ -138,8 +128,6 @@
       ></div>
 
 
-      <!-- MONITOR -->
-
       <button
         class="hotspot"
         id="monitorHotspot"
@@ -149,8 +137,6 @@
         <span class="hotspot-dot"></span>
       </button>
 
-
-      <!-- TV -->
 
       <button
         class="hotspot"
@@ -162,8 +148,6 @@
       </button>
 
 
-      <!-- PANDA -->
-
       <button
         class="hotspot"
         id="pandaHotspot"
@@ -174,8 +158,6 @@
       </button>
 
 
-      <!-- LAPTOP -->
-
       <button
         class="hotspot"
         id="laptopHotspot"
@@ -185,8 +167,6 @@
         <span class="hotspot-dot"></span>
       </button>
 
-
-      <!-- STICKY NOTE -->
 
       <button
         class="hotspot"
@@ -200,11 +180,6 @@
     </div>
 
 
-
-    <!-- ============================= -->
-    <!-- ROOM UI -->
-    <!-- ============================= -->
-
     <header id="roomHeader">
 
       <h2>
@@ -216,7 +191,6 @@
       </p>
 
     </header>
-
 
 
     <div id="progress">
@@ -238,11 +212,9 @@
     </div>
 
 
-
     <button id="helpButton">
       ? help
     </button>
-
 
 
     <button
@@ -251,7 +223,6 @@
     >
       ◉ sound on
     </button>
-
 
 
     <div id="roomInstructions">
@@ -270,9 +241,7 @@
 
 
 
-  <!-- ============================= -->
   <!-- FOCUS TRANSITION -->
-  <!-- ============================= -->
 
   <div
     id="focusTransition"
@@ -285,9 +254,7 @@
 
 
 
-  <!-- ============================= -->
   <!-- COMPUTER -->
-  <!-- ============================= -->
 
   <section
     class="modal"
@@ -327,7 +294,6 @@
       </div>
 
 
-
       <div
         id="computerDesktop"
         class="computer-interface"
@@ -344,7 +310,6 @@
           </button>
 
         </div>
-
 
 
         <div class="desktop">
@@ -364,7 +329,6 @@
             </p>
 
           </div>
-
 
 
           <div class="desktop-icons">
@@ -427,7 +391,6 @@
           </div>
 
 
-
           <div class="sticky-note">
 
             30 already sia sayang...
@@ -442,7 +405,6 @@
             </span>
 
           </div>
-
 
 
           <div class="taskbar">
@@ -467,9 +429,7 @@
 
 
 
-  <!-- ============================= -->
   <!-- COMPUTER APP -->
-  <!-- ============================= -->
 
   <section
     id="appWindow"
@@ -494,9 +454,7 @@
 
 
 
-  <!-- ============================= -->
   <!-- TV -->
-  <!-- ============================= -->
 
   <section
     class="modal"
@@ -534,7 +492,6 @@
       </div>
 
 
-
       <div
         id="tvStatic"
         class="tv-static"
@@ -547,7 +504,6 @@
         </p>
 
       </div>
-
 
 
       <div
@@ -595,10 +551,12 @@
           playsinline
           preload="metadata"
         >
+
           <source
             src="assets/birthday-video.mp4"
             type="video/mp4"
           >
+
         </video>
 
       </div>
@@ -609,9 +567,7 @@
 
 
 
-  <!-- ============================= -->
-  <!-- LAPTOP / AI -->
-  <!-- ============================= -->
+  <!-- LAPTOP -->
 
   <section
     class="modal"
@@ -646,7 +602,6 @@
       </div>
 
 
-
       <div
         id="aiConversation"
         class="ai-conversation"
@@ -656,62 +611,40 @@
           how old is faris today?
         </div>
 
-        <div
-          class="ai-message assistant-message reveal-message"
-          data-delay="600"
-        >
+        <div class="ai-message assistant-message reveal-message">
           30.
         </div>
 
-        <div
-          class="ai-message user-message reveal-message"
-          data-delay="1200"
-        >
+        <div class="ai-message user-message reveal-message">
           are you sure?
         </div>
 
-        <div
-          class="ai-message assistant-message reveal-message"
-          data-delay="1850"
-        >
+        <div class="ai-message assistant-message reveal-message">
           unfortunately, yes.
         </div>
 
-        <div
-          class="ai-message user-message reveal-message"
-          data-delay="2500"
-        >
+        <div class="ai-message user-message reveal-message">
           is that considered elderly
         </div>
 
-        <div
-          class="ai-message assistant-message reveal-message"
-          data-delay="3200"
-        >
+        <div class="ai-message assistant-message reveal-message">
           medically? no.
           <br><br>
           according to his girlfriend?
           ancient.
         </div>
 
-        <div
-          class="ai-message user-message reveal-message"
-          data-delay="4100"
-        >
+        <div class="ai-message user-message reveal-message">
           what should i do about it
         </div>
 
-        <div
-          class="ai-message assistant-message reveal-message special-ai"
-          data-delay="4850"
-        >
+        <div class="ai-message assistant-message reveal-message special-ai">
           keep him.
           <br><br>
           apparently youre quite fond of this one.
         </div>
 
       </div>
-
 
 
       <div class="ai-input">
@@ -732,9 +665,7 @@
 
 
 
-  <!-- ============================= -->
   <!-- PANDA -->
-  <!-- ============================= -->
 
   <section
     class="modal"
@@ -773,6 +704,7 @@
         <div class="panda-head">
 
           <div class="panda-eye left"></div>
+
           <div class="panda-eye right"></div>
 
           <div class="panda-nose"></div>
@@ -786,7 +718,6 @@
       </div>
 
 
-
       <p class="panda-intro">
         excuse me baboy.
       </p>
@@ -796,11 +727,9 @@
       </p>
 
 
-
       <button id="openPandaDelivery">
         open delivery
       </button>
-
 
 
       <div
@@ -835,10 +764,12 @@
             id="pandaAudio"
             preload="metadata"
           >
+
             <source
               src="assets/panda-message.m4a"
               type="audio/mp4"
             >
+
           </audio>
 
           <small id="pandaAudioStatus">
@@ -856,9 +787,7 @@
 
 
 
-  <!-- ============================= -->
   <!-- NOTE -->
-  <!-- ============================= -->
 
   <section
     class="modal note-modal"
@@ -915,9 +844,7 @@
 
 
 
-  <!-- ============================= -->
   <!-- HELP -->
-  <!-- ============================= -->
 
   <section
     class="modal"
@@ -970,9 +897,7 @@
 
 
 
-  <!-- ============================= -->
-  <!-- FINAL 5/5 REVEAL -->
-  <!-- ============================= -->
+  <!-- FINAL -->
 
   <section
     class="modal final-modal"
@@ -1011,9 +936,7 @@
 
 
 
-  <!-- ============================= -->
-  <!-- FINAL BIRTHDAY MESSAGE -->
-  <!-- ============================= -->
+  <!-- FINAL MESSAGE -->
 
   <section
     id="birthdayMessage"
@@ -1030,7 +953,6 @@
       <p class="eyebrow">
         FOR FARIS
       </p>
-
 
       <p class="letter-date">
         18 September 2026
@@ -1087,8 +1009,7 @@
   </section>
 
 
-
-  <script src="script.js?v=40"></script>
+  <script src="script.js?v=41"></script>
 
 </body>
 
