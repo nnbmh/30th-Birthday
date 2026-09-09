@@ -432,18 +432,20 @@ function playTypingBurst() {
 }
 
 /* ============================= */
-/* PANDA DELIVERY */
+/* PANDA / OREO DELIVERY */
 /* ============================= */
 
 const openPandaDelivery = document.getElementById("openPandaDelivery");
 const pandaMessage = document.getElementById("pandaMessage");
-const playPandaAudio = document.getElementById("playPandaAudio");
-const pandaAudio = document.getElementById("pandaAudio");
-const pandaAudioStatus = document.getElementById("pandaAudioStatus");
+const pandaDelivery = document.querySelector(".panda-delivery");
 
 function resetPanda() {
   pandaMessage.classList.add("hidden");
   openPandaDelivery.classList.remove("hidden");
+
+  if (pandaDelivery) {
+    pandaDelivery.scrollTop = 0;
+  }
 }
 
 openPandaDelivery.addEventListener("click", () => {
@@ -454,21 +456,13 @@ openPandaDelivery.addEventListener("click", () => {
 
   playTone(520, 0.1, 0.015, "sine");
   playTone(690, 0.14, 0.013, "sine", 0.08);
-});
 
-playPandaAudio.addEventListener("click", async () => {
-  try {
-    await pandaAudio.play();
-    pandaAudioStatus.textContent = "playing message from sayang ♡";
-    playPandaAudio.textContent = "playing...";
-  } catch {
-    pandaAudioStatus.textContent =
-      "no recording uploaded yet... add assets/panda-message.m4a later";
-  }
-});
-
-pandaAudio.addEventListener("ended", () => {
-  playPandaAudio.textContent = "play again";
+  setTimeout(() => {
+    pandaMessage.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  }, 80);
 });
 
 /* ============================= */
@@ -492,10 +486,6 @@ document.querySelectorAll("[data-close]").forEach((button) => {
 
     if (birthdayVideo && !birthdayVideo.paused) {
       birthdayVideo.pause();
-    }
-
-    if (pandaAudio && !pandaAudio.paused) {
-      pandaAudio.pause();
     }
 
     clearRoomFocus();
