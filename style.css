@@ -4372,3 +4372,41 @@ body {
       )
     ) !important;
 }
+
+/* ================================= */
+/* IPAD LANDSCAPE ROOM FRAMING */
+/* ================================= */
+
+@media
+  (min-width: 900px)
+  and (max-width: 1400px)
+  and (orientation: landscape) {
+
+  #roomImage {
+    object-position:
+      center 38% !important;
+  }
+
+  @keyframes roomWake {
+
+    0% {
+      transform:
+        scale(1.01);
+
+      filter:
+        brightness(0.66)
+        saturate(0.85);
+    }
+
+    100% {
+      transform:
+        scale(1);
+
+      filter:
+        brightness(1)
+        saturate(1);
+    }
+
+  }
+
+}
