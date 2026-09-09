@@ -736,7 +736,6 @@ const computerBoot =
     "computerBoot"
   );
 
-
 function runComputerBoot() {
 
   computerBoot.classList.remove(
@@ -744,10 +743,18 @@ function runComputerBoot() {
   );
 
 
-  /*
-    BEFORE: 1750ms
-    NOW: 700ms
-  */
+  setTimeout(
+    () => {
+
+      computerBoot.classList.add(
+        "finished"
+      );
+
+    },
+    250
+  );
+
+}
 
   setTimeout(
     () => {
