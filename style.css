@@ -2216,3 +2216,69 @@ button,
   letter-spacing: 0.13em;
   line-height: 1.4;
 }
+
+/* ============================= */
+/* DESKTOP READABILITY FIXES */
+/* ============================= */
+
+/* Natural, easier-to-click close buttons */
+.window-bar button,
+.ai-topbar button,
+.card-close,
+.paper-close,
+.tv-close,
+.app-titlebar button {
+  width: 32px !important;
+  height: 32px !important;
+  min-width: 32px !important;
+  padding: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 4px !important;
+  font-size: 17px !important;
+  line-height: 1 !important;
+  cursor: pointer !important;
+}
+
+/* Keep the computer title-bar X proportional */
+.window-bar button {
+  width: 34px !important;
+  height: 100% !important;
+  min-width: 34px !important;
+}
+
+/* Slight hover feedback for mouse users */
+.window-bar button:hover,
+.ai-topbar button:hover,
+.card-close:hover,
+.paper-close:hover,
+.tv-close:hover,
+.app-titlebar button:hover {
+  background: rgba(255, 255, 255, 0.09) !important;
+}
+
+/* FARIS-PC boot screen: larger but still restrained */
+.computer-boot .boot-logo {
+  font-size: 38px !important;
+  margin-bottom: 16px !important;
+}
+
+.computer-boot > p {
+  font-size: 15px !important;
+  letter-spacing: 0.18em !important;
+  margin: 0 0 20px !important;
+}
+
+.computer-boot .boot-line {
+  width: min(38vw, 360px) !important;
+  height: 2px !important;
+  margin-bottom: 15px !important;
+}
+
+.computer-boot small {
+  font-size: 10px !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.02em !important;
+  opacity: 0.5 !important;
+}
