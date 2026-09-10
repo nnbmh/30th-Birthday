@@ -684,6 +684,57 @@ const closeBirthdayMessage = document.getElementById("closeBirthdayMessage");
 
 let finalShown = false;
 
+/* Create the button Faris can use to read the final message again */
+const replayBirthdayButton = document.createElement("button");
+replayBirthdayButton.id = "replayBirthdayButton";
+replayBirthdayButton.textContent = "♡ birthday message";
+
+Object.assign(replayBirthdayButton.style, {
+  position: "absolute",
+  right: "20px",
+  bottom: "55px",
+  zIndex: "80",
+  padding: "9px 13px",
+  border: "1px solid rgba(255,255,255,0.18)",
+  borderRadius: "999px",
+  background: "rgba(0,0,0,0.42)",
+  backdropFilter: "blur(12px)",
+  WebkitBackdropFilter: "blur(12px)",
+  color: "white",
+  fontFamily: "monospace",
+  fontSize: "9px",
+  cursor: "pointer",
+  opacity: "0",
+  visibility: "hidden",
+  transition: "opacity .4s ease"
+});
+
+room.appendChild(replayBirthdayButton);
+
+function showBirthdayReplayButton() {
+  replayBirthdayButton.style.visibility = "visible";
+
+  requestAnimationFrame(() => {
+    replayBirthdayButton.style.opacity = "0.72";
+  });
+}
+
+function restoreRoomAfterFinal() {
+  room.classList.remove("final-reveal-active", "final-lights");
+  clearRoomFocus();
+
+  hotspots.forEach((hotspot) => {
+    hotspot.style.pointerEvents = "";
+    hotspot.disabled = false;
+    hotspot.classList.remove("active");
+  });
+
+  focusTransition.classList.remove("active");
+  openingHotspot = false;
+
+  showBirthdayReplayButton();
+}
+
 function startFinalReveal() {
   if (finalShown) return;
 
@@ -695,7 +746,8 @@ function startFinalReveal() {
   });
 
   appWindow.classList.remove("open");
-  room.classList.add("final-reveal-active");
+
+  room.classList.add("final-reveal-active", "final-lights");
 
   finalModal.classList.add("open");
   finalModal.setAttribute("aria-hidden", "false");
@@ -703,20 +755,35 @@ function startFinalReveal() {
   finalCounter.textContent = "5 / 5 FOUND";
   finalHeading.textContent = "";
   finalSubtext.textContent = "";
+
+  finalCounter.classList.remove("visible");
+  finalHeading.classList.remove("visible", "fade");
+  finalSubtext.classList.remove("visible");
   openFinalButton.classList.remove("visible");
 
   playFinalChime();
 
   setTimeout(() => {
+    finalCounter.classList.add("visible");
+  }, 350);
+
+  setTimeout(() => {
     finalHeading.textContent = "you actually found everything...";
+    finalHeading.classList.add("visible");
   }, 1000);
 
   setTimeout(() => {
     finalSubtext.textContent = "of course you did. nosy.";
+    finalSubtext.classList.add("visible");
   }, 2400);
 
   setTimeout(() => {
+    finalSubtext.classList.remove("visible");
+  }, 3350);
+
+  setTimeout(() => {
     finalSubtext.textContent = "theres one more thing, sayang.";
+    finalSubtext.classList.add("visible");
   }, 3900);
 
   setTimeout(() => {
@@ -737,5 +804,14 @@ closeBirthdayMessage.addEventListener("click", () => {
   playClick();
 
   birthdayMessage.classList.add("hidden");
-  room.classList.remove("final-reveal-active");
+
+  /* THIS is the important part:
+     completely return the room to normal */
+  restoreRoomAfterFinal();
+});
+
+replayBirthdayButton.addEventListener("click", () => {
+  playClick();
+
+  birthdayMessage.classList.remove("hidden");
 });
