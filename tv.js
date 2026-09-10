@@ -25,36 +25,41 @@
     "MORE BIRTHDAY COVERAGE TO FOLLOW"
   ];
 
-  const anchorScene = ({
+  function anchorScene({
     label,
     headline,
     subline,
     lowerLabel,
     lowerHeadline,
-    lowerSubline = ""
-  }) => `
-    <div class="news-slide">
-      <div class="broadcast-scene">
-        <div class="anchor-zone">
-          <div class="anchor-label">BBN NEWSROOM • LIVE</div>
-        </div>
-
-        <div class="studio-side-panel">
-          <p class="small-label">${label}</p>
-          <h2>${headline}</h2>
-          ${subline ? `<p>${subline}</p>` : ""}
-        </div>
-
-        <div class="lower-third">
-          <div class="lower-breaking">${lowerLabel}</div>
-          <div class="lower-main">
-            <h1>${lowerHeadline}</h1>
+    lowerSubline = "",
+    camera = "camera-wide"
+  }) {
+    return `
+      <div class="news-slide">
+        <div class="broadcast-scene">
+          <div class="studio-camera ${camera}">
+            <div class="studio-side-panel">
+              <p class="small-label">${label}</p>
+              <h2>${headline}</h2>
+              ${subline ? `<p>${subline}</p>` : ""}
+            </div>
           </div>
-          ${lowerSubline ? `<div class="lower-sub">${lowerSubline}</div>` : ""}
+
+          <div class="anchor-label">BBN NEWSROOM • LIVE</div>
+
+          <div class="lower-third">
+            <div class="lower-breaking">${lowerLabel}</div>
+
+            <div class="lower-main">
+              <h1>${lowerHeadline}</h1>
+            </div>
+
+            ${lowerSubline ? `<div class="lower-sub">${lowerSubline}</div>` : ""}
+          </div>
         </div>
       </div>
-    </div>
-  `;
+    `;
+  }
 
   const slides = [
     {
@@ -64,7 +69,8 @@
         subline: "Birthday celebrations are officially underway.",
         lowerLabel: "BREAKING NEWS",
         lowerHeadline: "Faris turns 30",
-        lowerSubline: "Sources in Singapore confirm celebrations are underway"
+        lowerSubline: "Sources in Singapore confirm celebrations are underway",
+        camera: "camera-wide"
       })
     },
 
@@ -74,7 +80,8 @@
         headline: "Birthday celebrations underway",
         subline: "The birthday boy is reported to be in good spirits.",
         lowerLabel: "LIVE",
-        lowerHeadline: "Birthday coverage continues"
+        lowerHeadline: "Birthday coverage continues",
+        camera: "camera-medium"
       })
     },
 
@@ -83,7 +90,9 @@
         <div class="news-slide">
           <div class="news-package">
             <span class="package-kicker">BBN SPECIAL REPORT</span>
+
             <h1 class="package-title">THE FARIS FILES</h1>
+
             <p class="package-copy">
               Our investigation into the birthday boy has uncovered several behaviours that experts have described as... uniquely Faris.
             </p>
@@ -159,7 +168,8 @@
         headline: "Random objects remain at risk",
         subline: "Investigators continue to examine unusual chewing behaviour.",
         lowerLabel: "DEVELOPING",
-        lowerHeadline: "Random objects advised to remain vigilant"
+        lowerHeadline: "Random objects advised to remain vigilant",
+        camera: "camera-medium"
       })
     },
 
@@ -170,7 +180,8 @@
         subline: "Food intake and hydration remain under active supervision.",
         lowerLabel: "SAYANG WATCH",
         lowerHeadline: "“you eat already or not?”",
-        lowerSubline: "Follow-up instruction: “drink more water.”"
+        lowerSubline: "Follow-up instruction: “drink more water.”",
+        camera: "camera-wide"
       })
     },
 
@@ -179,6 +190,7 @@
         <div class="news-slide">
           <div class="info-board">
             <p class="board-kicker">BBN DATA</p>
+
             <h2>SAYANG WELFARE PROGRAMME</h2>
 
             <div class="info-row">
@@ -207,7 +219,8 @@
         subline: "Recognition rate remains suspiciously high.",
         lowerLabel: "ANALYSIS",
         lowerHeadline: "Musical identification rate",
-        lowerSubline: "annoyingly high"
+        lowerSubline: "annoyingly high",
+        camera: "camera-medium"
       })
     },
 
@@ -216,6 +229,7 @@
         <div class="news-slide">
           <div class="music-card">
             <span class="package-kicker">BBN ARCHIVE</span>
+
             <h2>ARCHIVED AUDIO TRANSCRIPT</h2>
 
             <div class="music-transcript">
@@ -238,6 +252,7 @@
         <div class="news-slide">
           <div class="info-board numbers-board">
             <p class="board-kicker">BBN DATA DESK</p>
+
             <h2>FARIS BY THE NUMBERS</h2>
 
             <div class="info-row">
@@ -300,7 +315,8 @@
         headline: "10,827 km apart",
         subline: "Late-night Discord activity continues despite the distance.",
         lowerLabel: "LATE NIGHT",
-        lowerHeadline: "Calls reportedly continue until 3–4am"
+        lowerHeadline: "Calls reportedly continue until 3–4am",
+        camera: "camera-wide"
       })
     },
 
@@ -319,9 +335,11 @@
 
             <div class="lower-third">
               <div class="lower-breaking">BREAKING</div>
+
               <div class="lower-main">
                 <h1>Sayang caught being nice</h1>
               </div>
+
               <div class="lower-sub">
                 Unfortunately for the source, the statement has now been broadcast internationally
               </div>
@@ -338,7 +356,8 @@
         subline: "Faris is very, very loved.",
         lowerLabel: "CONFIRMED",
         lowerHeadline: "Faris is very, very loved",
-        lowerSubline: "Particularly by one woman approximately 10,827 kilometres away"
+        lowerSubline: "Particularly by one woman approximately 10,827 kilometres away",
+        camera: "camera-medium"
       })
     },
 
@@ -373,6 +392,7 @@
 
           <div class="lower-third">
             <div class="lower-breaking">EXCLUSIVE FOOTAGE</div>
+
             <div class="lower-main">
               <h1>Faris: 30 Years in the Making</h1>
             </div>
@@ -388,7 +408,11 @@
           <div class="final-broadcast">
             <div>
               <p class="final-kicker">BBN SPECIAL COVERAGE</p>
-              <h1>HAPPY 30TH<br>BIRTHDAY, FARIS</h1>
+
+              <h1>
+                HAPPY 30TH<br>
+                BIRTHDAY, FARIS
+              </h1>
 
               <p>This concludes our special birthday coverage.</p>
               <p>Further celebrations are expected throughout the day.</p>
@@ -423,7 +447,6 @@
     const slide = slides[currentNewsSlide];
 
     newsScreen.innerHTML = slide.html;
-
     buildTicker();
     restartTicker();
 
