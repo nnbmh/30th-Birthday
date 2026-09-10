@@ -186,10 +186,8 @@
 }
 
 .news-logo strong {
-  flex: 0 0 auto;
   padding: 6px 10px;
   border: 1px solid rgba(255, 255, 255, 0.85);
-  background: transparent;
   color: white;
   font-size: 19px;
   font-weight: 900;
@@ -226,7 +224,7 @@
   50% { opacity: 1; }
 }
 
-/* SCREEN */
+/* MAIN NEWS AREA */
 
 .news-screen {
   position: relative;
@@ -251,7 +249,7 @@
   to { opacity: 1; }
 }
 
-/* REAL NEWSROOM */
+/* STATIC REAL NEWSROOM */
 
 .broadcast-scene {
   position: relative;
@@ -283,7 +281,7 @@
   letter-spacing: 0.11em;
 }
 
-/* TEXT INSIDE BLANK STUDIO MONITOR */
+/* TEXT INSIDE STUDIO MONITOR */
 
 .studio-side-panel {
   position: absolute;
@@ -293,8 +291,8 @@
   height: 38%;
   padding: 2.6% 2.7%;
   overflow: hidden;
-  background: transparent;
   border: 0;
+  background: transparent;
   box-shadow: none;
 }
 
@@ -359,7 +357,6 @@
 
 .lower-main h1 {
   margin: 0;
-  max-width: calc(100% - 145px);
   font-size: clamp(21px, 2.6vw, 33px);
   font-weight: 800;
   line-height: 1;
@@ -376,7 +373,7 @@
   font-size: clamp(10px, 1vw, 13px);
 }
 
-/* FULLSCREEN REPORT GRAPHICS */
+/* FULLSCREEN REPORT */
 
 .news-package {
   position: relative;
@@ -539,7 +536,7 @@
 .info-board {
   width: 100%;
   height: 100%;
-  padding: 33px 42px 50px;
+  padding: 30px 42px 38px;
   overflow: auto;
   background:
     radial-gradient(circle at 82% 20%, rgba(54, 110, 150, 0.25), transparent 34%),
@@ -558,8 +555,8 @@
   display: grid;
   grid-template-columns: 58% 42%;
   align-items: center;
-  min-height: 46px;
-  padding: 6px 0;
+  min-height: 43px;
+  padding: 5px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.11);
 }
 
@@ -572,6 +569,36 @@
   color: white;
   font-size: clamp(16px, 1.65vw, 21px);
   text-align: right;
+}
+
+/* Keep all ten number rows visible above control bar */
+
+.numbers-board {
+  padding: 20px 42px 18px;
+  overflow: hidden;
+}
+
+.numbers-board .board-kicker {
+  margin-bottom: 9px;
+}
+
+.numbers-board h2 {
+  margin-bottom: 8px;
+  padding-bottom: 9px;
+  font-size: clamp(27px, 3.5vw, 43px);
+}
+
+.numbers-board .info-row {
+  min-height: 34px;
+  padding: 3px 0;
+}
+
+.numbers-board .info-row span {
+  font-size: clamp(12px, 1.25vw, 16px);
+}
+
+.numbers-board .info-row strong {
+  font-size: clamp(14px, 1.4vw, 18px);
 }
 
 /* MUSIC */
@@ -669,14 +696,6 @@
   object-fit: contain;
 }
 
-.news-video-stage .video-fallback {
-  width: 100%;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-}
-
 /* FINAL */
 
 .final-broadcast {
@@ -714,22 +733,33 @@
   font-size: clamp(17px, 1.8vw, 22px);
 }
 
-/* CONTINUE BUTTON */
+/* ================================= */
+/* CONTINUE BAR — NEVER OVERLAPS */
+/* ================================= */
 
 .news-controls {
-  position: absolute;
-  right: 15px;
-  bottom: 47px;
-  z-index: 190;
+  position: relative !important;
+  right: auto !important;
+  bottom: auto !important;
+  z-index: 170;
+  flex: 0 0 38px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  min-height: 38px;
+  padding: 0 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: #0c151f;
 }
 
 #newsNextButton {
-  min-width: 113px;
-  min-height: 32px;
-  padding: 0 13px;
-  border: 1px solid rgba(255, 255, 255, 0.28);
+  min-width: 108px;
+  min-height: 27px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 3px;
-  background: rgba(4, 10, 17, 0.9);
+  background: #15222e;
   color: white;
   font-size: 9px;
   font-weight: 850;
@@ -800,7 +830,7 @@
   to { transform: translateX(-50%); }
 }
 
-/* IPAD */
+/* IPAD / SMALL LANDSCAPE */
 
 @media (max-width: 850px) {
   #tvModal {
@@ -883,7 +913,30 @@
   }
 
   .info-board {
-    padding: 24px 28px 55px;
+    padding: 22px 28px 25px;
+  }
+
+  .numbers-board {
+    padding: 15px 28px 12px;
+  }
+
+  .numbers-board h2 {
+    margin-bottom: 5px;
+    padding-bottom: 7px;
+    font-size: 28px;
+  }
+
+  .numbers-board .info-row {
+    min-height: 29px;
+    padding: 2px 0;
+  }
+
+  .numbers-board .info-row span {
+    font-size: 12px;
+  }
+
+  .numbers-board .info-row strong {
+    font-size: 13px;
   }
 
   .lower-main {
@@ -892,7 +945,6 @@
   }
 
   .lower-main h1 {
-    max-width: calc(100% - 120px);
     font-size: clamp(19px, 3vw, 27px);
   }
 
@@ -903,13 +955,14 @@
   }
 
   .news-controls {
-    right: 10px;
-    bottom: 43px;
+    flex-basis: 34px;
+    min-height: 34px;
+    padding: 0 9px;
   }
 
   #newsNextButton {
-    min-width: 101px;
-    min-height: 30px;
+    min-width: 98px;
+    min-height: 24px;
     font-size: 8px;
   }
 
