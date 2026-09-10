@@ -12,9 +12,18 @@
   let currentNewsSlide = 0;
   let tvTimers = [];
 
+  /* BBN BRAND OVERRIDE */
+  const bbnStyle = document.createElement("style");
+  bbnStyle.textContent = `
+    .studio-background::after {
+      content: "BBN" !important;
+    }
+  `;
+  document.head.appendChild(bbnStyle);
+
   const slides = [
     {
-      ticker: "FARIS TURNS 30 • SAYANG MONITORING SITUATION FROM 10,827 KM AWAY • MORE TO FOLLOW",
+      ticker: "BBN NEWS • FARIS TURNS 30 • SAYANG MONITORING SITUATION FROM 10,827 KM AWAY • BIRTHDAY BOY REPORTED TO BE IN GOOD SPIRITS • LIVE FROM THE UNITED KINGDOM • BBN NEWS • FARIS TURNS 30 • SAYANG MONITORING SITUATION FROM 10,827 KM AWAY",
       html: `
         <div class="news-slide">
           <div class="broadcast-scene">
@@ -46,7 +55,7 @@
     },
 
     {
-      ticker: "BREAKING • FARIS TURNS 30 • BIRTHDAY BOY REPORTED TO BE IN GOOD SPIRITS",
+      ticker: "BBN NEWS • FARIS TURNS 30 • BIRTHDAY BOY REPORTED TO BE IN GOOD SPIRITS • SOURCES IN SINGAPORE CONFIRM CELEBRATIONS • LIVE FROM THE UNITED KINGDOM • BBN NEWS • FARIS TURNS 30",
       html: `
         <div class="news-slide">
           <div class="broadcast-scene">
@@ -57,7 +66,7 @@
                 <div class="anchor-head"></div>
                 <div class="anchor-body"></div>
               </div>
-              <div class="anchor-label">BDN NEWSROOM • LIVE</div>
+              <div class="anchor-label">BBN NEWSROOM • LIVE</div>
             </div>
 
             <div class="studio-side-panel">
@@ -80,7 +89,7 @@
     },
 
     {
-      ticker: "SPECIAL REPORT • THE FARIS FILES • INVESTIGATION NOW UNDERWAY",
+      ticker: "BBN SPECIAL REPORT • THE FARIS FILES • INVESTIGATION INTO BIRTHDAY SUBJECT NOW UNDERWAY • EXPERTS DESCRIBE FINDINGS AS UNIQUELY FARIS • BBN SPECIAL REPORT • THE FARIS FILES",
       html: `
         <div class="news-slide">
           <div class="news-package">
@@ -92,7 +101,7 @@
             </p>
 
             <div class="lower-third">
-              <div class="lower-breaking">SPECIAL REPORT</div>
+              <div class="lower-breaking">BBN INVESTIGATION</div>
               <div class="lower-main">
                 <h1>The Faris Files</h1>
               </div>
@@ -104,7 +113,7 @@
     },
 
     {
-      ticker: "DEVELOPING • SUBJECT PROFILE RELEASED • RELATIONSHIP STATUS CONFIRMED AS VERY TAKEN",
+      ticker: "BBN NEWS • SUBJECT PROFILE RELEASED • FARIS, 30, UNITED KINGDOM • MUSICAL KNOWLEDGE SUSPICIOUSLY EXTENSIVE • RELATIONSHIP STATUS CONFIRMED AS VERY TAKEN • BBN NEWS",
       html: `
         <div class="news-slide">
           <div class="profile-package">
@@ -135,7 +144,7 @@
     },
 
     {
-      ticker: "DEVELOPING • RANDOM OBJECTS ADVISED TO REMAIN VIGILANT",
+      ticker: "BBN DEVELOPING • RANDOM OBJECTS ADVISED TO REMAIN VIGILANT • INVESTIGATORS UNABLE TO EXPLAIN CHEWING BEHAVIOUR • SIMPLE TASKS REPORTEDLY TAKING THREE BUSINESS DAYS • BBN DEVELOPING",
       html: `
         <div class="news-slide">
           <div class="news-package">
@@ -163,7 +172,7 @@
     },
 
     {
-      ticker: "WELFARE REPORT • SAYANG FOOD AND HYDRATION STATUS UNDER ACTIVE SUPERVISION",
+      ticker: "BBN NEWS • SAYANG WELFARE CHECKS CONTINUE • FOOD INTAKE MONITORED • HYDRATION AGGRESSIVELY MONITORED • RESPONSIBLE OFFICER IDENTIFIED AS FARIS • BBN NEWS",
       html: `
         <div class="news-slide">
           <div class="news-package">
@@ -181,7 +190,7 @@
             <div class="big-quote">“drink more water.”</div>
 
             <div class="lower-third">
-              <div class="lower-breaking">WELFARE</div>
+              <div class="lower-breaking">BBN REPORT</div>
               <div class="lower-main">
                 <h1>Sayang welfare checks continue</h1>
               </div>
@@ -193,7 +202,7 @@
     },
 
     {
-      ticker: "SAYANG WELFARE PROGRAMME • HYDRATION AGGRESSIVELY MONITORED",
+      ticker: "BBN DATA • SAYANG WELFARE PROGRAMME • FOOD INTAKE MONITORED • HYDRATION AGGRESSIVELY MONITORED • RESPONSIBLE OFFICER: FARIS • BBN DATA • SAYANG WELFARE PROGRAMME",
       html: `
         <div class="news-slide">
           <div class="info-board">
@@ -219,7 +228,7 @@
     },
 
     {
-      ticker: "MUSIC INVESTIGATION • IDENTIFICATION RATE DESCRIBED AS ANNOYINGLY HIGH",
+      ticker: "BBN CULTURE • MUSICAL IDENTIFICATION RATE DESCRIBED AS ANNOYINGLY HIGH • WITNESSES SAY SUBJECT SOMEHOW KNOWS ALMOST EVERY SONG • EXPERTS BAFFLED • BBN CULTURE",
       html: `
         <div class="news-slide">
           <div class="music-card">
@@ -249,7 +258,7 @@
     },
 
     {
-      ticker: "ARCHIVED AUDIO RECOVERED • NO LEGAL ACTION HAS BEEN TAKEN",
+      ticker: "BBN ARCHIVE • PREVIOUSLY UNHEARD AUDIO RECOVERED • UNAUTHORISED CHAN MALI CHAN ADAPTATION UNDER REVIEW • NO LEGAL ACTION HAS BEEN TAKEN • BBN ARCHIVE",
       html: `
         <div class="news-slide">
           <div class="music-card">
@@ -268,7 +277,7 @@
           </div>
 
           <div class="lower-third">
-            <div class="lower-breaking">ARCHIVE</div>
+            <div class="lower-breaking">BBN ARCHIVE</div>
             <div class="lower-main">
               <h1>Previously unheard material recovered</h1>
             </div>
@@ -278,7 +287,7 @@
     },
 
     {
-      ticker: "DATA DESK • FARIS BY THE NUMBERS • ANALYSIS CONTINUES",
+      ticker: "BBN DATA DESK • FARIS BY THE NUMBERS • 10,827 KM BETWEEN FARIS AND SAYANG • 3 FLIGHTS TAKEN OVER • DISCORD CALLS TOO MANY TO COUNT • LIKELIHOOD SAYANG FLIES OVER AGAIN: 100% • BBN DATA DESK",
       html: `
         <div class="news-slide">
           <div class="info-board">
@@ -300,7 +309,7 @@
     },
 
     {
-      ticker: "LATE NIGHT REPORT • NEITHER PARTY APPEARS INTERESTED IN LEARNING FROM THIS",
+      ticker: "BBN LATE NIGHT • DISCORD CALLS REPORTEDLY CONTINUE UNTIL 3 OR 4AM • NEITHER PARTY APPEARS INTERESTED IN LEARNING FROM THIS • DISTANCE REMAINS 10,827 KM • BBN LATE NIGHT",
       html: `
         <div class="news-slide">
           <div class="broadcast-scene">
@@ -332,7 +341,7 @@
     },
 
     {
-      ticker: "BREAKING • SAYANG CAUGHT BEING NICE • INVESTIGATION UNDERWAY",
+      ticker: "BBN EXCLUSIVE • SAYANG CAUGHT BEING NICE • INVESTIGATION UNDERWAY • SOURCE ADMITS SHE LOVES SEEING FARIS GENUINELY HAPPY • STATEMENT BROADCAST INTERNATIONALLY • BBN EXCLUSIVE",
       html: `
         <div class="news-slide">
           <div class="statement-layout">
@@ -347,7 +356,7 @@
           </div>
 
           <div class="lower-third">
-            <div class="lower-breaking">BREAKING</div>
+            <div class="lower-breaking">BBN EXCLUSIVE</div>
             <div class="lower-main">
               <h1>Sayang caught being nice</h1>
             </div>
@@ -358,7 +367,7 @@
     },
 
     {
-      ticker: "VERIFIED • FARIS CONFIRMED TO BE VERY VERY LOVED",
+      ticker: "BBN VERIFIED • FARIS CONFIRMED TO BE VERY VERY LOVED • FINDING INDEPENDENTLY VERIFIED BY SOURCE APPROXIMATELY 10,827 KM AWAY • BBN VERIFIED • FARIS CONFIRMED TO BE VERY VERY LOVED",
       html: `
         <div class="news-slide">
           <div class="news-package">
@@ -387,7 +396,7 @@
     },
 
     {
-      ticker: "EXCLUSIVE FOOTAGE INCOMING • MATERIAL SUPPLIED BY SINGAPORE CORRESPONDENT",
+      ticker: "BBN EXCLUSIVE • FOOTAGE INCOMING FROM SINGAPORE CORRESPONDENT • FARIS: 30 YEARS IN THE MAKING • MATERIAL CONCERNS BIRTHDAY BOY DIRECTLY • BBN EXCLUSIVE",
       html: `
         <div class="news-slide">
           <div class="news-package">
@@ -404,7 +413,7 @@
             </p>
 
             <div class="lower-third">
-              <div class="lower-breaking">EXCLUSIVE</div>
+              <div class="lower-breaking">BBN EXCLUSIVE</div>
               <div class="lower-main">
                 <h1>Footage supplied by Sayang</h1>
               </div>
@@ -416,13 +425,13 @@
 
     {
       video: true,
-      ticker: "EXCLUSIVE FOOTAGE • FARIS: 30 YEARS IN THE MAKING",
+      ticker: "BBN EXCLUSIVE FOOTAGE • FARIS: 30 YEARS IN THE MAKING • FOOTAGE SUPPLIED BY SAYANG • BBN EXCLUSIVE FOOTAGE • FARIS: 30 YEARS IN THE MAKING • FOOTAGE SUPPLIED BY SAYANG",
       html: `
         <div class="news-slide">
           <div class="news-video-stage" id="newsVideoStage"></div>
 
           <div class="lower-third">
-            <div class="lower-breaking">EXCLUSIVE FOOTAGE</div>
+            <div class="lower-breaking">BBN EXCLUSIVE</div>
             <div class="lower-main">
               <h1>Faris: 30 Years in the Making</h1>
             </div>
@@ -433,7 +442,7 @@
 
     {
       final: true,
-      ticker: "HAPPY BIRTHDAY FARIS • 10,827 KM AWAY BUT NEVER REALLY THAT FAR • SAYANG LOVES YOU • END OF REPORT",
+      ticker: "BBN NEWS • HAPPY BIRTHDAY FARIS • 10,827 KM AWAY BUT NEVER REALLY THAT FAR • SAYANG LOVES YOU • END OF REPORT • HAPPY BIRTHDAY FARIS • BBN NEWS",
       html: `
         <div class="news-slide">
           <div class="final-broadcast">
