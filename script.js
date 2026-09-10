@@ -370,6 +370,14 @@ function closeLaptopAutomatically() {
   laptopModal.setAttribute("aria-hidden", "true");
 
   clearRoomFocus();
+  focusTransition.classList.remove("active");
+  openingHotspot = false;
+
+  hotspots.forEach((hotspot) => {
+    hotspot.style.pointerEvents = "";
+    hotspot.disabled = false;
+    hotspot.classList.remove("active");
+  });
 
   if (foundItems.size === 5 && !finalShown) {
     setTimeout(() => {
@@ -506,7 +514,16 @@ document.querySelectorAll("[data-close]").forEach((button) => {
       birthdayVideo.pause();
     }
 
+    /* always fully unlock the room */
     clearRoomFocus();
+    focusTransition.classList.remove("active");
+    openingHotspot = false;
+
+    hotspots.forEach((hotspot) => {
+      hotspot.style.pointerEvents = "";
+      hotspot.disabled = false;
+      hotspot.classList.remove("active");
+    });
 
     if (foundItems.size === 5 && !finalShown) {
       setTimeout(() => {
