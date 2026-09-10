@@ -25,86 +25,65 @@
     "MORE BIRTHDAY COVERAGE TO FOLLOW"
   ];
 
+  const anchorScene = ({
+    label,
+    headline,
+    subline,
+    lowerLabel,
+    lowerHeadline,
+    lowerSubline = ""
+  }) => `
+    <div class="news-slide">
+      <div class="broadcast-scene">
+        <div class="anchor-zone">
+          <div class="anchor-label">BBN NEWSROOM • LIVE</div>
+        </div>
+
+        <div class="studio-side-panel">
+          <p class="small-label">${label}</p>
+          <h2>${headline}</h2>
+          ${subline ? `<p>${subline}</p>` : ""}
+        </div>
+
+        <div class="lower-third">
+          <div class="lower-breaking">${lowerLabel}</div>
+          <div class="lower-main">
+            <h1>${lowerHeadline}</h1>
+          </div>
+          ${lowerSubline ? `<div class="lower-sub">${lowerSubline}</div>` : ""}
+        </div>
+      </div>
+    </div>
+  `;
+
   const slides = [
     {
-      html: `
-        <div class="news-slide">
-          <div class="broadcast-scene">
-            <div class="studio-background"></div>
-
-            <div class="anchor-zone">
-              <div class="anchor-silhouette">
-                <div class="anchor-head"></div>
-                <div class="anchor-body"></div>
-              </div>
-
-              <div class="anchor-label">BBN NEWSROOM • LIVE</div>
-            </div>
-
-            <div class="studio-side-panel">
-              <p class="small-label">LIVE • UNITED KINGDOM</p>
-              <h2>FARIS TURNS 30</h2>
-              <p>Celebrations are underway as the birthday boy officially enters his thirties.</p>
-            </div>
-
-            <div class="lower-third">
-              <div class="lower-breaking">BREAKING NEWS</div>
-              <div class="lower-main">
-                <h1>Faris turns 30</h1>
-              </div>
-              <div class="lower-sub">Sources in Singapore confirm celebrations are underway</div>
-            </div>
-          </div>
-        </div>
-      `
+      html: anchorScene({
+        label: "LIVE • UNITED KINGDOM",
+        headline: "FARIS TURNS 30",
+        subline: "Birthday celebrations are officially underway.",
+        lowerLabel: "BREAKING NEWS",
+        lowerHeadline: "Faris turns 30",
+        lowerSubline: "Sources in Singapore confirm celebrations are underway"
+      })
     },
 
     {
-      html: `
-        <div class="news-slide">
-          <div class="broadcast-scene">
-            <div class="studio-background"></div>
-
-            <div class="anchor-zone">
-              <div class="anchor-silhouette">
-                <div class="anchor-head"></div>
-                <div class="anchor-body"></div>
-              </div>
-
-              <div class="anchor-label">BBN NEWSROOM • LIVE</div>
-            </div>
-
-            <div class="studio-side-panel">
-              <p class="small-label">BREAKING NEWS</p>
-              <h2>Birthday celebrations underway</h2>
-
-              <p>
-                We interrupt your regularly scheduled programming with breaking news from the United Kingdom.
-              </p>
-
-              <p>
-                Faris has officially turned 30.
-              </p>
-            </div>
-
-            <div class="lower-third">
-              <div class="lower-breaking">LIVE</div>
-              <div class="lower-main">
-                <h1>Birthday boy reported in good spirits</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      `
+      html: anchorScene({
+        label: "BREAKING NEWS",
+        headline: "Birthday celebrations underway",
+        subline: "The birthday boy is reported to be in good spirits.",
+        lowerLabel: "LIVE",
+        lowerHeadline: "Birthday coverage continues"
+      })
     },
 
     {
       html: `
         <div class="news-slide">
           <div class="news-package">
-            <span class="package-kicker">BBN INVESTIGATION</span>
+            <span class="package-kicker">BBN SPECIAL REPORT</span>
             <h1 class="package-title">THE FARIS FILES</h1>
-
             <p class="package-copy">
               Our investigation into the birthday boy has uncovered several behaviours that experts have described as... uniquely Faris.
             </p>
@@ -175,88 +154,31 @@
     },
 
     {
-      html: `
-        <div class="news-slide">
-          <div class="broadcast-scene">
-            <div class="studio-background"></div>
-
-            <div class="anchor-zone">
-              <div class="anchor-silhouette">
-                <div class="anchor-head"></div>
-                <div class="anchor-body"></div>
-              </div>
-
-              <div class="anchor-label">BBN NEWSROOM</div>
-            </div>
-
-            <div class="studio-side-panel">
-              <p class="small-label">DEVELOPING</p>
-              <h2>Random objects remain at risk</h2>
-
-              <p>
-                Investigators remain unable to explain why the subject insists on chewing random objects.
-              </p>
-
-              <p>
-                They have, however, confirmed that he takes approximately three business days to complete a task that should take five minutes.
-              </p>
-            </div>
-
-            <div class="lower-third">
-              <div class="lower-breaking">DEVELOPING</div>
-              <div class="lower-main">
-                <h1>Random objects advised to remain vigilant</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      `
+      html: anchorScene({
+        label: "DEVELOPING",
+        headline: "Random objects remain at risk",
+        subline: "Investigators continue to examine unusual chewing behaviour.",
+        lowerLabel: "DEVELOPING",
+        lowerHeadline: "Random objects advised to remain vigilant"
+      })
     },
 
     {
-      html: `
-        <div class="news-slide">
-          <div class="broadcast-scene">
-            <div class="studio-background"></div>
-
-            <div class="anchor-zone">
-              <div class="anchor-silhouette">
-                <div class="anchor-head"></div>
-                <div class="anchor-body"></div>
-              </div>
-
-              <div class="anchor-label">BBN NEWSROOM</div>
-            </div>
-
-            <div class="studio-side-panel">
-              <p class="small-label">SINGAPORE</p>
-              <h2>Welfare checks continue</h2>
-
-              <p>
-                Despite these findings, reports from Singapore suggest Faris regularly conducts important welfare checks on his girlfriend.
-              </p>
-
-              <p>
-                These generally consist of two questions.
-              </p>
-            </div>
-
-            <div class="lower-third">
-              <div class="lower-breaking">SAYANG WATCH</div>
-              <div class="lower-main">
-                <h1>“you eat already or not?”</h1>
-              </div>
-              <div class="lower-sub">Follow-up instruction: “drink more water.”</div>
-            </div>
-          </div>
-        </div>
-      `
+      html: anchorScene({
+        label: "SINGAPORE",
+        headline: "Welfare checks continue",
+        subline: "Food intake and hydration remain under active supervision.",
+        lowerLabel: "SAYANG WATCH",
+        lowerHeadline: "“you eat already or not?”",
+        lowerSubline: "Follow-up instruction: “drink more water.”"
+      })
     },
 
     {
       html: `
         <div class="news-slide">
           <div class="info-board">
+            <p class="board-kicker">BBN DATA</p>
             <h2>SAYANG WELFARE PROGRAMME</h2>
 
             <div class="info-row">
@@ -279,50 +201,22 @@
     },
 
     {
-      html: `
-        <div class="news-slide">
-          <div class="broadcast-scene">
-            <div class="studio-background"></div>
-
-            <div class="anchor-zone">
-              <div class="anchor-silhouette">
-                <div class="anchor-head"></div>
-                <div class="anchor-body"></div>
-              </div>
-
-              <div class="anchor-label">BBN NEWSROOM</div>
-            </div>
-
-            <div class="studio-side-panel">
-              <p class="small-label">CULTURE DESK</p>
-              <h2>An unusual ability</h2>
-
-              <p>
-                Witnesses claim that almost any song can be played in Faris' presence and he will somehow know what it is.
-              </p>
-
-              <p>
-                Experts have yet to determine why his brain has chosen to store this information.
-              </p>
-            </div>
-
-            <div class="lower-third">
-              <div class="lower-breaking">ANALYSIS</div>
-              <div class="lower-main">
-                <h1>Musical identification rate</h1>
-              </div>
-              <div class="lower-sub">annoyingly high</div>
-            </div>
-          </div>
-        </div>
-      `
+      html: anchorScene({
+        label: "CULTURE DESK",
+        headline: "Unusual musical ability identified",
+        subline: "Recognition rate remains suspiciously high.",
+        lowerLabel: "ANALYSIS",
+        lowerHeadline: "Musical identification rate",
+        lowerSubline: "annoyingly high"
+      })
     },
 
     {
       html: `
         <div class="news-slide">
           <div class="music-card">
-            <span class="package-kicker">ARCHIVED AUDIO TRANSCRIPT</span>
+            <span class="package-kicker">BBN ARCHIVE</span>
+            <h2>ARCHIVED AUDIO TRANSCRIPT</h2>
 
             <div class="music-transcript">
               ♪ Di mana dia, anak baboy saya? ♪<br>
@@ -342,7 +236,8 @@
     {
       html: `
         <div class="news-slide">
-          <div class="info-board">
+          <div class="info-board numbers-board">
+            <p class="board-kicker">BBN DATA DESK</p>
             <h2>FARIS BY THE NUMBERS</h2>
 
             <div class="info-row">
@@ -386,12 +281,12 @@
             </div>
 
             <div class="info-row">
-              <span>number of times shes wished he was 10,827 km closer</span>
+              <span>times shes wished he was 10,827 km closer</span>
               <strong>countless</strong>
             </div>
 
             <div class="info-row">
-              <span>likelihood shed fly all that way for him again</span>
+              <span>likelihood shed fly all that way again</span>
               <strong>100%</strong>
             </div>
           </div>
@@ -400,49 +295,20 @@
     },
 
     {
-      html: `
-        <div class="news-slide">
-          <div class="broadcast-scene">
-            <div class="studio-background"></div>
-
-            <div class="anchor-zone">
-              <div class="anchor-silhouette">
-                <div class="anchor-head"></div>
-                <div class="anchor-body"></div>
-              </div>
-
-              <div class="anchor-label">BBN NEWSROOM</div>
-            </div>
-
-            <div class="studio-side-panel">
-              <p class="small-label">DISTANCE REPORT</p>
-              <h2>10,827 km apart</h2>
-
-              <p>
-                Despite the considerable distance between Singapore and the United Kingdom, sources confirm that the pair continue to spend an unreasonable number of hours together on Discord.
-              </p>
-
-              <p>
-                Some calls have reportedly continued until 3 or 4 in the morning.
-              </p>
-            </div>
-
-            <div class="lower-third">
-              <div class="lower-breaking">LATE NIGHT</div>
-              <div class="lower-main">
-                <h1>Neither party appears to learn from this</h1>
-              </div>
-            </div>
-          </div>
-        </div>
-      `
+      html: anchorScene({
+        label: "DISTANCE REPORT",
+        headline: "10,827 km apart",
+        subline: "Late-night Discord activity continues despite the distance.",
+        lowerLabel: "LATE NIGHT",
+        lowerHeadline: "Calls reportedly continue until 3–4am"
+      })
     },
 
     {
       html: `
         <div class="news-slide">
           <div class="statement-layout">
-            <span class="statement-tag">EXCLUSIVE STATEMENT FROM SINGAPORE</span>
+            <span class="statement-tag">BBN EXCLUSIVE • SINGAPORE</span>
 
             <blockquote>
               “hes annoying uh... but i really love seeing him happy. especially that face he makes when hes genuinely excited abt something and his stupid big smile.<br><br>
@@ -452,11 +318,13 @@
             <cite>— Sayang</cite>
 
             <div class="lower-third">
-              <div class="lower-breaking">BBN EXCLUSIVE</div>
+              <div class="lower-breaking">BREAKING</div>
               <div class="lower-main">
                 <h1>Sayang caught being nice</h1>
               </div>
-              <div class="lower-sub">Unfortunately for the source, the statement has now been broadcast internationally</div>
+              <div class="lower-sub">
+                Unfortunately for the source, the statement has now been broadcast internationally
+              </div>
             </div>
           </div>
         </div>
@@ -464,45 +332,20 @@
     },
 
     {
-      html: `
-        <div class="news-slide">
-          <div class="broadcast-scene">
-            <div class="studio-background"></div>
-
-            <div class="anchor-zone">
-              <div class="anchor-silhouette">
-                <div class="anchor-head"></div>
-                <div class="anchor-body"></div>
-              </div>
-
-              <div class="anchor-label">BBN NEWSROOM</div>
-            </div>
-
-            <div class="studio-side-panel">
-              <p class="small-label">VERIFIED</p>
-              <h2>One fact confirmed</h2>
-
-              <p>
-                Investigators have concluded that while Faris remains difficult to classify, one fact has been independently verified.
-              </p>
-            </div>
-
-            <div class="lower-third">
-              <div class="lower-breaking">CONFIRMED</div>
-              <div class="lower-main">
-                <h1>He is very, very loved.</h1>
-              </div>
-              <div class="lower-sub">Particularly by one woman approximately 10,827 kilometres away</div>
-            </div>
-          </div>
-        </div>
-      `
+      html: anchorScene({
+        label: "VERIFIED",
+        headline: "One fact independently confirmed",
+        subline: "Faris is very, very loved.",
+        lowerLabel: "CONFIRMED",
+        lowerHeadline: "Faris is very, very loved",
+        lowerSubline: "Particularly by one woman approximately 10,827 kilometres away"
+      })
     },
 
     {
       html: `
         <div class="news-slide">
-          <div class="news-package">
+          <div class="news-package footage-package">
             <span class="package-kicker">BBN EXCLUSIVE</span>
 
             <h1 class="package-title">
@@ -544,10 +387,10 @@
         <div class="news-slide">
           <div class="final-broadcast">
             <div>
+              <p class="final-kicker">BBN SPECIAL COVERAGE</p>
               <h1>HAPPY 30TH<br>BIRTHDAY, FARIS</h1>
 
               <p>This concludes our special birthday coverage.</p>
-
               <p>Further celebrations are expected throughout the day.</p>
             </div>
           </div>
@@ -606,7 +449,6 @@
 
   function startBirthdayNews() {
     clearTVTimers();
-
     currentNewsSlide = 0;
 
     tvPower.className = "tv-power";
