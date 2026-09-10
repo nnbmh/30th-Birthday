@@ -201,11 +201,18 @@ function openHotspot(hotspot) {
     modal.setAttribute("aria-hidden", "false");
 
     markFound(item);
-    runModalExperience(item);
-    clearRoomFocus();
 
+    /* release the room lock BEFORE running the experience */
+    clearRoomFocus();
     focusTransition.classList.remove("active");
     openingHotspot = false;
+
+    /* now run the individual hotspot content */
+    try {
+      runModalExperience(item);
+    } catch (error) {
+      console.error(`Error opening ${item}:`, error);
+    }
   }, 220);
 }
 
