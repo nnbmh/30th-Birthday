@@ -12,18 +12,21 @@
   let currentNewsSlide = 0;
   let tvTimers = [];
 
-  /* BBN BRAND OVERRIDE */
-  const bbnStyle = document.createElement("style");
-  bbnStyle.textContent = `
-    .studio-background::after {
-      content: "BBN" !important;
-    }
-  `;
-  document.head.appendChild(bbnStyle);
+  const tickerHeadlines = [
+    "FARIS TURNS 30",
+    "BREAKING NEWS FROM THE UNITED KINGDOM",
+    "SAYANG MONITORING SITUATION FROM 10,827 KM AWAY",
+    "BIRTHDAY BOY REPORTED TO BE IN GOOD SPIRITS",
+    "RANDOM OBJECTS ADVISED TO REMAIN VIGILANT",
+    "SAYANG HYDRATION PROGRAMME REMAINS ACTIVE",
+    "MUSICAL IDENTIFICATION RATE REMAINS ANNOYINGLY HIGH",
+    "LATE-NIGHT DISCORD ACTIVITY CONTINUES",
+    "SOURCES CONFIRM FARIS IS VERY VERY LOVED",
+    "MORE BIRTHDAY COVERAGE TO FOLLOW"
+  ];
 
   const slides = [
     {
-      ticker: "BBN NEWS • FARIS TURNS 30 • SAYANG MONITORING SITUATION FROM 10,827 KM AWAY • BIRTHDAY BOY REPORTED TO BE IN GOOD SPIRITS • LIVE FROM THE UNITED KINGDOM • BBN NEWS • FARIS TURNS 30 • SAYANG MONITORING SITUATION FROM 10,827 KM AWAY",
       html: `
         <div class="news-slide">
           <div class="broadcast-scene">
@@ -34,6 +37,8 @@
                 <div class="anchor-head"></div>
                 <div class="anchor-body"></div>
               </div>
+
+              <div class="anchor-label">BBN NEWSROOM • LIVE</div>
             </div>
 
             <div class="studio-side-panel">
@@ -45,9 +50,9 @@
             <div class="lower-third">
               <div class="lower-breaking">BREAKING NEWS</div>
               <div class="lower-main">
-                <h1>FARIS TURNS 30</h1>
+                <h1>Faris turns 30</h1>
               </div>
-              <div class="lower-sub">Celebrations underway in the United Kingdom</div>
+              <div class="lower-sub">Sources in Singapore confirm celebrations are underway</div>
             </div>
           </div>
         </div>
@@ -55,7 +60,6 @@
     },
 
     {
-      ticker: "BBN NEWS • FARIS TURNS 30 • BIRTHDAY BOY REPORTED TO BE IN GOOD SPIRITS • SOURCES IN SINGAPORE CONFIRM CELEBRATIONS • LIVE FROM THE UNITED KINGDOM • BBN NEWS • FARIS TURNS 30",
       html: `
         <div class="news-slide">
           <div class="broadcast-scene">
@@ -66,22 +70,28 @@
                 <div class="anchor-head"></div>
                 <div class="anchor-body"></div>
               </div>
+
               <div class="anchor-label">BBN NEWSROOM • LIVE</div>
             </div>
 
             <div class="studio-side-panel">
               <p class="small-label">BREAKING NEWS</p>
               <h2>Birthday celebrations underway</h2>
-              <p>We interrupt your regularly scheduled programming with breaking news from the United Kingdom.</p>
-              <p>Faris has officially turned 30.</p>
+
+              <p>
+                We interrupt your regularly scheduled programming with breaking news from the United Kingdom.
+              </p>
+
+              <p>
+                Faris has officially turned 30.
+              </p>
             </div>
 
             <div class="lower-third">
               <div class="lower-breaking">LIVE</div>
               <div class="lower-main">
-                <h1>Faris officially turns 30</h1>
+                <h1>Birthday boy reported in good spirits</h1>
               </div>
-              <div class="lower-sub">Sources in Singapore confirm celebrations are underway</div>
             </div>
           </div>
         </div>
@@ -89,31 +99,21 @@
     },
 
     {
-      ticker: "BBN SPECIAL REPORT • THE FARIS FILES • INVESTIGATION INTO BIRTHDAY SUBJECT NOW UNDERWAY • EXPERTS DESCRIBE FINDINGS AS UNIQUELY FARIS • BBN SPECIAL REPORT • THE FARIS FILES",
       html: `
         <div class="news-slide">
           <div class="news-package">
-            <span class="package-kicker">SPECIAL REPORT</span>
+            <span class="package-kicker">BBN INVESTIGATION</span>
             <h1 class="package-title">THE FARIS FILES</h1>
 
             <p class="package-copy">
               Our investigation into the birthday boy has uncovered several behaviours that experts have described as... uniquely Faris.
             </p>
-
-            <div class="lower-third">
-              <div class="lower-breaking">BBN INVESTIGATION</div>
-              <div class="lower-main">
-                <h1>The Faris Files</h1>
-              </div>
-              <div class="lower-sub">Investigators examine unusual behaviour of birthday subject</div>
-            </div>
           </div>
         </div>
       `
     },
 
     {
-      ticker: "BBN NEWS • SUBJECT PROFILE RELEASED • FARIS, 30, UNITED KINGDOM • MUSICAL KNOWLEDGE SUSPICIOUSLY EXTENSIVE • RELATIONSHIP STATUS CONFIRMED AS VERY TAKEN • BBN NEWS",
       html: `
         <div class="news-slide">
           <div class="profile-package">
@@ -129,14 +129,45 @@
             <div class="profile-data">
               <h2>SUBJECT PROFILE</h2>
 
-              <div class="profile-row"><strong>age</strong><span>30</span></div>
-              <div class="profile-row"><strong>location</strong><span>United Kingdom</span></div>
-              <div class="profile-row"><strong>hobbies</strong><span>rock climbing, occasional Dota</span></div>
-              <div class="profile-row"><strong>known weaknesses</strong><span>steak, cheese</span></div>
-              <div class="profile-row"><strong>musical knowledge</strong><span>suspiciously extensive</span></div>
-              <div class="profile-row"><strong>time required to do anything</strong><span>longer than necessary</span></div>
-              <div class="profile-row"><strong>chewing random objects</strong><span>concerning</span></div>
-              <div class="profile-row"><strong>relationship status</strong><span>very taken</span></div>
+              <div class="profile-row">
+                <strong>age</strong>
+                <span>30</span>
+              </div>
+
+              <div class="profile-row">
+                <strong>location</strong>
+                <span>United Kingdom</span>
+              </div>
+
+              <div class="profile-row">
+                <strong>hobbies</strong>
+                <span>rock climbing, occasional Dota</span>
+              </div>
+
+              <div class="profile-row">
+                <strong>known weaknesses</strong>
+                <span>steak, cheese</span>
+              </div>
+
+              <div class="profile-row">
+                <strong>musical knowledge</strong>
+                <span>suspiciously extensive</span>
+              </div>
+
+              <div class="profile-row">
+                <strong>time required to do anything</strong>
+                <span>longer than necessary</span>
+              </div>
+
+              <div class="profile-row">
+                <strong>chewing random objects</strong>
+                <span>concerning</span>
+              </div>
+
+              <div class="profile-row">
+                <strong>relationship status</strong>
+                <span>very taken</span>
+              </div>
             </div>
           </div>
         </div>
@@ -144,27 +175,38 @@
     },
 
     {
-      ticker: "BBN DEVELOPING • RANDOM OBJECTS ADVISED TO REMAIN VIGILANT • INVESTIGATORS UNABLE TO EXPLAIN CHEWING BEHAVIOUR • SIMPLE TASKS REPORTEDLY TAKING THREE BUSINESS DAYS • BBN DEVELOPING",
       html: `
         <div class="news-slide">
-          <div class="news-package">
-            <span class="package-kicker">DEVELOPING STORY</span>
-            <h1 class="package-title">Random objects remain at risk</h1>
+          <div class="broadcast-scene">
+            <div class="studio-background"></div>
 
-            <p class="package-copy">
-              Investigators remain unable to explain why the subject insists on chewing random objects.
-            </p>
+            <div class="anchor-zone">
+              <div class="anchor-silhouette">
+                <div class="anchor-head"></div>
+                <div class="anchor-body"></div>
+              </div>
 
-            <p class="package-copy">
-              They have, however, confirmed that he takes approximately three business days to complete a task that should take five minutes.
-            </p>
+              <div class="anchor-label">BBN NEWSROOM</div>
+            </div>
+
+            <div class="studio-side-panel">
+              <p class="small-label">DEVELOPING</p>
+              <h2>Random objects remain at risk</h2>
+
+              <p>
+                Investigators remain unable to explain why the subject insists on chewing random objects.
+              </p>
+
+              <p>
+                They have, however, confirmed that he takes approximately three business days to complete a task that should take five minutes.
+              </p>
+            </div>
 
             <div class="lower-third">
               <div class="lower-breaking">DEVELOPING</div>
               <div class="lower-main">
-                <h1>Investigation continues</h1>
+                <h1>Random objects advised to remain vigilant</h1>
               </div>
-              <div class="lower-sub">Random objects advised to remain vigilant</div>
             </div>
           </div>
         </div>
@@ -172,29 +214,39 @@
     },
 
     {
-      ticker: "BBN NEWS • SAYANG WELFARE CHECKS CONTINUE • FOOD INTAKE MONITORED • HYDRATION AGGRESSIVELY MONITORED • RESPONSIBLE OFFICER IDENTIFIED AS FARIS • BBN NEWS",
       html: `
         <div class="news-slide">
-          <div class="news-package">
-            <span class="package-kicker">WELFARE REPORT</span>
+          <div class="broadcast-scene">
+            <div class="studio-background"></div>
 
-            <p class="package-copy">
-              Despite these findings, reports from Singapore suggest Faris regularly conducts important welfare checks on his girlfriend.
-            </p>
+            <div class="anchor-zone">
+              <div class="anchor-silhouette">
+                <div class="anchor-head"></div>
+                <div class="anchor-body"></div>
+              </div>
 
-            <p class="package-copy">
-              These generally consist of two questions:
-            </p>
+              <div class="anchor-label">BBN NEWSROOM</div>
+            </div>
 
-            <div class="big-quote">“you eat already or not?”</div>
-            <div class="big-quote">“drink more water.”</div>
+            <div class="studio-side-panel">
+              <p class="small-label">SINGAPORE</p>
+              <h2>Welfare checks continue</h2>
+
+              <p>
+                Despite these findings, reports from Singapore suggest Faris regularly conducts important welfare checks on his girlfriend.
+              </p>
+
+              <p>
+                These generally consist of two questions.
+              </p>
+            </div>
 
             <div class="lower-third">
-              <div class="lower-breaking">BBN REPORT</div>
+              <div class="lower-breaking">SAYANG WATCH</div>
               <div class="lower-main">
-                <h1>Sayang welfare checks continue</h1>
+                <h1>“you eat already or not?”</h1>
               </div>
-              <div class="lower-sub">Food intake and hydration remain under supervision</div>
+              <div class="lower-sub">Follow-up instruction: “drink more water.”</div>
             </div>
           </div>
         </div>
@@ -202,7 +254,6 @@
     },
 
     {
-      ticker: "BBN DATA • SAYANG WELFARE PROGRAMME • FOOD INTAKE MONITORED • HYDRATION AGGRESSIVELY MONITORED • RESPONSIBLE OFFICER: FARIS • BBN DATA • SAYANG WELFARE PROGRAMME",
       html: `
         <div class="news-slide">
           <div class="info-board">
@@ -228,37 +279,46 @@
     },
 
     {
-      ticker: "BBN CULTURE • MUSICAL IDENTIFICATION RATE DESCRIBED AS ANNOYINGLY HIGH • WITNESSES SAY SUBJECT SOMEHOW KNOWS ALMOST EVERY SONG • EXPERTS BAFFLED • BBN CULTURE",
       html: `
         <div class="news-slide">
-          <div class="music-card">
-            <span class="package-kicker">MUSIC INVESTIGATION</span>
-            <h2>Unusual ability identified</h2>
+          <div class="broadcast-scene">
+            <div class="studio-background"></div>
 
-            <p>
-              Witnesses claim that almost any song can be played in Faris' presence and he will somehow know what it is.
-            </p>
+            <div class="anchor-zone">
+              <div class="anchor-silhouette">
+                <div class="anchor-head"></div>
+                <div class="anchor-body"></div>
+              </div>
 
-            <p>
-              Experts have yet to determine why his brain has chosen to store this information.
-            </p>
-
-            <div class="music-rate">annoyingly high</div>
-          </div>
-
-          <div class="lower-third">
-            <div class="lower-breaking">ANALYSIS</div>
-            <div class="lower-main">
-              <h1>Musical identification rate</h1>
+              <div class="anchor-label">BBN NEWSROOM</div>
             </div>
-            <div class="lower-sub">Experts describe ability as suspiciously extensive</div>
+
+            <div class="studio-side-panel">
+              <p class="small-label">CULTURE DESK</p>
+              <h2>An unusual ability</h2>
+
+              <p>
+                Witnesses claim that almost any song can be played in Faris' presence and he will somehow know what it is.
+              </p>
+
+              <p>
+                Experts have yet to determine why his brain has chosen to store this information.
+              </p>
+            </div>
+
+            <div class="lower-third">
+              <div class="lower-breaking">ANALYSIS</div>
+              <div class="lower-main">
+                <h1>Musical identification rate</h1>
+              </div>
+              <div class="lower-sub">annoyingly high</div>
+            </div>
           </div>
         </div>
       `
     },
 
     {
-      ticker: "BBN ARCHIVE • PREVIOUSLY UNHEARD AUDIO RECOVERED • UNAUTHORISED CHAN MALI CHAN ADAPTATION UNDER REVIEW • NO LEGAL ACTION HAS BEEN TAKEN • BBN ARCHIVE",
       html: `
         <div class="news-slide">
           <div class="music-card">
@@ -275,11 +335,64 @@
 
             <p>No legal action has been taken.</p>
           </div>
+        </div>
+      `
+    },
 
-          <div class="lower-third">
-            <div class="lower-breaking">BBN ARCHIVE</div>
-            <div class="lower-main">
-              <h1>Previously unheard material recovered</h1>
+    {
+      html: `
+        <div class="news-slide">
+          <div class="info-board">
+            <h2>FARIS BY THE NUMBERS</h2>
+
+            <div class="info-row">
+              <span>countries explored together</span>
+              <strong>4</strong>
+            </div>
+
+            <div class="info-row">
+              <span>distance between Faris & Sayang</span>
+              <strong>10,827 km</strong>
+            </div>
+
+            <div class="info-row">
+              <span>flights Sayang has taken over</span>
+              <strong>3</strong>
+            </div>
+
+            <div class="info-row">
+              <span>Discord calls</span>
+              <strong>too many to count</strong>
+            </div>
+
+            <div class="info-row">
+              <span>calls that became 3–4am</span>
+              <strong>more than sensible</strong>
+            </div>
+
+            <div class="info-row">
+              <span>songs Faris mysteriously knows</span>
+              <strong>apparently all of them</strong>
+            </div>
+
+            <div class="info-row">
+              <span>how often Sayang misses him</span>
+              <strong>more than shed like to admit</strong>
+            </div>
+
+            <div class="info-row">
+              <span>hugs currently owed to Sayang</span>
+              <strong>far too many</strong>
+            </div>
+
+            <div class="info-row">
+              <span>number of times shes wished he was 10,827 km closer</span>
+              <strong>countless</strong>
+            </div>
+
+            <div class="info-row">
+              <span>likelihood shed fly all that way for him again</span>
+              <strong>100%</strong>
             </div>
           </div>
         </div>
@@ -287,40 +400,26 @@
     },
 
     {
-      ticker: "BBN DATA DESK • FARIS BY THE NUMBERS • 10,827 KM BETWEEN FARIS AND SAYANG • 3 FLIGHTS TAKEN OVER • DISCORD CALLS TOO MANY TO COUNT • LIKELIHOOD SAYANG FLIES OVER AGAIN: 100% • BBN DATA DESK",
-      html: `
-        <div class="news-slide">
-          <div class="info-board">
-            <h2>FARIS BY THE NUMBERS</h2>
-
-            <div class="info-row"><span>countries explored together</span><strong>4</strong></div>
-            <div class="info-row"><span>distance between Faris & Sayang</span><strong>10,827 km</strong></div>
-            <div class="info-row"><span>flights Sayang has taken over</span><strong>3</strong></div>
-            <div class="info-row"><span>Discord calls</span><strong>too many to count</strong></div>
-            <div class="info-row"><span>calls that became 3–4am</span><strong>more than sensible</strong></div>
-            <div class="info-row"><span>songs Faris mysteriously knows</span><strong>apparently all of them</strong></div>
-            <div class="info-row"><span>how often Sayang misses him</span><strong>more than shed like to admit</strong></div>
-            <div class="info-row"><span>hugs currently owed</span><strong>far too many</strong></div>
-            <div class="info-row"><span>wishes he was 10,827 km closer</span><strong>countless</strong></div>
-            <div class="info-row"><span>likelihood shed fly over again</span><strong>100%</strong></div>
-          </div>
-        </div>
-      `
-    },
-
-    {
-      ticker: "BBN LATE NIGHT • DISCORD CALLS REPORTEDLY CONTINUE UNTIL 3 OR 4AM • NEITHER PARTY APPEARS INTERESTED IN LEARNING FROM THIS • DISTANCE REMAINS 10,827 KM • BBN LATE NIGHT",
       html: `
         <div class="news-slide">
           <div class="broadcast-scene">
             <div class="studio-background"></div>
+
+            <div class="anchor-zone">
+              <div class="anchor-silhouette">
+                <div class="anchor-head"></div>
+                <div class="anchor-body"></div>
+              </div>
+
+              <div class="anchor-label">BBN NEWSROOM</div>
+            </div>
 
             <div class="studio-side-panel">
               <p class="small-label">DISTANCE REPORT</p>
               <h2>10,827 km apart</h2>
 
               <p>
-                Sources confirm that the pair continue to spend an unreasonable number of hours together on Discord.
+                Despite the considerable distance between Singapore and the United Kingdom, sources confirm that the pair continue to spend an unreasonable number of hours together on Discord.
               </p>
 
               <p>
@@ -329,11 +428,10 @@
             </div>
 
             <div class="lower-third">
-              <div class="lower-breaking">LIVE</div>
+              <div class="lower-breaking">LATE NIGHT</div>
               <div class="lower-main">
-                <h1>Neither party learns from this</h1>
+                <h1>Neither party appears to learn from this</h1>
               </div>
-              <div class="lower-sub">Late-night Discord calls continue despite considerable distance</div>
             </div>
           </div>
         </div>
@@ -341,7 +439,6 @@
     },
 
     {
-      ticker: "BBN EXCLUSIVE • SAYANG CAUGHT BEING NICE • INVESTIGATION UNDERWAY • SOURCE ADMITS SHE LOVES SEEING FARIS GENUINELY HAPPY • STATEMENT BROADCAST INTERNATIONALLY • BBN EXCLUSIVE",
       html: `
         <div class="news-slide">
           <div class="statement-layout">
@@ -353,42 +450,49 @@
             </blockquote>
 
             <cite>— Sayang</cite>
-          </div>
 
-          <div class="lower-third">
-            <div class="lower-breaking">BBN EXCLUSIVE</div>
-            <div class="lower-main">
-              <h1>Sayang caught being nice</h1>
+            <div class="lower-third">
+              <div class="lower-breaking">BBN EXCLUSIVE</div>
+              <div class="lower-main">
+                <h1>Sayang caught being nice</h1>
+              </div>
+              <div class="lower-sub">Unfortunately for the source, the statement has now been broadcast internationally</div>
             </div>
-            <div class="lower-sub">Unfortunately, statement has now been broadcast internationally</div>
           </div>
         </div>
       `
     },
 
     {
-      ticker: "BBN VERIFIED • FARIS CONFIRMED TO BE VERY VERY LOVED • FINDING INDEPENDENTLY VERIFIED BY SOURCE APPROXIMATELY 10,827 KM AWAY • BBN VERIFIED • FARIS CONFIRMED TO BE VERY VERY LOVED",
       html: `
         <div class="news-slide">
-          <div class="news-package">
-            <span class="package-kicker">FINAL INVESTIGATIVE FINDING</span>
+          <div class="broadcast-scene">
+            <div class="studio-background"></div>
 
-            <p class="package-copy">
-              Investigators have concluded that while Faris remains difficult to classify, one fact has been independently verified.
-            </p>
+            <div class="anchor-zone">
+              <div class="anchor-silhouette">
+                <div class="anchor-head"></div>
+                <div class="anchor-body"></div>
+              </div>
 
-            <div class="big-quote">He is very, very loved.</div>
+              <div class="anchor-label">BBN NEWSROOM</div>
+            </div>
 
-            <p class="package-copy">
-              Particularly by one woman approximately 10,827 kilometres away.
-            </p>
+            <div class="studio-side-panel">
+              <p class="small-label">VERIFIED</p>
+              <h2>One fact confirmed</h2>
+
+              <p>
+                Investigators have concluded that while Faris remains difficult to classify, one fact has been independently verified.
+              </p>
+            </div>
 
             <div class="lower-third">
               <div class="lower-breaking">CONFIRMED</div>
               <div class="lower-main">
-                <h1>Faris is very, very loved</h1>
+                <h1>He is very, very loved.</h1>
               </div>
-              <div class="lower-sub">Finding independently verified by Singapore source</div>
+              <div class="lower-sub">Particularly by one woman approximately 10,827 kilometres away</div>
             </div>
           </div>
         </div>
@@ -396,13 +500,15 @@
     },
 
     {
-      ticker: "BBN EXCLUSIVE • FOOTAGE INCOMING FROM SINGAPORE CORRESPONDENT • FARIS: 30 YEARS IN THE MAKING • MATERIAL CONCERNS BIRTHDAY BOY DIRECTLY • BBN EXCLUSIVE",
       html: `
         <div class="news-slide">
           <div class="news-package">
-            <span class="package-kicker">EXCLUSIVE FOOTAGE</span>
+            <span class="package-kicker">BBN EXCLUSIVE</span>
 
-            <h1 class="package-title">FARIS:<br>30 YEARS IN THE MAKING</h1>
+            <h1 class="package-title">
+              FARIS:<br>
+              30 YEARS IN THE MAKING
+            </h1>
 
             <p class="package-copy">
               We are now receiving exclusive footage supplied by our Singapore correspondent.
@@ -411,13 +517,6 @@
             <p class="package-copy">
               The following material concerns the birthday boy directly.
             </p>
-
-            <div class="lower-third">
-              <div class="lower-breaking">BBN EXCLUSIVE</div>
-              <div class="lower-main">
-                <h1>Footage supplied by Sayang</h1>
-              </div>
-            </div>
           </div>
         </div>
       `
@@ -425,13 +524,12 @@
 
     {
       video: true,
-      ticker: "BBN EXCLUSIVE FOOTAGE • FARIS: 30 YEARS IN THE MAKING • FOOTAGE SUPPLIED BY SAYANG • BBN EXCLUSIVE FOOTAGE • FARIS: 30 YEARS IN THE MAKING • FOOTAGE SUPPLIED BY SAYANG",
       html: `
         <div class="news-slide">
           <div class="news-video-stage" id="newsVideoStage"></div>
 
           <div class="lower-third">
-            <div class="lower-breaking">BBN EXCLUSIVE</div>
+            <div class="lower-breaking">EXCLUSIVE FOOTAGE</div>
             <div class="lower-main">
               <h1>Faris: 30 Years in the Making</h1>
             </div>
@@ -442,20 +540,15 @@
 
     {
       final: true,
-      ticker: "BBN NEWS • HAPPY BIRTHDAY FARIS • 10,827 KM AWAY BUT NEVER REALLY THAT FAR • SAYANG LOVES YOU • END OF REPORT • HAPPY BIRTHDAY FARIS • BBN NEWS",
       html: `
         <div class="news-slide">
           <div class="final-broadcast">
             <div>
               <h1>HAPPY 30TH<br>BIRTHDAY, FARIS</h1>
 
-              <p>
-                This concludes our special birthday coverage.
-              </p>
+              <p>This concludes our special birthday coverage.</p>
 
-              <p>
-                Further celebrations are expected throughout the day.
-              </p>
+              <p>Further celebrations are expected throughout the day.</p>
             </div>
           </div>
         </div>
@@ -468,6 +561,15 @@
     tvTimers = [];
   }
 
+  function buildTicker() {
+    const text = tickerHeadlines.join(" • ") + " • ";
+
+    newsTickerText.innerHTML = `
+      <span class="ticker-copy">${text}</span>
+      <span class="ticker-copy" aria-hidden="true">${text}</span>
+    `;
+  }
+
   function restartTicker() {
     newsTickerText.style.animation = "none";
     void newsTickerText.offsetWidth;
@@ -478,7 +580,8 @@
     const slide = slides[currentNewsSlide];
 
     newsScreen.innerHTML = slide.html;
-    newsTickerText.textContent = slide.ticker;
+
+    buildTicker();
     restartTicker();
 
     if (slide.video) {
@@ -490,15 +593,20 @@
       }
 
       newsNextButton.textContent = "CONTINUE ›";
-    } else if (slide.final) {
-      newsNextButton.textContent = "RETURN TO ROOM";
-    } else {
-      newsNextButton.textContent = "CONTINUE ›";
+      return;
     }
+
+    if (slide.final) {
+      newsNextButton.textContent = "RETURN TO ROOM";
+      return;
+    }
+
+    newsNextButton.textContent = "CONTINUE ›";
   }
 
   function startBirthdayNews() {
     clearTVTimers();
+
     currentNewsSlide = 0;
 
     tvPower.className = "tv-power";
@@ -506,7 +614,7 @@
     tvBroadcast.className = "tv-broadcast";
 
     newsScreen.innerHTML = "";
-    newsTickerText.textContent = "";
+    newsTickerText.innerHTML = "";
 
     const staticTimer = setTimeout(() => {
       tvPower.classList.add("hidden-phase");
