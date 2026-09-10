@@ -160,7 +160,6 @@
 .birthday-news .tv-broadcast.active {
   visibility: visible;
   opacity: 1;
-  transform: none;
 }
 
 /* TOP BAR */
@@ -206,7 +205,6 @@
 }
 
 .news-live-dot {
-  flex: 0 0 auto;
   width: 7px;
   height: 7px;
   border-radius: 50%;
@@ -216,8 +214,6 @@
 }
 
 .news-date {
-  flex: 0 0 auto;
-  margin-left: 20px;
   color: rgba(255, 255, 255, 0.65);
   font-size: 11px;
   font-weight: 700;
@@ -230,7 +226,7 @@
   50% { opacity: 1; }
 }
 
-/* MAIN SCREEN */
+/* SCREEN */
 
 .news-screen {
   position: relative;
@@ -239,15 +235,12 @@
   width: 100%;
   min-height: 0;
   overflow: hidden;
-  background:
-    radial-gradient(circle at 70% 25%, rgba(45, 107, 157, 0.28), transparent 35%),
-    linear-gradient(135deg, #173149 0%, #0a1725 52%, #05090f 100%);
+  background: #07111e;
 }
 
 .news-slide {
   position: absolute;
   inset: 0;
-  z-index: 1;
   width: 100%;
   height: 100%;
   opacity: 0;
@@ -258,181 +251,79 @@
   to { opacity: 1; }
 }
 
-/* NEWSROOM */
+/* REAL NEWSROOM */
 
 .broadcast-scene {
   position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background:
-    linear-gradient(90deg, rgba(5, 10, 16, 0.98) 0%, rgba(11, 28, 44, 0.82) 43%, rgba(8, 17, 28, 0.92) 100%),
-    radial-gradient(circle at 25% 25%, rgba(54, 117, 164, 0.28), transparent 34%);
+  background-image: url("assets/bbn-anchor.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
-
-.studio-background {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.studio-background::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: 0.58;
-  background:
-    linear-gradient(90deg, transparent 0 13%, rgba(255, 255, 255, 0.035) 13% 13.2%, transparent 13.2% 27%, rgba(255, 255, 255, 0.03) 27% 27.2%, transparent 27.2%),
-    linear-gradient(180deg, transparent 0 17%, rgba(255, 255, 255, 0.035) 17% 17.2%, transparent 17.2% 70%, rgba(255, 255, 255, 0.03) 70% 70.2%, transparent 70.2%);
-}
-
-.studio-background::after {
-  content: "BBN";
-  position: absolute;
-  left: 3%;
-  top: 3%;
-  color: rgba(255, 255, 255, 0.035);
-  font-size: clamp(130px, 20vw, 250px);
-  font-weight: 900;
-  letter-spacing: 0.03em;
-}
-
-/* TEMPORARY ANCHOR */
 
 .anchor-zone {
   position: absolute;
-  left: 3%;
-  top: 4%;
-  width: 48%;
-  height: 70%;
-}
-
-.anchor-silhouette {
-  position: absolute;
-  left: 12%;
-  bottom: -9%;
-  width: 260px;
-  height: 390px;
-}
-
-.anchor-head {
-  position: absolute;
-  left: 89px;
-  top: 3px;
-  width: 84px;
-  height: 96px;
-  border-radius: 48% 48% 44% 44%;
-  background: linear-gradient(145deg, #9ca4aa, #606a72);
-}
-
-.anchor-body {
-  position: absolute;
-  left: 24px;
-  top: 84px;
-  width: 220px;
-  height: 310px;
-  border-radius: 78px 78px 12px 12px;
-  background: linear-gradient(145deg, #27323d, #101820);
-}
-
-.anchor-body::before {
-  content: "";
-  position: absolute;
-  left: 78px;
-  top: 0;
-  width: 64px;
-  height: 125px;
-  clip-path: polygon(50% 0, 100% 100%, 50% 78%, 0 100%);
-  background: rgba(255, 255, 255, 0.68);
-}
-
-.anchor-body::after {
-  content: "";
-  position: absolute;
-  left: 103px;
-  top: 26px;
-  width: 18px;
-  height: 105px;
-  clip-path: polygon(50% 0, 100% 17%, 70% 100%, 30% 100%, 0 17%);
-  background: #6c2731;
+  inset: 0;
+  pointer-events: none;
 }
 
 .anchor-label {
   position: absolute;
-  left: 8%;
-  bottom: 3%;
-  z-index: 3;
-  padding: 7px 11px;
-  border-left: 3px solid #e7c64f;
-  background: rgba(7, 15, 23, 0.82);
-  color: rgba(255, 255, 255, 0.84);
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.1em;
+  left: 2.2%;
+  bottom: 19px;
+  padding: 6px 10px;
+  border-left: 3px solid #e3c454;
+  background: rgba(4, 10, 17, 0.8);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 9px;
+  font-weight: 850;
+  letter-spacing: 0.11em;
 }
 
-/* STORY SCREEN */
+/* TEXT INSIDE BLANK STUDIO MONITOR */
 
 .studio-side-panel {
   position: absolute;
-  right: 4%;
-  top: 8%;
-  width: 43%;
-  min-height: 245px;
-  padding: 23px 25px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: linear-gradient(150deg, rgba(17, 48, 72, 0.96), rgba(6, 16, 27, 0.98));
-  box-shadow: 0 20px 55px rgba(0, 0, 0, 0.33);
-}
-
-.studio-side-panel::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 5px;
-  height: 100%;
-  background: #e3c454;
+  left: 53.3%;
+  top: 11%;
+  width: 41.5%;
+  height: 38%;
+  padding: 2.6% 2.7%;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
 }
 
 .studio-side-panel .small-label {
-  margin: 0 0 11px;
+  margin: 0 0 9px;
   color: #e3c454;
-  font-size: 11px;
-  font-weight: 850;
+  font-size: clamp(9px, 0.95vw, 12px);
+  font-weight: 900;
   letter-spacing: 0.12em;
 }
 
 .studio-side-panel h2 {
+  max-width: 100%;
   margin: 0;
-  font-size: clamp(35px, 4.3vw, 55px);
-  font-weight: 780;
+  color: white;
+  font-size: clamp(29px, 3.5vw, 45px);
+  font-weight: 820;
   line-height: 0.98;
-  letter-spacing: -0.045em;
+  letter-spacing: -0.04em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
 }
 
 .studio-side-panel p {
-  margin: 15px 0 0;
+  max-width: 95%;
+  margin: 12px 0 0;
   color: rgba(255, 255, 255, 0.88);
-  font-size: clamp(17px, 1.65vw, 21px);
-  line-height: 1.4;
-}
-
-/* DESK */
-
-.broadcast-scene::after {
-  content: "";
-  position: absolute;
-  left: -7%;
-  right: -7%;
-  bottom: 19%;
-  height: 14%;
-  z-index: 8;
-  border-top: 2px solid rgba(255, 255, 255, 0.23);
-  background: linear-gradient(180deg, rgba(60, 77, 90, 0.95), rgba(16, 24, 31, 0.98));
-  transform: perspective(600px) rotateX(54deg);
-  transform-origin: bottom;
-  box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.32);
+  font-size: clamp(13px, 1.3vw, 17px);
+  line-height: 1.35;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
 }
 
 /* LOWER THIRD */
@@ -448,28 +339,29 @@
 .lower-breaking {
   display: inline-flex;
   align-items: center;
-  min-height: 31px;
-  padding: 0 17px;
+  min-height: 24px;
+  padding: 0 14px;
   background: #e3c454;
-  color: #0e1115;
-  font-size: 12px;
+  color: #111;
+  font-size: 9px;
   font-weight: 900;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
 }
 
 .lower-main {
   display: flex;
   align-items: center;
-  min-height: 62px;
-  padding: 8px 22px;
-  background: rgba(248, 249, 250, 0.98);
+  min-height: 43px;
+  padding: 5px 18px;
+  background: rgba(248, 249, 250, 0.97);
   color: #11161d;
 }
 
 .lower-main h1 {
   margin: 0;
-  font-size: clamp(27px, 3.3vw, 42px);
-  font-weight: 780;
+  max-width: calc(100% - 145px);
+  font-size: clamp(21px, 2.6vw, 33px);
+  font-weight: 800;
   line-height: 1;
   letter-spacing: -0.035em;
 }
@@ -477,46 +369,46 @@
 .lower-sub {
   display: flex;
   align-items: center;
-  min-height: 34px;
-  padding: 0 22px;
-  background: #111b26;
+  min-height: 25px;
+  padding: 0 18px;
+  background: rgba(11, 23, 35, 0.97);
   color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(14px, 1.35vw, 18px);
+  font-size: clamp(10px, 1vw, 13px);
 }
 
-/* FARIS FILES */
+/* FULLSCREEN REPORT GRAPHICS */
 
 .news-package {
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 38px 44px 155px;
+  padding: 48px 50px 90px;
   overflow: hidden;
   background:
-    linear-gradient(125deg, rgba(19, 38, 57, 0.96), rgba(5, 11, 18, 0.99)),
-    repeating-linear-gradient(90deg, transparent 0 110px, rgba(255, 255, 255, 0.03) 110px 111px);
+    radial-gradient(circle at 75% 30%, rgba(48, 103, 149, 0.3), transparent 34%),
+    linear-gradient(135deg, #142b3f 0%, #091521 55%, #040a10 100%);
 }
 
 .news-package::after {
   content: "BBN";
   position: absolute;
   right: -1%;
-  top: 3%;
+  top: 4%;
   color: rgba(255, 255, 255, 0.035);
-  font-size: clamp(140px, 22vw, 280px);
+  font-size: clamp(145px, 22vw, 280px);
   font-weight: 900;
-  pointer-events: none;
 }
 
-.package-kicker {
+.package-kicker,
+.board-kicker {
   position: relative;
   z-index: 2;
   display: inline-block;
-  margin-bottom: 14px;
+  margin: 0 0 14px;
   padding: 6px 10px;
   background: #e3c454;
   color: #111;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.1em;
 }
@@ -524,10 +416,9 @@
 .package-title {
   position: relative;
   z-index: 2;
-  max-width: 850px;
-  margin: 0 0 22px;
-  font-size: clamp(43px, 5.3vw, 69px);
-  font-weight: 800;
+  margin: 0 0 24px;
+  font-size: clamp(46px, 5.5vw, 71px);
+  font-weight: 820;
   line-height: 0.94;
   letter-spacing: -0.05em;
 }
@@ -535,35 +426,22 @@
 .package-copy {
   position: relative;
   z-index: 2;
-  max-width: 840px;
+  max-width: 850px;
   margin: 0;
   color: rgba(255, 255, 255, 0.9);
   font-size: clamp(19px, 2vw, 25px);
-  line-height: 1.48;
+  line-height: 1.45;
 }
 
 .package-copy + .package-copy {
   margin-top: 16px;
 }
 
-.big-quote {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  margin: 22px 0 0;
-  color: white;
-  font-size: clamp(31px, 4.2vw, 53px);
-  font-weight: 800;
-  line-height: 1.02;
-  letter-spacing: -0.04em;
-}
-
 /* SUBJECT PROFILE */
 
 .profile-package {
-  position: relative;
   display: grid;
-  grid-template-columns: 36% 64%;
+  grid-template-columns: 35% 65%;
   width: 100%;
   height: 100%;
   background: #08121d;
@@ -573,7 +451,7 @@
   position: relative;
   display: flex;
   align-items: flex-end;
-  padding: 36px;
+  padding: 34px;
   overflow: hidden;
   border-right: 1px solid rgba(255, 255, 255, 0.13);
   background:
@@ -587,19 +465,19 @@
   left: 50%;
   top: 45%;
   transform: translate(-50%, -50%);
-  color: rgba(255, 255, 255, 0.13);
+  color: rgba(255, 255, 255, 0.12);
   font-size: clamp(190px, 26vw, 315px);
   font-weight: 900;
 }
 
 .subject-status {
   position: absolute;
-  left: 26px;
-  top: 26px;
+  left: 24px;
+  top: 24px;
   padding: 6px 9px;
   background: #e3c454;
   color: #111;
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 900;
   letter-spacing: 0.1em;
 }
@@ -613,7 +491,6 @@
   display: block;
   font-size: clamp(43px, 6vw, 72px);
   line-height: 0.9;
-  letter-spacing: -0.04em;
 }
 
 .subject-name span {
@@ -644,29 +521,29 @@
   padding: 10px 0;
   border-bottom: 1px solid rgba(255, 255, 255, 0.11);
   font-size: clamp(14px, 1.45vw, 18px);
-  line-height: 1.25;
 }
 
 .profile-row strong {
   color: rgba(255, 255, 255, 0.55);
   font-size: 0.82em;
-  font-weight: 800;
-  letter-spacing: 0.06em;
   text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .profile-row span {
   font-weight: 650;
 }
 
-/* DATA BOARD */
+/* DATA */
 
 .info-board {
   width: 100%;
   height: 100%;
-  padding: 31px 40px 60px;
+  padding: 33px 42px 50px;
   overflow: auto;
-  background: linear-gradient(120deg, rgba(10, 28, 42, 0.98), rgba(4, 9, 15, 1));
+  background:
+    radial-gradient(circle at 82% 20%, rgba(54, 110, 150, 0.25), transparent 34%),
+    linear-gradient(120deg, #10283b, #050b12);
 }
 
 .info-board h2 {
@@ -675,7 +552,6 @@
   border-bottom: 4px solid #e3c454;
   font-size: clamp(30px, 4vw, 49px);
   line-height: 1;
-  letter-spacing: -0.035em;
 }
 
 .info-row {
@@ -701,10 +577,9 @@
 /* MUSIC */
 
 .music-card {
-  position: relative;
   width: 100%;
   height: 100%;
-  padding: 39px 46px 145px;
+  padding: 42px 48px 90px;
   background:
     radial-gradient(circle at 82% 29%, rgba(171, 125, 55, 0.15), transparent 34%),
     linear-gradient(135deg, #101b28, #050b11);
@@ -712,8 +587,7 @@
 
 .music-card h2 {
   margin: 0 0 20px;
-  font-size: clamp(40px, 5vw, 63px);
-  letter-spacing: -0.045em;
+  font-size: clamp(36px, 4.6vw, 58px);
 }
 
 .music-card p {
@@ -722,16 +596,6 @@
   color: rgba(255, 255, 255, 0.84);
   font-size: clamp(18px, 1.9vw, 24px);
   line-height: 1.45;
-}
-
-.music-rate {
-  display: inline-block;
-  margin-top: 27px;
-  padding: 12px 17px;
-  border: 1px solid rgba(227, 196, 84, 0.55);
-  color: #e3c454;
-  font-size: clamp(27px, 3.4vw, 42px);
-  font-weight: 800;
 }
 
 .music-transcript {
@@ -750,7 +614,7 @@
 .statement-layout {
   width: 100%;
   height: 100%;
-  padding: 39px 45px 145px;
+  padding: 42px 47px 120px;
   background:
     radial-gradient(circle at 82% 22%, rgba(75, 126, 165, 0.25), transparent 33%),
     linear-gradient(135deg, #172b3d, #070d14);
@@ -761,7 +625,7 @@
   padding: 6px 10px;
   background: #e3c454;
   color: #111;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 900;
   letter-spacing: 0.1em;
 }
@@ -772,7 +636,6 @@
   font-size: clamp(25px, 3.2vw, 40px);
   font-weight: 650;
   line-height: 1.22;
-  letter-spacing: -0.025em;
 }
 
 .statement-layout cite {
@@ -781,15 +644,9 @@
   font-style: normal;
 }
 
-/* ================================= */
 /* VIDEO */
-/* IMPORTANT: HIDDEN UNTIL VIDEO SLIDE */
-/* ================================= */
 
-#birthdayVideo {
-  display: none !important;
-}
-
+#birthdayVideo,
 .video-fallback {
   display: none !important;
 }
@@ -809,7 +666,6 @@
   width: 100%;
   height: 100%;
   margin: 0;
-  background: black;
   object-fit: contain;
 }
 
@@ -819,22 +675,6 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap: 8px;
-  color: rgba(255, 255, 255, 0.75);
-  text-align: center;
-}
-
-.news-video-stage .video-fallback span {
-  font-size: 42px;
-}
-
-.news-video-stage .video-fallback p {
-  margin: 0;
-  font-size: 20px;
-}
-
-.news-video-stage .video-fallback small {
-  opacity: 0.55;
 }
 
 /* FINAL */
@@ -852,6 +692,14 @@
   text-align: center;
 }
 
+.final-kicker {
+  margin-bottom: 14px !important;
+  color: #e3c454 !important;
+  font-size: 11px !important;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
 .final-broadcast h1 {
   margin: 0;
   font-size: clamp(48px, 7vw, 88px);
@@ -866,32 +714,30 @@
   font-size: clamp(17px, 1.8vw, 22px);
 }
 
-/* CONTROLS */
+/* CONTINUE BUTTON */
 
 .news-controls {
   position: absolute;
-  right: 18px;
-  bottom: 50px;
-  z-index: 180;
+  right: 15px;
+  bottom: 47px;
+  z-index: 190;
 }
 
 #newsNextButton {
-  min-width: 128px;
-  min-height: 39px;
-  padding: 0 15px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
+  min-width: 113px;
+  min-height: 32px;
+  padding: 0 13px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
   border-radius: 3px;
-  background: rgba(8, 15, 22, 0.88);
+  background: rgba(4, 10, 17, 0.9);
   color: white;
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 850;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
   cursor: pointer;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
-/* SEAMLESS TICKER */
+/* TICKER */
 
 .news-ticker {
   position: relative;
@@ -954,7 +800,7 @@
   to { transform: translateX(-50%); }
 }
 
-/* IPAD / SMALL LANDSCAPE */
+/* IPAD */
 
 @media (max-width: 850px) {
   #tvModal {
@@ -989,34 +835,30 @@
     font-size: 9px;
   }
 
-  .anchor-zone {
-    left: 1%;
-    width: 43%;
-  }
-
-  .anchor-silhouette {
-    left: 0;
-    transform: scale(0.82);
-    transform-origin: bottom left;
-  }
-
   .studio-side-panel {
-    right: 2.5%;
-    top: 6%;
-    width: 52%;
-    padding: 17px 18px;
+    left: 53%;
+    top: 10.5%;
+    width: 42%;
+    height: 38%;
+    padding: 2.4% 2.7%;
   }
 
   .studio-side-panel h2 {
-    font-size: clamp(28px, 6vw, 42px);
+    font-size: clamp(23px, 4vw, 34px);
   }
 
   .studio-side-panel p {
-    font-size: clamp(14px, 2.5vw, 18px);
+    margin-top: 8px;
+    font-size: clamp(11px, 1.8vw, 14px);
+  }
+
+  .anchor-label {
+    bottom: 14px;
+    font-size: 8px;
   }
 
   .profile-package {
-    grid-template-columns: 32% 68%;
+    grid-template-columns: 33% 67%;
   }
 
   .subject-visual {
@@ -1036,7 +878,8 @@
   .news-package,
   .music-card,
   .statement-layout {
-    padding: 26px 28px 135px;
+    padding-left: 28px;
+    padding-right: 28px;
   }
 
   .info-board {
@@ -1044,24 +887,30 @@
   }
 
   .lower-main {
-    min-height: 53px;
-    padding: 7px 16px;
+    min-height: 39px;
+    padding: 5px 14px;
+  }
+
+  .lower-main h1 {
+    max-width: calc(100% - 120px);
+    font-size: clamp(19px, 3vw, 27px);
   }
 
   .lower-sub {
-    min-height: 30px;
-    padding: 0 16px;
+    min-height: 23px;
+    padding: 0 14px;
+    font-size: 10px;
   }
 
   .news-controls {
     right: 10px;
-    bottom: 44px;
+    bottom: 43px;
   }
 
   #newsNextButton {
-    min-width: 108px;
-    min-height: 34px;
-    font-size: 9px;
+    min-width: 101px;
+    min-height: 30px;
+    font-size: 8px;
   }
 
   .news-ticker {
@@ -1075,215 +924,5 @@
 
   .ticker-copy {
     font-size: 10px;
-  }
-}
-
-/* ================================= */
-/* REAL BBN NEWSROOM */
-/* ================================= */
-
-.birthday-news .broadcast-scene {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  background-image: url("assets/bbn-anchor.png") !important;
-  background-size: cover !important;
-  background-position: center center !important;
-  background-repeat: no-repeat !important;
-}
-
-.birthday-news .studio-background,
-.birthday-news .anchor-silhouette,
-.birthday-news .anchor-head,
-.birthday-news .anchor-body,
-.birthday-news .broadcast-scene::after {
-  display: none !important;
-}
-
-/* Keep the small newsroom identifier */
-.birthday-news .anchor-zone {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.birthday-news .anchor-label {
-  position: absolute;
-  left: 2.5%;
-  bottom: 22px;
-  z-index: 12;
-  padding: 6px 10px;
-  border-left: 3px solid #e3c454;
-  background: rgba(4, 10, 17, 0.78);
-  color: rgba(255, 255, 255, 0.92);
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.11em;
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-}
-
-/* Text positioned over the blank monitor in bbn-anchor.png */
-.birthday-news .studio-side-panel {
-  position: absolute;
-  left: 53.2%;
-  right: auto;
-  top: 10.5%;
-  width: 42%;
-  min-height: 0;
-  height: 43%;
-  padding: 4.2% 3.2% 3%;
-  overflow: hidden;
-  border: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-.birthday-news .studio-side-panel::before {
-  display: none;
-}
-
-.birthday-news .studio-side-panel .small-label {
-  margin: 0 0 9px;
-  color: #e3c454;
-  font-size: clamp(9px, 1vw, 12px);
-  font-weight: 900;
-  letter-spacing: 0.12em;
-}
-
-.birthday-news .studio-side-panel h2 {
-  max-width: 100%;
-  margin: 0;
-  color: white;
-  font-size: clamp(26px, 3.4vw, 44px);
-  font-weight: 800;
-  line-height: 0.98;
-  letter-spacing: -0.04em;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
-}
-
-.birthday-news .studio-side-panel p {
-  max-width: 100%;
-  margin: 12px 0 0;
-  color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(13px, 1.35vw, 17px);
-  line-height: 1.35;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
-}
-
-/* Smaller real-news lower third */
-.birthday-news .lower-third {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 30;
-}
-
-.birthday-news .lower-breaking {
-  display: inline-flex;
-  align-items: center;
-  min-height: 25px;
-  padding: 0 14px;
-  background: #e3c454;
-  color: #0e1115;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 0.09em;
-}
-
-.birthday-news .lower-main {
-  display: flex;
-  align-items: center;
-  min-height: 47px;
-  padding: 6px 18px;
-  background: rgba(248, 249, 250, 0.97);
-  color: #11161d;
-}
-
-.birthday-news .lower-main h1 {
-  margin: 0;
-  font-size: clamp(23px, 2.8vw, 35px);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.035em;
-}
-
-.birthday-news .lower-sub {
-  display: flex;
-  align-items: center;
-  min-height: 28px;
-  padding: 0 18px;
-  background: rgba(11, 23, 35, 0.97);
-  color: rgba(255, 255, 255, 0.9);
-  font-size: clamp(11px, 1.15vw, 15px);
-}
-
-/* Continue button stays above the graphics instead of covering them */
-.birthday-news .news-controls {
-  position: absolute;
-  right: 15px;
-  bottom: 50px;
-  z-index: 190;
-}
-
-.birthday-news #newsNextButton {
-  min-width: 116px;
-  min-height: 35px;
-  padding: 0 14px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  border-radius: 3px;
-  background: rgba(4, 10, 17, 0.88);
-  color: white;
-  font-size: 10px;
-  font-weight: 850;
-  letter-spacing: 0.09em;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-}
-
-@media (max-width: 850px) {
-  .birthday-news .broadcast-scene {
-    background-position: center center !important;
-  }
-
-  .birthday-news .studio-side-panel {
-    left: 52.8%;
-    top: 10%;
-    width: 42.5%;
-    height: 43%;
-    padding: 3.5% 2.8%;
-  }
-
-  .birthday-news .studio-side-panel h2 {
-    font-size: clamp(23px, 4vw, 34px);
-  }
-
-  .birthday-news .studio-side-panel p {
-    margin-top: 8px;
-    font-size: clamp(11px, 1.8vw, 14px);
-  }
-
-  .birthday-news .anchor-label {
-    left: 2%;
-    bottom: 16px;
-    font-size: 8px;
-  }
-
-  .birthday-news .lower-main {
-    min-height: 41px;
-  }
-
-  .birthday-news .lower-main h1 {
-    font-size: clamp(20px, 3.4vw, 28px);
-  }
-
-  .birthday-news .lower-sub {
-    min-height: 24px;
-    font-size: 11px;
   }
 }
