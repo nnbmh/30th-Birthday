@@ -14,6 +14,11 @@
     stylesheet.href = "style.css?v=" + cacheVersion;
     document.head.appendChild(stylesheet);
 
+    const computerStylesheet = document.createElement("link");
+    computerStylesheet.rel = "stylesheet";
+    computerStylesheet.href = "computer.css?v=" + cacheVersion;
+    document.head.appendChild(computerStylesheet);
+
     const tvStylesheet = document.createElement("link");
     tvStylesheet.rel = "stylesheet";
     tvStylesheet.href = "tv.css?v=" + cacheVersion;
@@ -124,44 +129,244 @@
           <button data-close>×</button>
         </div>
 
-        <div class="desktop">
-          <div class="desktop-greeting">
-            <p id="computerTime">00:00</p>
-            <h2>Good evening, Faris.</h2>
-            <p>Keep going. ★</p>
-          </div>
+        <div class="desktop faris-desktop">
+          <span id="computerTime" class="computer-hidden-clock">00:00</span>
 
-          <div class="desktop-icons">
-            <button class="desktop-icon" data-app="birthday">
-              <span class="desktop-symbol">30</span>
+          <div class="desktop-icons faris-desktop-icons">
+
+            <!-- THIS PC -->
+            <button class="desktop-icon" data-computer-app="thispc">
+              <span class="desktop-symbol os-icon os-pc">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <rect x="8" y="9" width="48" height="34" rx="3" fill="#5aa9e6"/>
+                  <rect x="12" y="13" width="40" height="26" rx="1" fill="#bfe3ff"/>
+                  <rect x="28" y="44" width="8" height="7" fill="#b7c5d1"/>
+                  <rect x="21" y="51" width="22" height="4" rx="2" fill="#dbe4ea"/>
+                </svg>
+              </span>
+              <p>This PC</p>
+            </button>
+
+            <!-- RECYCLE BIN -->
+            <button class="desktop-icon" data-computer-app="recycle">
+              <span class="desktop-symbol os-icon os-bin">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M19 18h27l-3 36H22z" fill="#d9f3ff"/>
+                  <path d="M17 14h31v6H17z" fill="#8fd3f4"/>
+                  <path d="M26 9h13l3 5H23z" fill="#bfeaff"/>
+                  <path d="M27 27l5-4 5 4-3 1 3 5h-5l-3-5z" fill="#4da8d8"/>
+                  <path d="M39 36l3 5-4 6-1-4h-6l3-5 4 1z" fill="#4da8d8"/>
+                </svg>
+              </span>
+              <p>Recycle Bin</p>
+            </button>
+
+            <!-- DOCUMENTS -->
+            <button class="desktop-icon" data-computer-app="documents">
+              <span class="desktop-symbol os-icon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M7 19h21l5 6h24v28H7z" fill="#f5c451"/>
+                  <path d="M7 15h19l5 6h26v7H7z" fill="#ffdb72"/>
+                </svg>
+              </span>
+              <p>Documents</p>
+            </button>
+
+            <!-- DOWNLOADS -->
+            <button class="desktop-icon" data-computer-app="downloads">
+              <span class="desktop-symbol os-icon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M7 19h21l5 6h24v28H7z" fill="#f5c451"/>
+                  <path d="M7 15h19l5 6h26v7H7z" fill="#ffdb72"/>
+                  <path d="M32 29v14" stroke="#3d4650" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M25 38l7 7 7-7" fill="none" stroke="#3d4650" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <p>Downloads</p>
+            </button>
+
+            <!-- CHROME -->
+            <button class="desktop-icon" data-computer-app="chrome">
+              <span class="desktop-symbol os-icon app-logo">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <circle cx="32" cy="32" r="27" fill="#fff"/>
+                  <path d="M32 32L9 32A27 27 0 0 1 50 13z" fill="#ea4335"/>
+                  <path d="M32 32l12 21A27 27 0 0 1 9 32z" fill="#34a853"/>
+                  <path d="M32 32l18-19A27 27 0 0 1 44 53z" fill="#fbbc05"/>
+                  <circle cx="32" cy="32" r="11" fill="#4285f4"/>
+                  <circle cx="32" cy="32" r="7" fill="#6ba4f7"/>
+                </svg>
+              </span>
+              <p>Chrome</p>
+            </button>
+
+            <!-- DISCORD -->
+            <button class="desktop-icon" data-computer-app="discord">
+              <span class="desktop-symbol os-icon app-logo">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <rect x="6" y="6" width="52" height="52" rx="13" fill="#5865f2"/>
+                  <path d="M22 22c7-5 13-5 20 0 4 6 6 12 7 19-5 4-9 6-13 7l-2-4c3-1 5-2 7-4-7 4-12 4-19 0 2 2 4 3 7 4l-2 4c-4-1-8-3-13-7 1-7 3-13 8-19z" fill="white"/>
+                  <circle cx="25" cy="33" r="3" fill="#5865f2"/>
+                  <circle cx="39" cy="33" r="3" fill="#5865f2"/>
+                </svg>
+              </span>
+              <p>Discord</p>
+            </button>
+
+            <!-- SPOTIFY -->
+            <button class="desktop-icon" data-computer-app="spotify">
+              <span class="desktop-symbol os-icon app-logo">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <circle cx="32" cy="32" r="27" fill="#1ed760"/>
+                  <path d="M18 25c11-3 24-2 34 3" fill="none" stroke="#111" stroke-width="5" stroke-linecap="round"/>
+                  <path d="M20 34c9-2 20-1 29 3" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+                  <path d="M22 42c8-1 16 0 23 3" fill="none" stroke="#111" stroke-width="3.5" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <p>Spotify</p>
+            </button>
+
+            <!-- STEAM -->
+            <button class="desktop-icon" data-computer-app="steam">
+              <span class="desktop-symbol os-icon app-logo">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <circle cx="32" cy="32" r="27" fill="#15344c"/>
+                  <circle cx="42" cy="22" r="9" fill="none" stroke="white" stroke-width="4"/>
+                  <circle cx="20" cy="42" r="7" fill="none" stroke="white" stroke-width="4"/>
+                  <path d="M26 39l10-11 8 3" fill="none" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+              </span>
+              <p>Steam</p>
+            </button>
+
+            <!-- BIRTHDAY -->
+            <button class="desktop-icon birthday-file" data-app="birthday">
+              <span class="desktop-symbol os-icon file-icon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M15 6h25l11 11v41H15z" fill="#f4f4f4"/>
+                  <path d="M40 6v12h11" fill="#d7e0e7"/>
+                  <path d="M22 29h22M22 35h22M22 41h16" stroke="#5d6a73" stroke-width="3"/>
+                  <rect x="18" y="11" width="16" height="10" rx="2" fill="#5a9de2"/>
+                  <text x="26" y="19" text-anchor="middle" font-size="8" font-family="sans-serif" fill="white">30</text>
+                </svg>
+              </span>
               <p>birthday.txt</p>
             </button>
 
+            <!-- PHOTOS -->
             <button class="desktop-icon" data-app="photos">
-              <span class="desktop-symbol">▣</span>
+              <span class="desktop-symbol os-icon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M7 19h21l5 6h24v28H7z" fill="#f5c451"/>
+                  <path d="M7 15h19l5 6h26v7H7z" fill="#ffdb72"/>
+                  <rect x="22" y="30" width="24" height="16" rx="2" fill="#fff"/>
+                  <circle cx="29" cy="35" r="3" fill="#6fb6df"/>
+                  <path d="M24 44l7-7 5 5 3-3 5 5z" fill="#65a864"/>
+                </svg>
+              </span>
               <p>photos</p>
             </button>
 
+            <!-- MESSAGE -->
             <button class="desktop-icon" data-app="message">
-              <span class="desktop-symbol">♡</span>
+              <span class="desktop-symbol os-icon file-icon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M15 6h25l11 11v41H15z" fill="#f4f4f4"/>
+                  <path d="M40 6v12h11" fill="#d7e0e7"/>
+                  <path d="M22 29h22M22 35h22M22 41h16" stroke="#5d6a73" stroke-width="3"/>
+                </svg>
+              </span>
               <p>message.txt</p>
             </button>
 
+            <!-- CLASSIFIED -->
             <button class="desktop-icon" data-app="classified">
-              <span class="desktop-symbol">🔒</span>
+              <span class="desktop-symbol os-icon classified-icon">
+                <svg viewBox="0 0 64 64" aria-hidden="true">
+                  <path d="M7 19h21l5 6h24v28H7z" fill="#464b50"/>
+                  <path d="M7 15h19l5 6h26v7H7z" fill="#5a6066"/>
+                  <rect x="26" y="31" width="18" height="15" rx="2" fill="#d5b34c"/>
+                  <path d="M30 31v-4a5 5 0 0 1 10 0v4" fill="none" stroke="#d5b34c" stroke-width="3"/>
+                </svg>
+              </span>
               <p>CLASSIFIED</p>
             </button>
           </div>
 
-          <div class="sticky-note">
-            30 already sia sayang...<br><br>
-            anyway, i left you something.
-            <span>:)</span>
+          <div id="computerToast" class="computer-toast"></div>
+
+          <div id="startMenu" class="start-menu">
+            <div class="start-profile">
+              <div class="start-avatar">F</div>
+              <div>
+                <strong>Faris</strong>
+                <span>FARIS-PC</span>
+              </div>
+            </div>
+
+            <div class="start-links">
+              <button data-computer-app="documents">Documents</button>
+              <button data-computer-app="downloads">Downloads</button>
+              <button data-computer-app="thispc">This PC</button>
+            </div>
+
+            <div class="start-power">⏻</div>
           </div>
 
-          <div class="taskbar">
-            <span>◈</span>
-            <span id="taskbarTime">00:00</span>
+          <div class="taskbar faris-taskbar">
+            <div class="taskbar-left">
+              <button id="startButton" class="taskbar-icon start-button" aria-label="Start">
+                <svg viewBox="0 0 24 24">
+                  <path d="M3 4l8-1v8H3zm10-1l8-1v9h-8zM3 13h8v8l-8-1zm10 0h8v9l-8-1z" fill="currentColor"/>
+                </svg>
+              </button>
+
+              <button class="taskbar-search" aria-label="Search">
+                <span>⌕</span>
+                <small>Search</small>
+              </button>
+
+              <button class="taskbar-icon" data-computer-app="documents" aria-label="File Explorer">
+                <svg viewBox="0 0 64 64">
+                  <path d="M7 19h21l5 6h24v28H7z" fill="#f5c451"/>
+                  <path d="M7 15h19l5 6h26v7H7z" fill="#ffdb72"/>
+                </svg>
+              </button>
+
+              <button class="taskbar-icon" data-computer-app="chrome" aria-label="Chrome">
+                <svg viewBox="0 0 64 64">
+                  <circle cx="32" cy="32" r="27" fill="#fff"/>
+                  <path d="M32 32L9 32A27 27 0 0 1 50 13z" fill="#ea4335"/>
+                  <path d="M32 32l12 21A27 27 0 0 1 9 32z" fill="#34a853"/>
+                  <path d="M32 32l18-19A27 27 0 0 1 44 53z" fill="#fbbc05"/>
+                  <circle cx="32" cy="32" r="11" fill="#4285f4"/>
+                </svg>
+              </button>
+
+              <button class="taskbar-icon" data-computer-app="discord" aria-label="Discord">
+                <svg viewBox="0 0 64 64">
+                  <rect x="6" y="6" width="52" height="52" rx="13" fill="#5865f2"/>
+                  <path d="M22 22c7-5 13-5 20 0 4 6 6 12 7 19-5 4-9 6-13 7l-2-4c3-1 5-2 7-4-7 4-12 4-19 0 2 2 4 3 7 4l-2 4c-4-1-8-3-13-7 1-7 3-13 8-19z" fill="white"/>
+                </svg>
+              </button>
+
+              <button class="taskbar-icon" data-computer-app="spotify" aria-label="Spotify">
+                <svg viewBox="0 0 64 64">
+                  <circle cx="32" cy="32" r="27" fill="#1ed760"/>
+                  <path d="M18 25c11-3 24-2 34 3M20 34c9-2 20-1 29 3M22 42c8-1 16 0 23 3" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+                </svg>
+              </button>
+            </div>
+
+            <div class="taskbar-right">
+              <span class="tray-chevron">⌃</span>
+              <span class="tray-network">⌁</span>
+              <span class="tray-volume">)))</span>
+              <div class="taskbar-clock">
+                <span id="taskbarTime">00:00</span>
+                <small id="taskbarDate">18/09/2026</small>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -246,32 +451,23 @@
       <div id="aiConversation" class="ai-conversation">
         <div class="ai-message user-message reveal-message">is 30 old</div>
         <div class="ai-message assistant-message reveal-message">No. 30 is still considered young adulthood.</div>
-
         <div class="ai-message user-message reveal-message">be serious</div>
         <div class="ai-message assistant-message reveal-message">I am.</div>
-
         <div class="ai-message user-message reveal-message">then why does my girlfriend keep calling me old</div>
         <div class="ai-message assistant-message reveal-message">Based on the available evidence, this appears to be bullying.</div>
-
         <div class="ai-message user-message reveal-message">should i be concerned</div>
         <div class="ai-message assistant-message reveal-message">Probably not. She seems unusually fond of you.</div>
-
         <div class="ai-message user-message reveal-message">unusually?</div>
         <div class="ai-message assistant-message reveal-message">She built you an entire interactive birthday room.</div>
-
         <div class="ai-message user-message reveal-message">fair</div>
-
         <div class="ai-message user-message reveal-message">so what actually happens when you turn 30</div>
         <div class="ai-message assistant-message reveal-message">Increased maturity, confidence and self-awareness.</div>
-
         <div class="ai-message user-message reveal-message">anything else</div>
         <div class="ai-message assistant-message reveal-message">You may start making noises when standing up.</div>
-
         <div class="ai-message user-message reveal-message">fuck off</div>
         <div class="ai-message assistant-message reveal-message">Happy birthday, Faris.</div>
-
         <div class="ai-message user-message reveal-message">how do you know my name</div>
-        <div class="ai-message assistant-message reveal-message special-ai">You have bigger problems.</div>
+        <div class="ai-message assistant-message special-ai reveal-message">You have bigger problems.</div>
       </div>
 
       <div class="ai-input">
@@ -281,13 +477,12 @@
     </div>
   </section>
 
-  <!-- PANDA / OREO -->
+  <!-- PANDA -->
   <section class="modal" id="pandaModal" aria-hidden="true">
     <div class="modal-background" data-close></div>
 
     <div class="panda-delivery">
       <button class="card-close" data-close>×</button>
-
       <p class="eyebrow">SPECIAL DELIVERY</p>
 
       <div class="panda-character">
@@ -308,7 +503,6 @@
 
         <span class="panda-arm panda-arm-left"></span>
         <span class="panda-arm panda-arm-right"></span>
-
         <span class="panda-foot panda-foot-left"></span>
         <span class="panda-foot panda-foot-right"></span>
       </div>
@@ -432,6 +626,10 @@
     mainScript.src = "script.js?v=" + cacheVersion;
 
     mainScript.onload = () => {
+      const computerScript = document.createElement("script");
+      computerScript.src = "computer.js?v=" + cacheVersion;
+      document.body.appendChild(computerScript);
+
       const tvScript = document.createElement("script");
       tvScript.src = "tv.js?v=" + cacheVersion;
       document.body.appendChild(tvScript);
