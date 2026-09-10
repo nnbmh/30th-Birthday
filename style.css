@@ -737,12 +737,14 @@ button,
   padding: 20px;
   visibility: hidden;
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.35s ease, visibility 0.35s;
 }
 
 .modal.open {
   visibility: visible;
   opacity: 1;
+  pointer-events: auto;
 }
 
 .modal-background {
@@ -1086,12 +1088,14 @@ button,
   color: white;
   box-shadow: 0 40px 120px rgba(0, 0, 0, 0.75);
   transition: 0.25s ease;
+  pointer-events: none;
 }
 
 .app-window.open {
   visibility: visible;
   opacity: 1;
   transform: translate(-50%, -50%) scale(1);
+  pointer-events: none;
 }
 
 .app-titlebar {
