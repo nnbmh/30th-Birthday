@@ -571,6 +571,35 @@ button,
   z-index: 90;
 }
 
+/* Keep hotspot layer reliably above room visuals */
+#roomCanvas .hotspot {
+  pointer-events: auto;
+}
+
+#monitorHotspot {
+  z-index: 60;
+}
+
+#tvHotspot {
+  z-index: 60;
+}
+
+#laptopHotspot {
+  z-index: 60;
+}
+
+#pandaHotspot {
+  z-index: 60;
+}
+
+/*
+  Sticky note sits physically on the MSI monitor,
+  so it must remain above the monitor hotspot.
+*/
+#noteHotspot {
+  z-index: 90;
+}
+
 /* ============================= */
 /* HOTSPOT DOT */
 /* ============================= */
