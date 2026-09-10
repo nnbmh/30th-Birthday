@@ -668,28 +668,29 @@ button,
 /* OBJECT FOCUS */
 /* ============================= */
 
+/*
+  Keep the room image stationary.
+  The transition overlay gives us the cinematic focus effect without
+  separating the visual object from its clickable hotspot.
+*/
+
 #room.focus-computer #roomImage {
-  transform: scale(1.12) translate(10%, 2%);
   filter: brightness(0.65);
 }
 
 #room.focus-tv #roomImage {
-  transform: scale(1.12) translate(-4%, 8%);
   filter: brightness(0.6);
 }
 
 #room.focus-laptop #roomImage {
-  transform: scale(1.1) translate(-5%, -3%);
   filter: brightness(0.62);
 }
 
 #room.focus-panda #roomImage {
-  transform: scale(1.1) translate(-8%, -3%);
   filter: brightness(0.65);
 }
 
 #room.focus-note #roomImage {
-  transform: scale(1.08);
   filter: brightness(0.68);
 }
 
