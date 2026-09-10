@@ -115,24 +115,21 @@ enterButton.addEventListener("click", () => {
 /* DESKTOP ROOM MOVEMENT */
 /* ============================= */
 
+/*
+  IMPORTANT:
+  Do not move the room image independently from the hotspots.
+  The previous mouse parallax made the visible objects move while
+  their clickable areas stayed behind.
+*/
+
 if (window.matchMedia("(pointer: fine)").matches) {
-  document.addEventListener("mousemove", (event) => {
+  document.addEventListener("mousemove", () => {
     if (room.classList.contains("final-reveal-active")) return;
 
-    if (
-      room.classList.contains("focus-computer") ||
-      room.classList.contains("focus-tv") ||
-      room.classList.contains("focus-laptop") ||
-      room.classList.contains("focus-panda") ||
-      room.classList.contains("focus-note")
-    ) {
-      return;
-    }
-
-    const x = (event.clientX / window.innerWidth - 0.5) * 4;
-    const y = (event.clientY / window.innerHeight - 0.5) * 3;
-
-    roomImage.style.transform = `scale(1.025) translate(${-x}px, ${-y}px)`;
+    /*
+      Intentionally no image-only transform here.
+      This keeps every invisible hotspot aligned with the room.
+    */
   });
 }
 
