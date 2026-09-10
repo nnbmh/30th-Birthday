@@ -258,9 +258,7 @@
   to { opacity: 1; }
 }
 
-/* ============================= */
 /* NEWSROOM */
-/* ============================= */
 
 .broadcast-scene {
   position: relative;
@@ -299,8 +297,7 @@
   letter-spacing: 0.03em;
 }
 
-/* TEMPORARY ANCHOR
-   This becomes the real anchor image later */
+/* TEMPORARY ANCHOR */
 
 .anchor-zone {
   position: absolute;
@@ -384,8 +381,7 @@
   min-height: 245px;
   padding: 23px 25px;
   border: 1px solid rgba(255, 255, 255, 0.15);
-  background:
-    linear-gradient(150deg, rgba(17, 48, 72, 0.96), rgba(6, 16, 27, 0.98));
+  background: linear-gradient(150deg, rgba(17, 48, 72, 0.96), rgba(6, 16, 27, 0.98));
   box-shadow: 0 20px 55px rgba(0, 0, 0, 0.33);
 }
 
@@ -433,8 +429,7 @@
   height: 14%;
   z-index: 8;
   border-top: 2px solid rgba(255, 255, 255, 0.23);
-  background:
-    linear-gradient(180deg, rgba(60, 77, 90, 0.95), rgba(16, 24, 31, 0.98));
+  background: linear-gradient(180deg, rgba(60, 77, 90, 0.95), rgba(16, 24, 31, 0.98));
   transform: perspective(600px) rotateX(54deg);
   transform-origin: bottom;
   box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.32);
@@ -489,9 +484,7 @@
   font-size: clamp(14px, 1.35vw, 18px);
 }
 
-/* ============================= */
 /* FARIS FILES */
-/* ============================= */
 
 .news-package {
   position: relative;
@@ -633,8 +626,7 @@
 .profile-data {
   padding: 28px 33px;
   overflow: auto;
-  background:
-    linear-gradient(155deg, #101d2a, #060d14);
+  background: linear-gradient(155deg, #101d2a, #060d14);
 }
 
 .profile-data h2 {
@@ -674,8 +666,7 @@
   height: 100%;
   padding: 31px 40px 60px;
   overflow: auto;
-  background:
-    linear-gradient(120deg, rgba(10, 28, 42, 0.98), rgba(4, 9, 15, 1));
+  background: linear-gradient(120deg, rgba(10, 28, 42, 0.98), rgba(4, 9, 15, 1));
 }
 
 .info-board h2 {
@@ -790,52 +781,59 @@
   font-style: normal;
 }
 
+/* ================================= */
 /* VIDEO */
+/* IMPORTANT: HIDDEN UNTIL VIDEO SLIDE */
+/* ================================= */
+
+#birthdayVideo {
+  display: none !important;
+}
+
+.video-fallback {
+  display: none !important;
+}
 
 .news-video-stage {
   position: absolute;
-  inset: 0 0 96px;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
   background: black;
 }
 
-#birthdayVideo {
-  display: none;
+.news-video-stage #birthdayVideo {
+  display: block !important;
   width: 100%;
   height: 100%;
+  margin: 0;
   background: black;
   object-fit: contain;
 }
 
-#birthdayVideo[src],
-#birthdayVideo:has(source) {
-  display: block;
-}
-
-.video-fallback {
-  display: none;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+.news-video-stage .video-fallback {
   width: 100%;
   height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
   color: rgba(255, 255, 255, 0.75);
   text-align: center;
 }
 
-.video-fallback span {
+.news-video-stage .video-fallback span {
   font-size: 42px;
 }
 
-.video-fallback p {
+.news-video-stage .video-fallback p {
   margin: 0;
   font-size: 20px;
 }
 
-.video-fallback small {
+.news-video-stage .video-fallback small {
   opacity: 0.55;
 }
 
@@ -873,7 +871,7 @@
 .news-controls {
   position: absolute;
   right: 18px;
-  bottom: 44px;
+  bottom: 50px;
   z-index: 180;
 }
 
@@ -883,7 +881,7 @@
   padding: 0 15px;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-radius: 3px;
-  background: rgba(8, 15, 22, 0.86);
+  background: rgba(8, 15, 22, 0.88);
   color: white;
   font-size: 11px;
   font-weight: 850;
@@ -893,9 +891,7 @@
   -webkit-backdrop-filter: blur(8px);
 }
 
-/* ============================= */
 /* SEAMLESS TICKER */
-/* ============================= */
 
 .news-ticker {
   position: relative;
@@ -958,7 +954,7 @@
   to { transform: translateX(-50%); }
 }
 
-/* MOBILE / SMALL LANDSCAPE */
+/* IPAD / SMALL LANDSCAPE */
 
 @media (max-width: 850px) {
   #tvModal {
@@ -1059,7 +1055,7 @@
 
   .news-controls {
     right: 10px;
-    bottom: 43px;
+    bottom: 44px;
   }
 
   #newsNextButton {
