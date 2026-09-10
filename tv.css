@@ -1077,3 +1077,213 @@
     font-size: 10px;
   }
 }
+
+/* ================================= */
+/* REAL BBN NEWSROOM */
+/* ================================= */
+
+.birthday-news .broadcast-scene {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-image: url("assets/bbn-anchor.png") !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+}
+
+.birthday-news .studio-background,
+.birthday-news .anchor-silhouette,
+.birthday-news .anchor-head,
+.birthday-news .anchor-body,
+.birthday-news .broadcast-scene::after {
+  display: none !important;
+}
+
+/* Keep the small newsroom identifier */
+.birthday-news .anchor-zone {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.birthday-news .anchor-label {
+  position: absolute;
+  left: 2.5%;
+  bottom: 22px;
+  z-index: 12;
+  padding: 6px 10px;
+  border-left: 3px solid #e3c454;
+  background: rgba(4, 10, 17, 0.78);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+}
+
+/* Text positioned over the blank monitor in bbn-anchor.png */
+.birthday-news .studio-side-panel {
+  position: absolute;
+  left: 53.2%;
+  right: auto;
+  top: 10.5%;
+  width: 42%;
+  min-height: 0;
+  height: 43%;
+  padding: 4.2% 3.2% 3%;
+  overflow: hidden;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.birthday-news .studio-side-panel::before {
+  display: none;
+}
+
+.birthday-news .studio-side-panel .small-label {
+  margin: 0 0 9px;
+  color: #e3c454;
+  font-size: clamp(9px, 1vw, 12px);
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.birthday-news .studio-side-panel h2 {
+  max-width: 100%;
+  margin: 0;
+  color: white;
+  font-size: clamp(26px, 3.4vw, 44px);
+  font-weight: 800;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
+}
+
+.birthday-news .studio-side-panel p {
+  max-width: 100%;
+  margin: 12px 0 0;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(13px, 1.35vw, 17px);
+  line-height: 1.35;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+/* Smaller real-news lower third */
+.birthday-news .lower-third {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+}
+
+.birthday-news .lower-breaking {
+  display: inline-flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 0 14px;
+  background: #e3c454;
+  color: #0e1115;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: 0.09em;
+}
+
+.birthday-news .lower-main {
+  display: flex;
+  align-items: center;
+  min-height: 47px;
+  padding: 6px 18px;
+  background: rgba(248, 249, 250, 0.97);
+  color: #11161d;
+}
+
+.birthday-news .lower-main h1 {
+  margin: 0;
+  font-size: clamp(23px, 2.8vw, 35px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.birthday-news .lower-sub {
+  display: flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 18px;
+  background: rgba(11, 23, 35, 0.97);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: clamp(11px, 1.15vw, 15px);
+}
+
+/* Continue button stays above the graphics instead of covering them */
+.birthday-news .news-controls {
+  position: absolute;
+  right: 15px;
+  bottom: 50px;
+  z-index: 190;
+}
+
+.birthday-news #newsNextButton {
+  min-width: 116px;
+  min-height: 35px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+  background: rgba(4, 10, 17, 0.88);
+  color: white;
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.09em;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+@media (max-width: 850px) {
+  .birthday-news .broadcast-scene {
+    background-position: center center !important;
+  }
+
+  .birthday-news .studio-side-panel {
+    left: 52.8%;
+    top: 10%;
+    width: 42.5%;
+    height: 43%;
+    padding: 3.5% 2.8%;
+  }
+
+  .birthday-news .studio-side-panel h2 {
+    font-size: clamp(23px, 4vw, 34px);
+  }
+
+  .birthday-news .studio-side-panel p {
+    margin-top: 8px;
+    font-size: clamp(11px, 1.8vw, 14px);
+  }
+
+  .birthday-news .anchor-label {
+    left: 2%;
+    bottom: 16px;
+    font-size: 8px;
+  }
+
+  .birthday-news .lower-main {
+    min-height: 41px;
+  }
+
+  .birthday-news .lower-main h1 {
+    font-size: clamp(20px, 3.4vw, 28px);
+  }
+
+  .birthday-news .lower-sub {
+    min-height: 24px;
+    font-size: 11px;
+  }
+}
