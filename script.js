@@ -741,17 +741,45 @@ function showBirthdayReplayButton() {
 }
 
 function restoreRoomAfterFinal() {
-  room.classList.remove("final-reveal-active", "final-lights");
-  clearRoomFocus();
+  /* Remove every final-state room class */
+  room.classList.remove(
+    "final-reveal-active",
+    "final-lights",
+    "focus-computer",
+    "focus-tv",
+    "focus-laptop",
+    "focus-panda",
+    "focus-note"
+  );
 
+  /* Make sure no invisible modal is left covering the room */
+  document.querySelectorAll(".modal").forEach((modal) => {
+    modal.classList.remove("open");
+    modal.setAttribute("aria-hidden", "true");
+    modal.style.pointerEvents = "";
+  });
+
+  /* Close any computer file window */
+  appWindow.classList.remove("open");
+
+  /* Reset transition */
+  focusTransition.classList.remove("active");
+
+  /* Release hotspot lock */
+  openingHotspot = false;
+
+  /* Restore every hotspot */
   hotspots.forEach((hotspot) => {
-    hotspot.style.pointerEvents = "";
     hotspot.disabled = false;
+    hotspot.style.pointerEvents = "auto";
     hotspot.classList.remove("active");
   });
 
-  focusTransition.classList.remove("active");
-  openingHotspot = false;
+  /* Reset the room image */
+  roomImage.style.transform = "";
+
+  /* Make room interactive again */
+  room.style.pointerEvents = "auto";
 
   showBirthdayReplayButton();
 }
@@ -817,7 +845,7 @@ openFinalButton.addEventListener("click", () => {
 
   finalModal.classList.remove("open");
   finalModal.setAttribute("aria-hidden", "true");
-
+  room.classList.remove("final-reveal-active", "final-lights");
   birthdayMessage.classList.remove("hidden");
 });
 
