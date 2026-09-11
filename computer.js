@@ -247,20 +247,19 @@ const computerAppData = {
   },
 
   message: {
-    title: "message.txt",
-    content: `
-      <div class="birthday-pc-file">
-        <p class="eyebrow">MESSAGE FROM SAYANG</p>
-        <h2>hi bb.</h2>
-        <p>surprised theres no insult here?</p>
-        <p>i can be nice to you sometimes okay...</p>
-        <p>i just wanted to leave you a little reminder that youre very very loved.</p>
-        <p>not because its your birthday and i have to say it... but because you are.</p>
-        <p>im really glad youre here, sayang.</p>
-        <p>happy 30th birthday bb ♡</p>
-      </div>
-    `
-  },
+  title: "DO NOT OPEN.txt",
+  content: `
+    <div class="birthday-pc-file">
+      <p class="eyebrow">DO NOT OPEN</p>
+      <h2>faris...</h2>
+      <p>the file literally said do not open.</p>
+      <p>but since youre here now...</p>
+      <p>i miss you alot uh bb.</p>
+      <p>i miss being able to just reach over and touch you whenever i want... your cuddles, having you next to me and not having a stupid screen between us.</p>
+      <p>okay enough. close this now.</p>
+    </div>
+  `
+},
 
   photos: {
     title: "photos",
