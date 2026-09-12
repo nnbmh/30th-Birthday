@@ -20,20 +20,91 @@ function showComputerToast(message) {
   computerToastTimer = setTimeout(() => computerToast.classList.remove("show"), 2200);
 }
 
-function explorerItem(icon, name, app = "") {
-  if (app) return `<button class="explorer-item" data-explorer-app="${app}"><div class="explorer-item-icon">${icon}</div><span>${name}</span></button>`;
-  return `<div class="explorer-item"><div class="explorer-item-icon">${icon}</div><span>${name}</span></div>`;
+function setComputerWindowMode(appName) {
+  const explorerApps = ["thispc", "documents", "downloads", "photos", "recycle"];
+  appWindow.classList.toggle("explorer-mode", explorerApps.includes(appName));
 }
 
-function explorerLayout(path, items) {
-  return `<div class="explorer-window">
-    <div class="explorer-toolbar">
-      <span class="explorer-nav">‹ &nbsp; › &nbsp; ↑</span>
-      <div class="explorer-path">This PC &nbsp;›&nbsp; ${path}</div>
+function folderIcon() {
+  return `<span class="win-folder-glyph"><span></span></span>`;
+}
+
+function fileIcon(type = "file") {
+  if (type === "pdf") return `<span class="win-file-glyph win-pdf">PDF</span>`;
+  if (type === "image") return `<span class="win-file-glyph win-image-glyph">▧</span>`;
+  if (type === "doc") return `<span class="win-file-glyph win-doc">W</span>`;
+  return `<span class="win-file-glyph">▤</span>`;
+}
+
+function sidebar() {
+  return `<aside class="win-sidebar">
+    <div class="win-sidebar-group">
+      <div class="win-sidebar-title">Quick access</div>
+      <button class="win-nav-item" data-explorer-app="thispc"><span>▣</span>This PC</button>
+      <button class="win-nav-item" data-explorer-app="documents"><span>▤</span>Documents</button>
+      <button class="win-nav-item" data-explorer-app="downloads"><span>↓</span>Downloads</button>
+      <button class="win-nav-item" data-explorer-app="photos"><span>▧</span>Pictures</button>
     </div>
-    <h3 class="explorer-heading">${path}</h3>
-    <div class="explorer-grid">${items.join("")}</div>
+    <div class="win-sidebar-group">
+      <div class="win-sidebar-title">This PC</div>
+      <div class="win-nav-static"><span>♫</span>Music</div>
+      <div class="win-nav-static"><span>▰</span>Local Disk (C:)</div>
+    </div>
+  </aside>`;
+}
+
+function explorerChrome(path, content, searchLabel = "Search") {
+  return `<div class="windows-explorer">
+    <div class="win-ribbon">
+      <span class="win-file-tab">File</span>
+      <span>Home</span>
+      <span>Share</span>
+      <span>View</span>
+    </div>
+    <div class="win-address-row">
+      <div class="win-history">
+        <button type="button" class="win-history-button" data-explorer-back aria-label="Back">‹</button>
+        <span>›</span>
+        <span>↑</span>
+      </div>
+      <div class="win-address-bar">${path}</div>
+      <div class="win-search-box">⌕&nbsp;&nbsp;${searchLabel}</div>
+    </div>
+    <div class="win-explorer-body">
+      ${sidebar()}
+      <main class="win-file-pane">${content}</main>
+    </div>
+    <div class="win-status-bar"></div>
   </div>`;
+}
+
+function explorerFolderItem(name, app = "") {
+  const attribute = app ? `data-explorer-app="${app}"` : "";
+  return `<button class="win-large-item win-folder-item" ${attribute}>
+    ${folderIcon()}
+    <span>${name}</span>
+  </button>`;
+}
+
+function explorerFileItem(name, type = "file") {
+  return `<div class="win-large-item win-standard-file">
+    ${fileIcon(type)}
+    <span>${name}</span>
+  </div>`;
+}
+
+function photoFolderItem(name, folder) {
+  return `<button class="win-large-item win-folder-item" data-photo-folder="${folder}">
+    ${folderIcon()}
+    <span>${name}</span>
+  </button>`;
+}
+
+function photoFileItem(path, name, collection, index) {
+  return `<button class="win-large-item win-photo-item" data-photo-path="${path}" data-photo-name="${name}" data-photo-collection="${collection}" data-photo-index="${index}">
+    <span class="win-photo-thumb"><img src="${path}" alt="${name}" loading="lazy"></span>
+    <span>${name}</span>
+  </button>`;
 }
 
 const standalonePhotos = [
@@ -85,43 +156,22 @@ const usPhotos = [
   "IMG_9220.jpeg"
 ];
 
-function photoFile(path, name, collection, index) {
-  return `<button class="photo-file" data-photo-path="${path}" data-photo-name="${name}" data-photo-collection="${collection}" data-photo-index="${index}">
-    <div class="photo-thumbnail"><img src="${path}" alt="${name}" loading="lazy"></div>
-    <span>${name}</span>
-  </button>`;
-}
-
-function photoFolder(name, folder, previewPaths) {
-  const previews = previewPaths.slice(0, 4).map((path) => `<img src="${path}" alt="" loading="lazy">`).join("");
-  return `<button class="photo-folder" data-photo-folder="${folder}">
-    <div class="photo-folder-icon"><div class="photo-folder-preview">${previews}</div></div>
-    <span>${name}</span>
-  </button>`;
-}
-
 function renderPhotosHome() {
-  const standalone = standalonePhotos.map((name, index) => photoFile(`assets/photos/${name}`, name, "standalone", index)).join("");
-  const candidPreview = candidPhotos.slice(0, 4).map((name) => `assets/photos/candid/${name}`);
-  const usPreview = usPhotos.slice(0, 4).map((name) => `assets/photos/us/${name}`);
+  const items = [
+    photoFolderItem("candid pics i like", "candid"),
+    photoFolderItem("us", "us"),
+    ...standalonePhotos.map((name, index) => photoFileItem(`assets/photos/${name}`, name, "standalone", index))
+  ].join("");
 
-  return `<div class="explorer-window photo-explorer">
-    <div class="explorer-toolbar">
-      <span class="explorer-nav">‹ &nbsp; › &nbsp; ↑</span>
-      <div class="explorer-path">This PC &nbsp;›&nbsp; Pictures</div>
+  return explorerChrome(
+    `This PC <span>›</span> Pictures`,
+    `<div class="win-pane-heading">
+      <span>Pictures</span>
+      <small>8 items</small>
     </div>
-    <div class="photo-section">
-      <h3 class="explorer-heading">Folders</h3>
-      <div class="photo-folder-grid">
-        ${photoFolder("candid pics i like", "candid", candidPreview)}
-        ${photoFolder("us", "us", usPreview)}
-      </div>
-    </div>
-    <div class="photo-section">
-      <h3 class="explorer-heading">Photos</h3>
-      <div class="photo-grid">${standalone}</div>
-    </div>
-  </div>`;
+    <div class="win-large-grid">${items}</div>`,
+    "Search Pictures"
+  );
 }
 
 function renderPhotoFolder(folder) {
@@ -129,53 +179,138 @@ function renderPhotoFolder(folder) {
   const names = isCandid ? candidPhotos : usPhotos;
   const label = isCandid ? "candid pics i like" : "us";
   const base = isCandid ? "assets/photos/candid/" : "assets/photos/us/";
-  const photos = names.map((name, index) => photoFile(`${base}${name}`, name, folder, index)).join("");
 
-  return `<div class="explorer-window photo-explorer">
-    <div class="explorer-toolbar">
-      <button class="photo-back" data-photo-back="home" aria-label="Back to Pictures">‹</button>
-      <span class="explorer-nav">› &nbsp; ↑</span>
-      <div class="explorer-path">This PC &nbsp;›&nbsp; Pictures &nbsp;›&nbsp; ${label}</div>
+  const items = names.map((name, index) => {
+    return photoFileItem(`${base}${name}`, name, folder, index);
+  }).join("");
+
+  return explorerChrome(
+    `This PC <span>›</span> Pictures <span>›</span> ${label}`,
+    `<div class="win-pane-heading">
+      <span>${label}</span>
+      <small>${names.length} items</small>
     </div>
-    <div class="photo-folder-heading">
-      <h3>${label}</h3>
-      <span>${names.length} items</span>
+    <div class="win-large-grid win-photo-folder-grid">${items}</div>`,
+    `Search ${label}`
+  );
+}
+
+function renderThisPC() {
+  return explorerChrome(
+    "This PC",
+    `<div class="win-section-label"><span>Folders</span><i></i></div>
+    <div class="win-large-grid win-pc-folder-grid">
+      ${explorerFolderItem("Documents", "documents")}
+      ${explorerFolderItem("Downloads", "downloads")}
+      ${explorerFolderItem("Pictures", "photos")}
+      ${explorerFolderItem("Music")}
     </div>
-    <div class="photo-grid photo-grid-folder">${photos}</div>
-  </div>`;
+    <div class="win-section-label win-drive-label"><span>Devices and drives</span><i></i></div>
+    <div class="win-drive-row">
+      <div class="win-drive-icon">▰</div>
+      <div class="win-drive-details">
+        <div>Local Disk (C:)</div>
+        <div class="win-drive-meter"><span></span></div>
+        <small>214 GB free of 476 GB</small>
+      </div>
+    </div>`,
+    "Search This PC"
+  );
+}
+
+function renderDocuments() {
+  return explorerChrome(
+    `This PC <span>›</span> Documents`,
+    `<div class="win-pane-heading"><span>Documents</span><small>4 items</small></div>
+    <div class="win-large-grid">
+      ${explorerFolderItem("Forge Protocol")}
+      ${explorerFileItem("Master CV.docx", "doc")}
+      ${explorerFolderItem("Personal")}
+      ${explorerFolderItem("Work")}
+    </div>`,
+    "Search Documents"
+  );
+}
+
+function renderDownloads() {
+  return explorerChrome(
+    `This PC <span>›</span> Downloads`,
+    `<div class="win-pane-heading"><span>Downloads</span><small>7 items</small></div>
+    <div class="win-large-grid">
+      ${explorerFileItem("CV - BA.pdf", "pdf")}
+      ${explorerFileItem("Cover Letter - BA.pdf", "pdf")}
+      ${explorerFileItem("Faris Osmanbhoy Recommendation.pdf", "pdf")}
+      ${explorerFileItem("Canva Design.png", "image")}
+      ${explorerFileItem("Canva Design (1).png", "image")}
+      ${explorerFileItem("image_3847.jpg", "image")}
+      ${explorerFileItem("IMG_20260903.png", "image")}
+    </div>`,
+    "Search Downloads"
+  );
+}
+
+function renderRecycleBin() {
+  return explorerChrome(
+    "Recycle Bin",
+    `<div class="win-empty-folder">
+      <div>🗑</div>
+      <p>This folder is empty.</p>
+    </div>`,
+    "Search Recycle Bin"
+  );
 }
 
 function getPhotoCollection(collection) {
-  if (collection === "candid") return candidPhotos.map((name) => ({ name, path: `assets/photos/candid/${name}` }));
-  if (collection === "us") return usPhotos.map((name) => ({ name, path: `assets/photos/us/${name}` }));
-  return standalonePhotos.map((name) => ({ name, path: `assets/photos/${name}` }));
+  if (collection === "candid") {
+    return candidPhotos.map((name) => ({
+      name,
+      path: `assets/photos/candid/${name}`
+    }));
+  }
+
+  if (collection === "us") {
+    return usPhotos.map((name) => ({
+      name,
+      path: `assets/photos/us/${name}`
+    }));
+  }
+
+  return standalonePhotos.map((name) => ({
+    name,
+    path: `assets/photos/${name}`
+  }));
 }
 
 function renderPhotoViewer() {
   const photo = currentPhotoCollection[currentPhotoIndex];
   if (!photo) return;
 
-  const counter = `${currentPhotoIndex + 1} / ${currentPhotoCollection.length}`;
-  appContent.innerHTML = `<div class="photo-viewer">
-    <div class="photo-viewer-toolbar">
-      <button class="photo-viewer-back" data-photo-viewer-back aria-label="Back">‹</button>
-      <div class="photo-viewer-title">${photo.name}</div>
-      <div class="photo-viewer-counter">${counter}</div>
+  appContent.innerHTML = `<div class="windows-photo-viewer">
+    <div class="win-photo-viewer-top">
+      <button type="button" data-photo-viewer-back aria-label="Back">←</button>
+      <span>${photo.name}</span>
+      <small>${currentPhotoIndex + 1} of ${currentPhotoCollection.length}</small>
     </div>
-    <div class="photo-viewer-stage">
-      <button class="photo-nav photo-nav-prev" data-photo-prev aria-label="Previous photo">‹</button>
+    <div class="win-photo-viewer-stage">
+      <button type="button" class="win-viewer-arrow win-viewer-left" data-photo-prev aria-label="Previous">‹</button>
       <img src="${photo.path}" alt="${photo.name}">
-      <button class="photo-nav photo-nav-next" data-photo-next aria-label="Next photo">›</button>
+      <button type="button" class="win-viewer-arrow win-viewer-right" data-photo-next aria-label="Next">›</button>
     </div>
-    <div class="photo-viewer-footer">${photo.name}</div>
+    <div class="win-photo-viewer-bottom">
+      <span>－</span>
+      <span>＋</span>
+      <span>↻</span>
+      <span>♡</span>
+      <span>⋯</span>
+    </div>
   </div>`;
 }
 
-function openPhoto(path, name, collection, index) {
+function openPhoto(collection, index) {
   currentPhotoCollection = getPhotoCollection(collection);
   currentPhotoIndex = Number(index);
   currentPhotoFolder = collection;
-  appTitle.textContent = name;
+  appTitle.textContent = currentPhotoCollection[currentPhotoIndex].name;
   renderPhotoViewer();
   computerClick();
 }
@@ -199,73 +334,41 @@ function showNextPhoto() {
 const computerAppData = {
   thispc: {
     title: "This PC",
-    content: `<div class="explorer-window">
-      <div class="explorer-toolbar">
-        <span class="explorer-nav">‹ &nbsp; › &nbsp; ↑</span>
-        <div class="explorer-path">This PC</div>
-      </div>
-      <h3 class="explorer-heading">Folders</h3>
-      <div class="explorer-grid">
-        ${explorerItem("📄", "Documents", "documents")}
-        ${explorerItem("⬇️", "Downloads", "downloads")}
-        ${explorerItem("🖼️", "Pictures", "photos")}
-        ${explorerItem("🎵", "Music")}
-      </div>
-      <div class="drive-section">
-        <h3 class="explorer-heading">Devices and drives</h3>
-        <div class="drive-item">
-          <div class="drive-icon">💽</div>
-          <div class="drive-info">
-            <div class="drive-name">Local Disk (C:)</div>
-            <div class="drive-bar"><span></span></div>
-            <div class="drive-space">214 GB free of 476 GB</div>
-          </div>
-        </div>
-      </div>
-    </div>`
+    render: renderThisPC
   },
 
   documents: {
     title: "Documents",
-    content: explorerLayout("Documents", [
-      explorerItem("📁", "Forge Protocol"),
-      explorerItem("📄", "Master CV.docx"),
-      explorerItem("📁", "Personal"),
-      explorerItem("📁", "Work")
-    ])
+    render: renderDocuments
   },
 
   downloads: {
     title: "Downloads",
-    content: explorerLayout("Downloads", [
-      explorerItem("📕", "CV - BA.pdf"),
-      explorerItem("📕", "Cover Letter - BA.pdf"),
-      explorerItem("📕", "Faris Osmanbhoy Recommendation.pdf"),
-      explorerItem("🖼️", "Canva Design.png"),
-      explorerItem("🖼️", "Canva Design (1).png"),
-      explorerItem("🖼️", "image_3847.jpg"),
-      explorerItem("🖼️", "IMG_20260903.png")
-    ])
+    render: renderDownloads
   },
 
   recycle: {
     title: "Recycle Bin",
-    content: `<div class="explorer-window">
-      <div class="explorer-toolbar">
-        <span class="explorer-nav">‹ &nbsp; › &nbsp; ↑</span>
-        <div class="explorer-path">Recycle Bin</div>
-      </div>
-      <div class="recycle-empty">
-        <div class="recycle-empty-icon">🗑️</div>
-        <p>This folder is empty.</p>
-      </div>
-    </div>`
+    render: renderRecycleBin
+  },
+
+  photos: {
+    title: "Pictures",
+    render: renderPhotosHome
   },
 
   chrome: {
     title: "Google Chrome",
     content: `<div class="fake-app">
-      <div class="fake-app-logo"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="#fff"/><path d="M32 32L9 32A27 27 0 0 1 50 13z" fill="#ea4335"/><path d="M32 32l12 21A27 27 0 0 1 9 32z" fill="#34a853"/><path d="M32 32l18-19A27 27 0 0 1 44 53z" fill="#fbbc05"/><circle cx="32" cy="32" r="11" fill="#4285f4"/></svg></div>
+      <div class="fake-app-logo">
+        <svg viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="27" fill="#fff"/>
+          <path d="M32 32L9 32A27 27 0 0 1 50 13z" fill="#ea4335"/>
+          <path d="M32 32l12 21A27 27 0 0 1 9 32z" fill="#34a853"/>
+          <path d="M32 32l18-19A27 27 0 0 1 44 53z" fill="#fbbc05"/>
+          <circle cx="32" cy="32" r="11" fill="#4285f4"/>
+        </svg>
+      </div>
       <h2>Google Chrome</h2>
       <p>Internet access unavailable during birthday maintenance.</p>
     </div>`
@@ -274,7 +377,12 @@ const computerAppData = {
   discord: {
     title: "Discord",
     content: `<div class="fake-app">
-      <div class="fake-app-logo"><svg viewBox="0 0 64 64"><rect x="6" y="6" width="52" height="52" rx="13" fill="#5865f2"/><path d="M22 22c7-5 13-5 20 0 4 6 6 12 7 19-5 4-9 6-13 7l-2-4c3-1 5-2 7-4-7 4-12 4-19 0 2 2 4 3 7 4l-2 4c-4-1-8-3-13-7 1-7 3-13 8-19z" fill="white"/></svg></div>
+      <div class="fake-app-logo">
+        <svg viewBox="0 0 64 64">
+          <rect x="6" y="6" width="52" height="52" rx="13" fill="#5865f2"/>
+          <path d="M22 22c7-5 13-5 20 0 4 6 6 12 7 19-5 4-9 6-13 7l-2-4c3-1 5-2 7-4-7 4-12 4-19 0 2 2 4 3 7 4l-2 4c-4-1-8-3-13-7 1-7 3-13 8-19z" fill="white"/>
+        </svg>
+      </div>
       <h2>Discord</h2>
       <p>already enough hours logged here.</p>
     </div>`
@@ -283,7 +391,12 @@ const computerAppData = {
   spotify: {
     title: "Spotify",
     content: `<div class="fake-app">
-      <div class="fake-app-logo"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="#1ed760"/><path d="M18 25c11-3 24-2 34 3M20 34c9-2 20-1 29 3M22 42c8-1 16 0 23 3" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/></svg></div>
+      <div class="fake-app-logo">
+        <svg viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="27" fill="#1ed760"/>
+          <path d="M18 25c11-3 24-2 34 3M20 34c9-2 20-1 29 3M22 42c8-1 16 0 23 3" fill="none" stroke="#111" stroke-width="4" stroke-linecap="round"/>
+        </svg>
+      </div>
       <h2>Spotify</h2>
       <p>Playback unavailable.</p>
     </div>`
@@ -292,7 +405,14 @@ const computerAppData = {
   steam: {
     title: "Steam",
     content: `<div class="fake-app">
-      <div class="fake-app-logo"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="27" fill="#15344c"/><circle cx="42" cy="22" r="9" fill="none" stroke="white" stroke-width="4"/><circle cx="20" cy="42" r="7" fill="none" stroke="white" stroke-width="4"/><path d="M26 39l10-11 8 3" fill="none" stroke="white" stroke-width="5" stroke-linecap="round"/></svg></div>
+      <div class="fake-app-logo">
+        <svg viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="27" fill="#15344c"/>
+          <circle cx="42" cy="22" r="9" fill="none" stroke="white" stroke-width="4"/>
+          <circle cx="20" cy="42" r="7" fill="none" stroke="white" stroke-width="4"/>
+          <path d="M26 39l10-11 8 3" fill="none" stroke="white" stroke-width="5" stroke-linecap="round"/>
+        </svg>
+      </div>
       <h2>Steam</h2>
       <p>connection unavailable.</p>
     </div>`
@@ -337,11 +457,6 @@ const computerAppData = {
     </div>`
   },
 
-  photos: {
-    title: "photos",
-    content: renderPhotosHome()
-  },
-
   classified: {
     title: "CLASSIFIED",
     content: `<div class="birthday-pc-file">
@@ -357,10 +472,13 @@ const computerAppData = {
 function openComputerApp(appName) {
   const data = computerAppData[appName];
   if (!data) return;
+
   computerClick();
   if (startMenu) startMenu.classList.remove("open");
+
+  setComputerWindowMode(appName);
   appTitle.textContent = data.title;
-  appContent.innerHTML = appName === "photos" ? renderPhotosHome() : data.content;
+  appContent.innerHTML = data.render ? data.render() : data.content;
   appWindow.classList.add("open");
 }
 
@@ -375,9 +493,13 @@ document.querySelectorAll("[data-app]").forEach((button) => {
   button.addEventListener("click", (event) => {
     const appName = button.dataset.app;
     if (!computerAppData[appName]) return;
+
     event.stopPropagation();
+    setComputerWindowMode(appName);
     appTitle.textContent = computerAppData[appName].title;
-    appContent.innerHTML = appName === "photos" ? renderPhotosHome() : computerAppData[appName].content;
+    appContent.innerHTML = computerAppData[appName].render
+      ? computerAppData[appName].render()
+      : computerAppData[appName].content;
     appWindow.classList.add("open");
   });
 });
@@ -389,9 +511,10 @@ appContent.addEventListener("click", (event) => {
     return;
   }
 
-  const folderButton = event.target.closest("[data-photo-folder]");
-  if (folderButton) {
-    const folder = folderButton.dataset.photoFolder;
+  const photoFolder = event.target.closest("[data-photo-folder]");
+  if (photoFolder) {
+    const folder = photoFolder.dataset.photoFolder;
+    currentPhotoFolder = folder;
     appTitle.textContent = folder === "candid" ? "candid pics i like" : "us";
     appContent.innerHTML = renderPhotoFolder(folder);
     computerClick();
@@ -400,19 +523,7 @@ appContent.addEventListener("click", (event) => {
 
   const photoButton = event.target.closest("[data-photo-path]");
   if (photoButton) {
-    openPhoto(
-      photoButton.dataset.photoPath,
-      photoButton.dataset.photoName,
-      photoButton.dataset.photoCollection,
-      photoButton.dataset.photoIndex
-    );
-    return;
-  }
-
-  if (event.target.closest("[data-photo-back]")) {
-    appTitle.textContent = "photos";
-    appContent.innerHTML = renderPhotosHome();
-    computerClick();
+    openPhoto(photoButton.dataset.photoCollection, photoButton.dataset.photoIndex);
     return;
   }
 
@@ -421,9 +532,10 @@ appContent.addEventListener("click", (event) => {
       appTitle.textContent = currentPhotoFolder === "candid" ? "candid pics i like" : "us";
       appContent.innerHTML = renderPhotoFolder(currentPhotoFolder);
     } else {
-      appTitle.textContent = "photos";
+      appTitle.textContent = "Pictures";
       appContent.innerHTML = renderPhotosHome();
     }
+
     computerClick();
     return;
   }
@@ -433,7 +545,19 @@ appContent.addEventListener("click", (event) => {
     return;
   }
 
-  if (event.target.closest("[data-photo-next]")) showNextPhoto();
+  if (event.target.closest("[data-photo-next]")) {
+    showNextPhoto();
+    return;
+  }
+
+  if (event.target.closest("[data-explorer-back]")) {
+    if (currentPhotoFolder === "candid" || currentPhotoFolder === "us") {
+      currentPhotoFolder = "photos";
+      appTitle.textContent = "Pictures";
+      appContent.innerHTML = renderPhotosHome();
+      computerClick();
+    }
+  }
 });
 
 if (startButton && startMenu) {
@@ -444,7 +568,9 @@ if (startButton && startMenu) {
   });
 
   document.addEventListener("click", (event) => {
-    if (!startMenu.contains(event.target) && event.target !== startButton) startMenu.classList.remove("open");
+    if (!startMenu.contains(event.target) && event.target !== startButton) {
+      startMenu.classList.remove("open");
+    }
   });
 }
 
@@ -459,6 +585,7 @@ if (searchButton) {
 
 function updateComputerDate() {
   if (!taskbarDate) return;
+
   const now = new Date();
   taskbarDate.textContent = now.toLocaleDateString("en-GB", {
     day: "2-digit",
