@@ -377,9 +377,20 @@
   <section id="appWindow" class="app-window">
     <div class="app-titlebar">
       <span id="appTitle">File</span>
-      <button id="closeApp">×</button>
-    </div>
-    <div id="appContent"></div>
+      <div class="window-controls">
+        <button class="window-control window-minimize" type="button" aria-label="Minimize" tabindex="-1">
+          <span></span>
+        </button>
+
+    <button class="window-control window-maximize" type="button" aria-label="Maximize" tabindex="-1">
+      <span></span>
+    </button>
+
+    <button id="closeApp" class="window-control window-close" type="button" aria-label="Close">
+      <span></span>
+    </button>
+  </div>
+</div>
   </section>
 
   <!-- TV -->
