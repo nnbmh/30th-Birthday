@@ -8,6 +8,10 @@ let currentPhotoCollection = [];
 let currentPhotoIndex = 0;
 let currentPhotoFolder = "photos";
 
+let currentExplorerLocation = null;
+let explorerBackStack = [];
+let explorerForwardStack = [];
+
 function computerClick() {
   if (typeof playClick === "function") playClick();
 }
@@ -21,7 +25,7 @@ function showComputerToast(message) {
 }
 
 function setComputerWindowMode(appName) {
-  const explorerApps = ["thispc", "documents", "downloads", "photos", "recycle"];
+  const explorerApps = ["thispc", "documents", "downloads", "photos", "recycle", "candid", "us"];
   appWindow.classList.toggle("explorer-mode", explorerApps.includes(appName));
 }
 
@@ -36,50 +40,159 @@ function fileIcon(type = "file") {
   return `<span class="win-file-glyph">▤</span>`;
 }
 
-function sidebar() {
+function getExplorerParent(location) {
+  if (location === "candid" || location === "us") return "photos";
+  if (location === "documents" || location === "downloads" || location === "photos") return "thispc";
+  return null;
+}
+
+function getExplorerTitle(location) {
+  const titles = {
+    thispc: "This PC",
+    documents: "Documents",
+    downloads: "Downloads",
+    photos: "Pictures",
+    candid: "candid pics i like",
+    us: "us",
+    recycle: "Recycle Bin"
+  };
+  return titles[location] || "File Explorer";
+}
+
+function getExplorerPath(location) {
+  if (location === "thispc") return `This PC`;
+  if (location === "documents") return `This PC <span>›</span> Documents`;
+  if (location === "downloads") return `This PC <span>›</span> Downloads`;
+  if (location === "photos") return `This PC <span>›</span> Pictures`;
+  if (location === "candid") return `This PC <span>›</span> Pictures <span>›</span> candid pics i like`;
+  if (location === "us") return `This PC <span>›</span> Pictures <span>›</span> us`;
+  if (location === "recycle") return `Recycle Bin`;
+  return "";
+}
+
+function sidebar(activeLocation) {
+  const active = (location) => activeLocation === location ? " active" : "";
+
   return `<aside class="win-sidebar">
-    <div class="win-sidebar-group">
-      <div class="win-sidebar-title">Quick access</div>
-      <button class="win-nav-item" data-explorer-app="thispc"><span>▣</span>This PC</button>
-      <button class="win-nav-item" data-explorer-app="documents"><span>▤</span>Documents</button>
-      <button class="win-nav-item" data-explorer-app="downloads"><span>↓</span>Downloads</button>
-      <button class="win-nav-item" data-explorer-app="photos"><span>▧</span>Pictures</button>
+    <div class="win-sidebar-section">
+      <div class="win-sidebar-heading">Quick access</div>
+      <button class="win-nav-item${active("thispc")}" data-explorer-location="thispc">
+        <span class="win-nav-icon pc-nav-icon">▣</span>
+        <span>This PC</span>
+      </button>
+      <button class="win-nav-item${active("documents")}" data-explorer-location="documents">
+        <span class="win-nav-icon folder-nav-icon">▤</span>
+        <span>Documents</span>
+      </button>
+      <button class="win-nav-item${active("downloads")}" data-explorer-location="downloads">
+        <span class="win-nav-icon download-nav-icon">↓</span>
+        <span>Downloads</span>
+      </button>
+      <button class="win-nav-item${active("photos")}" data-explorer-location="photos">
+        <span class="win-nav-icon picture-nav-icon">▧</span>
+        <span>Pictures</span>
+      </button>
     </div>
-    <div class="win-sidebar-group">
-      <div class="win-sidebar-title">This PC</div>
-      <div class="win-nav-static"><span>♫</span>Music</div>
-      <div class="win-nav-static"><span>▰</span>Local Disk (C:)</div>
+    <div class="win-sidebar-section">
+      <div class="win-sidebar-heading">This PC</div>
+      <div class="win-nav-static">
+        <span class="win-nav-icon">♫</span>
+        <span>Music</span>
+      </div>
+      <div class="win-nav-static">
+        <span class="win-nav-icon">▰</span>
+        <span>Local Disk (C:)</span>
+      </div>
     </div>
   </aside>`;
 }
 
-function explorerChrome(path, content, searchLabel = "Search") {
-  return `<div class="windows-explorer">
-    <div class="win-ribbon">
+function ribbon() {
+  return `<div class="win-ribbon">
+    <div class="win-tabs">
       <span class="win-file-tab">File</span>
-      <span>Home</span>
-      <span>Share</span>
-      <span>View</span>
+      <span class="win-tab active">Home</span>
+      <span class="win-tab">Share</span>
+      <span class="win-tab">View</span>
     </div>
-    <div class="win-address-row">
-      <div class="win-history">
-        <button type="button" class="win-history-button" data-explorer-back aria-label="Back">‹</button>
-        <span>›</span>
-        <span>↑</span>
+    <div class="win-command-bar">
+      <div class="win-command-group">
+        <span class="win-command-icon">★</span>
+        <small>Pin to Quick access</small>
       </div>
-      <div class="win-address-bar">${path}</div>
-      <div class="win-search-box">⌕&nbsp;&nbsp;${searchLabel}</div>
+      <div class="win-command-group">
+        <span class="win-command-icon">⧉</span>
+        <small>Copy</small>
+      </div>
+      <div class="win-command-group">
+        <span class="win-command-icon">▣</span>
+        <small>Paste</small>
+      </div>
+      <div class="win-command-divider"></div>
+      <div class="win-command-group">
+        <span class="win-command-icon">✂</span>
+        <small>Cut</small>
+      </div>
+      <div class="win-command-group">
+        <span class="win-command-icon">✎</span>
+        <small>Rename</small>
+      </div>
+      <div class="win-command-group">
+        <span class="win-command-icon">✕</span>
+        <small>Delete</small>
+      </div>
+      <div class="win-command-divider"></div>
+      <div class="win-command-group">
+        <span class="win-command-icon">□</span>
+        <small>New folder</small>
+      </div>
+      <div class="win-command-group">
+        <span class="win-command-icon">✓</span>
+        <small>Properties</small>
+      </div>
     </div>
-    <div class="win-explorer-body">
-      ${sidebar()}
-      <main class="win-file-pane">${content}</main>
-    </div>
-    <div class="win-status-bar"></div>
   </div>`;
 }
 
-function explorerFolderItem(name, app = "") {
-  const attribute = app ? `data-explorer-app="${app}"` : "";
+function explorerChrome(location, content, itemCount = "") {
+  const parent = getExplorerParent(location);
+  const canBack = explorerBackStack.length > 0;
+  const canForward = explorerForwardStack.length > 0;
+  const canUp = Boolean(parent);
+
+  return `<div class="windows-explorer">
+    ${ribbon()}
+    <div class="win-address-row">
+      <div class="win-history">
+        <button class="win-nav-button" data-explorer-back ${canBack ? "" : "disabled"} aria-label="Back">
+          <span class="nav-arrow-left"></span>
+        </button>
+        <button class="win-nav-button" data-explorer-forward ${canForward ? "" : "disabled"} aria-label="Forward">
+          <span class="nav-arrow-right"></span>
+        </button>
+        <button class="win-nav-button" data-explorer-up ${canUp ? "" : "disabled"} aria-label="Up">
+          <span class="nav-arrow-up"></span>
+        </button>
+      </div>
+      <div class="win-address-bar">${getExplorerPath(location)}</div>
+      <div class="win-search-box">
+        <span class="win-search-icon"></span>
+        <span>Search ${getExplorerTitle(location)}</span>
+      </div>
+    </div>
+    <div class="win-explorer-body">
+      ${sidebar(location)}
+      <main class="win-file-pane">${content}</main>
+    </div>
+    <div class="win-status-bar">
+      <span>${itemCount}</span>
+      <div class="win-view-buttons"><span>▤</span><span>▦</span></div>
+    </div>
+  </div>`;
+}
+
+function explorerFolderItem(name, location = "") {
+  const attribute = location ? `data-explorer-location="${location}"` : "";
   return `<button class="win-large-item win-folder-item" ${attribute}>
     ${folderIcon()}
     <span>${name}</span>
@@ -94,7 +207,7 @@ function explorerFileItem(name, type = "file") {
 }
 
 function photoFolderItem(name, folder) {
-  return `<button class="win-large-item win-folder-item" data-photo-folder="${folder}">
+  return `<button class="win-large-item win-folder-item" data-explorer-location="${folder}">
     ${folderIcon()}
     <span>${name}</span>
   </button>`;
@@ -156,87 +269,56 @@ const usPhotos = [
   "IMG_9220.jpeg"
 ];
 
-function renderPhotosHome() {
-  const items = [
-    photoFolderItem("candid pics i like", "candid"),
-    photoFolderItem("us", "us"),
-    ...standalonePhotos.map((name, index) => photoFileItem(`assets/photos/${name}`, name, "standalone", index))
-  ].join("");
-
-  return explorerChrome(
-    `This PC <span>›</span> Pictures`,
-    `<div class="win-pane-heading">
-      <span>Pictures</span>
-      <small>8 items</small>
-    </div>
-    <div class="win-large-grid">${items}</div>`,
-    "Search Pictures"
-  );
-}
-
-function renderPhotoFolder(folder) {
-  const isCandid = folder === "candid";
-  const names = isCandid ? candidPhotos : usPhotos;
-  const label = isCandid ? "candid pics i like" : "us";
-  const base = isCandid ? "assets/photos/candid/" : "assets/photos/us/";
-
-  const items = names.map((name, index) => {
-    return photoFileItem(`${base}${name}`, name, folder, index);
-  }).join("");
-
-  return explorerChrome(
-    `This PC <span>›</span> Pictures <span>›</span> ${label}`,
-    `<div class="win-pane-heading">
-      <span>${label}</span>
-      <small>${names.length} items</small>
-    </div>
-    <div class="win-large-grid win-photo-folder-grid">${items}</div>`,
-    `Search ${label}`
-  );
-}
-
 function renderThisPC() {
   return explorerChrome(
-    "This PC",
-    `<div class="win-section-label"><span>Folders</span><i></i></div>
+    "thispc",
+    `<div class="win-section-heading">
+      <span class="win-section-caret">⌄</span>
+      <span>Folders</span>
+      <i></i>
+    </div>
     <div class="win-large-grid win-pc-folder-grid">
       ${explorerFolderItem("Documents", "documents")}
       ${explorerFolderItem("Downloads", "downloads")}
       ${explorerFolderItem("Pictures", "photos")}
       ${explorerFolderItem("Music")}
     </div>
-    <div class="win-section-label win-drive-label"><span>Devices and drives</span><i></i></div>
+    <div class="win-section-heading win-drive-heading">
+      <span class="win-section-caret">⌄</span>
+      <span>Devices and drives</span>
+      <i></i>
+    </div>
     <div class="win-drive-row">
-      <div class="win-drive-icon">▰</div>
+      <div class="win-drive-glyph">
+        <span></span>
+      </div>
       <div class="win-drive-details">
-        <div>Local Disk (C:)</div>
+        <div class="win-drive-name">Local Disk (C:)</div>
         <div class="win-drive-meter"><span></span></div>
         <small>214 GB free of 476 GB</small>
       </div>
     </div>`,
-    "Search This PC"
+    "5 items"
   );
 }
 
 function renderDocuments() {
   return explorerChrome(
-    `This PC <span>›</span> Documents`,
-    `<div class="win-pane-heading"><span>Documents</span><small>4 items</small></div>
-    <div class="win-large-grid">
+    "documents",
+    `<div class="win-large-grid">
       ${explorerFolderItem("Forge Protocol")}
       ${explorerFileItem("Master CV.docx", "doc")}
       ${explorerFolderItem("Personal")}
       ${explorerFolderItem("Work")}
     </div>`,
-    "Search Documents"
+    "4 items"
   );
 }
 
 function renderDownloads() {
   return explorerChrome(
-    `This PC <span>›</span> Downloads`,
-    `<div class="win-pane-heading"><span>Downloads</span><small>7 items</small></div>
-    <div class="win-large-grid">
+    "downloads",
+    `<div class="win-large-grid">
       ${explorerFileItem("CV - BA.pdf", "pdf")}
       ${explorerFileItem("Cover Letter - BA.pdf", "pdf")}
       ${explorerFileItem("Faris Osmanbhoy Recommendation.pdf", "pdf")}
@@ -245,19 +327,113 @@ function renderDownloads() {
       ${explorerFileItem("image_3847.jpg", "image")}
       ${explorerFileItem("IMG_20260903.png", "image")}
     </div>`,
-    "Search Downloads"
+    "7 items"
+  );
+}
+
+function renderPhotosHome() {
+  const items = [
+    photoFolderItem("candid pics i like", "candid"),
+    photoFolderItem("us", "us"),
+    ...standalonePhotos.map((name, index) => photoFileItem(`assets/photos/${name}`, name, "standalone", index))
+  ].join("");
+
+  return explorerChrome(
+    "photos",
+    `<div class="win-large-grid">${items}</div>`,
+    "8 items"
+  );
+}
+
+function renderPhotoFolder(folder) {
+  const isCandid = folder === "candid";
+  const names = isCandid ? candidPhotos : usPhotos;
+  const base = isCandid ? "assets/photos/candid/" : "assets/photos/us/";
+
+  return explorerChrome(
+    folder,
+    `<div class="win-large-grid win-photo-folder-grid">
+      ${names.map((name, index) => photoFileItem(`${base}${name}`, name, folder, index)).join("")}
+    </div>`,
+    `${names.length} items`
   );
 }
 
 function renderRecycleBin() {
   return explorerChrome(
-    "Recycle Bin",
+    "recycle",
     `<div class="win-empty-folder">
-      <div>🗑</div>
+      <div class="win-empty-bin">♲</div>
       <p>This folder is empty.</p>
     </div>`,
-    "Search Recycle Bin"
+    "0 items"
   );
+}
+
+function renderExplorerLocation(location) {
+  if (location === "thispc") return renderThisPC();
+  if (location === "documents") return renderDocuments();
+  if (location === "downloads") return renderDownloads();
+  if (location === "photos") return renderPhotosHome();
+  if (location === "candid" || location === "us") return renderPhotoFolder(location);
+  if (location === "recycle") return renderRecycleBin();
+  return renderThisPC();
+}
+
+function navigateExplorer(location, addHistory = true) {
+  if (!location) return;
+
+  if (addHistory && currentExplorerLocation && currentExplorerLocation !== location) {
+    explorerBackStack.push(currentExplorerLocation);
+    explorerForwardStack = [];
+  }
+
+  currentExplorerLocation = location;
+  currentPhotoFolder = location === "candid" || location === "us" ? location : "photos";
+
+  setComputerWindowMode(location);
+  appTitle.textContent = getExplorerTitle(location);
+  appContent.innerHTML = renderExplorerLocation(location);
+  appWindow.classList.add("open");
+  computerClick();
+}
+
+function explorerBack() {
+  if (!explorerBackStack.length) return;
+
+  const destination = explorerBackStack.pop();
+
+  if (currentExplorerLocation) {
+    explorerForwardStack.push(currentExplorerLocation);
+  }
+
+  currentExplorerLocation = destination;
+  currentPhotoFolder = destination === "candid" || destination === "us" ? destination : "photos";
+  appTitle.textContent = getExplorerTitle(destination);
+  appContent.innerHTML = renderExplorerLocation(destination);
+  computerClick();
+}
+
+function explorerForward() {
+  if (!explorerForwardStack.length) return;
+
+  const destination = explorerForwardStack.pop();
+
+  if (currentExplorerLocation) {
+    explorerBackStack.push(currentExplorerLocation);
+  }
+
+  currentExplorerLocation = destination;
+  currentPhotoFolder = destination === "candid" || destination === "us" ? destination : "photos";
+  appTitle.textContent = getExplorerTitle(destination);
+  appContent.innerHTML = renderExplorerLocation(destination);
+  computerClick();
+}
+
+function explorerUp() {
+  const parent = getExplorerParent(currentExplorerLocation);
+  if (!parent) return;
+  navigateExplorer(parent, true);
 }
 
 function getPhotoCollection(collection) {
@@ -332,31 +508,6 @@ function showNextPhoto() {
 }
 
 const computerAppData = {
-  thispc: {
-    title: "This PC",
-    render: renderThisPC
-  },
-
-  documents: {
-    title: "Documents",
-    render: renderDocuments
-  },
-
-  downloads: {
-    title: "Downloads",
-    render: renderDownloads
-  },
-
-  recycle: {
-    title: "Recycle Bin",
-    render: renderRecycleBin
-  },
-
-  photos: {
-    title: "Pictures",
-    render: renderPhotosHome
-  },
-
   chrome: {
     title: "Google Chrome",
     content: `<div class="fake-app">
@@ -470,6 +621,16 @@ const computerAppData = {
 };
 
 function openComputerApp(appName) {
+  const explorerLocations = ["thispc", "documents", "downloads", "photos", "recycle"];
+
+  if (explorerLocations.includes(appName)) {
+    explorerBackStack = [];
+    explorerForwardStack = [];
+    currentExplorerLocation = null;
+    navigateExplorer(appName, false);
+    return;
+  }
+
   const data = computerAppData[appName];
   if (!data) return;
 
@@ -478,7 +639,7 @@ function openComputerApp(appName) {
 
   setComputerWindowMode(appName);
   appTitle.textContent = data.title;
-  appContent.innerHTML = data.render ? data.render() : data.content;
+  appContent.innerHTML = data.content;
   appWindow.classList.add("open");
 }
 
@@ -492,32 +653,39 @@ document.querySelectorAll("[data-computer-app]").forEach((button) => {
 document.querySelectorAll("[data-app]").forEach((button) => {
   button.addEventListener("click", (event) => {
     const appName = button.dataset.app;
-    if (!computerAppData[appName]) return;
-
     event.stopPropagation();
-    setComputerWindowMode(appName);
-    appTitle.textContent = computerAppData[appName].title;
-    appContent.innerHTML = computerAppData[appName].render
-      ? computerAppData[appName].render()
-      : computerAppData[appName].content;
-    appWindow.classList.add("open");
+
+    if (appName === "photos") {
+      explorerBackStack = [];
+      explorerForwardStack = [];
+      currentExplorerLocation = null;
+      navigateExplorer("photos", false);
+      return;
+    }
+
+    openComputerApp(appName);
   });
 });
 
 appContent.addEventListener("click", (event) => {
-  const explorerButton = event.target.closest("[data-explorer-app]");
-  if (explorerButton) {
-    openComputerApp(explorerButton.dataset.explorerApp);
+  const locationButton = event.target.closest("[data-explorer-location]");
+  if (locationButton) {
+    navigateExplorer(locationButton.dataset.explorerLocation, true);
     return;
   }
 
-  const photoFolder = event.target.closest("[data-photo-folder]");
-  if (photoFolder) {
-    const folder = photoFolder.dataset.photoFolder;
-    currentPhotoFolder = folder;
-    appTitle.textContent = folder === "candid" ? "candid pics i like" : "us";
-    appContent.innerHTML = renderPhotoFolder(folder);
-    computerClick();
+  if (event.target.closest("[data-explorer-back]")) {
+    explorerBack();
+    return;
+  }
+
+  if (event.target.closest("[data-explorer-forward]")) {
+    explorerForward();
+    return;
+  }
+
+  if (event.target.closest("[data-explorer-up]")) {
+    explorerUp();
     return;
   }
 
@@ -528,14 +696,13 @@ appContent.addEventListener("click", (event) => {
   }
 
   if (event.target.closest("[data-photo-viewer-back]")) {
-    if (currentPhotoFolder === "candid" || currentPhotoFolder === "us") {
-      appTitle.textContent = currentPhotoFolder === "candid" ? "candid pics i like" : "us";
-      appContent.innerHTML = renderPhotoFolder(currentPhotoFolder);
-    } else {
-      appTitle.textContent = "Pictures";
-      appContent.innerHTML = renderPhotosHome();
-    }
+    const destination = currentPhotoFolder === "candid" || currentPhotoFolder === "us"
+      ? currentPhotoFolder
+      : "photos";
 
+    currentExplorerLocation = destination;
+    appTitle.textContent = getExplorerTitle(destination);
+    appContent.innerHTML = renderExplorerLocation(destination);
     computerClick();
     return;
   }
@@ -547,16 +714,6 @@ appContent.addEventListener("click", (event) => {
 
   if (event.target.closest("[data-photo-next]")) {
     showNextPhoto();
-    return;
-  }
-
-  if (event.target.closest("[data-explorer-back]")) {
-    if (currentPhotoFolder === "candid" || currentPhotoFolder === "us") {
-      currentPhotoFolder = "photos";
-      appTitle.textContent = "Pictures";
-      appContent.innerHTML = renderPhotosHome();
-      computerClick();
-    }
   }
 });
 
