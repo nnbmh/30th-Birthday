@@ -1,0 +1,904 @@
+/* ========================================================= */
+/* RESPONSIVE SYSTEM — FARIS' ROOM                           */
+/* Loaded LAST so it only overrides sizing/layout behaviour  */
+/* ========================================================= */
+
+:root {
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  --viewport-gap: clamp(8px, 1.5vw, 20px);
+}
+
+/* ========================================================= */
+/* TRUE VIEWPORT                                             */
+/* ========================================================= */
+
+html {
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  background: #070707;
+}
+
+body {
+  position: fixed;
+  inset: 0;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: #070707;
+}
+
+/*
+  Do not use 100vw for the main room.
+  On iPad/Safari the layout viewport can disagree with the
+  actual visible browser area. inset: 0 tracks the real area.
+*/
+
+#loadingScreen,
+#introScreen,
+#room,
+#focusTransition,
+#birthdayMessage {
+  position: fixed;
+  inset: 0;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+}
+
+#room {
+  overflow: hidden;
+}
+
+#roomCanvas {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+#roomImage {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+/* ========================================================= */
+/* SAFE AREAS                                               */
+/* ========================================================= */
+
+#roomHeader {
+  left: max(18px, calc(var(--safe-left) + 12px));
+  top: max(18px, calc(var(--safe-top) + 12px));
+}
+
+#progress {
+  right: max(18px, calc(var(--safe-right) + 12px));
+  top: max(18px, calc(var(--safe-top) + 12px));
+}
+
+#helpButton {
+  left: max(18px, calc(var(--safe-left) + 12px));
+  bottom: max(20px, calc(var(--safe-bottom) + 14px));
+}
+
+#soundButton {
+  right: max(18px, calc(var(--safe-right) + 12px));
+  bottom: max(20px, calc(var(--safe-bottom) + 14px));
+}
+
+#roomInstructions {
+  bottom: max(28px, calc(var(--safe-bottom) + 18px));
+}
+
+/* ========================================================= */
+/* ALL MODALS                                               */
+/* ========================================================= */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  min-height: 0;
+  padding:
+    max(var(--viewport-gap), var(--safe-top))
+    max(var(--viewport-gap), var(--safe-right))
+    max(var(--viewport-gap), var(--safe-bottom))
+    max(var(--viewport-gap), var(--safe-left));
+  overflow: hidden;
+}
+
+.modal-background {
+  position: absolute;
+  inset: 0;
+}
+
+/* Generic cards can never exceed the visible screen */
+
+.content-card,
+.ai-window,
+.panda-delivery,
+.paper-note,
+.final-sequence,
+.birthday-letter {
+  max-width: calc(
+    100% -
+    var(--safe-left) -
+    var(--safe-right) -
+    (var(--viewport-gap) * 2)
+  );
+  max-height: calc(
+    100% -
+    var(--safe-top) -
+    var(--safe-bottom) -
+    (var(--viewport-gap) * 2)
+  );
+}
+
+/* ========================================================= */
+/* COMPUTER — DESKTOP / LAPTOP / TABLET LANDSCAPE           */
+/* ========================================================= */
+
+/*
+  Native computer design = 1180 × 750.
+
+  Width is limited by BOTH:
+  - available screen width
+  - available screen height converted to the same aspect ratio
+
+  So the whole PC always fits without getting chopped off.
+*/
+
+.computer {
+  width: min(
+    1180px,
+    calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      (var(--viewport-gap) * 2)
+    ),
+    calc(
+      (
+        100dvh -
+        var(--safe-top) -
+        var(--safe-bottom) -
+        (var(--viewport-gap) * 2)
+      ) * 1.573333
+    )
+  );
+  height: auto;
+  aspect-ratio: 1180 / 750;
+  max-width: 1180px;
+  max-height: calc(
+    100dvh -
+    var(--safe-top) -
+    var(--safe-bottom) -
+    (var(--viewport-gap) * 2)
+  );
+  min-width: 0;
+  min-height: 0;
+  margin: auto;
+}
+
+/*
+  Older browser fallback.
+  If dvh is unavailable it still uses regular viewport height.
+*/
+
+@supports not (height: 100dvh) {
+  .computer {
+    width: min(
+      1180px,
+      calc(100vw - (var(--viewport-gap) * 2)),
+      calc((100vh - (var(--viewport-gap) * 2)) * 1.573333)
+    );
+  }
+}
+
+/* Everything inside remains tied to the computer window */
+
+.computer-interface,
+.computer-boot {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+.faris-desktop {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* Explorer and all opened PC windows must stay inside the PC */
+
+.app-window {
+  max-width: calc(100% - 24px);
+  max-height: calc(100% - 64px);
+}
+
+.app-window.explorer-mode {
+  width: min(900px, calc(100% - 24px));
+  height: min(610px, calc(100% - 64px));
+  max-width: calc(100% - 24px);
+  max-height: calc(100% - 64px);
+}
+
+/* Explorer internals are allowed to shrink properly */
+
+.win-explorer,
+.win-explorer-body,
+.win-file-pane,
+.win-sidebar {
+  min-width: 0;
+  min-height: 0;
+}
+
+.win-file-pane {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ========================================================= */
+/* BBN TV                                                   */
+/* ========================================================= */
+
+/*
+  Native broadcast design = 1180 × 720.
+  Same two-axis fitting system as the computer.
+*/
+
+#tvModal {
+  padding:
+    max(var(--viewport-gap), var(--safe-top))
+    max(var(--viewport-gap), var(--safe-right))
+    max(var(--viewport-gap), var(--safe-bottom))
+    max(var(--viewport-gap), var(--safe-left));
+}
+
+.birthday-news {
+  width: min(
+    1180px,
+    calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      (var(--viewport-gap) * 2)
+    ),
+    calc(
+      (
+        100dvh -
+        var(--safe-top) -
+        var(--safe-bottom) -
+        (var(--viewport-gap) * 2)
+      ) * 1.638889
+    )
+  );
+  height: auto;
+  aspect-ratio: 1180 / 720;
+  max-width: 1180px;
+  max-height: calc(
+    100dvh -
+    var(--safe-top) -
+    var(--safe-bottom) -
+    (var(--viewport-gap) * 2)
+  );
+  min-width: 0;
+  min-height: 0;
+  margin: auto;
+}
+
+@supports not (height: 100dvh) {
+  .birthday-news {
+    width: min(
+      1180px,
+      calc(100vw - (var(--viewport-gap) * 2)),
+      calc((100vh - (var(--viewport-gap) * 2)) * 1.638889)
+    );
+  }
+}
+
+.birthday-news .tv-broadcast,
+.birthday-news .tv-power,
+.birthday-news .tv-static {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+
+/* ========================================================= */
+/* CHATGPT LAPTOP                                           */
+/* ========================================================= */
+
+.ai-window {
+  width: min(
+    720px,
+    calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      (var(--viewport-gap) * 2)
+    )
+  );
+  height: min(
+    700px,
+    calc(
+      100dvh -
+      var(--safe-top) -
+      var(--safe-bottom) -
+      (var(--viewport-gap) * 2)
+    )
+  );
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.ai-conversation {
+  min-height: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ========================================================= */
+/* PANDA / OREO                                             */
+/* ========================================================= */
+
+.panda-delivery {
+  width: min(
+    500px,
+    calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      (var(--viewport-gap) * 2)
+    )
+  );
+  max-height: calc(
+    100dvh -
+    var(--safe-top) -
+    var(--safe-bottom) -
+    (var(--viewport-gap) * 2)
+  );
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ========================================================= */
+/* STICKY NOTE                                              */
+/* ========================================================= */
+
+.paper-note {
+  width: min(
+    370px,
+    calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      (var(--viewport-gap) * 2)
+    )
+  );
+  max-height: calc(
+    100dvh -
+    var(--safe-top) -
+    var(--safe-bottom) -
+    (var(--viewport-gap) * 2)
+  );
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ========================================================= */
+/* FINAL REVEAL / LETTER                                    */
+/* ========================================================= */
+
+.final-sequence {
+  width: min(
+    760px,
+    calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      (var(--viewport-gap) * 2)
+    )
+  );
+  max-height: calc(
+    100dvh -
+    var(--safe-top) -
+    var(--safe-bottom) -
+    (var(--viewport-gap) * 2)
+  );
+}
+
+#birthdayMessage {
+  overflow: hidden;
+  padding:
+    max(var(--viewport-gap), var(--safe-top))
+    max(var(--viewport-gap), var(--safe-right))
+    max(var(--viewport-gap), var(--safe-bottom))
+    max(var(--viewport-gap), var(--safe-left));
+}
+
+.birthday-letter {
+  width: min(
+    760px,
+    calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      (var(--viewport-gap) * 2)
+    )
+  );
+  max-height: calc(
+    100dvh -
+    var(--safe-top) -
+    var(--safe-bottom) -
+    (var(--viewport-gap) * 2)
+  );
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ========================================================= */
+/* TOUCH DEVICES                                            */
+/* ========================================================= */
+
+@media (hover: none), (pointer: coarse) {
+  button,
+  .desktop-icon,
+  .taskbar-icon,
+  .win-nav-button,
+  .tv-close,
+  .card-close,
+  .paper-close,
+  #closeBirthdayMessage {
+    touch-action: manipulation;
+  }
+
+  .win-nav-button {
+    min-width: 34px;
+    min-height: 34px;
+  }
+
+  .tv-close,
+  .card-close,
+  .paper-close,
+  #closeBirthdayMessage {
+    min-width: 40px;
+    min-height: 40px;
+  }
+}
+
+/* ========================================================= */
+/* TABLETS — PORTRAIT                                       */
+/* ========================================================= */
+
+@media (orientation: portrait) and (min-width: 600px) and (max-width: 1100px) {
+  :root {
+    --viewport-gap: 14px;
+  }
+
+  #roomImage {
+    object-position: center center;
+  }
+
+  .computer {
+    width: calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      28px
+    );
+    height: min(
+      720px,
+      calc(
+        100dvh -
+        var(--safe-top) -
+        var(--safe-bottom) -
+        28px
+      )
+    );
+    aspect-ratio: auto;
+  }
+
+  .faris-desktop-icons {
+    grid-template-columns: repeat(4, minmax(68px, 88px));
+    grid-auto-rows: 82px;
+    gap: 5px 8px;
+  }
+
+  .faris-desktop-icons .desktop-icon {
+    width: 82px;
+    height: 79px;
+  }
+
+  .faris-desktop-icons .desktop-icon p {
+    width: 78px;
+    font-size: 9px;
+  }
+
+  .app-window.explorer-mode {
+    width: calc(100% - 18px);
+    height: calc(100% - 58px);
+    max-width: calc(100% - 18px);
+    max-height: calc(100% - 58px);
+  }
+}
+
+/* ========================================================= */
+/* PHONES — LANDSCAPE                                       */
+/* ========================================================= */
+
+@media (max-height: 600px) and (orientation: landscape) {
+  :root {
+    --viewport-gap: 6px;
+  }
+
+  #roomHeader {
+    left: max(12px, calc(var(--safe-left) + 8px));
+    top: max(10px, calc(var(--safe-top) + 6px));
+  }
+
+  #progress {
+    right: max(12px, calc(var(--safe-right) + 8px));
+    top: max(10px, calc(var(--safe-top) + 6px));
+  }
+
+  #helpButton,
+  #soundButton {
+    bottom: max(10px, calc(var(--safe-bottom) + 6px));
+  }
+
+  #roomInstructions {
+    bottom: max(12px, calc(var(--safe-bottom) + 8px));
+    padding: 6px 10px;
+    font-size: 8px;
+  }
+
+  .computer {
+    max-height: calc(
+      100dvh -
+      var(--safe-top) -
+      var(--safe-bottom) -
+      12px
+    );
+  }
+
+  .birthday-news {
+    max-height: calc(
+      100dvh -
+      var(--safe-top) -
+      var(--safe-bottom) -
+      12px
+    );
+  }
+}
+
+/* ========================================================= */
+/* PHONES — PORTRAIT                                        */
+/* ========================================================= */
+
+@media (max-width: 599px) and (orientation: portrait) {
+  :root {
+    --viewport-gap: 6px;
+  }
+
+  #roomImage {
+    object-position: center center;
+  }
+
+  #roomHeader {
+    left: max(12px, calc(var(--safe-left) + 8px));
+    top: max(12px, calc(var(--safe-top) + 8px));
+  }
+
+  #roomHeader h2 {
+    font-size: 14px;
+  }
+
+  #roomHeader p,
+  #progress {
+    font-size: 8px;
+  }
+
+  #progress {
+    right: max(12px, calc(var(--safe-right) + 8px));
+    top: max(12px, calc(var(--safe-top) + 8px));
+  }
+
+  #helpButton,
+  #soundButton {
+    bottom: max(12px, calc(var(--safe-bottom) + 8px));
+  }
+
+  #roomInstructions {
+    max-width: calc(100% - 110px);
+    bottom: max(12px, calc(var(--safe-bottom) + 8px));
+    padding: 6px 9px;
+    font-size: 8px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  /*
+    Phone portrait gets a tall PC window instead of forcing
+    the entire desktop into a tiny landscape thumbnail.
+  */
+
+  .computer {
+    width: calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      12px
+    );
+    height: calc(
+      100dvh -
+      var(--safe-top) -
+      var(--safe-bottom) -
+      12px
+    );
+    max-width: none;
+    max-height: none;
+    aspect-ratio: auto;
+    border-radius: 5px;
+  }
+
+  .window-bar {
+    height: 34px;
+  }
+
+  .faris-desktop-icons {
+    left: 8px;
+    right: 8px;
+    top: 8px;
+    bottom: 50px;
+    grid-template-columns: repeat(3, minmax(68px, 1fr));
+    grid-auto-rows: 78px;
+    gap: 3px 4px;
+    overflow-y: auto;
+    align-content: start;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .faris-desktop-icons .desktop-icon {
+    width: 100%;
+    height: 74px;
+    padding: 4px 2px;
+  }
+
+  .faris-desktop-icons .desktop-symbol {
+    width: 40px;
+    height: 40px;
+  }
+
+  .faris-desktop-icons .desktop-symbol svg {
+    width: 38px;
+    height: 38px;
+  }
+
+  .faris-desktop-icons .desktop-icon p {
+    width: 100%;
+    margin-top: 3px;
+    font-size: 8px;
+  }
+
+  .faris-taskbar {
+    height: 42px;
+    padding: 0 4px;
+  }
+
+  .taskbar-icon {
+    width: 34px;
+  }
+
+  .app-window {
+    left: 5px !important;
+    right: 5px !important;
+    top: 5px !important;
+    bottom: 5px !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: none;
+    max-height: none;
+  }
+
+  .app-window.explorer-mode {
+    left: 4px !important;
+    right: 4px !important;
+    top: 4px !important;
+    bottom: 4px !important;
+    width: auto !important;
+    height: auto !important;
+    max-width: none;
+    max-height: none;
+  }
+
+  .win-ribbon-command span {
+    display: none;
+  }
+
+  .win-sidebar {
+    width: 120px;
+    min-width: 120px;
+  }
+
+  .win-file-pane {
+    padding: 10px;
+  }
+
+  /*
+    BBN remains widescreen on portrait phones.
+    Nothing gets cropped; it simply fits the width.
+  */
+
+  .birthday-news {
+    width: calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      8px
+    );
+    height: auto;
+    max-height: calc(
+      100dvh -
+      var(--safe-top) -
+      var(--safe-bottom) -
+      8px
+    );
+    aspect-ratio: 1180 / 720;
+    border-radius: 4px;
+  }
+
+  .ai-window {
+    width: calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      12px
+    );
+    height: calc(
+      100dvh -
+      var(--safe-top) -
+      var(--safe-bottom) -
+      12px
+    );
+    max-height: none;
+    border-radius: 6px;
+  }
+
+  .panda-delivery,
+  .paper-note,
+  .content-card {
+    width: calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      20px
+    );
+    max-height: calc(
+      100dvh -
+      var(--safe-top) -
+      var(--safe-bottom) -
+      20px
+    );
+  }
+
+  .content-card {
+    padding: 28px 22px;
+  }
+
+  .birthday-letter {
+    width: calc(
+      100vw -
+      var(--safe-left) -
+      var(--safe-right) -
+      12px
+    );
+    max-height: calc(
+      100dvh -
+      var(--safe-top) -
+      var(--safe-bottom) -
+      12px
+    );
+  }
+}
+
+/* ========================================================= */
+/* VERY SMALL PHONES                                        */
+/* ========================================================= */
+
+@media (max-width: 380px) {
+  .faris-desktop-icons {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .win-sidebar {
+    width: 96px;
+    min-width: 96px;
+  }
+
+  .win-address-bar {
+    font-size: 9px;
+  }
+
+  .win-search-box {
+    display: none;
+  }
+}
+
+/* ========================================================= */
+/* LARGE DESKTOP                                            */
+/* ========================================================= */
+
+@media (min-width: 1500px) and (min-height: 850px) {
+  :root {
+    --viewport-gap: 24px;
+  }
+
+  .computer,
+  .birthday-news {
+    margin: auto;
+  }
+}
+
+/* ========================================================= */
+/* ORIENTATION / RESIZE STABILITY                           */
+/* ========================================================= */
+
+@media (orientation: landscape) {
+  .modal {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (orientation: portrait) {
+  .modal {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+/* Prevent transformed children from widening the document */
+
+.computer,
+.birthday-news,
+.ai-window,
+.panda-delivery,
+.paper-note,
+.content-card,
+.birthday-letter {
+  flex-shrink: 1;
+}
+
+/* Safari text inflation can destroy carefully sized interfaces */
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
