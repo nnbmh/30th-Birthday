@@ -1,21 +1,13 @@
-/* ============================= */
-/* FARIS-PC DESKTOP OVERRIDES */
-/* ============================= */
-
 .computer-hidden-clock {
   display: none;
 }
 
 .faris-desktop {
-  background:
-    radial-gradient(circle at 68% 24%, rgba(68, 111, 145, 0.5), transparent 34%),
-    linear-gradient(145deg, #203a50 0%, #132a3d 46%, #07131d 100%);
+  background: radial-gradient(circle at 68% 24%, rgba(68, 111, 145, 0.5), transparent 34%), linear-gradient(145deg, #203a50 0%, #132a3d 46%, #07131d 100%);
 }
 
 .faris-desktop::before {
-  background:
-    linear-gradient(120deg, rgba(255, 255, 255, 0.04), transparent 38%),
-    radial-gradient(circle at 75% 18%, rgba(255, 255, 255, 0.04), transparent 25%);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.04), transparent 38%), radial-gradient(circle at 75% 18%, rgba(255, 255, 255, 0.04), transparent 25%);
 }
 
 .faris-desktop-icons {
@@ -103,10 +95,6 @@
   width: 45px;
   height: 45px;
 }
-
-/* ============================= */
-/* TASKBAR */
-/* ============================= */
 
 .faris-taskbar {
   height: 46px;
@@ -205,10 +193,6 @@
   opacity: 0.7;
 }
 
-/* ============================= */
-/* START MENU */
-/* ============================= */
-
 .start-menu {
   position: absolute;
   left: 8px;
@@ -295,10 +279,6 @@
   opacity: 0.55;
 }
 
-/* ============================= */
-/* COMPUTER TOAST */
-/* ============================= */
-
 .computer-toast {
   position: absolute;
   right: 18px;
@@ -322,10 +302,6 @@
   opacity: 1;
   transform: translateY(0);
 }
-
-/* ============================= */
-/* FILE EXPLORER */
-/* ============================= */
 
 .explorer-window {
   font-family: "Segoe UI", sans-serif;
@@ -371,7 +347,10 @@
   padding: 12px 8px;
   border: 1px solid transparent;
   border-radius: 3px;
+  background: transparent;
+  color: inherit;
   text-align: center;
+  cursor: pointer;
 }
 
 .explorer-item:hover {
@@ -439,10 +418,6 @@
   opacity: 0.45;
 }
 
-/* ============================= */
-/* FAKE APPLICATION WINDOWS */
-/* ============================= */
-
 .fake-app {
   text-align: center;
 }
@@ -485,9 +460,273 @@
   opacity: 0.55;
 }
 
-/* ============================= */
-/* RESPONSIVE COMPUTER */
-/* ============================= */
+.photo-explorer {
+  min-height: 360px;
+}
+
+.photo-section + .photo-section {
+  margin-top: 28px;
+}
+
+.photo-folder-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(150px, 220px));
+  gap: 14px;
+}
+
+.photo-folder {
+  min-width: 0;
+  padding: 10px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  background: transparent;
+  color: white;
+  text-align: left;
+  cursor: pointer;
+}
+
+.photo-folder:hover {
+  border-color: rgba(116, 176, 225, 0.24);
+  background: rgba(116, 176, 225, 0.08);
+}
+
+.photo-folder-icon {
+  position: relative;
+  height: 105px;
+  margin-bottom: 8px;
+  padding: 11px 9px 8px;
+  border-radius: 4px;
+  background: linear-gradient(#e5bd4c 0 18px, #d9a82f 18px 100%);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+}
+
+.photo-folder-icon::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: -6px;
+  width: 62px;
+  height: 12px;
+  border-radius: 3px 3px 0 0;
+  background: #e5bd4c;
+}
+
+.photo-folder-preview {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  overflow: hidden;
+  border-radius: 2px;
+  background: #111;
+}
+
+.photo-folder-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.photo-folder > span {
+  display: block;
+  overflow: hidden;
+  font-size: 10px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.photo-folder-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 17px;
+}
+
+.photo-folder-heading h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.photo-folder-heading span {
+  font-size: 9px;
+  opacity: 0.45;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px 10px;
+}
+
+.photo-grid-folder {
+  padding-bottom: 10px;
+}
+
+.photo-file {
+  min-width: 0;
+  padding: 7px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+.photo-file:hover {
+  border-color: rgba(116, 176, 225, 0.25);
+  background: rgba(116, 176, 225, 0.08);
+}
+
+.photo-thumbnail {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #0b0d0f;
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.22);
+}
+
+.photo-thumbnail img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.18s ease;
+}
+
+.photo-file:hover .photo-thumbnail img {
+  transform: scale(1.025);
+}
+
+.photo-file > span {
+  display: block;
+  margin-top: 7px;
+  overflow: hidden;
+  font-size: 8px;
+  line-height: 1.25;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.photo-back,
+.photo-viewer-back {
+  flex: 0 0 auto;
+  width: 29px;
+  height: 29px;
+  border: 0;
+  border-radius: 3px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.78);
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.photo-back:hover,
+.photo-viewer-back:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.photo-viewer {
+  height: min(570px, 70vh);
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+  margin: -32px;
+  overflow: hidden;
+  background: #08090a;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.photo-viewer-toolbar {
+  height: 48px;
+  flex: 0 0 48px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #181b1e;
+}
+
+.photo-viewer-title {
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
+  font-size: 10px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.photo-viewer-counter {
+  font-size: 9px;
+  opacity: 0.48;
+}
+
+.photo-viewer-stage {
+  position: relative;
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 58px;
+  overflow: hidden;
+  background: #050607;
+}
+
+.photo-viewer-stage img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.45);
+}
+
+.photo-nav {
+  position: absolute;
+  top: 50%;
+  width: 38px;
+  height: 56px;
+  transform: translateY(-50%);
+  border: 0;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 31px;
+  cursor: pointer;
+}
+
+.photo-nav:hover {
+  background: rgba(255, 255, 255, 0.13);
+}
+
+.photo-nav-prev {
+  left: 10px;
+}
+
+.photo-nav-next {
+  right: 10px;
+}
+
+.photo-viewer-footer {
+  height: 34px;
+  flex: 0 0 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  background: #121416;
+  font-size: 8px;
+  opacity: 0.58;
+}
 
 @media (max-width: 900px) {
   .faris-desktop-icons {
@@ -518,6 +757,10 @@
 
   .taskbar-search {
     width: 80px;
+  }
+
+  .photo-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -562,5 +805,30 @@
 
   .explorer-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .photo-folder-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .photo-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .photo-folder-icon {
+    height: 82px;
+  }
+
+  .photo-viewer {
+    height: min(520px, 72vh);
+  }
+
+  .photo-viewer-stage {
+    padding: 12px 43px;
+  }
+
+  .photo-nav {
+    width: 32px;
+    height: 48px;
   }
 }
