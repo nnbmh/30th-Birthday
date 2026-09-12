@@ -2,6 +2,8 @@ const computerToast = document.getElementById("computerToast");
 const startButton = document.getElementById("startButton");
 const startMenu = document.getElementById("startMenu");
 const taskbarDate = document.getElementById("taskbarDate");
+const picturesDesktopLabel = document.querySelector('[data-app="photos"] p');
+if (picturesDesktopLabel) picturesDesktopLabel.textContent = "Pictures";
 
 let computerToastTimer = null;
 let currentPhotoCollection = [];
@@ -213,9 +215,9 @@ function photoFolderItem(name, folder) {
   </button>`;
 }
 
-function photoFileItem(path, name, collection, index) {
+function photoFileItem(path, name, collection, index, eager = false) {
   return `<button class="win-large-item win-photo-item" data-photo-path="${path}" data-photo-name="${name}" data-photo-collection="${collection}" data-photo-index="${index}">
-    <span class="win-photo-thumb"><img src="${path}" alt="${name}" loading="lazy"></span>
+    <span class="win-photo-thumb"><img src="${path}" alt="${name}" loading="${eager ? "eager" : "lazy"}" decoding="async"></span>
     <span>${name}</span>
   </button>`;
 }
@@ -335,8 +337,7 @@ function renderPhotosHome() {
   const items = [
     photoFolderItem("candid pics i like", "candid"),
     photoFolderItem("us", "us"),
-    ...standalonePhotos.map((name, index) => photoFileItem(`assets/photos/${name}`, name, "standalone", index))
-  ].join("");
+ ...standalonePhotos.map((name, index) => photoFileItem(`assets/photos/${name}`, name, "standalone", index, true));
 
   return explorerChrome(
     "photos",
@@ -455,6 +456,19 @@ function getPhotoCollection(collection) {
     name,
     path: `assets/photos/${name}`
   }));
+}
+
+function preloadPictureThumbnails() {
+  standalonePhotos.forEach((name) => {
+    const image = new Image();
+    image.src = `assets/photos/${name}`;
+  });
+}
+
+if ("requestIdleCallback" in window) {
+  requestIdleCallback(preloadPictureThumbnails, { timeout: 1500 });
+} else {
+  setTimeout(preloadPictureThumbnails, 500);
 }
 
 function renderPhotoViewer() {
