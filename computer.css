@@ -303,121 +303,6 @@
   transform: translateY(0);
 }
 
-.explorer-window {
-  font-family: "Segoe UI", sans-serif;
-}
-
-.explorer-toolbar {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: -32px -32px 20px;
-  padding: 11px 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: #181b1e;
-}
-
-.explorer-nav {
-  font-size: 13px;
-  opacity: 0.55;
-}
-
-.explorer-path {
-  flex: 1;
-  padding: 7px 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: #101214;
-  font-size: 10px;
-}
-
-.explorer-heading {
-  margin: 0 0 14px;
-  font-size: 12px;
-  font-weight: 500;
-}
-
-.explorer-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-}
-
-.explorer-item {
-  min-width: 0;
-  padding: 12px 8px;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  background: transparent;
-  color: inherit;
-  text-align: center;
-  cursor: pointer;
-}
-
-.explorer-item:hover {
-  border-color: rgba(116, 176, 225, 0.22);
-  background: rgba(116, 176, 225, 0.08);
-}
-
-.explorer-item-icon {
-  height: 39px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 7px;
-  font-size: 29px;
-}
-
-.explorer-item span:last-child {
-  display: block;
-  overflow-wrap: anywhere;
-  font-size: 9px;
-  line-height: 1.25;
-}
-
-.drive-section {
-  margin-top: 8px;
-}
-
-.drive-item {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 12px;
-}
-
-.drive-icon {
-  font-size: 28px;
-}
-
-.drive-info {
-  flex: 1;
-}
-
-.drive-name {
-  margin-bottom: 7px;
-  font-size: 10px;
-}
-
-.drive-bar {
-  width: 100%;
-  height: 5px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.drive-bar span {
-  display: block;
-  width: 55%;
-  height: 100%;
-  background: #4699d3;
-}
-
-.drive-space {
-  margin-top: 5px;
-  font-size: 8px;
-  opacity: 0.45;
-}
-
 .fake-app {
   text-align: center;
 }
@@ -443,219 +328,482 @@
   opacity: 0.62;
 }
 
-.recycle-empty {
-  padding: 26px 0;
-  text-align: center;
+/* WINDOWS EXPLORER WINDOW */
+
+.app-window.explorer-mode {
+  width: min(920px, calc(100vw - 90px)) !important;
+  height: min(610px, calc(100dvh - 125px)) !important;
+  max-width: none !important;
+  max-height: none !important;
+  overflow: hidden !important;
+  background: #191919 !important;
 }
 
-.recycle-empty-icon {
-  margin-bottom: 14px;
-  font-size: 38px;
-  opacity: 0.58;
-}
-
-.recycle-empty p {
-  margin: 0;
-  font-size: 11px;
-  opacity: 0.55;
-}
-
-.photo-explorer {
-  min-height: 360px;
-}
-
-.photo-section + .photo-section {
-  margin-top: 28px;
-}
-
-.photo-folder-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(150px, 220px));
-  gap: 14px;
-}
-
-.photo-folder {
-  min-width: 0;
-  padding: 10px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  background: transparent;
-  color: white;
-  text-align: left;
-  cursor: pointer;
-}
-
-.photo-folder:hover {
-  border-color: rgba(116, 176, 225, 0.24);
-  background: rgba(116, 176, 225, 0.08);
-}
-
-.photo-folder-icon {
-  position: relative;
-  height: 105px;
-  margin-bottom: 8px;
-  padding: 11px 9px 8px;
-  border-radius: 4px;
-  background: linear-gradient(#e5bd4c 0 18px, #d9a82f 18px 100%);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
-}
-
-.photo-folder-icon::before {
-  content: "";
-  position: absolute;
-  left: 8px;
-  top: -6px;
-  width: 62px;
-  height: 12px;
-  border-radius: 3px 3px 0 0;
-  background: #e5bd4c;
-}
-
-.photo-folder-preview {
-  position: relative;
-  z-index: 1;
-  height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  gap: 2px;
-  overflow: hidden;
-  border-radius: 2px;
-  background: #111;
-}
-
-.photo-folder-preview img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.photo-folder > span {
-  display: block;
-  overflow: hidden;
+.app-window.explorer-mode .app-titlebar {
+  height: 34px;
+  background: #202020;
+  border-bottom: 1px solid #303030;
+  font-family: "Segoe UI", sans-serif;
   font-size: 10px;
-  line-height: 1.25;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-.photo-folder-heading {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  margin-bottom: 17px;
+.app-window.explorer-mode #appContent {
+  height: calc(100% - 34px);
+  padding: 0 !important;
+  overflow: hidden !important;
 }
 
-.photo-folder-heading h3 {
-  margin: 0;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.photo-folder-heading span {
-  font-size: 9px;
-  opacity: 0.45;
-}
-
-.photo-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 13px 10px;
-}
-
-.photo-grid-folder {
-  padding-bottom: 10px;
-}
-
-.photo-file {
-  min-width: 0;
-  padding: 7px;
-  border: 1px solid transparent;
-  border-radius: 3px;
-  background: transparent;
-  color: white;
-  cursor: pointer;
-}
-
-.photo-file:hover {
-  border-color: rgba(116, 176, 225, 0.25);
-  background: rgba(116, 176, 225, 0.08);
-}
-
-.photo-thumbnail {
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: #0b0d0f;
-  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.22);
-}
-
-.photo-thumbnail img {
-  width: 100%;
+.windows-explorer {
   height: 100%;
-  display: block;
-  object-fit: cover;
-  transition: transform 0.18s ease;
-}
-
-.photo-file:hover .photo-thumbnail img {
-  transform: scale(1.025);
-}
-
-.photo-file > span {
-  display: block;
-  margin-top: 7px;
-  overflow: hidden;
-  font-size: 8px;
-  line-height: 1.25;
-  text-align: center;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.photo-back,
-.photo-viewer-back {
-  flex: 0 0 auto;
-  width: 29px;
-  height: 29px;
-  border: 0;
-  border-radius: 3px;
-  background: transparent;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 22px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.photo-back:hover,
-.photo-viewer-back:hover {
-  background: rgba(255, 255, 255, 0.08);
-}
-
-.photo-viewer {
-  height: min(570px, 70vh);
-  min-height: 360px;
   display: flex;
   flex-direction: column;
-  margin: -32px;
   overflow: hidden;
-  background: #08090a;
-  font-family: "Segoe UI", sans-serif;
+  background: #191919;
+  color: #f2f2f2;
+  font-family: "Segoe UI", Arial, sans-serif;
 }
 
-.photo-viewer-toolbar {
-  height: 48px;
-  flex: 0 0 48px;
+.win-ribbon {
+  height: 31px;
+  flex: 0 0 31px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 0 13px;
+  border-bottom: 1px solid #2e2e2e;
+  background: #202020;
+  font-size: 10px;
+}
+
+.win-ribbon span {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 2px;
+}
+
+.win-ribbon .win-file-tab {
+  margin-left: -13px;
+  padding: 0 15px;
+  background: #176fba;
+  color: white;
+}
+
+.win-address-row {
+  height: 43px;
+  flex: 0 0 43px;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 9px;
+  border-bottom: 1px solid #303030;
+  background: #191919;
+}
+
+.win-history {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #aaa;
+  font-size: 17px;
+}
+
+.win-history-button {
+  width: 23px;
+  height: 27px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #aaa;
+  font-size: 23px;
+  cursor: pointer;
+}
+
+.win-history-button:hover {
+  color: white;
+}
+
+.win-address-bar {
+  height: 30px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  overflow: hidden;
+  padding: 0 10px;
+  border: 1px solid #454545;
+  background: #202020;
+  color: #ddd;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.win-address-bar span {
+  color: #777;
+}
+
+.win-search-box {
+  width: 190px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 9px;
+  overflow: hidden;
+  border: 1px solid #454545;
+  background: #202020;
+  color: #888;
+  font-size: 9px;
+  white-space: nowrap;
+}
+
+.win-explorer-body {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+}
+
+.win-sidebar {
+  width: 180px;
+  flex: 0 0 180px;
+  padding: 10px 6px;
+  overflow-y: auto;
+  border-right: 1px solid #303030;
+  background: #191919;
+}
+
+.win-sidebar-group + .win-sidebar-group {
+  margin-top: 14px;
+}
+
+.win-sidebar-title {
+  margin: 0 8px 4px;
+  color: #9b9b9b;
+  font-size: 9px;
+}
+
+.win-nav-item,
+.win-nav-static {
+  width: 100%;
+  height: 27px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 0 9px;
+  border: 0;
+  background: transparent;
+  color: #ddd;
+  font-family: "Segoe UI", sans-serif;
+  font-size: 10px;
+  text-align: left;
+}
+
+.win-nav-item {
+  cursor: pointer;
+}
+
+.win-nav-item:hover {
+  background: #303030;
+}
+
+.win-nav-item span,
+.win-nav-static span {
+  width: 17px;
+  color: #e2b849;
+  text-align: center;
+}
+
+.win-file-pane {
+  min-width: 0;
+  flex: 1;
+  padding: 13px 15px 24px;
+  overflow: auto;
+  background: #191919;
+}
+
+.win-pane-heading {
+  height: 31px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+  border-bottom: 1px solid #2d2d2d;
+}
+
+.win-pane-heading > span {
+  font-size: 11px;
+}
+
+.win-pane-heading small {
+  color: #777;
+  font-size: 8px;
+}
+
+.win-section-label {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 0 14px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: #181b1e;
+  margin-bottom: 4px;
+  color: #aaa;
+  font-size: 10px;
 }
 
-.photo-viewer-title {
+.win-section-label i {
+  height: 1px;
+  flex: 1;
+  background: #303030;
+}
+
+.win-drive-label {
+  margin-top: 24px;
+}
+
+.win-large-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(118px, 1fr));
+  align-items: start;
+  gap: 6px 3px;
+}
+
+.win-large-item {
+  min-width: 0;
+  height: 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 7px 5px 4px;
+  border: 1px solid transparent;
+  background: transparent;
+  color: #eee;
+  font-family: "Segoe UI", sans-serif;
+  text-align: center;
+  cursor: default;
+}
+
+button.win-large-item {
+  cursor: pointer;
+}
+
+.win-large-item:hover {
+  border-color: #3f6888;
+  background: rgba(47, 92, 128, 0.28);
+}
+
+.win-large-item > span:last-child {
+  width: 100%;
+  margin-top: 5px;
+  overflow: hidden;
+  font-size: 9px;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+/* NORMAL WINDOWS FOLDER ICON */
+
+.win-folder-glyph {
+  position: relative;
+  width: 68px;
+  height: 55px;
+  flex: 0 0 55px;
+  margin-top: 5px;
+}
+
+.win-folder-glyph::before {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 3px;
+  width: 31px;
+  height: 13px;
+  border-radius: 3px 3px 0 0;
+  background: #e6b743;
+}
+
+.win-folder-glyph::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  right: 3px;
+  top: 11px;
+  bottom: 3px;
+  border-radius: 3px;
+  background: linear-gradient(135deg, #ffd766 0%, #e5ad34 100%);
+  box-shadow: inset 0 1px rgba(255, 255, 255, 0.25);
+}
+
+.win-folder-glyph > span {
+  position: absolute;
+  left: 7px;
+  right: 7px;
+  top: 17px;
+  bottom: 7px;
+  z-index: 1;
+  border-radius: 2px;
+  background: rgba(255, 238, 173, 0.18);
+}
+
+/* GENERIC FILE ICONS */
+
+.win-file-glyph {
+  width: 45px;
+  height: 57px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 57px;
+  margin-top: 4px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #f2f2f2 0 76%, #cacaca 76% 100%);
+  color: #333;
+  font-size: 16px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+}
+
+.win-pdf {
+  background: linear-gradient(135deg, #f4f4f4 0 76%, #ccc 76% 100%);
+  color: #d63b31;
+  font-size: 10px;
+  font-weight: 700;
+}
+
+.win-doc {
+  color: #2b71c8;
+  font-weight: 700;
+}
+
+.win-image-glyph {
+  color: #5b93bb;
+}
+
+/* PHOTO FILE THUMBNAILS */
+
+.win-photo-thumb {
+  width: 92px;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 70px;
+  overflow: hidden;
+  border: 1px solid #4a4a4a;
+  background: #111;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.win-photo-thumb img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.win-photo-item {
+  height: 118px;
+}
+
+.win-photo-folder-grid .win-photo-thumb {
+  width: 100px;
+  height: 76px;
+  flex-basis: 76px;
+}
+
+/* DRIVE */
+
+.win-drive-row {
+  width: 320px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px;
+}
+
+.win-drive-icon {
+  font-size: 38px;
+  color: #bdbdbd;
+}
+
+.win-drive-details {
+  flex: 1;
+  font-size: 9px;
+}
+
+.win-drive-meter {
+  height: 10px;
+  margin: 6px 0 4px;
+  border: 1px solid #3d3d3d;
+  background: #101010;
+}
+
+.win-drive-meter span {
+  display: block;
+  width: 55%;
+  height: 100%;
+  background: #2b91d4;
+}
+
+.win-drive-details small {
+  color: #888;
+  font-size: 8px;
+}
+
+.win-empty-folder {
+  padding-top: 115px;
+  color: #777;
+  text-align: center;
+}
+
+.win-empty-folder div {
+  font-size: 34px;
+}
+
+.win-empty-folder p {
+  margin-top: 12px;
+  font-size: 10px;
+}
+
+.win-status-bar {
+  height: 23px;
+  flex: 0 0 23px;
+  border-top: 1px solid #303030;
+  background: #202020;
+}
+
+/* WINDOWS-STYLE PHOTO VIEWER */
+
+.windows-photo-viewer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #111;
+  color: white;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.win-photo-viewer-top {
+  height: 45px;
+  flex: 0 0 45px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 0 13px;
+  border-bottom: 1px solid #282828;
+  background: #1b1b1b;
+}
+
+.win-photo-viewer-top button {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #ddd;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.win-photo-viewer-top span {
   min-width: 0;
   flex: 1;
   overflow: hidden;
@@ -664,12 +812,12 @@
   white-space: nowrap;
 }
 
-.photo-viewer-counter {
+.win-photo-viewer-top small {
+  color: #888;
   font-size: 9px;
-  opacity: 0.48;
 }
 
-.photo-viewer-stage {
+.win-photo-viewer-stage {
   position: relative;
   min-height: 0;
   flex: 1;
@@ -678,55 +826,56 @@
   justify-content: center;
   padding: 18px 58px;
   overflow: hidden;
-  background: #050607;
+  background: #0a0a0a;
 }
 
-.photo-viewer-stage img {
+.win-photo-viewer-stage img {
   max-width: 100%;
   max-height: 100%;
   display: block;
   object-fit: contain;
-  box-shadow: 0 8px 35px rgba(0, 0, 0, 0.45);
 }
 
-.photo-nav {
+.win-viewer-arrow {
   position: absolute;
   top: 50%;
-  width: 38px;
-  height: 56px;
+  width: 36px;
+  height: 50px;
   transform: translateY(-50%);
   border: 0;
-  border-radius: 4px;
+  border-radius: 2px;
   background: rgba(255, 255, 255, 0.07);
-  color: rgba(255, 255, 255, 0.82);
-  font-size: 31px;
+  color: #ddd;
+  font-size: 28px;
   cursor: pointer;
 }
 
-.photo-nav:hover {
-  background: rgba(255, 255, 255, 0.13);
+.win-viewer-arrow:hover {
+  background: rgba(255, 255, 255, 0.14);
 }
 
-.photo-nav-prev {
-  left: 10px;
+.win-viewer-left {
+  left: 12px;
 }
 
-.photo-nav-next {
-  right: 10px;
+.win-viewer-right {
+  right: 12px;
 }
 
-.photo-viewer-footer {
-  height: 34px;
-  flex: 0 0 34px;
+.win-photo-viewer-bottom {
+  height: 43px;
+  flex: 0 0 43px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0 12px;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
-  background: #121416;
-  font-size: 8px;
-  opacity: 0.58;
+  gap: 30px;
+  border-top: 1px solid #282828;
+  background: #1b1b1b;
+  color: #bbb;
+  font-size: 16px;
 }
+
+/* RESPONSIVE */
 
 @media (max-width: 900px) {
   .faris-desktop-icons {
@@ -759,8 +908,22 @@
     width: 80px;
   }
 
-  .photo-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .app-window.explorer-mode {
+    width: min(94vw, 860px) !important;
+    height: min(72vh, 580px) !important;
+  }
+
+  .win-sidebar {
+    width: 150px;
+    flex-basis: 150px;
+  }
+
+  .win-search-box {
+    width: 145px;
+  }
+
+  .win-large-grid {
+    grid-template-columns: repeat(auto-fill, minmax(105px, 1fr));
   }
 }
 
@@ -803,32 +966,39 @@
     display: none;
   }
 
-  .explorer-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .app-window.explorer-mode {
+    width: 94vw !important;
+    height: 74vh !important;
   }
 
-  .photo-folder-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .win-sidebar {
+    width: 122px;
+    flex-basis: 122px;
   }
 
-  .photo-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  .win-search-box {
+    display: none;
   }
 
-  .photo-folder-icon {
-    height: 82px;
+  .win-ribbon {
+    gap: 15px;
   }
 
-  .photo-viewer {
-    height: min(520px, 72vh);
+  .win-file-pane {
+    padding: 10px 8px 20px;
   }
 
-  .photo-viewer-stage {
-    padding: 12px 43px;
+  .win-large-grid {
+    grid-template-columns: repeat(2, minmax(90px, 1fr));
   }
 
-  .photo-nav {
-    width: 32px;
-    height: 48px;
+  .win-photo-thumb {
+    width: 84px;
+    height: 64px;
+    flex-basis: 64px;
+  }
+
+  .win-photo-viewer-stage {
+    padding: 12px 44px;
   }
 }
