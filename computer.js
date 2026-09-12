@@ -337,7 +337,10 @@ function renderPhotosHome() {
   const items = [
     photoFolderItem("candid pics i like", "candid"),
     photoFolderItem("us", "us"),
- ...standalonePhotos.map((name, index) => photoFileItem(`assets/photos/${name}`, name, "standalone", index, true));
+    ...standalonePhotos.map((name, index) =>
+      photoFileItem(`assets/photos/${name}`, name, "standalone", index, true)
+    )
+  ].join("");
 
   return explorerChrome(
     "photos",
